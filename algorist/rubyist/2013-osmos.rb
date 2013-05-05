@@ -1,6 +1,6 @@
 #!/usr/bin/env /usr/local/bin/ruby
 
-#%w{test/unit open-uri}.each { |e| require e }
+# %w{test/unit open-uri}.each { |e| require e }
 
 module CodeJam
   def self.main(io)
@@ -15,25 +15,26 @@ module CodeJam
   end
 
   def self.solve(tc, n, motes)
-    memos = [] # maximum values by k capacity
-    map = lambda do |w, s|
-      case
+    memos = {}
+    map = lambda do |k, s|
+      k += s.shift until s.empty? || k <= s[0]
+      memos[k] ||= {}
+      memos[k][s.size] ||= case
       when s.empty?
         0
-      when 1 == w
+      when 1 == k
         s.size
       else
-        w += s.shift while w > s[0]
-        1 + [map.call(w, s[1..-1]), map.call(w, [w-1] + s) ].min
+        1 + [map.call(k, s[1..-1]), map.call(2*k - 1, s) ].min
       end
     end
-    "Case ##{tc}: #{map.call(n, motes)}"
+    "Case ##{tc}: #{map.call(n, motes.dup)}"
   end
 end
 
 #class TestCases < Test::Unit::TestCase
 #  def test_main
-#    test_case_uri = 'https://raw.github.com/henry4j/-/master/algorist/rubyist/osmos-testcases/unit-test.in'
+#    test_case_uri = 'https://raw.github.com/henry4j/-/master/algorist/rubyist/osmos-testcases/A-small-attempt0.in'
 #    open(test_case_uri) { |io| CodeJam.main(io) }
 #  end
 #end
