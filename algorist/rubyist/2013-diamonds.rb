@@ -17,8 +17,8 @@ module CodeJam
   def self.solve(tc, n, p)
     map = lambda do |k, q, h|
       if k > 0
-        l = [q[0]-1, q[1]-1] # x - 1, y - 1
-        r = [q[0]+1, q[1]-1] # x + 1, y - 1
+        l = [q[0]-1, q[1]-1]
+        r = [q[0]+1, q[1]-1]
         l2 = h[l[0]] && h[l[0]] >= l[1]
         r2 = h[r[0]] && h[r[0]] >= r[1]
         if l2 && r2 || q[1] == 0
