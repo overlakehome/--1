@@ -1,6 +1,6 @@
 #!/usr/bin/env /usr/local/bin/ruby
 
-# %w{test/unit open-uri}.each { |e| require e }
+%w{test/unit open-uri}.each { |e| require e }
 
 module CodeJam
   def self.main(io)
@@ -28,15 +28,16 @@ module CodeJam
         1 + [map.call(k, s[1..-1]), map.call(2*k - 1, s) ].min
       end
     end
-    "Case ##{tc}: #{map.call(n, motes.dup)}"
+    x = map.call(n, motes.dup)
+    "Case ##{tc}: #{x}"
   end
 end
 
-#class TestCases < Test::Unit::TestCase
-#  def test_main
-#    test_case_uri = 'https://raw.github.com/henry4j/-/master/algorist/rubyist/osmos-testcases/A-small-attempt0.in'
-#    open(test_case_uri) { |io| CodeJam.main(io) }
-#  end
-#end
+class TestCases < Test::Unit::TestCase
+  def test_main
+    test_case_uri = 'https://raw.github.com/henry4j/-/master/algorist/rubyist/osmos-testcases/A-small-attempt0.in'
+    open(test_case_uri) { |io| CodeJam.main(io) }
+  end
+end
 
-CodeJam.main(STDIN)
+# CodeJam.main(STDIN)
