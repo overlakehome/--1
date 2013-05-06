@@ -6,7 +6,7 @@
 module CodeJam
   def self.main(io)
     cases = 1.upto(io.readline.to_i).map do |tc|
-      n, m = io.readline.chomp.split.map { |e| e.to_i }
+      n, _ = io.readline.chomp.split.map { |e| e.to_i }
       m = io.readline.chomp.split.map { |e| e.to_i }
       [tc, n, m.sort]
     end
