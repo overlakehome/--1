@@ -1,4 +1,5 @@
 #!/usr/bin/env /usr/local/bin/ruby
+# https://code.google.com/codejam/contest/2434486/dashboard
 
 %w{test/unit open-uri}.each { |e| require e }
 
