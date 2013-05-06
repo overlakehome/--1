@@ -10,9 +10,7 @@ module CodeJam
       m = io.readline.chomp.split.map { |e| e.to_i }
       [tc, n, m.sort]
     end
-    cases.each do |c| 
-      puts solve(*c)
-    end
+    cases.each { |c| puts solve(*c) }
   end
 
   def self.solve(tc, n, motes)
