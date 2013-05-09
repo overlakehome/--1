@@ -1,17 +1,16 @@
 #!/usr/bin/env /usr/local/bin/ruby
+# https://code.google.com/codejam/contest/2434486/dashboard
 
 %w{test/unit open-uri}.each { |e| require e }
 
 module CodeJam
   def self.main(io)
     cases = 1.upto(io.readline.to_i).map do |tc|
-      n, m = io.readline.chomp.split.map { |e| e.to_i }
+      n, _ = io.readline.chomp.split.map { |e| e.to_i }
       m = io.readline.chomp.split.map { |e| e.to_i }
       [tc, n, m.sort]
     end
-    cases.each do |c| 
-      puts solve(*c)
-    end
+    cases.each { |c| puts solve(*c) }
   end
 
   def self.solve(tc, n, motes)
