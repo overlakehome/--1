@@ -14,6 +14,10 @@ module CodeJam
 #    end
   end
 
+  def self.drop(n, memos)
+    
+  end
+
   def self.solve(tc, n, p)
     map = lambda do |k, q, h|
       if k > 0
