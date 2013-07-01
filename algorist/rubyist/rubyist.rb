@@ -1256,18 +1256,18 @@ module Strings
   def self.combine_parens(n)
     answers = []
     expand_out = lambda do |a|
-      ones = a.last[1]
+      opens = a.last[1]
       case
-      when a.size == 2*ones then [['(', 1+ones]] # open
-      when n == ones then [[')', ones]] # close
-      else [['(', 1+ones], [')', ones]]  # open, or close
+      when a.size == 2*opens then [['(', 1+opens]] # open
+      when n == opens then [[')', opens]] # close
+      else [['(', 1+opens], [')', opens]]  # open, or close
       end
     end
-
+  
     reduce_off = lambda do |a|
       answers << a.map { |e| e[0] }.join if a.size == 2*n
     end
-
+  
     Search.backtrack([['(', 1]], expand_out, reduce_off)
     answers
   end
