@@ -1,0 +1,25 @@
+##### [Install Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
+
+```bash
+curl -o ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz
+tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /Applications/
+open /Applications/eclipse/Eclipse.app # and then keep this in dock
+```
+
+##### Mahout
+
+curl -o ~/Downloads/mahout-distribution-0.7.zip -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
+
+#### text
+
+```bash
+echo | mvn archetype:generate \
+  -DarchetypeGroupId=org.apache.maven.archetypes \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DarchetypeVersion=1.1 \
+  -DgroupId=com.henry4j \
+  -DartifactId=text \
+  -Dversion=1.0-SNAPSHOT \
+  -DpackageName=com.henry4j \
+  -DinteractiveMode=false
+```
