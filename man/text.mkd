@@ -24,4 +24,4 @@ echo | mvn archetype:generate \
   -DinteractiveMode=false
 ```
 
-* [porter-stemmer-1.4](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
+* [porter-stemmer-1.4.jar](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
