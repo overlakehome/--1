@@ -23,3 +23,5 @@ echo | mvn archetype:generate \
   -DpackageName=com.henry4j \
   -DinteractiveMode=false
 ```
+
+* [porter-stemmer-1.4](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
