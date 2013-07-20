@@ -7,3 +7,5 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
 ##### 
+
+http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
