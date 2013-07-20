@@ -24,8 +24,11 @@ echo | mvn archetype:generate \
   -DinteractiveMode=false
 ```
 
-* [google-guava-14.0.1.jar](http://search.maven.org/#artifactdetails%7Ccom.google.guava%7Cguava%7C14.0.1%7Cbundle)
-* [opencsv-2.3.jar](http://search.maven.org/#artifactdetails%7Cnet.sf.opencsv%7Copencsv%7C2.3%7Cjar)
-* [porter-stemmer-1.4.jar](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
+* add dependencies to pom.xml
+  * [google-guava-14.0.1.jar](http://search.maven.org/#artifactdetails%7Ccom.google.guava%7Cguava%7C14.0.1%7Cbundle)
+  * [opencsv-2.3.jar](http://search.maven.org/#artifactdetails%7Cnet.sf.opencsv%7Copencsv%7C2.3%7Cjar)
+  * [porter-stemmer-1.4.jar](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
+
+* `mvn eclipse:eclipse -DdownloadSources=true`
 
 eod
