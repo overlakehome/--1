@@ -8,11 +8,8 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 
 ##### Hadoop - [Running Hadoop on Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/)
 
-
 * [Getting Started w/ Single Node Setup](http://hadoop.apache.org/docs/stable/single_node_setup.html)
-
-* http://hadoop.apache.org/docs/stable/single_node_setup.html
-* Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download)
+  * Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download)
 * hadoop-1.1.2.tar.gz
 
 ##### Mahout
