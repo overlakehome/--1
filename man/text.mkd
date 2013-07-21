@@ -1,4 +1,4 @@
-##### [Install Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
+##### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
 
 ```bash
 curl -o ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz
