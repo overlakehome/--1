@@ -10,7 +10,9 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 
 * `brew install hadoop`
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
-* Setup `export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home` at `hadoop-env.sh`.
+* Setup `/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh`
+  * `export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home`
+  * `export HADOOP_OPTS="-Djava.security.krb5.realm= -Djava.security.krb5.kdc="`
 * Setup pseudo-distributed operation http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
 
