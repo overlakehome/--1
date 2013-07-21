@@ -20,11 +20,7 @@ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 1
 ps aux | grep hadoop | grep -v grep | wc -l # puts '5'
 ```
 
-###### More on Hadoop Getting Started
-
-* [Single Node Setup](http://hadoop.apache.org/docs/stable/single_node_setup.html)
-  * Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download)
-* [Pseudo Distributed Mode Setup on a Single Node](http://www.thegeekstuff.com/2012/02/hadoop-pseudo-distributed-installation/)
+* [Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
 * [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
 ##### Mahout
