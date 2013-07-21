@@ -36,7 +36,7 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ##### Mahout LDA
 
 ```bash
-mahout seqdirectory -i /tmp/1 -o /tmp/2 -c UTF-8
+mahout seqdirectory -i /tmp/1 -o /tmp/2 # -c UTF-8
 ```
 
 #### text
