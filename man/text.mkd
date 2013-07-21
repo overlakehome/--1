@@ -9,6 +9,8 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ##### Hadoop
 
 * http://hadoop.apache.org/docs/stable/single_node_setup.html
+* Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download) ([hadoop-1.1.2.tar.gz] (http://www.linuxtourist.com/apache/hadoop/common/hadoop-1.1.2/))
+* hadoop-1.1.2.tar.gz
 
 ##### Mahout
 
