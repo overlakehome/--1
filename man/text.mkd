@@ -11,7 +11,7 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 * Setup passphraseless ssh after `brew install hadoop`
 * Setup `export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home` at `hadoop-env.sh`.
 * Setup pseudo-distributed operation http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed
-# Bring up the name node http://localhost:50070/ and job tracker http://localhost:50030/
+* Bring up the name node http://localhost:50070/ and job tracker http://localhost:50030/
 
 ```bash
 hadoop namenode -format
