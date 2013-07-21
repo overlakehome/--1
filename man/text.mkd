@@ -38,10 +38,11 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ##### Mahout LDA
 
 ```bash
-hadoop dfs -rmr /tmp/dfs1
-hadoop dfs -put /tmp/local1 /tmp/dfs1
-mahout seqdirectory -i /tmp/dfs1 -o /tmp/dfs2 -ow # -c UTF-8
-mahout seq2sparse -i /tmp/dfs2 -o /tmp/dfs3 -ow -wt tf # -seq -ng 3 -nr 3 -ml 20 # ngram(3), reducer(3), minLLR(20)
+hadoop dfs -rmr /tmp/dfs0
+hadoop dfs -put /tmp/local0 /tmp/dfs0
+mahout seqdirectory -i /tmp/dfs0/ -o /tmp/dfs1/ -ow # -c UTF-8
+mahout seq2sparse -i /tmp/dfs1/ -o /tmp/dfs2/ -ow -wt tf # -seq -ng 3 -nr 3 -ml 20 # ngram(3), reducer(3), minLLR(20)
+mahout lda -i /tmp/dfs2/tf-vectors/ -o /tmp/dfs3/ -k 12 -v 32768 # -a 20
 ```
 
 #### text
