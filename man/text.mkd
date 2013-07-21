@@ -6,7 +6,7 @@ tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /App
 open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
-##### Hadoop
+##### Hadoop - [Running Hadoop on Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/)
 
 * http://hadoop.apache.org/docs/stable/single_node_setup.html
 * Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download)
