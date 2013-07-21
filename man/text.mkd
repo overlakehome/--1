@@ -38,6 +38,7 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ##### Mahout LDA
 
 ```bash
+hadoop dfs -rmr /tmp/dfs1
 hadoop dfs -put /tmp/local1 /tmp/dfs1
 mahout seqdirectory -i /tmp/dfs1 -o /tmp/dfs2 # -c UTF-8
 ```
