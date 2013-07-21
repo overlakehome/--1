@@ -20,7 +20,7 @@ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 1
 ps aux | grep hadoop | grep -v grep | wc -l # puts '5'
 ```
 
-* [Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
+* [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
 * [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
 ##### Mahout
