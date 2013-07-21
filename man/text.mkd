@@ -15,9 +15,10 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 
 ```bash
 hadoop namenode -format
-start-all.sh # brings up the name node http://localhost:50070/ and job tracker http://localhost:50030/
-hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100
+start-all.sh # starts hadoop daemons along w/ the name node and job tracker
 ps aux | grep hadoop | grep -v grep | wc -l # puts '5'
+hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # computes pi
+stop-all.sh # stops hadoop daemons.
 ```
 
 * [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
