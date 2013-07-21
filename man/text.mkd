@@ -41,6 +41,7 @@ mahout cvb -i /tmp/dfs2/tf-vectors/ -o /tmp/dfs3/ -ow -k 12 -nt 32768 -x 10000
 * LDA CVB?
   * http://stackoverflow.com/questions/16994529/how-to-print-mahout-lda-cvb-topic
   * http://stackoverflow.com/questions/17119703/what-is-represented-by-the-doc-topic-distribution-output-of-mahouts-cvb-imple
+  * http://stackoverflow.com/questions/11651713/using-mahout-to-train-an-lda-and-retrieve-its-topics
 
 ##### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
 
