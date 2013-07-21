@@ -8,11 +8,14 @@ open /Applications/eclipse/Eclipse.app # and then keep this in dock
 
 ##### Hadoop - [[Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/) | [Mac OS X](http://wiki.apache.org/hadoop/Running_Hadoop_On_OS_X_10.5_64-bit_\(Single-Node_Cluster\))]
 
-* See More
-  * [Single Node Setup](http://hadoop.apache.org/docs/stable/single_node_setup.html)
-    * Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download)
-  * [Pseudo Distributed Mode Setup on a Single Node](http://www.thegeekstuff.com/2012/02/hadoop-pseudo-distributed-installation/)
-  * [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
+
+
+###### More on Hadoop Getting Started
+
+* [Single Node Setup](http://hadoop.apache.org/docs/stable/single_node_setup.html)
+  * Download Hadoop - [current stable releases](http://hadoop.apache.org/releases.html#Download)
+* [Pseudo Distributed Mode Setup on a Single Node](http://www.thegeekstuff.com/2012/02/hadoop-pseudo-distributed-installation/)
+* [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
 ##### Mahout
 
