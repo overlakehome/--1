@@ -100,7 +100,11 @@ cat ${WORK_DIR}/reuters-lda/vectordump
   * tfidf-vectors
   * tokenized-documents
   * wordcount
-
+* reuters-out-matrix
+  * docIndex
+  * matrix
+* reuters-lda-model
+* reuters-lda-topic
 
 ##### Mahout LDA
 
