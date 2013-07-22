@@ -56,7 +56,7 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
     $HADOOP dfs -put ${WORK_DIR}/reuters-out ${WORK_DIR}/reuters-out
     
     echo "Converting to Sequence Files from Directory"
-    $MAHOUT seqdirectory -i ${WORK_DIR}/reuters-out -o ${WORK_DIR}/reuters-out-seqdir -c UTF-8 -chunk 5
+    $MAHOUT seqdirectory -i ${WORK_DIR}/reuters-out -o ${WORK_DIR}/reuters-out-seqdir -ow -c UTF-8 -chunk 5
 fi
 ```
 
