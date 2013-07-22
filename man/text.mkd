@@ -72,6 +72,16 @@ $MAHOUT seq2sparse \
 
 ```
 
+* reuters-out-seqdir-sparse-lda
+  * df-count
+  * dictionary.file-0
+  * frequency.file-0
+  * tf-vectors
+  * tfidf-vectors
+  * tokenized-documents
+  * wordcount
+
+
 ##### Mahout LDA
 
 ```bash
