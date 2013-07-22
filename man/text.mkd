@@ -74,7 +74,22 @@ $MAHOUT rowid \
   -o ${WORK_DIR}/reuters-out-matrix \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
-
+&& \
+$MAHOUT cvb \
+  -i ${WORK_DIR}/reuters-out-matrix/matrix \
+  -o ${WORK_DIR}/reuters-lda -k 20 -ow -x 20 \
+  -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
+  -dt ${WORK_DIR}/reuters-lda-topics \
+  -mt ${WORK_DIR}/reuters-lda-model \
+&& \
+$MAHOUT vectordump \
+  -i ${WORK_DIR}/reuters-lda-topics/part-m-00000 \
+  -o ${WORK_DIR}/reuters-lda/vectordump \
+  -vs 10 -p true \
+  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
+  -dt sequencefile -sort ${WORK_DIR}/reuters-lda-topics/part-m-00000 \
+  && \
+cat ${WORK_DIR}/reuters-lda/vectordump
 ```
 
 * reuters-out-seqdir-sparse-lda
