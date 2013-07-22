@@ -27,6 +27,36 @@ unzip -o ~/Downloads/mahout-distribution-0.7.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
 
+##### Mahout Demo
+
+```bash
+MAHOUT="mahout" # which mahout
+HADOOP="hadoop" # which hadoop
+
+WORK_DIR=/tmp/mahout-work-${USER}
+mkdir -p ${WORK_DIR}
+
+if [ ! -e ${WORK_DIR}/reuters-out ]; then
+    if [ ! -e ${WORK_DIR}/reuters-sgm ]; then
+        if [ ! -f ${WORK_DIR}/reuters21578.tar.gz ]; then
+            echo "Downloading Reuters-21578"
+            curl http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.tar.gz -o ${WORK_DIR}/reuters21578.tar.gz
+        fi
+        mkdir -p ${WORK_DIR}/reuters-sgm
+        echo "Extracting..."
+        tar xzf ${WORK_DIR}/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
+    fi
+    echo "Extracting Reuters"
+    $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-out
+
+    echo "Copying Reuters data to Hadoop"
+    $HADOOP dfs -rmr ${WORK_DIR}/reuters-sgm || true
+    $HADOOP dfs -rmr ${WORK_DIR}/reuters-out || true
+    $HADOOP dfs -put ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-sgm
+    $HADOOP dfs -put ${WORK_DIR}/reuters-out ${WORK_DIR}/reuters-out
+fi
+```
+
 ##### Mahout LDA
 
 ```bash
