@@ -29,7 +29,7 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 
 ##### Mahout Demo
 
-####### Prepare Sequence Files
+###### Prepare Sequence Files
 
 ```bash
 MAHOUT="mahout" # which mahout
@@ -62,7 +62,7 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
 fi
 ```
 
-####### LDA and ...
+###### LDA and ...
 
 ```bash
 ...
