@@ -69,6 +69,11 @@ $MAHOUT seq2sparse \
   -i ${WORK_DIR}/reuters-out-seqdir/ \
   -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector \
 && \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/reuters-out-seqdir-sparse-lda/tfidf-vectors \
+  -o ${WORK_DIR}/reuters-out-matrix \
+&& \
+rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
 
 ```
 
