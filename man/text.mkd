@@ -54,6 +54,9 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
     $HADOOP dfs -rmr ${WORK_DIR}/reuters-out || true
     $HADOOP dfs -put ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-sgm
     $HADOOP dfs -put ${WORK_DIR}/reuters-out ${WORK_DIR}/reuters-out
+    
+    echo "Converting to Sequence Files from Directory"
+    $MAHOUT seqdirectory -i ${WORK_DIR}/reuters-out -o ${WORK_DIR}/reuters-out-seqdir -c UTF-8 -chunk 5
 fi
 ```
 
