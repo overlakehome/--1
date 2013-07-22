@@ -65,7 +65,11 @@ fi
 ###### LDA and ...
 
 ```bash
-...
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/reuters-out-seqdir/ \
+  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector \
+&& \
+
 ```
 
 ##### Mahout LDA
