@@ -29,6 +29,8 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 
 ##### Mahout Demo
 
+####### Prepare Sequence Files
+
 ```bash
 MAHOUT="mahout" # which mahout
 HADOOP="hadoop" # which hadoop
@@ -55,9 +57,15 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
     $HADOOP dfs -put ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-sgm
     $HADOOP dfs -put ${WORK_DIR}/reuters-out ${WORK_DIR}/reuters-out
     
-    echo "Converting to Sequence Files from Directory"
+    echo "Converting to Sequence Files"
     $MAHOUT seqdirectory -i ${WORK_DIR}/reuters-out -o ${WORK_DIR}/reuters-out-seqdir -ow -c UTF-8 -chunk 5
 fi
+```
+
+####### LDA and ...
+
+```bash
+...
 ```
 
 ##### Mahout LDA
