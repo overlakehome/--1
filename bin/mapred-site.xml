@@ -13,7 +13,7 @@
     <value>4</value>
   </property>
   <property>
-    <name>mapred.tasktracker.reduce.tasks.maximum/>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
     <value>2</value>
   </property>
 </configuration>
