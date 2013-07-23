@@ -3,10 +3,9 @@
 * `brew install hadoop`
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
   * `ssh-keygen -t rsa`, and then `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
-* Setup `/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh`
-  * `export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home`
-  * `export HADOOP_OPTS="-Djava.security.krb5.realm= -Djava.security.krb5.kdc="`
-* Setup pseudo-distributed operation http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed
+* Setup `libexec/conf/hadoop-env.sh` and [pseudo-distributed operation](http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed)
+  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' -kL 'https://raw.github.com/henry4j/-/master/bin/hadoop-env.sh'`
+  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'`
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
 
 ```bash
@@ -27,8 +26,8 @@ stop-all.sh # stops hadoop daemons.
 ##### Mahout 0.7
 
 ```bah
-curl -o ~/Downloads/mahout-distribution-0.7.zip -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
-unzip -o ~/Downloads/mahout-distribution-0.7.zip -d /workspace/
+curl -o $HOME/Downloads/mahout-distribution-0.7.zip -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
+unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
 
@@ -49,13 +48,13 @@ mkdir -p ${WORK_DIR}
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-out ]; then
     if [ ! -e ${WORK_DIR}/reuters-sgm ]; then
-        if [ ! -f ${WORK_DIR}/reuters21578.tar.gz ]; then
+        if [ ! -f $HOME/Downloads/reuters21578.tar.gz ]; then
             echo "Downloading Reuters-21578"
-            curl http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.tar.gz -o ${WORK_DIR}/reuters21578.tar.gz
+            curl http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.tar.gz -o $HOME/Downloads/reuters21578.tar.gz
         fi
         mkdir -p ${WORK_DIR}/reuters-sgm
         echo "Extracting..."
-        tar xzf ${WORK_DIR}/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
+        tar xzf $HOME/Downloads/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
     fi
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-out
