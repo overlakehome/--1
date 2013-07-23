@@ -48,13 +48,13 @@ mkdir -p ${WORK_DIR}
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-out ]; then
     if [ ! -e ${WORK_DIR}/reuters-sgm ]; then
-        if [ ! -f ${WORK_DIR}/reuters21578.tar.gz ]; then
+        if [ ! -f $HOME/Downloads/reuters21578.tar.gz ]; then
             echo "Downloading Reuters-21578"
-            curl http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.tar.gz -o ${WORK_DIR}/reuters21578.tar.gz
+            curl http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.tar.gz -o $HOME/Downloads/reuters21578.tar.gz
         fi
         mkdir -p ${WORK_DIR}/reuters-sgm
         echo "Extracting..."
-        tar xzf ${WORK_DIR}/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
+        tar xzf $HOME/Downloads/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
     fi
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-out
