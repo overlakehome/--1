@@ -35,12 +35,12 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```bash
 MAHOUT="mahout" # which mahout
 HADOOP="hadoop" # which hadoop
+
+WORK_DIR=/tmp/mahout-work-${USER}
+mkdir -p ${WORK_DIR}
 ```
 
 ```bash
-WORK_DIR=/tmp/mahout-work-${USER}
-mkdir -p ${WORK_DIR}
-
 if [ ! -e ${WORK_DIR}/reuters-out ]; then
     if [ ! -e ${WORK_DIR}/reuters-sgm ]; then
         if [ ! -f ${WORK_DIR}/reuters21578.tar.gz ]; then
