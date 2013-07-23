@@ -3,9 +3,8 @@
 * `brew install hadoop`
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
   * `ssh-keygen -t rsa`, and then `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
-* Setup `/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh`
-  * `export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home`
-  * `export HADOOP_OPTS="-Djava.security.krb5.realm= -Djava.security.krb5.kdc="`
+* Setup `libexec/conf/hadoop-env.sh`
+  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' -kL 'https://raw.github.com/henry4j/-/master/bin/hadoop-env.sh'`
 * Setup pseudo-distributed operation http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed
   * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'`
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
