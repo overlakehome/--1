@@ -178,6 +178,15 @@ java.io.FileNotFoundException: /tmp/hadoop-hylee/mapred/local/taskTracker/hylee/
 13/07/23 14:12:36 INFO mapred.JobClient: Running job: job_201307231037_0030
 ```
 
+```bash
+$MAHOUT cvb \
+  -i ${WORK_DIR}/reuters-out-matrix/matrix \
+  -o ${WORK_DIR}/reuters-lda -k 20 -ow -x 20 \
+  -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
+  -dt ${WORK_DIR}/reuters-lda-topics \
+  -mt ${WORK_DIR}/reuters-lda-model
+```
+
 ##### Mahout LDA
 
 * LDA CVB?
