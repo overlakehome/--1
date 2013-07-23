@@ -59,10 +59,9 @@ little snitch, [sequel.pro](http://www.sequelpro.com/download/), [oracle.sql.dev
 
 ##### Install Mac VIM
 
-    wget -P /tmp/ https://macvim.googlecode.com/files/MacVim-snapshot-66-Lion.tbz
-    tar xvf /tmp/MacVim-snapshot-66-Lion.tbz -C /tmp/
-    mv /tmp/MacVim-snapshot-66/MacVim.app /Applications/
-    ln -s /Applications/MacVim.app/Contents/MacOS/Vim /usr/local/bin/vim
+    curl -o /tmp/MacVim-snapshot-68-Lion.tbz -kL https://macvim.googlecode.com/files/MacVim-snapshot-68-Lion.tbz
+    tar xvf /tmp/MacVim-snapshot-68-Lion.tbz -C /tmp/
+    mv /tmp/MacVim-snapshot-68/MacVim.app /Applications/
 
 ##### ~~[Install Ruby through RVM on Mac](http://ryanbigg.com/2011/06/mac-os-x-ruby-rvm-rails-and-you/)~~
 
@@ -70,11 +69,9 @@ little snitch, [sequel.pro](http://www.sequelpro.com/download/), [oracle.sql.dev
 
     brew install rbenv
     brew install ruby-build
-    rbenv uninstall 1.9.3-p392
-    rbenv install 1.9.3-p392
-    rbenv uninstall 1.8.7-p371
-    rbenv install 1.8.7-p371
-    rbenv global 1.8.7-p371
+    rbenv uninstall 1.9.3-p448
+    rbenv install 1.9.3-p448
+    rbenv global 1.9.3-p448
     rbenv which ruby # $HOME/.rbenv/versions/1.8.7-p371/bin/ruby
     gem install ruby-debug
 
