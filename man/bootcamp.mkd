@@ -24,7 +24,7 @@ little snitch, [sequel.pro](http://www.sequelpro.com/download/), [oracle.sql.dev
 
 * ~~[Xcode 4.1 for Lion](https://developer.apple.com/downloads/download.action?path=Developer_Tools/xcode_4.1_for_lion/xcode_4.1_for_lion.dmg)~~, or ~~[Xcode 4.1 for Snow Leopard](http://www.cs.dartmouth.edu/~tim/xcode_4.1_for_snow_leopard.dmg)~~, and ~~[MacPorts to install](http://guide.macports.org/chunked/installing.macports.uninstalling.html)~~
 * ~~[GCC for Mac OS X](http://kennethreitz.com/xcode-gcc-and-homebrew.html) → [10.7+ v2 with X11 headers and bux fixes](https://github.com/downloads/kennethreitz/osx-gcc-installer/GCC-10.7-v2.pkg)~~
-* [Command Line Tools for Xcode](https://developer.apple.com/downloads/index.action?=command%20line%20tools)
+* [Command Line Tools for Xcode](https://developer.apple.com/downloads/index.action?=command%20line%20tools), or Preferences > Downloads > Components and install "Command Line Tools"
 * `ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"`
 
 ##### Set up [github.com](http://github.com/) and [assembla.com](http://assembla.com/) accounts
