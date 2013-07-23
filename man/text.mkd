@@ -115,7 +115,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 * reuters-lda-model
 * reuters-lda-topic
 
-
+```log
 13/07/23 14:11:42 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20 to /tmp/mahout-work-hylee/reuters-lda
 13/07/23 14:11:45 INFO input.FileInputFormat: Total input paths to process : 10
 13/07/23 14:11:46 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics
@@ -142,7 +142,6 @@ java.io.FileNotFoundException: /tmp/hadoop-hylee/mapred/local/taskTracker/hylee/
 	at org.apache.hadoop.mapred.TaskTracker$5.run(TaskTracker.java:2581)
 	at java.lang.Thread.run(Thread.java:680)
 
-```log
 13/07/23 14:11:49 WARN mapred.JobClient: Error reading task outputhttp://172.16.31.44:50060/tasklog?plaintext=true&attemptid=attempt_201307231037_0029_m_000011_0&filter=stdout
 13/07/23 14:11:49 WARN mapred.JobClient: Error reading task outputhttp://172.16.31.44:50060/tasklog?plaintext=true&attemptid=attempt_201307231037_0029_m_000011_0&filter=stderr
 13/07/23 14:12:19 INFO mapred.JobClient:  map 20% reduce 0%
