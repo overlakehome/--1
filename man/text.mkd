@@ -20,6 +20,10 @@ stop-all.sh # stops hadoop daemons.
 * [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
 * [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
+##### Mahout Trunk
+
+* `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
+
 ##### Mahout 0.7
 
 ```bah
