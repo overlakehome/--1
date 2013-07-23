@@ -44,7 +44,7 @@ WORK_DIR=/tmp/mahout-work-${USER}
 mkdir -p ${WORK_DIR}
 ```
 
-* WARN: `driver.MahoutDriver: No org.apache.lucene.benchmark.utils.ExtractReuters.props found on classpath, will use command-line arguments only`
+* `WARN: driver.MahoutDriver: [No org.apache.lucene.benchmark.utils.ExtractReuters.props found on classpath](http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)`
 
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-out ]; then
