@@ -181,10 +181,10 @@ java.io.FileNotFoundException: /tmp/hadoop-hylee/mapred/local/taskTracker/hylee/
 ```bash
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
-  -o ${WORK_DIR}/reuters-lda -k 20 -ow -x 20 \
+  -o ${WORK_DIR}/reuters-lda-x2 -ow -k 20 -x 2 \
   -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
-  -dt ${WORK_DIR}/reuters-lda-topics \
-  -mt ${WORK_DIR}/reuters-lda-model
+  -dt ${WORK_DIR}/reuters-lda-topics-x2 \
+  -mt ${WORK_DIR}/reuters-lda-model-x2
 ```
 
 ##### Mahout LDA
