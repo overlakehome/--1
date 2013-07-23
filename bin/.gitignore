@@ -1,0 +1,11 @@
+*.class
+*.iws
+*.md.html
+*.mkd.html
+.DS_Store
+.p4config
+.settings/
+project.properties
+bin/
+gen/
+target/
