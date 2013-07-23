@@ -35,7 +35,9 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```bash
 MAHOUT="mahout" # which mahout
 HADOOP="hadoop" # which hadoop
+```
 
+```bash
 WORK_DIR=/tmp/mahout-work-${USER}
 mkdir -p ${WORK_DIR}
 
