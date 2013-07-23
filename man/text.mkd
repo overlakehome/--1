@@ -33,8 +33,8 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ###### Prepare Sequence Files
 
 ```bash
-MAHOUT="mahout" # which mahout
-HADOOP="hadoop" # which hadoop
+MAHOUT="/workspace/mahout/bin/mahout" # which mahout
+HADOOP="/usr/local/bin/hadoop" # which hadoop
 
 WORK_DIR=/tmp/mahout-work-${USER}
 mkdir -p ${WORK_DIR}
