@@ -62,7 +62,6 @@ little snitch, [sequel.pro](http://www.sequelpro.com/download/), [oracle.sql.dev
     curl -o /tmp/MacVim-snapshot-68-Lion.tbz -kL https://macvim.googlecode.com/files/MacVim-snapshot-68-Lion.tbz
     tar xvf /tmp/MacVim-snapshot-68-Lion.tbz -C /tmp/
     mv /tmp/MacVim-snapshot-68/MacVim.app /Applications/
-    ln -s /Applications/MacVim.app/Contents/MacOS/Vim /usr/local/bin/vim
 
 ##### ~~[Install Ruby through RVM on Mac](http://ryanbigg.com/2011/06/mac-os-x-ruby-rvm-rails-and-you/)~~
 
