@@ -102,7 +102,8 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 
 * reuters-out-seqdir-sparse-lda
   * df-count
-  * dictionary.file-0 -- contains the mapping between a term and its integer ID.
+  * dictionary.file-0 -- integer Ids keyed by term.
+    * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -q | less
   * frequency.file-0
   * tf-vectors
   * tfidf-vectors
