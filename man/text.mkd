@@ -111,8 +111,8 @@ cat ${WORK_DIR}/reuters-lda/vectordump
      * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
      * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
   * tfidf-vectors
-     * e.g. {5405:3.594198703765869,5506:9.593134880065918,3170:2.8289616107940674,  
-             22224:4.587512493133545,7160:4.637308120727539}
+     * e.g. {5405:3.594198703765869,5506:9.593134880065918,  
+       3170:2.8289616107940674,22224:4.587512493133545,7160:4.637308120727539}
   * tokenized-documents -- tokens (string tuples) keyed by docs.
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tokenized-documents -o /tmp/tokonized.txt -n 10
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
