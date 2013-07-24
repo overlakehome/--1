@@ -91,11 +91,11 @@ $MAHOUT cvb \
   -mt ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT vectordump \
-  -i ${WORK_DIR}/reuters-lda-topics/part-m-00000 \
+  -i ${WORK_DIR}/reuters-lda-model/part-m-00000 \
   -o ${WORK_DIR}/reuters-lda/vectordump \
   -vs 10 -p true \
-  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
-  -dt sequencefile -sort ${WORK_DIR}/reuters-lda-topics/part-m-00000 \
+  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* -dt sequencefile \
+  -sort ${WORK_DIR}/reuters-lda-model/part-m-00000 \
   && \
 cat ${WORK_DIR}/reuters-lda/vectordump
 ```
