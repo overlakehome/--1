@@ -186,6 +186,14 @@ $MAHOUT cvb \
   -mt ${WORK_DIR}/reuters-lda-model-x2
 ```
 
+```bash
+13/07/23 16:40:03 INFO cvb.CVB0Driver: Completed 2 iterations in 787 seconds
+13/07/23 16:40:03 INFO cvb.CVB0Driver: Perplexities: ()
+13/07/23 16:40:03 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 to /tmp/mahout-work-hylee/reuters-lda-x2
+13/07/23 16:40:04 INFO input.FileInputFormat: Total input paths to process : 10
+13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
+```
+
 ##### Mahout LDA
 
 * LDA CVB?
