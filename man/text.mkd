@@ -102,7 +102,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 
 * reuters-out-seqdir-sparse-lda
   * df-count
-  * dictionary.file-0
+  * dictionary.file-0 -- contains the mapping between a term and its integer ID.
   * frequency.file-0
   * tf-vectors
   * tfidf-vectors
