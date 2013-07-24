@@ -77,7 +77,7 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
 fi
 ```
 
-###### LDA and ...
+###### LDA CBA in Action
 
 ```bash
 $MAHOUT seq2sparse \
@@ -152,6 +152,8 @@ cat ${WORK_DIR}/reuters-lda/vectordump
     one:1202.5700042310225,revs:1101.5045121231876,mln:1064.8691927325294,dlrs:1063.4477874597524,  
     six:1058.6275574151828,13:1039.8571629633227,loss:1002.0268614814164,qtr:969.7141107558248}
 
+###### LDA CBA - 2 Iterations
+
 ```bash
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
@@ -169,14 +171,9 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
-##### Mahout LDA
+##### Map Reduce Programming w/ Eclipse
 
-* LDA CVB?
-  * http://stackoverflow.com/questions/16994529/how-to-print-mahout-lda-cvb-topic
-  * http://stackoverflow.com/questions/17119703/what-is-represented-by-the-doc-topic-distribution-output-of-mahouts-cvb-imple
-  * http://stackoverflow.com/questions/11651713/using-mahout-to-train-an-lda-and-retrieve-its-topics
-
-##### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
+###### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
 
 ```bash
 curl -o ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -kL http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz
@@ -184,7 +181,7 @@ tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /App
 open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
-#### text app in java
+##### Text Taming App in java
 
 ```bash
 echo | mvn archetype:generate \
