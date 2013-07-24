@@ -136,9 +136,9 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 * reuters-lda-topic -- final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix
 * reuters-lda-model -- final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20
   * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -o model-2.txt  
-    -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
+    -p true -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
     -d /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -dt sequencefile # 20 terms each topic.
-  * e.g. {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
+  * e.g. 0    {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
     mar:2000.3959744299038,bank:1544.2597492115585,company:1447.3947811352577,he:1441.3986830272913,  
     pct:1432.803268216384,two:1375.951945852348,sales:1266.572475574726,11:1234.2160846942008,  
     one:1202.5700042310225,revs:1101.5045121231876,mln:1064.8691927325294,dlrs:1063.4477874597524,  
