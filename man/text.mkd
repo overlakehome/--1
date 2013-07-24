@@ -36,9 +36,9 @@ curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT-job.jar ?
 curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT.jar ?
 ```
 
-##### Mahout Demo w/ 21,578 documents taking 2 hours.
+##### Mahout LDA Demo 
 
-###### Prepare Sequence Files
+###### Prepare Document Collection
 
 ```bash
 MAHOUT="/workspace/mahout/bin/mahout" # which mahout
@@ -75,7 +75,7 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
 fi
 ```
 
-###### LDA CBA in Action
+###### Topic Modeling in Action
 
 ```bash
 $MAHOUT seq2sparse \
