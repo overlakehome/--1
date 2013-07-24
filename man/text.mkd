@@ -119,7 +119,10 @@ cat ${WORK_DIR}/reuters-lda/vectordump
      * key: zy: Value: 7
 * reuters-out-matrix
   * docIndex
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/docIndex -q | head
+     * e.g. key: 0: value: /reut2-000.sgm-0.txt; key: 1: value: /reut2-000.sgm-1.txt; key: 2: value: /reut2-000.sgm-10.txt.
   * matrix
+     * ?
 * reuters-lda-model
 * reuters-lda-topic
 
