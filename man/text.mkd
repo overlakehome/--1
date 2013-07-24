@@ -4,7 +4,7 @@
 * [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
 * [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
-![http://ecx.images-amazon.com/images/I/41yb9gpRRYL._SL190_PIsitb-sticker-arrow-dp,TopRight,12,-18_SH30_OU01_AA190_.jpg]
+![](http://ecx.images-amazon.com/images/I/41yb9gpRRYL._SL190_PIsitb-sticker-arrow-dp,TopRight,12,-18_SH30_OU01_AA190_.jpg)
 
 ##### Hadoop on Mac OS X - [ [Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/) | [Mac OS X](http://wiki.apache.org/hadoop/Running_Hadoop_On_OS_X_10.5_64-bit_\(Single-Node_Cluster\)) ]
 
