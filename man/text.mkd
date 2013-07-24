@@ -177,6 +177,11 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
+##### In Progress
+
+* http://stackoverflow.com/questions/14757162/run-cvb-in-mahout-0-8
+* *
+
 ##### Introduction to Clustering Text -- [Mahout algorithms](https://cwiki.apache.org/confluence/display/MAHOUT/Algorithms)
 
 * text clustering: having a text processing tool that can automatically group similar items and present the results with summarizing labels is a good way to wade through large amount of text or search results without having to read all, or even most, of the content.
