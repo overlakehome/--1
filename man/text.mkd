@@ -75,17 +75,17 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/reuters-out-seqdir/ \
-  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector \
+  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector # took 273274 ms \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/reuters-out-seqdir-sparse-lda/tfidf-vectors \
-  -o ${WORK_DIR}/reuters-out-matrix \
+  -o ${WORK_DIR}/reuters-out-matrix # took 5209 ms \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
-  -o ${WORK_DIR}/reuters-lda -k 20 -ow -x 20 \
+  -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
   -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
   -dt ${WORK_DIR}/reuters-lda-topics \
   -mt ${WORK_DIR}/reuters-lda-model \
