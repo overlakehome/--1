@@ -31,6 +31,13 @@ unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
 
+```
+mv /workspace/mahout/mahout-examples-0.7-job.jar /workspace/mahout/mahout-examples-0.7-job.jar.bak
+mv /workspace/mahout/mahout-examples-0.7.jar /workspace/mahout/mahout-examples-0.7.jar.bak
+curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT-job.jar ?
+curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT.jar ?
+```
+
 ##### Mahout Demo w/ 21,578 documents taking 2 hours.
 
 ###### Prepare Sequence Files
