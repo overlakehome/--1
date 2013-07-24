@@ -2,7 +2,6 @@
 
 * [Mahout on Amazon EMR: Elastic MapReduce](https://cwiki.apache.org/confluence/display/MAHOUT/Mahout+on+Elastic+MapReduce)
 * [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
-* [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
 ![x](http://www.manning.com/holmes/holmes_cover150.jpg)
 ![x](http://www.manning.com/ingersoll/ingersoll_cover150.jpg)
