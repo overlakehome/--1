@@ -109,7 +109,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
      * e.g. key: 0: value: 43; key: 41806: value: 7 -- term '0' occurs 43 times; term 'zy' occurs 7 times.
   * tf-vectors
      * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
-     * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms.
+     * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
   * tfidf-vectors
   * tokenized-documents
   * wordcount
