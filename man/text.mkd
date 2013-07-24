@@ -120,7 +120,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 * reuters-out-matrix
   * docIndex
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/docIndex -q | head
-     * e.g. key: 0: value: /reut2-000.sgm-0.txt; key: 1: value: /reut2-000.sgm-1.txt; key: 2: value: /reut2-000.sgm-10.txt.
+     * e.g. key: 1: value: /reut2-000.sgm-1.txt; key: 21577: value: /reut2-021.sgm-99.txt
   * matrix
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/matrix -q | tail
      * e.g. key: 21577: value: /reut2-021.sgm-99.txt:{33834:9.623783111572266,  
