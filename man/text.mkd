@@ -115,6 +115,8 @@ cat ${WORK_DIR}/reuters-lda/vectordump
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tokenized-documents -o /tmp/tokonized.txt -n 10
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * wordcount
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/wordcount -q | grep ' zy:'
+     * key: zy: Value: 7
 * reuters-out-matrix
   * docIndex
   * matrix
