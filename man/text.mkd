@@ -51,8 +51,6 @@ WORK_DIR=/tmp/mahout-work-${USER}
 mkdir -p ${WORK_DIR}
 ```
 
-* WARN: driver.MahoutDriver: [No **org.apache.lucene.benchmark.utils.ExtractReuters**.props found on classpath](http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
-
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-out ]; then
     if [ ! -e ${WORK_DIR}/reuters-sgm ]; then
@@ -64,6 +62,10 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
         echo "Extracting..."
         tar xzf $HOME/Downloads/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
     fi
+
+    # Safe to ignore WARN: driver.MahoutDriver:
+    #   [No org.apache.lucene.benchmark.utils.ExtractReuters.props found on classpath]
+    #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-out
 
