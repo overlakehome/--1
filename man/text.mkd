@@ -1,3 +1,9 @@
+##### References
+
+* https://cwiki.apache.org/confluence/display/MAHOUT/Mahout+on+Elastic+MapReduce
+* [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
+* [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
+
 ##### Hadoop on Mac OS X - [ [Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/) | [Mac OS X](http://wiki.apache.org/hadoop/Running_Hadoop_On_OS_X_10.5_64-bit_\(Single-Node_Cluster\)) ]
 
 * `brew install hadoop`
@@ -15,9 +21,6 @@ ps aux | grep hadoop | grep -v grep | wc -l # puts '5'
 hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # computes pi
 stop-all.sh # stops hadoop daemons.
 ```
-
-* [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
-* [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
 
 ##### Mahout 0.7 w/ patches of 0.9
 
