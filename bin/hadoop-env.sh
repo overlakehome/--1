@@ -17,8 +17,8 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK
 
 # Extra Java runtime options.  Empty by default.
 # export HADOOP_OPTS=-server
-export HADOOP_OPTS="-Djava.security.krb5.realm= -Djava.security.krb5.kdc="
-export HADOOP_OPTS="-Dhadoop.tmp.dir=/usr/local/tmp/hadoop-$USER"
+export HADOOP_OPTS="$HADOOP_OPTS -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
+export HADOOP_OPTS="$HADOOP_OPTS -Dhadoop.tmp.dir=/usr/local/tmp/hadoop-$USER"
 
 # Command specific options appended to HADOOP_OPTS when specified
 export HADOOP_NAMENODE_OPTS="-Dcom.sun.management.jmxremote $HADOOP_NAMENODE_OPTS"
