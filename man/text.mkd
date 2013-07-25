@@ -286,6 +286,25 @@ echo | mvn archetype:generate \
 
 * `mvn eclipse:eclipse -DdownloadSources=true`
 
+```
+org.apache.mahout:mahout-examples:jar:0.8:compile
++- org.apache.lucene:lucene-benchmark:jar:4.3.0:compile
+|  +- org.apache.lucene:lucene-highlighter:jar:4.3.0:compile
+|  |  \- org.apache.lucene:lucene-queries:jar:4.3.0:compile
+|  +- org.apache.lucene:lucene-memory:jar:4.3.0:compile
+|  +- org.apache.lucene:lucene-queryparser:jar:4.3.0:compile
+|  |  \- org.apache.lucene:lucene-sandbox:jar:4.3.0:compile
+|  |     \- jakarta-regexp:jakarta-regexp:jar:1.4:compile
+|  +- org.apache.lucene:lucene-facet:jar:4.3.0:compile
+|  +- com.ibm.icu:icu4j:jar:49.1:compile
+|  +- net.sourceforge.nekohtml:nekohtml:jar:1.9.17:compile
+|  +- org.apache.commons:commons-compress:jar:1.4.1:compile
+|  \- xerces:xercesImpl:jar:2.9.1:compile
++- org.apache.lucene:lucene-analyzers-common:jar:4.3.0:compile
++- org.slf4j:slf4j-api:jar:1.7.5:compile
+\- org.slf4j:slf4j-jcl:jar:1.7.5:runtime
+   \- commons-logging:commons-logging:jar:1.1.1:compile
+```
 
 ##### References
 
