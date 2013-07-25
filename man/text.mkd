@@ -1,4 +1,9 @@
-##### Hadoop - [ [Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/) | [Mac OS X](http://wiki.apache.org/hadoop/Running_Hadoop_On_OS_X_10.5_64-bit_\(Single-Node_Cluster\)) ]
+##### Keywords
+
+* LDA topic-probability distribution per document (p(z|d))
+* 
+
+##### Hadoop on Mac OS X - [ [Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/) | [Mac OS X](http://wiki.apache.org/hadoop/Running_Hadoop_On_OS_X_10.5_64-bit_\(Single-Node_Cluster\)) ]
 
 * `brew install hadoop`
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
@@ -16,14 +21,9 @@ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 1
 stop-all.sh # stops hadoop daemons.
 ```
 
-* [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
-* [HDFS and Map Reduce Introduction](http://www.thegeekstuff.com/2012/01/hadoop-hdfs-mapreduce-intro/)
+##### Mahout 0.7 w/ patches of 0.9
 
-##### Mahout Trunk
-
-* `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
-
-##### Mahout 0.7
+* Mahout Trunk: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
 ```bah
 curl -o $HOME/Downloads/mahout-distribution-0.7.zip -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
@@ -31,9 +31,16 @@ unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
 
-##### Mahout Demo w/ 21,578 documents taking 2 hours.
+```
+mv /workspace/mahout/mahout-examples-0.7-job.jar /workspace/mahout/mahout-examples-0.7-job.jar.bak
+mv /workspace/mahout/mahout-examples-0.7.jar /workspace/mahout/mahout-examples-0.7.jar.bak
+curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT-job.jar ?
+curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT.jar ?
+```
 
-###### Prepare Sequence Files
+##### Mahout LDA Demo 
+
+###### Prepare Document Collection
 
 ```bash
 MAHOUT="/workspace/mahout/bin/mahout" # which mahout
@@ -42,8 +49,6 @@ HADOOP="/usr/local/bin/hadoop" # which hadoop
 WORK_DIR=/tmp/mahout-work-${USER}
 mkdir -p ${WORK_DIR}
 ```
-
-* WARN: driver.MahoutDriver: [No **org.apache.lucene.benchmark.utils.ExtractReuters**.props found on classpath](http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
 
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-out ]; then
@@ -56,6 +61,10 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
         echo "Extracting..."
         tar xzf $HOME/Downloads/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
     fi
+
+    # Safe to ignore WARN: driver.MahoutDriver:
+    #   [No org.apache.lucene.benchmark.utils.ExtractReuters.props found on classpath]
+    #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-out
 
@@ -70,112 +79,87 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
 fi
 ```
 
-###### LDA and ...
+###### Topic Modeling in Action
 
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/reuters-out-seqdir/ \
-  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector \
+  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector # took 273274 ms \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/reuters-out-seqdir-sparse-lda/tfidf-vectors \
-  -o ${WORK_DIR}/reuters-out-matrix \
+  -o ${WORK_DIR}/reuters-out-matrix # took 5209 ms \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
-  -o ${WORK_DIR}/reuters-lda -k 20 -ow -x 20 \
+  -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
   -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
   -dt ${WORK_DIR}/reuters-lda-topics \
   -mt ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT vectordump \
-  -i ${WORK_DIR}/reuters-lda-topics/part-m-00000 \
+  -i ${WORK_DIR}/reuters-lda-model/part-m-00000 \
   -o ${WORK_DIR}/reuters-lda/vectordump \
   -vs 10 -p true \
-  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
-  -dt sequencefile -sort ${WORK_DIR}/reuters-lda-topics/part-m-00000 \
+  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* -dt sequencefile \
+  -sort ${WORK_DIR}/reuters-lda-model/part-m-00000 \
   && \
 cat ${WORK_DIR}/reuters-lda/vectordump
 ```
 
 * reuters-out-seqdir-sparse-lda
   * df-count
-  * dictionary.file-0
-  * frequency.file-0
+  * dictionary.file-0 -- integer IDs keyed by term.
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -q # returns 41807 terms.
+     * e.g. key: 0: value: 0, key: zy: value: 41806
+  * frequency.file-0 -- frequencies keyed by term ID.
+     * e.g. key: 0: value: 43; key: 41806: value: 7 -- term '0' occurs 43 times; term 'zy' occurs 7 times.
   * tf-vectors
+     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
+     * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
   * tfidf-vectors
-  * tokenized-documents
+     * e.g. {5405:3.594198703765869,5506:9.593134880065918,  
+       3170:2.8289616107940674,22224:4.587512493133545,7160:4.637308120727539}
+  * tokenized-documents -- tokens (string tuples) keyed by docs.
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tokenized-documents -o /tmp/tokonized.txt -n 10
+     * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * wordcount
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/wordcount -q | grep ' zy:'
+     * key: zy: Value: 7
 * reuters-out-matrix
   * docIndex
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/docIndex -q | head
+     * e.g. key: 1: value: /reut2-000.sgm-1.txt; key: 21577: value: /reut2-021.sgm-99.txt
   * matrix
-* reuters-lda-model
-* reuters-lda-topic
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/matrix -q | tail
+     * e.g. key: 21577: value: /reut2-021.sgm-99.txt:{33834:9.623783111572266,  
+          34837:5.249424934387207,20362:1.9876184463500977,39389:11.363191604614258,4747:4.020981311798096,  
+          40723:7.030537128448486,25508:6.2267255783081055,29996:4.846031665802002,26109:4.315020561218262,  
+          3730:3.051023483276367,33426:3.2492547035217285,4397:2.9004313945770264,7711:4.540079116821289,  
+          834:8.676844596862793,12157:4.992977619171143,10344:4.8077287673950195,29802:4.378199577331543,  
+          23135:4.283630847930908,30839:3.5672693252563477,30234:4.959400177001953,30567:3.5451722145080566,  
+          1555:7.45306921005249,2689:3.1351888179779053,39538:4.789113998413086,36387:4.446075916290283,  
+          30377:3.8201377391815186,19031:4.827460765838623,39463:9.880817413330078}
+* reuters-lda-topic -- final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix
+  * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-topics-x2 -o document-model-inference.txt
+  * e.g. {0:0.03604119661007879,1:0.0688613083091687,2:0.04104584185075027,3:0.04201322451285146,  
+    4:0.07094607918051136,5:0.059726447187793144,6:0.027547023622972115,7:0.02936943642966859,  
+    8:0.05693857435609574,9:0.0804624506346288,10:0.05340769167421293,11:0.015173259854307931,  
+    12:0.04513986733501052,13:0.0516641119210567,14:0.0337996577135869,15:0.029916406161888273,  
+    16:0.058812759531053076,17:0.04011268844849057,18:0.07464871072544656,19:0.08437326394042743}
+* reuters-lda-model -- final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20
+  * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-model/model-20 -o topic-term-distributions.txt  
+    -p true -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
+    -d /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -dt sequencefile # 20 terms each topic.
+  * e.g. topic0   {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
+    mar:2000.3959744299038,bank:1544.2597492115585,company:1447.3947811352577,he:1441.3986830272913,  
+    pct:1432.803268216384,two:1375.951945852348,sales:1266.572475574726,11:1234.2160846942008,  
+    one:1202.5700042310225,revs:1101.5045121231876,mln:1064.8691927325294,dlrs:1063.4477874597524,  
+    six:1058.6275574151828,13:1039.8571629633227,loss:1002.0268614814164,qtr:969.7141107558248}
 
-```log
-13/07/23 14:11:42 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20 to /tmp/mahout-work-hylee/reuters-lda
-13/07/23 14:11:45 INFO input.FileInputFormat: Total input paths to process : 10
-13/07/23 14:11:46 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics
-13/07/23 14:11:47 INFO input.FileInputFormat: Total input paths to process : 1
-13/07/23 14:11:48 INFO mapred.JobClient: Running job: job_201307231037_0029
-13/07/23 14:11:49 INFO mapred.JobClient:  map 0% reduce 0%
-13/07/23 14:11:49 INFO mapred.JobClient: Task Id : attempt_201307231037_0029_m_000011_0, Status : FAILED
-Error initializing attempt_201307231037_0029_m_000011_0:
-java.io.FileNotFoundException: /tmp/hadoop-hylee/mapred/local/taskTracker/hylee/jobcache/job_201307231037_0029/jars/org/apache/mahout/math/buffer/IntBufferConsumer.class (Permission denied)
- at java.io.FileOutputStream.open(Native Method)
-	at java.io.FileOutputStream.<init>(FileOutputStream.java:194)
-	at java.io.FileOutputStream.<init>(FileOutputStream.java:145)
-	at org.apache.hadoop.util.RunJar.unJar(RunJar.java:51)
-	at org.apache.hadoop.mapred.JobLocalizer.localizeJobJarFile(JobLocalizer.java:277)
-	at org.apache.hadoop.mapred.JobLocalizer.localizeJobFiles(JobLocalizer.java:377)
-	at org.apache.hadoop.mapred.JobLocalizer.localizeJobFiles(JobLocalizer.java:367)
-	at org.apache.hadoop.mapred.DefaultTaskController.initializeJob(DefaultTaskController.java:211)
-	at org.apache.hadoop.mapred.TaskTracker$4.run(TaskTracker.java:1331)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at javax.security.auth.Subject.doAs(Subject.java:396)
-	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1149)
-	at org.apache.hadoop.mapred.TaskTracker.initializeJob(TaskTracker.java:1306)
-	at org.apache.hadoop.mapred.TaskTracker.localizeJob(TaskTracker.java:1221)
-	at org.apache.hadoop.mapred.TaskTracker$5.run(TaskTracker.java:2581)
-	at java.lang.Thread.run(Thread.java:680)
-
-13/07/23 14:11:49 WARN mapred.JobClient: Error reading task outputhttp://172.16.31.44:50060/tasklog?plaintext=true&attemptid=attempt_201307231037_0029_m_000011_0&filter=stdout
-13/07/23 14:11:49 WARN mapred.JobClient: Error reading task outputhttp://172.16.31.44:50060/tasklog?plaintext=true&attemptid=attempt_201307231037_0029_m_000011_0&filter=stderr
-13/07/23 14:12:19 INFO mapred.JobClient:  map 20% reduce 0%
-13/07/23 14:12:23 INFO mapred.JobClient:  map 40% reduce 0%
-13/07/23 14:12:26 INFO mapred.JobClient:  map 50% reduce 0%
-13/07/23 14:12:27 INFO mapred.JobClient:  map 60% reduce 0%
-13/07/23 14:12:30 INFO mapred.JobClient:  map 70% reduce 0%
-13/07/23 14:12:31 INFO mapred.JobClient:  map 80% reduce 0%
-13/07/23 14:12:34 INFO mapred.JobClient:  map 90% reduce 0%
-13/07/23 14:12:35 INFO mapred.JobClient:  map 100% reduce 0%
-13/07/23 14:12:36 INFO mapred.JobClient: Job complete: job_201307231037_0029
-13/07/23 14:12:36 INFO mapred.JobClient: Counters: 16
-13/07/23 14:12:36 INFO mapred.JobClient:   Job Counters 
-13/07/23 14:12:36 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=42934
-13/07/23 14:12:36 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
-13/07/23 14:12:36 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
-13/07/23 14:12:36 INFO mapred.JobClient:     Launched map tasks=10
-13/07/23 14:12:36 INFO mapred.JobClient:     Data-local map tasks=10
-13/07/23 14:12:36 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=0
-13/07/23 14:12:36 INFO mapred.JobClient:   File Output Format Counters 
-13/07/23 14:12:36 INFO mapred.JobClient:     Bytes Written=6690610
-13/07/23 14:12:36 INFO mapred.JobClient:   FileSystemCounters
-13/07/23 14:12:36 INFO mapred.JobClient:     HDFS_BYTES_READ=6692090
-13/07/23 14:12:36 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=532600
-13/07/23 14:12:36 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=6690610
-13/07/23 14:12:36 INFO mapred.JobClient:   File Input Format Counters 
-13/07/23 14:12:36 INFO mapred.JobClient:     Bytes Read=6690610
-13/07/23 14:12:36 INFO mapred.JobClient:   Map-Reduce Framework
-13/07/23 14:12:36 INFO mapred.JobClient:     Map input records=20
-13/07/23 14:12:36 INFO mapred.JobClient:     Spilled Records=0
-13/07/23 14:12:36 INFO mapred.JobClient:     Total committed heap usage (bytes)=850001920
-13/07/23 14:12:36 INFO mapred.JobClient:     Map output records=20
-13/07/23 14:12:36 INFO mapred.JobClient:     SPLIT_RAW_BYTES=1480
-13/07/23 14:12:36 INFO mapred.JobClient: Running job: job_201307231037_0030
-```
+###### LDA CBA - 2 Iterations
 
 ```bash
 $MAHOUT cvb \
@@ -194,14 +178,86 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
-##### Mahout LDA
+##### Infer Document-Topic Distribution by [Topic Model#infer](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#infer(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector))?
 
-* LDA CVB?
-  * http://stackoverflow.com/questions/16994529/how-to-print-mahout-lda-cvb-topic
-  * http://stackoverflow.com/questions/17119703/what-is-represented-by-the-doc-topic-distribution-output-of-mahouts-cvb-imple
-  * http://stackoverflow.com/questions/11651713/using-mahout-to-train-an-lda-and-retrieve-its-topics
+* Ours:
 
-##### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
+```java
+int numTopics = 20;
+TopicModel topicModel = new TopicModel(...);
+Vector docTopics = new DenseVector(numTopics).assign(1.0 / numTopics);
+documentTopicDistribution = topicModel(documentInTFVector, docTopic); // returns a vector of topic probabilities.
+```
+
+* Theirs: [TopicModel#infer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/clustering/lda/cvb/TopicModel.java?view=markup)
+
+```java
+298   public Vector infer(Vector original, Vector docTopics) {
+299     Vector pTerm = original.like();
+300	    for (Element e : original.nonZeroes()) {
+301	      int term = e.index();
+302	      // p(a) = sum_x (p(a|x) * p(x|i))
+303	      double pA = 0;
+304	      for (int x = 0; x < numTopics; x++) {
+305	        pA += (topicTermCounts.viewRow(x).get(term) / topicSums.get(x)) * docTopics.get(x);
+306	      }
+307	      pTerm.set(term, pA);
+308	    }
+309	    return pTerm;
+310	  }
+```
+
+##### Introduction to Clustering Text -- [Mahout algorithms](https://cwiki.apache.org/confluence/display/MAHOUT/Algorithms)
+
+* text clustering: having a text processing tool that can automatically group similar items and present the results with summarizing labels is a good way to wade through large amount of text or search results without having to read all, or even most, of the content.
+* cluster is an unsupervised task w/ no human interaction, such as annotating training text, required that can automatically put related content into buckets; in some cases, it also can assign **labels** to buckets and even give **summaries** of what's in each bucket.
+* carrot vs. mahout
+  * merits and demerits.
+* how clustering can be appied at the word- or topic-level to identify keywords, or topics in documents (called topic modeling) using LDA (latent dirichlet allocation).
+* performance: how fast? and how good?
+* e.g. Google News, not just good algos, but **scalability**
+  * factors: title, text, and publication time; they use various clustering algorithms to identify closely related stories.
+  * there is more than running clustering algorithms - grouping news content on a near-real-time basis - designed to be scale.
+  * quickly cluster large # of documents, determine representative documents or labels for display, and deal with new, incoming documents.
+
+##### Types of clustering
+
+* clustering is also useful for many other things besides text, like grouping users or data from a series of sensors, but those are outside the scope of this book.
+* clustering documents is usually an offline batch processing job, so it's often worthwhile to spend extra time to get better results.
+  * descriptions for clusters are often generated by looking at the most important terms by some weighting mechanism (such as TF-IDF) in documents closest to the centroid.
+  * using n-grams (or identifying phrases) may also be worth experimenting with when testing description(?) approaches.
+* clustering words into topics (also called topic modeling) is an effective way to quickly find topics that are covered in a large set of documents.
+  * we assume that documents often cover several different topics and that words related to a given topic often found near each other -- quickly find which words appearch near each other and what documents are attached those words; in a sense, topic modeling also does document clustering.
+  * topics themselves lack names, so naming it is the job of the person generating the topics. generating topics for a collection is one more way to aid users in browsing the collection and discovering interests, while we don't even know what documents contain which topic.
+
+<table>
+  <thead>
+    <tr>
+      <td>Topic 0</td>
+      <td>Topic 1</td>
+    </th>
+  </thread>
+  <tbody>
+    <tr>
+      <td>win saturday time game know nation u more after two take over back has from texa first day man offici 2 high one sinc some sunday</td>
+      <td>yesterday game work new last over more most year than two from state after been would us polic peopl team run were open five american</td>
+    </tr>
+  </tbody>
+</table>
+
+* choosing clustering algorithms
+  * hieararchical approach that runs non-linear time vs. flat approach that runs in linear time.
+  * in hard- vs. soft-membership, required to rebuild clusters with new documents or not.
+  * adaptive with user feedback, required to specify the number of clusters, performance and quality.
+* similarity is implemented as a measure of distance between two documents that are represented as sparse vectors in p-norm with TF-IDF weights.
+  * Euclidean or Cosine distance measures are appropriate for 2-norm, while Manhattan distance measure is for 1-norm.
+* labeling clustering results involves utilizing concept/topic modeling by Latent Dirichlet Allocation, or
+  * picking representative documents from a cluster (randomly, near from centroid, or by membership likelihood).
+  * picking good labels by important terms or phrases in a cluster, a weighted list of terms by TF-IDF, a list of phrases by n-grams.
+
+##### Map Reduce Programming w/ Eclipse
+
+###### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
 
 ```bash
 curl -o ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -kL http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz
@@ -209,7 +265,7 @@ tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /App
 open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
-#### text app in java
+##### Text Taming App in java
 
 ```bash
 echo | mvn archetype:generate \
@@ -229,5 +285,15 @@ echo | mvn archetype:generate \
   * [porter-stemmer-1.4.jar](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
 
 * `mvn eclipse:eclipse -DdownloadSources=true`
+
+
+##### References
+
+* [Mahout on Amazon EMR: Elastic MapReduce](https://cwiki.apache.org/confluence/display/MAHOUT/Mahout+on+Elastic+MapReduce)
+* [Yahoo Dev. Network - Hadoop Tutorial](http://developer.yahoo.com/hadoop/tutorial/)
+
+![x](http://www.manning.com/holmes/holmes_cover150.jpg)
+![x](http://www.manning.com/ingersoll/ingersoll_cover150.jpg)
+![x](http://www.manning.com/owen/owen_cover150.jpg)
 
 eod
