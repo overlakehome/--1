@@ -1,6 +1,8 @@
 package com.henry4j;
 
 import static java.lang.Math.max;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 
@@ -28,8 +30,12 @@ public class AppTest {
 
         val conf = new Configuration();
         val dictionary = readDictionary(new Path("/tmp/dictionary.file-0"), conf);
-        assert null != dictionary;
+        assertThat(dictionary.length, equalTo(41807));
 
+        // reads 'model' dense matrix (20 x 41K), and in 'topicSum' dense vector.
+        val model = readModel(dictionary, new Path("/tmp/model-n"), conf); 
+        model.topicSums();
+        
 //        Vector doc = null;
 //        Vector docTopics = new DenseVector(numTopics).assign(1.0/numTopics);
 //        Matrix docModel = new SparseRowMatrix(numTopics, doc.get().size());
@@ -52,7 +58,7 @@ public class AppTest {
         val statuses = FileSystem.get(conf).listStatus(path, PathFilters.partFilter());
         val modelPaths = new Path[statuses.length];
         for (int i = 0; i < statuses.length; i++) {
-          modelPaths[i] = new Path(statuses[i].getPath().toUri().toString());
+            modelPaths[i] = new Path(statuses[i].getPath().toUri().toString());
         }
         return modelPaths;
     }
