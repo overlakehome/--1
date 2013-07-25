@@ -182,10 +182,32 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
-##### In Progress
+##### Infer Document-Topic Distribution by [Topic Model#infer](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#infer(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector))?
 
-* http://stackoverflow.com/questions/14757162/run-cvb-in-mahout-0-8
-* *
+* Ours:
+
+```java
+TopicModel topicModel = new TopicModel(...);
+documentTopicDistribution = topicModel(documentInTFVector, ...); // returns a vector of topic probabilities.
+```
+
+* Theirs: [TopicModel#infer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/clustering/lda/cvb/TopicModel.java?view=markup)
+
+```java
+298   public Vector infer(Vector original, Vector docTopics) {
+299     Vector pTerm = original.like();
+300	    for (Element e : original.nonZeroes()) {
+301	      int term = e.index();
+302	      // p(a) = sum_x (p(a|x) * p(x|i))
+303	      double pA = 0;
+304	      for (int x = 0; x < numTopics; x++) {
+305	        pA += (topicTermCounts.viewRow(x).get(term) / topicSums.get(x)) * docTopics.get(x);
+306	      }
+307	      pTerm.set(term, pA);
+308	    }
+309	    return pTerm;
+310	  }
+```
 
 ##### Introduction to Clustering Text -- [Mahout algorithms](https://cwiki.apache.org/confluence/display/MAHOUT/Algorithms)
 
