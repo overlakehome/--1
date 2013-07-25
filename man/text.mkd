@@ -187,8 +187,10 @@ $MAHOUT cvb \
 * Ours:
 
 ```java
+int numTopics = 20;
 TopicModel topicModel = new TopicModel(...);
-documentTopicDistribution = topicModel(documentInTFVector, ...); // returns a vector of topic probabilities.
+Vector docTopics = new DenseVector(numTopics).assign(1.0 / numTopics);
+documentTopicDistribution = topicModel(documentInTFVector, docTopic); // returns a vector of topic probabilities.
 ```
 
 * Theirs: [TopicModel#infer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/clustering/lda/cvb/TopicModel.java?view=markup)
