@@ -147,7 +147,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
           1555:7.45306921005249,2689:3.1351888179779053,39538:4.789113998413086,36387:4.446075916290283,  
           30377:3.8201377391815186,19031:4.827460765838623,39463:9.880817413330078}
 * reuters-lda-topic -- final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix
-  * ...
+  * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-topics-x2 -o document-model-inference.txt
 * reuters-lda-model -- final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20
   * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-model/model-20 -o model-20.txt  
     -p true -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
