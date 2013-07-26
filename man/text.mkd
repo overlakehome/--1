@@ -325,7 +325,7 @@ tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /App
 open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
-##### Text Taming App in java
+##### How-To: Spawn Up a text taming app Java project
 
 ```bash
 echo | mvn archetype:generate \
@@ -339,7 +339,7 @@ echo | mvn archetype:generate \
   -DinteractiveMode=false
 ```
 
-* add dependencies to pom.xml
+* add dependencies to pom.xml -- see [head revision](https://github.com/henry4j/-/blob/master/sources/text/pom.xml)
   * [google-guava-14.0.1.jar](http://search.maven.org/#artifactdetails%7Ccom.google.guava%7Cguava%7C14.0.1%7Cbundle)
   * [opencsv-2.3.jar](http://search.maven.org/#artifactdetails%7Cnet.sf.opencsv%7Copencsv%7C2.3%7Cjar)
   * [porter-stemmer-1.4.jar](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
