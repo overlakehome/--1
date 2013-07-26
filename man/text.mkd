@@ -99,8 +99,8 @@ rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuter
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-matrix/matrix \
-  -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
   -dict ${WORK_DIR}/reuters-vector/dictionary.file-0 \
+  -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
   -dt ${WORK_DIR}/reuters-lda-topics \
   -mt ${WORK_DIR}/reuters-lda-model
 ```
