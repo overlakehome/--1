@@ -1,7 +1,6 @@
 ##### Keywords
 
 * LDA topic-probability distribution per document (p(z|d))
-* 
 
 ##### Hadoop on Mac OS X - [ [Ubuntu](http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/) | [Mac OS X](http://wiki.apache.org/hadoop/Running_Hadoop_On_OS_X_10.5_64-bit_\(Single-Node_Cluster\)) ]
 
@@ -9,24 +8,30 @@
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
   * `ssh-keygen -t rsa`, and then `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
 * Setup `libexec/conf/hadoop-env.sh` and [pseudo-distributed operation](http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed)
-  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' -kL 'https://raw.github.com/henry4j/-/master/bin/hadoop-env.sh'`
-  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'`
-  * `rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER && stop-all.sh && hadoop namenode -format`
+  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' \`
+    `  -kL 'https://raw.github.com/henry4j/-/master/bin/hadoop-env.sh'`
+  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' \`
+    `  -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'`
+  * `rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER`
+  * `stop-all.sh && hadoop namenode -format`
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
+* Put and get files by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then [`hadoop dfs -ls`](http://hadoop.apache.org/docs/stable/file_system_shell.html#ls)
 
 ```bash
-start-all.sh # starts hadoop daemons along w/ the name node and job tracker
-ps aux | grep hadoop | grep -v grep | wc -l # puts '5'
-hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # computes pi
+start-all.sh # starts up hadoop daemons: name, data, 2nd name nodes, and job & task tracker.
+ps aux | grep hadoop | grep -o 'org.apache.[^ ]\+$' # sees 5 lines
+hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # same as ruby -e 'p Math::PI'
 stop-all.sh # stops hadoop daemons.
 ```
 
-##### Mahout 0.7 w/ patches of 0.9
+##### Mahout 0.7 w/ [0.8 patches](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
 * Mahout Trunk: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
 ```bah
-curl -o $HOME/Downloads/mahout-distribution-0.7.zip -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
+sudo mkdir /workspace
+curl -o $HOME/Downloads/mahout-distribution-0.7.zip \
+  -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
 unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
@@ -34,13 +39,15 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
 mv /workspace/mahout/mahout-examples-0.7-job.jar /workspace/mahout/mahout-examples-0.7-job.jar.bak
 mv /workspace/mahout/mahout-examples-0.7.jar /workspace/mahout/mahout-examples-0.7.jar.bak
-curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT-job.jar ?
-curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT.jar ?
+curl -o /workspace/mahout/mahout-examples-0.8-job.jar \
+  -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8-job.jar
+curl -o /workspace/mahout/mahout-examples-0.8.jar \
+  -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8.jar
 ```
 
-##### Mahout LDA Demo 
+##### Mahout LDA CVB Demo 
 
-###### Prepare Document Collection
+###### Prepare Document Collection from Lucene Batchmark Program
 
 ```bash
 MAHOUT="/workspace/mahout/bin/mahout" # which mahout
@@ -84,50 +91,41 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/reuters-out-seqdir/ \
-  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector # took 273274 ms \
+  -o ${WORK_DIR}/reuters-out-seqdir-vectorized -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/reuters-out-seqdir-sparse-lda/tfidf-vectors \
-  -o ${WORK_DIR}/reuters-out-matrix # took 5209 ms \
+  -i ${WORK_DIR}/reuters-out-seqdir-vectorized/tfidf-vectors \
+  -o ${WORK_DIR}/reuters-out-matrix # took 5,209 ms \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
   -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
-  -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
+  -dict ${WORK_DIR}/reuters-out-seqdir-vectorized/dictionary.file-0 \
   -dt ${WORK_DIR}/reuters-lda-topics \
-  -mt ${WORK_DIR}/reuters-lda-model \
-&& \
-$MAHOUT vectordump \
-  -i ${WORK_DIR}/reuters-lda-model/part-m-00000 \
-  -o ${WORK_DIR}/reuters-lda/vectordump \
-  -vs 10 -p true \
-  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* -dt sequencefile \
-  -sort ${WORK_DIR}/reuters-lda-model/part-m-00000 \
-  && \
-cat ${WORK_DIR}/reuters-lda/vectordump
+  -mt ${WORK_DIR}/reuters-lda-model
 ```
 
-* reuters-out-seqdir-sparse-lda
+* `reuters-out-seqdir-vectorized` by `seq2sparse`
   * df-count
   * dictionary.file-0 -- integer IDs keyed by term.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -q # returns 41807 terms.
-     * e.g. key: 0: value: 0, key: zy: value: 41806
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/dictionary.file-0 -q # returns 41807 terms.
+     * e.g. key: "0": value: 0, key: "zy": value: 41806
   * frequency.file-0 -- frequencies keyed by term ID.
      * e.g. key: 0: value: 43; key: 41806: value: 7 -- term '0' occurs 43 times; term 'zy' occurs 7 times.
   * tf-vectors
-     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
+     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
      * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
   * tfidf-vectors
-     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
+     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
      * e.g. {5405:3.594198703765869,5506:9.593134880065918,  
        3170:2.8289616107940674,22224:4.587512493133545,7160:4.637308120727539}
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tokenized-documents -o /tmp/tokonized.txt -n 10
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/tokenized-documents -o /tmp/tokonized.txt -n 10
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * wordcount
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/wordcount -q | grep ' zy:'
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/wordcount -q | grep ' zy:'
      * key: zy: Value: 7
 * reuters-out-matrix
   * docIndex
@@ -153,7 +151,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 * reuters-lda-model -- final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20
   * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-model/model-20 -o topic-term-distributions.txt  
     -p true -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
-    -d /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -dt sequencefile # 20 terms each topic.
+    -d /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/dictionary.file-0 -dt sequencefile # 20 terms each topic.
   * e.g. topic0   {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
     mar:2000.3959744299038,bank:1544.2597492115585,company:1447.3947811352577,he:1441.3986830272913,  
     pct:1432.803268216384,two:1375.951945852348,sales:1266.572475574726,11:1234.2160846942008,  
@@ -166,7 +164,7 @@ cat ${WORK_DIR}/reuters-lda/vectordump
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
   -o ${WORK_DIR}/reuters-lda-x2 -ow -k 20 -x 2 \
-  -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
+  -dict ${WORK_DIR}/reuters-out-seqdir-vectorized/dictionary.file-* \
   -dt ${WORK_DIR}/reuters-lda-topics-x2 \
   -mt ${WORK_DIR}/reuters-lda-model-x2
 ```
@@ -179,33 +177,94 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
-##### Infer Document-Topic Distribution by [Topic Model#infer](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#infer(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector))?
+##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix\))?
 
-* Ours:
-
-```java
-int numTopics = 20;
-TopicModel topicModel = new TopicModel(...);
-Vector docTopics = new DenseVector(numTopics).assign(1.0 / numTopics);
-documentTopicDistribution = topicModel(documentInTFVector, docTopic); // returns a vector of topic probabilities.
-```
-
-* Theirs: [TopicModel#infer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/clustering/lda/cvb/TopicModel.java?view=markup)
+* [My Hello LDA! app -- to be updated w/ feedback from Jake M. (Principal SDE)](http://mahout.markmail.org/message/gjrfbjykwbjjm5gp)
 
 ```java
-298   public Vector infer(Vector original, Vector docTopics) {
-299     Vector pTerm = original.like();
-300	    for (Element e : original.nonZeroes()) {
-301	      int term = e.index();
-302	      // p(a) = sum_x (p(a|x) * p(x|i))
-303	      double pA = 0;
-304	      for (int x = 0; x < numTopics; x++) {
-305	        pA += (topicTermCounts.viewRow(x).get(term) / topicSums.get(x)) * docTopics.get(x);
-306	      }
-307	      pTerm.set(term, pA);
-308	    }
-309	    return pTerm;
-310	  }
+@Test
+public void testDocumentTopicInferenceForNewDocsOverReuters() {
+    val conf = new Configuration();
+    val dictionary = readDictionary(new Path("/tmp/dictionary"), conf);
+    assertThat(dictionary.length, equalTo(41807));
+
+    // reads 'model' dense matrix (20 x 41K), and in 'topicSum' dense vector.
+    TopicModel model = readModel(dictionary, new Path("/tmp/lda-model-splits"), conf);
+    assertThat(model.getNumTopics(), equalTo(20));
+    assertThat(model.getNumTerms(), equalTo(41807));
+
+    val doc = takeOnlineDocument(conf);
+    Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0/model.getNumTopics());
+    Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
+
+    for (int i = 0; i < 25 /* maxItrs */; i++) {
+        model.trainDocTopicModel(doc, docTopics, docTopicModel);
+        System.out.println(docTopics.toString());
+    }
+}
+
+private static Vector takeOnlineDocument(Configuration conf) {
+    // tfidf_vector represents a document in RandomAccessSparseVector.
+    // TODO: make a TFIDF vector out of an online string agaist dictionary, and frequency files.
+    val tfidf_vector = readTFVectorsInRange(new Path("/tmp/tfidf-vectors"), conf, 0, 1)[0].getSecond();
+    assertThat(tfidf_vector.size(), equalTo(41807));
+    return tfidf_vector;
+}
+
+@SneakyThrows({ IOException.class })
+private static Pair<String, Vector>[] readTFVectorsInRange(Path path, Configuration conf, int offset, int length) {
+    val seq = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
+    val documentName = new Text();
+    @SuppressWarnings("unchecked")
+    Pair<String, Vector>[] vectors = new Pair[length];
+    VectorWritable vector = new VectorWritable();
+    for (int i = 0; i < offset + length && seq.next(documentName, vector); i++) {
+        if (i >= offset) {
+            vectors[i - offset] = Pair.of(documentName.toString(), vector.get());
+        }
+    }
+    return vectors;
+}
+
+@SneakyThrows({ IOException.class })
+private static TopicModel readModel(String[] dictionary, Path path, Configuration conf) {
+    double alpha = 0.0001; // default: doc-topic smoothing
+    double eta = 0.0001; // default: term-topic smoothing
+    double modelWeight = 1f;
+    return new TopicModel(conf, eta, alpha, dictionary, 1, modelWeight, listModelPath(path, conf));
+}
+
+@SneakyThrows({ IOException.class })
+private static Path[] listModelPath(Path path, Configuration conf) {
+    if (FileSystem.get(conf).isFile(path)) {
+        return new Path[] { path };
+    } else {
+        val statuses = FileSystem.get(conf).listStatus(path, PathFilters.partFilter());
+        val modelPaths = new Path[statuses.length];
+        for (int i = 0; i < statuses.length; i++) {
+            modelPaths[i] = new Path(statuses[i].getPath().toUri().toString());
+        }
+        return modelPaths;
+    }
+}
+
+@SneakyThrows({ IOException.class })
+private static String[] readDictionary(Path path, Configuration conf) {
+    val term = new Text();
+    val id = new IntWritable();
+    val reader = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
+    val termIds = ImmutableList.<Pair<String, Integer>>builder();
+    int maxId = 0;
+    while (reader.next(term, id)) {
+        termIds.add(Pair.of(term.toString(), id.get()));
+        maxId = max(maxId, id.get());
+    }
+    String[] terms = new String[maxId + 1];
+    for (val termId : termIds.build()) {
+        terms[termId.getSecond().intValue()] = termId.getFirst().toString();
+    }
+    return terms;
+}
 ```
 
 ##### Introduction to Clustering Text -- [Mahout algorithms](https://cwiki.apache.org/confluence/display/MAHOUT/Algorithms)
@@ -256,8 +315,6 @@ documentTopicDistribution = topicModel(documentInTFVector, docTopic); // returns
   * picking representative documents from a cluster (randomly, near from centroid, or by membership likelihood).
   * picking good labels by important terms or phrases in a cluster, a weighted list of terms by TF-IDF, a list of phrases by n-grams.
 
-##### Map Reduce Programming w/ Eclipse
-
 ###### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
 
 ```bash
@@ -266,7 +323,11 @@ tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /App
 open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
-##### Text Taming App in java
+* Eclipse | Help | Install New Software... | Add...
+* Enter `m2e` and `http://download.eclipse.org/technology/m2e/releases/` into Add Repository | OK
+* Select All | Next | Next | Accept EULA | Finish | Restart Now
+
+##### How-To: Spawn Up a text taming app Java project
 
 ```bash
 echo | mvn archetype:generate \
@@ -280,12 +341,10 @@ echo | mvn archetype:generate \
   -DinteractiveMode=false
 ```
 
-* add dependencies to pom.xml
+* add dependencies to pom.xml -- see [head revision](https://github.com/henry4j/-/blob/master/sources/text/pom.xml)
   * [google-guava-14.0.1.jar](http://search.maven.org/#artifactdetails%7Ccom.google.guava%7Cguava%7C14.0.1%7Cbundle)
   * [opencsv-2.3.jar](http://search.maven.org/#artifactdetails%7Cnet.sf.opencsv%7Copencsv%7C2.3%7Cjar)
   * [porter-stemmer-1.4.jar](http://search.maven.org/#artifactdetails%7Cgov.sandia.foundry%7Cporter-stemmer%7C1.4%7Cjar)
-
-* `mvn eclipse:eclipse -DdownloadSources=true`
 
 ```
 org.apache.mahout:mahout-examples:jar:0.8:compile
@@ -306,6 +365,7 @@ org.apache.mahout:mahout-examples:jar:0.8:compile
 \- org.slf4j:slf4j-jcl:jar:1.7.5:runtime
    \- commons-logging:commons-logging:jar:1.1.1:compile
 ```
+* spawn up Eclipse project: `mvn eclipse:eclipse -DdownloadSources=true`
 
 ##### References
 
