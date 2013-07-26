@@ -18,6 +18,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.mahout.clustering.lda.cvb.TopicModel;
 import org.apache.mahout.common.Pair;
 import org.apache.mahout.common.iterator.sequencefile.PathFilters;
+import org.apache.mahout.math.NamedVector;
+import org.apache.mahout.math.Vector;
+import org.apache.mahout.math.VectorWritable;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
@@ -27,20 +30,43 @@ public class AppTest {
     public void test() {
         // hadoop dfs -get /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 /tmp/dictionary.file-0
         // hadoop dfs -get /tmp/mahout-work-hylee/reuters-lda-model/model-20 /tmp/model-n
+        // hadoop dfs -getmerge /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/tfidf-vectors /tmp/tfidf-vectors
 
         val conf = new Configuration();
         val dictionary = readDictionary(new Path("/tmp/dictionary.file-0"), conf);
         assertThat(dictionary.length, equalTo(41807));
+        readTFVectors(new Path("/tmp/tfidf-vectors"), conf);
 
         // reads 'model' dense matrix (20 x 41K), and in 'topicSum' dense vector.
-        val model = readModel(dictionary, new Path("/tmp/model-n"), conf); 
-        model.topicSums();
+        TopicModel model = readModel(dictionary, new Path("/tmp/model-n"), conf);
+        assertThat(model.getNumTopics(), equalTo(20));
+        assertThat(model.getNumTerms(), equalTo(41807));
+
         
+        // model.trainDocTopicModel(original, topics, docTopicModel);
+        // /tmp/tfidf
+        // model.infer(original, docTopics);
+
 //        Vector doc = null;
 //        Vector docTopics = new DenseVector(numTopics).assign(1.0/numTopics);
 //        Matrix docModel = new SparseRowMatrix(numTopics, doc.get().size());
 //    
 //        SequenceFileReader<, V>
+    }
+
+    // http://mail-archives.apache.org/mod_mbox/mahout-user/201205.mbox/%3CCAKA-QbDg4DR3RTbv8KoYnMOnLXkbbqaXji0+WtrL5UdSdsKbOA@mail.gmail.com%3E
+    // http://mail-archives.apache.org/mod_mbox/mahout-user/201205.mbox/%3CCACYXym-0zg3zPor-SmpWr=D210B_6-YeNyyNtddNWpiU_otDrA@mail.gmail.com%3E
+
+    @SneakyThrows({ IOException.class })
+    private static void readTFVectors(Path path, Configuration conf) {
+        val reader = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
+        Text documentName = new Text();
+        VectorWritable frequencies = new VectorWritable();
+        while (reader.next(documentName, frequencies)) {
+            Vector vector = frequencies.get();
+            NamedVector v = (NamedVector)vector;
+            System.out.println("term: " + documentName + ", freqs:" + frequencies);
+        }
     }
 
     @SneakyThrows({ IOException.class })
