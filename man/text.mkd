@@ -11,8 +11,10 @@
 * Setup `libexec/conf/hadoop-env.sh` and [pseudo-distributed operation](http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed)
   * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' \`
     `  -kL 'https://raw.github.com/henry4j/-/master/bin/hadoop-env.sh'`
-  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'`
-  * `rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER && stop-all.sh && hadoop namenode -format`
+  * `curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' \`
+    `  -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'`
+  * `rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER && stop-all.sh`
+  * `hadoop namenode -format`
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
 
 ```bash
