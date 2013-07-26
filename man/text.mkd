@@ -15,7 +15,7 @@
   * `rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER`
   * `stop-all.sh && hadoop namenode -format`
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
-* Put and get files by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then `hadoop dfs -ls`
+* Put and get files by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then [`hadoop dfs -ls`](http://hadoop.apache.org/docs/stable/file_system_shell.html#ls)
 
 ```bash
 start-all.sh # starts up hadoop daemons: name, data, 2nd name nodes, and job & task tracker.
