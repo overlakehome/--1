@@ -177,33 +177,94 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
-##### Infer Document-Topic Distribution by [Topic Model#infer](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#infer(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector))?
+##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix))?
 
-* Ours:
-
-```java
-int numTopics = 20;
-TopicModel topicModel = new TopicModel(...);
-Vector docTopics = new DenseVector(numTopics).assign(1.0 / numTopics);
-documentTopicDistribution = topicModel(documentInTFVector, docTopic); // returns a vector of topic probabilities.
-```
-
-* Theirs: [TopicModel#infer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/clustering/lda/cvb/TopicModel.java?view=markup)
+* [My Hello LDA! app -- to be updated w/ feedback from Jake M. (Principal SDE)](http://mahout.markmail.org/message/gjrfbjykwbjjm5gp)
 
 ```java
-298   public Vector infer(Vector original, Vector docTopics) {
-299     Vector pTerm = original.like();
-300     for (Element e : original.nonZeroes()) {
-301	      int term = e.index();
-302	      // p(a) = sum_x (p(a|x) * p(x|i))
-303	      double pA = 0;
-304	      for (int x = 0; x < numTopics; x++) {
-305	        pA += (topicTermCounts.viewRow(x).get(term) / topicSums.get(x)) * docTopics.get(x);
-306	      }
-307	      pTerm.set(term, pA);
-308	    }
-309	    return pTerm;
-310	  }
+@Test
+public void testDocumentTopicInferenceForNewDocsOverReuters() {
+    val conf = new Configuration();
+    val dictionary = readDictionary(new Path("/tmp/dictionary"), conf);
+    assertThat(dictionary.length, equalTo(41807));
+
+    // reads 'model' dense matrix (20 x 41K), and in 'topicSum' dense vector.
+    TopicModel model = readModel(dictionary, new Path("/tmp/lda-model-splits"), conf);
+    assertThat(model.getNumTopics(), equalTo(20));
+    assertThat(model.getNumTerms(), equalTo(41807));
+
+    val doc = takeOnlineDocument(conf);
+    Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0/model.getNumTopics());
+    Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
+
+    for (int i = 0; i < 25 /* maxItrs */; i++) {
+        model.trainDocTopicModel(doc, docTopics, docTopicModel);
+        System.out.println(docTopics.toString());
+    }
+}
+
+private static Vector takeOnlineDocument(Configuration conf) {
+    // tfidf_vector represents a document in RandomAccessSparseVector.
+    // TODO: make a TFIDF vector out of an online string agaist dictionary, and frequency files.
+    val tfidf_vector = readTFVectorsInRange(new Path("/tmp/tfidf-vectors"), conf, 0, 1)[0].getSecond();
+    assertThat(tfidf_vector.size(), equalTo(41807));
+    return tfidf_vector;
+}
+
+@SneakyThrows({ IOException.class })
+private static Pair<String, Vector>[] readTFVectorsInRange(Path path, Configuration conf, int offset, int length) {
+    val seq = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
+    val documentName = new Text();
+    @SuppressWarnings("unchecked")
+    Pair<String, Vector>[] vectors = new Pair[length];
+    VectorWritable vector = new VectorWritable();
+    for (int i = 0; i < offset + length && seq.next(documentName, vector); i++) {
+        if (i >= offset) {
+            vectors[i - offset] = Pair.of(documentName.toString(), vector.get());
+        }
+    }
+    return vectors;
+}
+
+@SneakyThrows({ IOException.class })
+private static TopicModel readModel(String[] dictionary, Path path, Configuration conf) {
+    double alpha = 0.0001; // default: doc-topic smoothing
+    double eta = 0.0001; // default: term-topic smoothing
+    double modelWeight = 1f;
+    return new TopicModel(conf, eta, alpha, dictionary, 1, modelWeight, listModelPath(path, conf));
+}
+
+@SneakyThrows({ IOException.class })
+private static Path[] listModelPath(Path path, Configuration conf) {
+    if (FileSystem.get(conf).isFile(path)) {
+        return new Path[] { path };
+    } else {
+        val statuses = FileSystem.get(conf).listStatus(path, PathFilters.partFilter());
+        val modelPaths = new Path[statuses.length];
+        for (int i = 0; i < statuses.length; i++) {
+            modelPaths[i] = new Path(statuses[i].getPath().toUri().toString());
+        }
+        return modelPaths;
+    }
+}
+
+@SneakyThrows({ IOException.class })
+private static String[] readDictionary(Path path, Configuration conf) {
+    val term = new Text();
+    val id = new IntWritable();
+    val reader = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
+    val termIds = ImmutableList.<Pair<String, Integer>>builder();
+    int maxId = 0;
+    while (reader.next(term, id)) {
+        termIds.add(Pair.of(term.toString(), id.get()));
+        maxId = max(maxId, id.get());
+    }
+    String[] terms = new String[maxId + 1];
+    for (val termId : termIds.build()) {
+        terms[termId.getSecond().intValue()] = termId.getFirst().toString();
+    }
+    return terms;
+}
 ```
 
 ##### Introduction to Clustering Text -- [Mahout algorithms](https://cwiki.apache.org/confluence/display/MAHOUT/Algorithms)
