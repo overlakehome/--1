@@ -137,10 +137,10 @@ $MAHOUT cvb \
      * `grep -o '13707:[[:digit:]]\+' tfidf_vectors.txt | paste -s -d, -` # 13707:9,13707:16,13707:9,13707:9
 * reuters-out-matrix
   * docIndex
-     * mahout seqdumper -i $WORK_DIR/reuters-matrix/docIndex -q | head
+     * `mahout seqdumper -i $WORK_DIR/reuters-matrix/docIndex -q | head`
      * e.g. key: 1: value: /reut2-000.sgm-1.txt; key: 21577: value: /reut2-021.sgm-99.txt
   * matrix
-     * mahout seqdumper -i $WORK_DIR/reuters-matrix/matrix -q | tail
+     * `mahout seqdumper -i $WORK_DIR/reuters-matrix/matrix -o matrix.txt`
      * e.g. key: 21577: value: /reut2-021.sgm-99.txt:{33834:9.623783111572266,  
           34837:5.249424934387207,20362:1.9876184463500977,39389:11.363191604614258,4747:4.020981311798096,  
           40723:7.030537128448486,25508:6.2267255783081055,29996:4.846031665802002,26109:4.315020561218262,  
