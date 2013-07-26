@@ -109,9 +109,9 @@ $MAHOUT cvb \
   * df-count
   * dictionary.file-0 -- integer IDs keyed by term.
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-seq-vectorized/dictionary.file-0 -q # returns 41807 terms.
-     * e.g. key: "0": value: 0, key: "zy": value: 41806
+     * e.g. key: `0`: value: 0, key: `zy`: value: 41806
   * frequency.file-0 -- frequencies keyed by term ID.
-     * e.g. key: 0: value: 43; key: 41806: value: 7 -- term '0' occurs 43 times; term 'zy' occurs 7 times.
+     * e.g. key: 0: value: 43; key: 41806: value: 7 -- term `0` occurs 43 times; term `zy` occurs 7 times.
   * tf-vectors
      * mahout vectordump -i /tmp/mahout-work-hylee/reuters-seq-vectorized/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
      * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
@@ -124,7 +124,7 @@ $MAHOUT cvb \
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * wordcount
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-seq-vectorized/wordcount -q | grep ' zy:'
-     * key: zy: Value: 7
+     * key: `zy`: Value: 7
 * reuters-out-matrix
   * docIndex
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-matrix/docIndex -q | head
