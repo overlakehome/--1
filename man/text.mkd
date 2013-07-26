@@ -177,7 +177,7 @@ $MAHOUT cvb \
 13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
 ```
 
-##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix))?
+##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix\))?
 
 * [My Hello LDA! app -- to be updated w/ feedback from Jake M. (Principal SDE)](http://mahout.markmail.org/message/gjrfbjykwbjjm5gp)
 
