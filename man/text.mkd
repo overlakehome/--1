@@ -84,7 +84,9 @@ if [ ! -e ${WORK_DIR}/reuters-ext ]; then
 fi
 ```
 
-###### Topic Modeling in Action
+###### Topic Modeling w/ Tuning
+
+* tuning required by seq2sparse and cvb for the better results.
 
 ```bash
 $MAHOUT seq2sparse \
