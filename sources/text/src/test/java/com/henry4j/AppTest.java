@@ -18,12 +18,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.mahout.clustering.lda.cvb.TopicModel;
 import org.apache.mahout.common.Pair;
 import org.apache.mahout.common.iterator.sequencefile.PathFilters;
-import org.apache.mahout.math.NamedVector;
 import org.apache.mahout.math.Vector;
 import org.apache.mahout.math.VectorWritable;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.henry4j.commons.base.Actions.Action2;
 
 public class AppTest {
     @Test
@@ -35,7 +35,10 @@ public class AppTest {
         val conf = new Configuration();
         val dictionary = readDictionary(new Path("/tmp/dictionary.file-0"), conf);
         assertThat(dictionary.length, equalTo(41807));
-        readTFVectors(new Path("/tmp/tfidf-vectors"), conf);
+
+        // tfidf_vector represents a document in RandomAccessSparseVector.
+        val tfidf_vector = readTFVectorsInRange(new Path("/tmp/tfidf-vectors"), conf, 0, 1)[0].getSecond();
+        assertThat(tfidf_vector.size(), equalTo(41807));
 
         // reads 'model' dense matrix (20 x 41K), and in 'topicSum' dense vector.
         TopicModel model = readModel(dictionary, new Path("/tmp/model-n"), conf);
@@ -58,15 +61,18 @@ public class AppTest {
     // http://mail-archives.apache.org/mod_mbox/mahout-user/201205.mbox/%3CCACYXym-0zg3zPor-SmpWr=D210B_6-YeNyyNtddNWpiU_otDrA@mail.gmail.com%3E
 
     @SneakyThrows({ IOException.class })
-    private static void readTFVectors(Path path, Configuration conf) {
-        val reader = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
-        Text documentName = new Text();
-        VectorWritable frequencies = new VectorWritable();
-        while (reader.next(documentName, frequencies)) {
-            Vector vector = frequencies.get();
-            NamedVector v = (NamedVector)vector;
-            System.out.println("term: " + documentName + ", freqs:" + frequencies);
+    private static Pair<String, Vector>[] readTFVectorsInRange(Path path, Configuration conf, int offset, int length) {
+        val seq = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
+        val documentName = new Text();
+        @SuppressWarnings("unchecked")
+        Pair<String, Vector>[] vectors = new Pair[length];
+        VectorWritable vector = new VectorWritable();
+        for (int i = 0; i < offset + length && seq.next(documentName, vector); i++) {
+            if (i >= offset) {
+                vectors[i - offset] = Pair.of(documentName.toString(), vector.get());
+            }
         }
+        return vectors;
     }
 
     @SneakyThrows({ IOException.class })
