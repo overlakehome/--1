@@ -130,10 +130,10 @@ $MAHOUT cvb \
   * df-count
   * tf-vectors
      * mahout vectordump -i $WORK_DIR/reuters-vector/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
-     * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
-  * tfidf-vectors
-     * mahout vectordump -i $WORK_DIR/reuters-vector/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
      * e.g. grep -o '13707:[[:digit:]]\+' tf-vectors.txt | paste -s -d, - # 13707:1,13707:3,13707:1,13707:1
+  * tfidf-vectors
+     * mahout vectordump -i $WORK_DIR/reuters-vector/tfidf-vectors -o tfidf_vectors.txt # returns 21,578 docs.
+     * e.g. grep -o '13707:[[:digit:]]\+' tfidf_vectors.txt | paste -s -d, - # 13707:9,13707:16,13707:9,13707:9
 * reuters-out-matrix
   * docIndex
      * mahout seqdumper -i $WORK_DIR/reuters-matrix/docIndex -q | head
