@@ -116,10 +116,10 @@ $MAHOUT cvb \
 
 * `reuters-out-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * mahout seqdumper -i $WORK_DIR/reuters-vector/tokenized-documents -o /tmp/tokenized.txt
+     * mahout seqdumper -i $WORK_DIR/reuters-vector/tokenized-documents -o /tmp/token_vectors.txt
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * dictionary.file-0 -- integer IDs keyed by term.
-     * mahout seqdumper -i $WORK_DIR/reuters-vector/dictionary.file-0 -q # returns 41807 terms.
+     * mahout seqdumper -i $WORK_DIR/reuters-vector/dictionary.file-0 -o /tmp/dictionary.txt # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `zy`: value: 41806
   * wordcount
      * mahout seqdumper -i $WORK_DIR/reuters-vector/wordcount -q | grep ' zy:'
