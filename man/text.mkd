@@ -91,36 +91,27 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/reuters-out-seqdir/ \
-  -o ${WORK_DIR}/reuters-out-seqdir-sparse-lda -ow --maxDFPercent 85 --namedVector # took 273274 ms \
+  -o ${WORK_DIR}/reuters-out-seqdir-vectorized -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/reuters-out-seqdir-sparse-lda/tfidf-vectors \
-  -o ${WORK_DIR}/reuters-out-matrix # took 5209 ms \
+  -i ${WORK_DIR}/reuters-out-seqdir-vectorized/tfidf-vectors \
+  -o ${WORK_DIR}/reuters-out-matrix # took 5,209 ms \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-out-matrix/matrix \
   -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
-  -dict ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* \
+  -dict ${WORK_DIR}/reuters-out-seqdir-vectorized/dictionary.file-0 \
   -dt ${WORK_DIR}/reuters-lda-topics \
-  -mt ${WORK_DIR}/reuters-lda-model \
-&& \
-$MAHOUT vectordump \
-  -i ${WORK_DIR}/reuters-lda-model/part-m-00000 \
-  -o ${WORK_DIR}/reuters-lda/vectordump \
-  -vs 10 -p true \
-  -d ${WORK_DIR}/reuters-out-seqdir-sparse-lda/dictionary.file-* -dt sequencefile \
-  -sort ${WORK_DIR}/reuters-lda-model/part-m-00000 \
-  && \
-cat ${WORK_DIR}/reuters-lda/vectordump
+  -mt ${WORK_DIR}/reuters-lda-model
 ```
 
-* reuters-out-seqdir-sparse-lda
+* `reuters-out-seqdir-vectorized` by `seq2sparse`
   * df-count
   * dictionary.file-0 -- integer IDs keyed by term.
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-sparse-lda/dictionary.file-0 -q # returns 41807 terms.
-     * e.g. key: 0: value: 0, key: zy: value: 41806
+     * e.g. key: "0": value: 0, key: "zy": value: 41806
   * frequency.file-0 -- frequencies keyed by term ID.
      * e.g. key: 0: value: 43; key: 41806: value: 7 -- term '0' occurs 43 times; term 'zy' occurs 7 times.
   * tf-vectors
