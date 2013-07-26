@@ -106,10 +106,16 @@ $MAHOUT cvb \
 ```
 
 * `reuters-out-vector` by `seq2sparse`
-  * df-count
+  * tokenized-documents -- tokens (string tuples) keyed by docs.
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/tokenized-documents -o /tmp/tokonized.txt -n 10
+     * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * dictionary.file-0 -- integer IDs keyed by term.
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/dictionary.file-0 -q # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `zy`: value: 41806
+  * wordcount
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/wordcount -q | grep ' zy:'
+     * key: `zy`: Value: 7
+  * df-count
   * frequency.file-0 -- frequencies keyed by term ID.
      * e.g. key: 0: value: 43; key: 41806: value: 7 -- term `0` occurs 43 times; term `zy` occurs 7 times.
   * tf-vectors
@@ -119,12 +125,6 @@ $MAHOUT cvb \
      * mahout vectordump -i /tmp/mahout-work-hylee/reuters-vector/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
      * e.g. {5405:3.594198703765869,5506:9.593134880065918,  
        3170:2.8289616107940674,22224:4.587512493133545,7160:4.637308120727539}
-  * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/tokenized-documents -o /tmp/tokonized.txt -n 10
-     * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
-  * wordcount
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/wordcount -q | grep ' zy:'
-     * key: `zy`: Value: 7
 * reuters-out-matrix
   * docIndex
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-matrix/docIndex -q | head
