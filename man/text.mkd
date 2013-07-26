@@ -116,24 +116,25 @@ $MAHOUT cvb \
 
 * `reuters-out-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * mahout seqdumper -i $WORK_DIR/reuters-vector/tokenized-documents -o token_vectors.txt
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/tokenized-documents -o token_vectors.txt`
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * dictionary.file-0 -- integer IDs keyed by term.
-     * mahout seqdumper -i $WORK_DIR/reuters-vector/dictionary.file-0 -o dictionary.txt # returns 41807 terms.
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `amazon`: value: 13707
   * wordcount
-     * mahout seqdumper -i $WORK_DIR/reuters-vector/wordcount -o wordcount.txt
-     * key: `amazon`: Value: 6 # grep -w amazon token_vectors.txt | grep -o amazon | wc -l
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/wordcount -o wordcount.txt`
+     * key: `amazon`: value: 6 # grep -w amazon token_vectors.txt | grep -o amazon | wc -l
   * frequency.file-0 -- frequencies keyed by term ID.
-     * mahout seqdumper -i $WORK_DIR/reuters-vector/frequency.file-0 -o frequency.txt
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/frequency.file-0 -o frequency.txt`
      * e.g. key: 0: value: 43; key: 13707: value: 4 -- term `0` occurs 43 times; term `amazon` occurs in 4 documents.
   * df-count
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/frequency.file-0 -q | grep 13707` # shows `amazon` occurs in 4 documents.
   * tf-vectors
-     * mahout vectordump -i $WORK_DIR/reuters-vector/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
-     * e.g. grep -o '13707:[[:digit:]]\\+' tf-vectors.txt | paste -s -d, - # 13707:1,13707:3,13707:1,13707:1
+     * `mahout vectordump -i $WORK_DIR/reuters-vector/tf-vectors/part-r-00000 -o tf-vectors.txt` # returns 21,578 docs.
+     * `grep -o '13707:[[:digit:]]\+' tf-vectors.txt | paste -s -d, -` # 13707:1,13707:3,13707:1,13707:1
   * tfidf-vectors
-     * mahout vectordump -i $WORK_DIR/reuters-vector/tfidf-vectors -o tfidf_vectors.txt # returns 21,578 docs.
-     * e.g. grep -o '13707:[[:digit:]]\\+' tfidf_vectors.txt | paste -s -d, - # 13707:9,13707:16,13707:9,13707:9
+     * `mahout vectordump -i $WORK_DIR/reuters-vector/tfidf-vectors -o tfidf_vectors.txt` # returns 21,578 docs.
+     * `grep -o '13707:[[:digit:]]\+' tfidf_vectors.txt | paste -s -d, -` # 13707:9,13707:16,13707:9,13707:9
 * reuters-out-matrix
   * docIndex
      * mahout seqdumper -i $WORK_DIR/reuters-matrix/docIndex -q | head
