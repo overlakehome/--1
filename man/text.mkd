@@ -107,6 +107,13 @@ $MAHOUT cvb \
   -mt ${WORK_DIR}/reuters-lda-model
 ```
 
+```bash
+13/07/26 12:17:51 INFO cvb.CVB0Driver: Completed 20 iterations in 2134 seconds
+13/07/26 12:17:51 INFO cvb.CVB0Driver: Perplexities: ()
+13/07/26 12:17:51 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20 to /tmp/mahout-work-hylee/reuters-lda
+13/07/26 12:17:53 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics
+```
+
 * `reuters-out-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
      * mahout seqdumper -i $WORK_DIR/reuters-vector/tokenized-documents -o /tmp/tokonized.txt -n 10
