@@ -105,7 +105,7 @@ $MAHOUT cvb \
   -mt ${WORK_DIR}/reuters-lda-model
 ```
 
-* `reuters-out-seq-vectorized` by `seq2sparse`
+* `reuters-out-vector` by `seq2sparse`
   * df-count
   * dictionary.file-0 -- integer IDs keyed by term.
      * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/dictionary.file-0 -q # returns 41807 terms.
