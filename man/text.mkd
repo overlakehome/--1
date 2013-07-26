@@ -89,10 +89,10 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/reuters-seq/ \
-  -o ${WORK_DIR}/reuters-seq-vectorized -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
+  -o ${WORK_DIR}/reuters-vector -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/reuters-seq-vectorized/tfidf-vectors \
+  -i ${WORK_DIR}/reuters-vector/tfidf-vectors \
   -o ${WORK_DIR}/reuters-matrix # took 5,209 ms \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
@@ -100,7 +100,7 @@ rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuter
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-matrix/matrix \
   -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
-  -dict ${WORK_DIR}/reuters-seq-vectorized/dictionary.file-0 \
+  -dict ${WORK_DIR}/reuters-vector/dictionary.file-0 \
   -dt ${WORK_DIR}/reuters-lda-topics \
   -mt ${WORK_DIR}/reuters-lda-model
 ```
@@ -108,22 +108,22 @@ $MAHOUT cvb \
 * `reuters-out-seq-vectorized` by `seq2sparse`
   * df-count
   * dictionary.file-0 -- integer IDs keyed by term.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-seq-vectorized/dictionary.file-0 -q # returns 41807 terms.
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/dictionary.file-0 -q # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `zy`: value: 41806
   * frequency.file-0 -- frequencies keyed by term ID.
      * e.g. key: 0: value: 43; key: 41806: value: 7 -- term `0` occurs 43 times; term `zy` occurs 7 times.
   * tf-vectors
-     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-seq-vectorized/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
+     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-vector/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
      * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
   * tfidf-vectors
-     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-seq-vectorized/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
+     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-vector/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
      * e.g. {5405:3.594198703765869,5506:9.593134880065918,  
        3170:2.8289616107940674,22224:4.587512493133545,7160:4.637308120727539}
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-seq-vectorized/tokenized-documents -o /tmp/tokonized.txt -n 10
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/tokenized-documents -o /tmp/tokonized.txt -n 10
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * wordcount
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-seq-vectorized/wordcount -q | grep ' zy:'
+     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-vector/wordcount -q | grep ' zy:'
      * key: `zy`: Value: 7
 * reuters-out-matrix
   * docIndex
@@ -149,7 +149,7 @@ $MAHOUT cvb \
 * reuters-lda-model -- final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20
   * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-model/model-20 -o topic-term-distributions.txt  
     -p true -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
-    -d /tmp/mahout-work-hylee/reuters-seq-vectorized/dictionary.file-0 -dt sequencefile # 20 terms each topic.
+    -d /tmp/mahout-work-hylee/reuters-vector/dictionary.file-0 -dt sequencefile # 20 terms each topic.
   * e.g. topic0   {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
     mar:2000.3959744299038,bank:1544.2597492115585,company:1447.3947811352577,he:1441.3986830272913,  
     pct:1432.803268216384,two:1375.951945852348,sales:1266.572475574726,11:1234.2160846942008,  
@@ -162,7 +162,7 @@ $MAHOUT cvb \
 $MAHOUT cvb \
   -i ${WORK_DIR}/reuters-matrix/matrix \
   -o ${WORK_DIR}/reuters-lda-x2 -ow -k 20 -x 2 \
-  -dict ${WORK_DIR}/reuters-seq-vectorized/dictionary.file-* \
+  -dict ${WORK_DIR}/reuters-vector/dictionary.file-* \
   -dt ${WORK_DIR}/reuters-lda-topics-x2 \
   -mt ${WORK_DIR}/reuters-lda-model-x2
 ```
