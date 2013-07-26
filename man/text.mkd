@@ -37,8 +37,10 @@ ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
 mv /workspace/mahout/mahout-examples-0.7-job.jar /workspace/mahout/mahout-examples-0.7-job.jar.bak
 mv /workspace/mahout/mahout-examples-0.7.jar /workspace/mahout/mahout-examples-0.7.jar.bak
-curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT-job.jar ?
-curl -o /workspace/mahout/mahout-examples-0.9-SNAPSHOT.jar ?
+curl -o /workspace/mahout/mahout-examples-0.8-job.jar \
+  -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8-job.jar
+curl -o /workspace/mahout/mahout-examples-0.8.jar \
+  -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8.jar
 ```
 
 ##### Mahout LDA Demo 
