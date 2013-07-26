@@ -315,16 +315,19 @@ private static String[] readDictionary(Path path, Configuration conf) {
   * picking representative documents from a cluster (randomly, near from centroid, or by membership likelihood).
   * picking good labels by important terms or phrases in a cluster, a weighted list of terms by TF-IDF, a list of phrases by n-grams.
 
+###### Install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
+
 ```bash
 curl -o ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -kL http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz
 tar xvf ~/Downloads/eclipse-standard-kepler-R-macosx-cocoa-x86_64.tar.gz -C /Applications/
 open /Applications/eclipse/Eclipse.app # and then keep this in dock
 ```
 
-##### How-To: Spawn Up a text taming app Java project
+* Eclipse | Help | Install New Software... | Add...
+* Enter `m2e` and `http://download.eclipse.org/technology/m2e/releases/` into Add Repository | OK
+* Select All | Next | Next | Accept EULA | Finish | Restart Now
 
-* install [Eclipse Kepler (4.3)](http://www.eclipse.org/downloads/)
-  * w/ M2E http://download.eclipse.org/technology/m2e/releases/
+##### How-To: Spawn Up a text taming app Java project
 
 ```bash
 echo | mvn archetype:generate \
