@@ -29,7 +29,9 @@ stop-all.sh # stops hadoop daemons.
 * Mahout Trunk: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
 ```bah
-curl -o $HOME/Downloads/mahout-distribution-0.7.zip -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
+sudo mkdir /workspace
+curl -o $HOME/Downloads/mahout-distribution-0.7.zip \
+  -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
 unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
 ```
@@ -43,9 +45,9 @@ curl -o /workspace/mahout/mahout-examples-0.8.jar \
   -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8.jar
 ```
 
-##### Mahout LDA Demo 
+##### Mahout LDA CVB Demo 
 
-###### Prepare Document Collection
+###### Prepare Document Collection from Lucene Batchmark Program
 
 ```bash
 MAHOUT="/workspace/mahout/bin/mahout" # which mahout
