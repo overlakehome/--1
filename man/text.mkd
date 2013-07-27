@@ -156,7 +156,7 @@ $MAHOUT cvb \
 ruby -e '
   require "JSON"
   puts %x(head -n 10 doc-topic-inference.txt).split.map { |l|
-    JSON[l.gsub(%r((\w+)\s*:), %q("\1":))].
+    JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
       reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f%) % (v*100) if v > 0.1; h }
   }
 '
