@@ -3,6 +3,7 @@ export PS1='\[\e]2;\u@\h:\@:\w\a\e]1;$(basename $(dirname $(pwd)))/\W\a\e[32;40m
 export TERM='xterm-color'
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
+export DOMAINNAME=`hostname | rev | cut -d. -f1,2 | rev`
 
 # homes and paths
 export ANDROID_HOME=/workspace/android-sdk
@@ -37,11 +38,11 @@ alias wget='wget --no-check-certificate'
 
 # ssh-aliases
 alias geio='ssh geio-7001.iad7'
-alias hylee-x='ssh hylee.desktop'
-alias hylee='ssh -X hylee.desktop'
+alias hylee="ssh hylee.desktop.$DOMAINNAME"
+alias hylee-x="ssh -X hylee.desktop.$DOMAINNAME"
 alias ii='ssh i-interactive'
-alias gamma='ssh acme-snapshot-gamma-na-1a-i-13e86d71.us-east-1'
-alias prod='ssh acme-snapshot-na-1a-i-263f645f.us-east-1'
+alias gamma="ssh acme-snapshot-gamma-na-1a-i-13e86d71.us-east-1.$DOMAINNAME"
+alias prod="ssh acme-snapshot-na-1a-i-263f645f.us-east-1.$DOMAINNAME"
 
 # cd aliases
 alias ..='cd ..'
