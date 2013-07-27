@@ -178,30 +178,10 @@ ruby -e '
   open("topic-term-distributions.txt").each { |l|
     (t,l) = l.split
     h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-      reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f) % (v*100) if v > 0.1; h }
+      reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f) % v if v > 0.1; h }
     puts "#{t}: #{h}"
   }
 '
-0: {0=>"143983.6"}
-10: {0=>"75663.0"}
-1: {0=>"253258.7", 7=>"411193.6", 1=>"234023.5", 15=>"232891.9", 10=>"231139.5"}
-11: {0=>"175895.8"}
-2: {0=>"358979.2", 4=>"345694.1"}
-12: {0=>"121142.4"}
-3: {0=>"126865.5"}
-13: {0=>"137293.7"}
-4: {0=>"177813.7"}
-14: {0=>"178982.7"}
-5: {0=>"151938.8"}
-15: {0=>"142817.4"}
-6: {0=>"105325.8"}
-16: {0=>"193135.4", 1=>"283618.1", 8=>"237387.2", 4=>"217380.3"}
-7: {0=>"227584.8", 1986=>"357775.9"}
-17: {0=>"311932.0"}
-8: {0=>"209573.5", 1986=>"330150.7"}
-18: {0=>"177753.4"}
-9: {0=>"119820.4"}
-19: {0=>"151321.2"}
 ```
 
 ##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix\))?
