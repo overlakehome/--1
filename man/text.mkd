@@ -56,7 +56,7 @@ export WORK_DIR=/tmp/mahout-work-${USER}
 [ ! -d $WORK_DIR ] && mkdir -p ${WORK_DIR}
 ```
 
-###### Prepare Document Collection from Lucene Batchmark Program
+###### Prepare Document Collection <sup>from Lucene Batchmark Program</sup> <sub>to Hadoop-native sequence files</sub>
 
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-ext ]; then
@@ -85,9 +85,9 @@ if [ ! -e ${WORK_DIR}/reuters-ext ]; then
 fi
 ```
 
-###### Topic Modeling w/ Tuning
+###### Topic Modeling w/o repetitive tuning cycles
 
-* tuning required by seq2sparse and cvb for the better results.
+* Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
 $MAHOUT seq2sparse \
@@ -146,39 +146,63 @@ $MAHOUT cvb \
        31707:12.5864839553833,31707:8.899988174438477,31707:8.899988174438477,31707:8.899988174438477,  
        31707:15.415231704711914,31707:19.900978088378906,31707:15.415231704711914
 * reuters-lda-topic -- final document/topic inference from $WORK_DIR/reuters-matrix/matrix
-  * mahout vectordump -i $WORK_DIR/reuters-lda-topics-x2 -o document-model-inference.txt
-  * e.g. {0:0.03604119661007879,1:0.0688613083091687,2:0.04104584185075027,3:0.04201322451285146,  
-    4:0.07094607918051136,5:0.059726447187793144,6:0.027547023622972115,7:0.02936943642966859,  
-    8:0.05693857435609574,9:0.0804624506346288,10:0.05340769167421293,11:0.015173259854307931,  
-    12:0.04513986733501052,13:0.0516641119210567,14:0.0337996577135869,15:0.029916406161888273,  
-    16:0.058812759531053076,17:0.04011268844849057,18:0.07464871072544656,19:0.08437326394042743}
+  * `mahout vectordump -i $WORK_DIR/reuters-lda-topics -o doc-topic-inference.txt`
 * reuters-lda-model -- final topic/term distributions from $WORK_DIR/reuters-lda-model/model-20
-  * mahout vectordump -i $WORK_DIR/reuters-lda-model/model-20 -o topic-term-distributions.txt  
-    -p true -sort $WORK_DIR/reuters-lda-model-x2/model-2 -vs 20  
-    -d $WORK_DIR/reuters-vector/dictionary.file-0 -dt sequencefile # 20 terms each topic.
-  * e.g. topic0   {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
-    mar:2000.3959744299038,bank:1544.2597492115585,company:1447.3947811352577,he:1441.3986830272913,  
-    pct:1432.803268216384,two:1375.951945852348,sales:1266.572475574726,11:1234.2160846942008,  
-    one:1202.5700042310225,revs:1101.5045121231876,mln:1064.8691927325294,dlrs:1063.4477874597524,  
-    six:1058.6275574151828,13:1039.8571629633227,loss:1002.0268614814164,qtr:969.7141107558248}
-
-###### LDA CBA - 2 Iterations
+  * `mahout vectordump -i $WORK_DIR/reuters-lda-model/model-20 -o topic-term-dist10.txt \`  
+    `-p true -sort $WORK_DIR/reuters-lda-model/model-20 -vs 10 \`  
+    `-d $WORK_DIR/reuters-vector/dictionary.file-0 -dt sequencefile` # top 10 terms each topic.
 
 ```bash
-$MAHOUT cvb \
-  -i ${WORK_DIR}/reuters-matrix/matrix \
-  -o ${WORK_DIR}/reuters-lda-x2 -ow -k 20 -x 2 \
-  -dict ${WORK_DIR}/reuters-vector/dictionary.file-* \
-  -dt ${WORK_DIR}/reuters-lda-topics-x2 \
-  -mt ${WORK_DIR}/reuters-lda-model-x2
+ruby -e '
+  require "JSON"
+  puts %x(head -n 10 doc-topic-inference.txt).split.map { |l|
+    JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
+      reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f%) % (v*100) if v > 0.1; h }
+  }
+'
+{0=>"30.8%", 3=>"22.1%", 7=>"22.1%", 10=>"13.4%"}
+{4=>"31.0%", 13=>"20.2%", 16=>"13.0%", 17=>"21.3%"}
+{2=>"88.3%"}
+{2=>"94.2%"}
+{1=>"19.8%", 2=>"41.9%", 19=>"38.3%"}
+{1=>"13.5%", 2=>"40.7%", 16=>"45.7%"}
+{3=>"11.2%", 7=>"28.4%", 10=>"45.8%"}
+{0=>"47.9%", 12=>"42.6%"}
+{1=>"93.5%"}
+{9=>"78.6%", 12=>"12.6%"}
 ```
 
 ```bash
-13/07/23 16:40:03 INFO cvb.CVB0Driver: Completed 2 iterations in 787 seconds
-13/07/23 16:40:03 INFO cvb.CVB0Driver: Perplexities: ()
-13/07/23 16:40:03 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from $WORK_DIR/reuters-lda-model-x2/model-2 to $WORK_DIR/reuters-lda-x2
-13/07/23 16:40:04 INFO input.FileInputFormat: Total input paths to process : 10
-13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from $WORK_DIR/reuters-matrix/matrix to $WORK_DIR/reuters-lda-topics-x2
+ruby -e '
+  require "JSON"
+  t = l = nil
+  open("topic-term-dist10.txt").each { |l|
+    (t,l) = l.split
+    h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
+      reduce({}) { |h, (k,v)| h[k] = (v/1000).round(1); h }
+    puts "%2s (/1k): %s" % [t, h]
+  }
+'
+ 0 (/1k): {"tonnes"=>5.7, "ec"=>3.6, "export"=>2.8, "european"=>2.7, "trade"=>2.5, "sugar"=>2.4, "community"=>2.4, "wheat"=>2.3, "agriculture"=>2.2, "u.s"=>2.1}
+10 (/1k): {"crop"=>1.6, "corn"=>1.3, "usda"=>1.1, "grain"=>1.1, "said"=>1.0, "chrysler"=>1.0, "land"=>0.9, "wheat"=>0.9, "weather"=>0.9, "crops"=>0.9}
+ 1 (/1k): {"record"=>5.0, "7"=>4.1, "dividend"=>4.1, "april"=>3.9, "apr"=>3.8, "cts"=>3.8, "div"=>3.3, "pay"=>3.3, "prior"=>3.2, "sets"=>3.0}
+11 (/1k): {"economic"=>4.2, "growth"=>4.0, "economy"=>3.4, "japan"=>2.4, "he"=>2.4, "domestic"=>2.3, "japanese"=>2.1, "more"=>2.1, "inflation"=>2.1, "trade"=>2.0}
+ 2 (/1k): {"vs"=>18.6, "net"=>11.7, "cts"=>11.3, "shr"=>10.2, "qtr"=>8.0, "mln"=>7.9, "loss"=>7.6, "revs"=>6.7, "note"=>5.6, "profit"=>4.9}
+12 (/1k): {"oil"=>2.4, "union"=>2.3, "workers"=>2.3, "strike"=>1.9, "said"=>1.8, "coffee"=>1.6, "had"=>1.4, "brazil"=>1.4, "south"=>1.4, "talks"=>1.3}
+ 3 (/1k): {"prices"=>4.0, "oil"=>3.1, "futures"=>2.5, "traders"=>2.1, "market"=>2.1, "higher"=>2.1, "price"=>1.8, "demand"=>1.6, "lower"=>1.6, "cents"=>1.4}
+13 (/1k): {"contract"=>3.2, "said"=>2.7, "plant"=>2.4, "air"=>2.1, "unit"=>1.9, "co"=>1.9, "company"=>1.9, "corp"=>1.7, "venture"=>1.7, "electric"=>1.6}
+ 4 (/1k): {"stake"=>3.1, "exchange"=>2.8, "securities"=>2.6, "commission"=>2.5, "stock"=>2.2, "said"=>2.2, "group"=>2.1, "would"=>2.1, "its"=>2.0, "trading"=>2.0}
+14 (/1k): {"bank"=>7.2, "banks"=>5.9, "debt"=>4.0, "loans"=>3.5, "billion"=>3.5, "loan"=>3.2, "foreign"=>2.8, "commercial"=>2.6, "interest"=>2.4, "bankers"=>2.3}
+ 5 (/1k): {"inc"=>3.5, "company"=>3.5, "said"=>3.4, "court"=>2.4, "corp"=>2.3, "president"=>2.3, "has"=>2.3, "its"=>2.3, "officer"=>2.1, "executive"=>2.1}
+15 (/1k): {"house"=>2.7, "budget"=>2.7, "tax"=>2.5, "would"=>2.4, "committee"=>2.4, "bill"=>2.3, "congress"=>1.9, "senate"=>1.9, "plan"=>1.6, "he"=>1.6}
+ 6 (/1k): {"computer"=>2.7, "systems"=>2.2, "said"=>1.9, "stg"=>1.8, "system"=>1.7, "market"=>1.5, "software"=>1.4, "products"=>1.2, "england"=>1.1, "computers"=>1.1}
+16 (/1k): {"pct"=>4.0, "bond"=>3.5, "issue"=>3.1, "ltd"=>3.0, "1"=>2.8, "manager"=>2.8, "lead"=>2.6, "mln"=>2.5, "coupon"=>2.4, "8"=>2.4}
+ 7 (/1k): {"pct"=>6.0, "rose"=>4.9, "february"=>4.7, "year"=>4.3, "from"=>3.9, "january"=>3.9, "billion"=>3.6, "1986"=>3.6, "fell"=>3.2, "compared"=>2.9}
+17 (/1k): {"shares"=>8.3, "common"=>5.9, "stock"=>5.7, "dlrs"=>5.1, "inc"=>4.7, "offering"=>4.7, "said"=>4.2, "share"=>3.9, "debt"=>3.8, "corp"=>3.7}
+ 8 (/1k): {"dlrs"=>4.4, "quarter"=>4.4, "earnings"=>4.0, "mln"=>3.6, "1986"=>3.3, "year"=>2.9, "company"=>2.7, "expects"=>2.7, "results"=>2.5, "share"=>2.4}
+18 (/1k): {"dollar"=>3.4, "west"=>2.6, "german"=>2.5, "dealers"=>2.5, "currency"=>2.5, "marks"=>2.4, "rates"=>2.4, "fed"=>2.4, "yen"=>2.0, "market"=>2.0}
+ 9 (/1k): {"u.s"=>2.6, "reagan"=>2.0, "he"=>1.8, "iran"=>1.8, "japanese"=>1.8, "japan"=>1.6, "trade"=>1.6, "states"=>1.5, "united"=>1.5, "officials"=>1.5}
+19 (/1k): {"he"=>4.4, "we"=>3.7, "analysts"=>3.3, "i"=>2.8, "have"=>2.1, "would"=>2.0, "analyst"=>2.0, "think"=>1.8, "market"=>1.7, "could"=>1.7}
 ```
 
 ##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix\))?
