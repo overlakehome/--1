@@ -47,15 +47,16 @@ curl -o /workspace/mahout/mahout-examples-0.8.jar \
 
 ##### Mahout LDA CVB Demo 
 
-###### Prepare Document Collection from Lucene Batchmark Program
 
 ```bash
-MAHOUT="/workspace/mahout/bin/mahout" # which mahout
-HADOOP="/usr/local/bin/hadoop" # which hadoop
-
-WORK_DIR=/tmp/mahout-work-${USER}
+# Set up alias and work dir.
+export MAHOUT="/workspace/mahout/bin/mahout" # same as mahout
+export HADOOP="/usr/local/bin/hadoop" # same as hadoop
+export WORK_DIR=/tmp/mahout-work-${USER}
 [ ! -d $WORK_DIR ] && mkdir -p ${WORK_DIR}
 ```
+
+###### Prepare Document Collection from Lucene Batchmark Program
 
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-ext ]; then
