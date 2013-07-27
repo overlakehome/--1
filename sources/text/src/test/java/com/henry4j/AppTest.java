@@ -1,7 +1,8 @@
 package com.henry4j;
 
 import static java.lang.Math.max;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import org.apache.mahout.common.Pair;
 import org.apache.mahout.common.iterator.sequencefile.PathFilters;
 import org.apache.mahout.math.DenseVector;
 import org.apache.mahout.math.Matrix;
+import org.apache.mahout.math.RandomAccessSparseVector;
 import org.apache.mahout.math.SparseRowMatrix;
 import org.apache.mahout.math.Vector;
 import org.apache.mahout.math.VectorWritable;
@@ -60,10 +62,26 @@ public void testDocumentTopicInferenceForNewDocsOverReuters() {
     Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0/model.getNumTopics());
     Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
 
-    for (int i = 0; i < 25 /* maxItrs */; i++) {
+    for (int i = 0; i < 20 /* maxItrs */; i++) {
         model.trainDocTopicModel(doc, docTopics, docTopicModel);
-        System.out.println(docTopics.toString());
+        System.out.println(strip(docTopics, 0.1).toString());
     }
+
+    // tests against doc-topic inference from training
+    assertThat(Math.round(docTopics.get(0) - 31), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(3) - 22), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(7) - 22), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(10) - 13), lessThanOrEqualTo(1L));
+}
+
+private static Vector strip(Vector v, double min) {
+    Vector sv = new RandomAccessSparseVector(v.size());
+    for (val e : v.all()) {
+        if (e.get() > min) {
+            sv.set(e.index(), e.get());
+        }
+    }
+    return sv;
 }
 
 private static Vector takeOnlineDocument(Configuration conf) {
