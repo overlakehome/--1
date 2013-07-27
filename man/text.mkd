@@ -26,10 +26,10 @@ stop-all.sh # stops hadoop daemons.
 
 ##### Mahout 0.7 w/ [0.8 patches](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
-* Mahout Trunk: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
+* Source code as best documentation: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
 ```bah
-sudo mkdir /workspace
+[ ! -d /workspace ] && sudo mkdir /workspace # make one unless there is.
 curl -o $HOME/Downloads/mahout-distribution-0.7.zip \
   -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
 unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
