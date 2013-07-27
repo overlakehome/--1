@@ -56,7 +56,7 @@ export WORK_DIR=/tmp/mahout-work-${USER}
 [ ! -d $WORK_DIR ] && mkdir -p ${WORK_DIR}
 ```
 
-###### Prepare Document Collection from Lucene Batchmark Program
+###### Prepare Document Collection <sup>from Lucene Batchmark Program</sup> <sub>to Hadoop-native sequence files</sub>
 
 ```bash
 if [ ! -e ${WORK_DIR}/reuters-ext ]; then
