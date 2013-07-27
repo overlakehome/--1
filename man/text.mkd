@@ -146,7 +146,7 @@ $MAHOUT cvb \
        31707:12.5864839553833,31707:8.899988174438477,31707:8.899988174438477,31707:8.899988174438477,  
        31707:15.415231704711914,31707:19.900978088378906,31707:15.415231704711914
 * reuters-lda-topic -- final document/topic inference from $WORK_DIR/reuters-matrix/matrix
-  * `mahout vectordump -i $WORK_DIR/reuters-lda-topics -o document-topic-inference.txt`
+  * `mahout vectordump -i $WORK_DIR/reuters-lda-topics -o doc-topic-inference.txt`
 * reuters-lda-model -- final topic/term distributions from $WORK_DIR/reuters-lda-model/model-20
   * `mahout vectordump -i $WORK_DIR/reuters-lda-model/model-20 -o topic-term-distributions.txt \`  
     `-p true -sort $WORK_DIR/reuters-lda-model/model-20 -vs 15 \`  
