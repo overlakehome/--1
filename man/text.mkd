@@ -148,8 +148,8 @@ $MAHOUT cvb \
 * reuters-lda-topic -- final document/topic inference from $WORK_DIR/reuters-matrix/matrix
   * `mahout vectordump -i $WORK_DIR/reuters-lda-topics -o document-topic-inference.txt`
 * reuters-lda-model -- final topic/term distributions from $WORK_DIR/reuters-lda-model/model-20
-  * `mahout vectordump -i $WORK_DIR/reuters-lda-model/model-20 -o topic-term-distributions.txt`  
-    `-p true -sort $WORK_DIR/reuters-lda-model/model-20 -vs 15`  
+  * `mahout vectordump -i $WORK_DIR/reuters-lda-model/model-20 -o topic-term-distributions.txt \`  
+    `-p true -sort $WORK_DIR/reuters-lda-model/model-20 -vs 15 \`  
     `-d $WORK_DIR/reuters-vector/dictionary.file-0 -dt sequencefile` # top 15 terms each topic.
 
 ```bash
