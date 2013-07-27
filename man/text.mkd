@@ -19,7 +19,7 @@
 
 ```bash
 start-all.sh # starts up hadoop daemons: name, data, 2nd name nodes, and job & task tracker.
-ps aux | grep hadoop | grep -o 'org.apache.[^ ]\+$' # sees 5 lines
+ps aux | grep hadoop | grep -o 'org.apache.[^ ]\+$' # sees 5 lines for hadoop daemons.
 hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # same as ruby -e 'p Math::PI'
 stop-all.sh # stops hadoop daemons.
 ```
