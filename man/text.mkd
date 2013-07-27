@@ -164,25 +164,6 @@ head -n 2 topic-term-distributions.txt
 10	{crop:1614.0501397152202,corn:1328.097444980963,usda:1094.1952410131955,grain:1062.350145115043,said:1041.4191696874411,chrysler:1007.7248884961681,land:948.7121900578755,wheat:873.6906065406373,weather:871.1613470249432,crops:864.858131399484,mln:852.3232776187515,acres:815.7753911956302,areas:788.940463006496,gencorp:779.3432958209048,soybean:756.6295014149304}
 ```
 
-###### LDA CBA - 2 Iterations
-
-```bash
-$MAHOUT cvb \
-  -i ${WORK_DIR}/reuters-matrix/matrix \
-  -o ${WORK_DIR}/reuters-lda-x2 -ow -k 20 -x 2 \
-  -dict ${WORK_DIR}/reuters-vector/dictionary.file-* \
-  -dt ${WORK_DIR}/reuters-lda-topics-x2 \
-  -mt ${WORK_DIR}/reuters-lda-model-x2
-```
-
-```bash
-13/07/23 16:40:03 INFO cvb.CVB0Driver: Completed 2 iterations in 787 seconds
-13/07/23 16:40:03 INFO cvb.CVB0Driver: Perplexities: ()
-13/07/23 16:40:03 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from $WORK_DIR/reuters-lda-model-x2/model-2 to $WORK_DIR/reuters-lda-x2
-13/07/23 16:40:04 INFO input.FileInputFormat: Total input paths to process : 10
-13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from $WORK_DIR/reuters-matrix/matrix to $WORK_DIR/reuters-lda-topics-x2
-```
-
 ##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix\))?
 
 * [My Hello LDA! app -- to be updated w/ feedback from Jake M. (Principal SDE)](http://mahout.markmail.org/message/gjrfbjykwbjjm5gp)
