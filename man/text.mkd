@@ -8,6 +8,7 @@
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
   * `ssh-keygen -t rsa`, and then `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
 * Setup `libexec/conf/hadoop-env.sh` and [pseudo-distributed operation](http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed)
+
 ```bash
 curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' \
   -kL 'https://raw.github.com/henry4j/-/master/bin/hadoop-env.sh'
