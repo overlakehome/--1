@@ -35,19 +35,18 @@ import com.google.common.collect.ImmutableList;
 // http://mail-archives.apache.org/mod_mbox/mahout-user/201205.mbox/%3CCACYXym-0zg3zPor-SmpWr=D210B_6-YeNyyNtddNWpiU_otDrA@mail.gmail.com%3E
 
 public class AppTest {
-    /*
-     * This program needs a dictionary (of terms), a document (in tfidf vector), and an LDA model (built w/ tfidf) as follows:
-     * 
-     * hadoop dfs -get /tmp/mahout-work-$USER/reuters-out-seqdir-sparse-lda/dictionary.file-0 /tmp/dictionary
-     * hadoop dfs -get /tmp/mahout-work-$USER/reuters-out-seqdir-sparse-lda/tfidf-vectors /tmp/tfidf-vectors
-     * hadoop dfs -get /tmp/mahout-work-$USER/reuters-lda-model/model-20 /tmp/lda-model-splits
-     * 
-     * # or,
-     * curl -o /tmp/dictionary -kL https://dl.dropboxusercontent.com/u/47820156/mahout/dictionary
-     * curl -o /tmp/lda-model-splits/part-r-0000\#1 -kL https://dl.dropboxusercontent.com/u/47820156/mahout/lda-model-splits/part-r-0000[0-9]
-     * --create-dir
-     * curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/mahout/tfidf-vectors
-     */
+/*
+ * This program needs a dictionary (of terms), a document (in tfidf vector), and an LDA model (built w/ tfidf) as follows:
+ * 
+hadoop dfs -get /tmp/mahout-work-$USER/reuters-out-seqdir-sparse-lda/dictionary.file-0 /tmp/dictionary
+hadoop dfs -get /tmp/mahout-work-$USER/reuters-out-seqdir-sparse-lda/tfidf-vectors /tmp/tfidf-vectors
+hadoop dfs -get /tmp/mahout-work-$USER/reuters-lda-model/model-20 /tmp/lda-model-splits
+
+# or,
+curl -o /tmp/dictionary -kL https://dl.dropboxusercontent.com/u/47820156/mahout/dictionary
+curl -o /tmp/lda-model-splits/part-r-0000\#1 -kL https://dl.dropboxusercontent.com/u/47820156/mahout/lda-model-splits/part-r-0000[0-9] --create-dir
+curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/mahout/tfidf-vectors
+ */
 
     @Test
     public void testDocumentTopicInferenceForNewDocsOverReuters() {
