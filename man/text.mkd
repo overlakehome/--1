@@ -15,21 +15,21 @@
   * `rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER`
   * `stop-all.sh && hadoop namenode -format`
 * Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
-* Put and get files by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then [`hadoop dfs -ls`](http://hadoop.apache.org/docs/stable/file_system_shell.html#ls)
+* Upload & Downloads local files to DFS by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then [`hadoop dfs -ls`](http://hadoop.apache.org/docs/stable/file_system_shell.html#ls)
 
 ```bash
 start-all.sh # starts up hadoop daemons: name, data, 2nd name nodes, and job & task tracker.
-ps aux | grep hadoop | grep -o 'org.apache.[^ ]\+$' # sees 5 lines
+ps aux | grep hadoop | grep -o 'org.apache.[^ ]\+$' # sees 5 lines for hadoop daemons.
 hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # same as ruby -e 'p Math::PI'
 stop-all.sh # stops hadoop daemons.
 ```
 
 ##### Mahout 0.7 w/ [0.8 patches](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
-* Mahout Trunk: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
+* Source code as best documentation: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
 ```bah
-sudo mkdir /workspace
+[ ! -d /workspace ] && sudo mkdir /workspace # make one unless there is.
 curl -o $HOME/Downloads/mahout-distribution-0.7.zip \
   -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
 unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
@@ -47,18 +47,19 @@ curl -o /workspace/mahout/mahout-examples-0.8.jar \
 
 ##### Mahout LDA CVB Demo 
 
+
+```bash
+# Set up alias and work dir.
+export MAHOUT="/workspace/mahout/bin/mahout" # same as mahout
+export HADOOP="/usr/local/bin/hadoop" # same as hadoop
+export WORK_DIR=/tmp/mahout-work-${USER}
+[ ! -d $WORK_DIR ] && mkdir -p ${WORK_DIR}
+```
+
 ###### Prepare Document Collection from Lucene Batchmark Program
 
 ```bash
-MAHOUT="/workspace/mahout/bin/mahout" # which mahout
-HADOOP="/usr/local/bin/hadoop" # which hadoop
-
-WORK_DIR=/tmp/mahout-work-${USER}
-mkdir -p ${WORK_DIR}
-```
-
-```bash
-if [ ! -e ${WORK_DIR}/reuters-out ]; then
+if [ ! -e ${WORK_DIR}/reuters-ext ]; then
     if [ ! -e ${WORK_DIR}/reuters-sgm ]; then
         if [ ! -f $HOME/Downloads/reuters21578.tar.gz ]; then
             echo "Downloading Reuters-21578"
@@ -73,85 +74,88 @@ if [ ! -e ${WORK_DIR}/reuters-out ]; then
     #   [No org.apache.lucene.benchmark.utils.ExtractReuters.props found on classpath]
     #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
-    $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-out
+    $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-ext
 
     echo "Copying Reuters data to Hadoop"
-    $HADOOP dfs -rmr ${WORK_DIR}/reuters-sgm || true
-    $HADOOP dfs -rmr ${WORK_DIR}/reuters-out || true
-    $HADOOP dfs -put ${WORK_DIR}/reuters-sgm ${WORK_DIR}/reuters-sgm
-    $HADOOP dfs -put ${WORK_DIR}/reuters-out ${WORK_DIR}/reuters-out
+    $HADOOP dfs -rmr ${WORK_DIR}/reuters-ext || true
+    $HADOOP dfs -put ${WORK_DIR}/reuters-ext ${WORK_DIR}/reuters-ext
     
     echo "Converting to Sequence Files"
-    $MAHOUT seqdirectory -i ${WORK_DIR}/reuters-out -o ${WORK_DIR}/reuters-out-seqdir -ow -c UTF-8 -chunk 5
+    $MAHOUT seqdirectory -i ${WORK_DIR}/reuters-ext -o ${WORK_DIR}/reuters-seq -ow -c UTF-8 -chunk 5
 fi
 ```
 
-###### Topic Modeling in Action
+###### Topic Modeling w/ Tuning
+
+* tuning required by seq2sparse and cvb for the better results.
 
 ```bash
 $MAHOUT seq2sparse \
-  -i ${WORK_DIR}/reuters-out-seqdir/ \
-  -o ${WORK_DIR}/reuters-out-seqdir-vectorized -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
+  -i ${WORK_DIR}/reuters-seq/ \
+  -o ${WORK_DIR}/reuters-vector -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/reuters-out-seqdir-vectorized/tfidf-vectors \
-  -o ${WORK_DIR}/reuters-out-matrix # took 5,209 ms \
+  -i ${WORK_DIR}/reuters-vector/tfidf-vectors \
+  -o ${WORK_DIR}/reuters-matrix # took 5,209 ms \
 && \
 rm -rf ${WORK_DIR}/reuters-lda ${WORK_DIR}/reuters-lda-topics ${WORK_DIR}/reuters-lda-model \
 && \
 $MAHOUT cvb \
-  -i ${WORK_DIR}/reuters-out-matrix/matrix \
+  -i ${WORK_DIR}/reuters-matrix/matrix \
+  -dict ${WORK_DIR}/reuters-vector/dictionary.file-0 \
   -o ${WORK_DIR}/reuters-lda -ow -k 20 -x 20 \
-  -dict ${WORK_DIR}/reuters-out-seqdir-vectorized/dictionary.file-0 \
   -dt ${WORK_DIR}/reuters-lda-topics \
   -mt ${WORK_DIR}/reuters-lda-model
 ```
 
-* `reuters-out-seqdir-vectorized` by `seq2sparse`
-  * df-count
-  * dictionary.file-0 -- integer IDs keyed by term.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/dictionary.file-0 -q # returns 41807 terms.
-     * e.g. key: "0": value: 0, key: "zy": value: 41806
-  * frequency.file-0 -- frequencies keyed by term ID.
-     * e.g. key: 0: value: 43; key: 41806: value: 7 -- term '0' occurs 43 times; term 'zy' occurs 7 times.
-  * tf-vectors
-     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/tf-vectors/part-r-00000 -o tf-vectors.txt # returns 21,578 docs.
-     * e.g. {3170:1.0,3949:1.0,5506:1.0,7160:1.0,22224:1.0,5405:1.0} -- this doc has 6 terms '16', '1987', '26.90', '26', '36', 'feb'.
-  * tfidf-vectors
-     * mahout vectordump -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/tfidf-vectors -o tfidf_vec.txt # returns 21,578 docs.
-     * e.g. {5405:3.594198703765869,5506:9.593134880065918,  
-       3170:2.8289616107940674,22224:4.587512493133545,7160:4.637308120727539}
+```bash
+13/07/26 12:17:51 INFO cvb.CVB0Driver: Completed 20 iterations in 2134 seconds
+13/07/26 12:17:51 INFO cvb.CVB0Driver: Perplexities: ()
+13/07/26 12:17:51 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20 to /tmp/mahout-work-hylee/reuters-lda
+13/07/26 12:17:53 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics
+```
+
+* `reuters-out-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/tokenized-documents -o /tmp/tokonized.txt -n 10
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/tokenized-documents -o token_vectors.txt`
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
+  * dictionary.file-0 -- integer IDs keyed by term.
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
+     * e.g. key: `0`: value: 0, key: `amazon`: value: 13707
   * wordcount
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/wordcount -q | grep ' zy:'
-     * key: zy: Value: 7
-* reuters-out-matrix
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/wordcount -o wordcount.txt`
+     * key: `amazon`: value: 6 # grep -w amazon token_vectors.txt | grep -o amazon | wc -l
+  * frequency.file-0 -- frequencies keyed by term ID.
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/frequency.file-0 -o frequency.txt`
+     * e.g. key: 0: value: 43; key: 13707: value: 4 -- term `0` occurs 43 times; term `amazon` occurs in 4 documents.
+  * df-count
+     * `mahout seqdumper -i $WORK_DIR/reuters-vector/frequency.file-0 -q | grep 13707` # shows `amazon` occurs in 4 documents.
+  * tf-vectors
+     * `mahout vectordump -i $WORK_DIR/reuters-vector/tf-vectors/part-r-00000 -o tf-vectors.txt` # returns 21,578 docs.
+     * `grep -o '13707:[[:digit:]]\+' tf-vectors.txt | paste -s -d, -` # 13707:1,13707:3,13707:1,13707:1
+  * tfidf-vectors
+     * `mahout vectordump -i $WORK_DIR/reuters-vector/tfidf-vectors -o tfidf_vectors.txt` # returns 21,578 docs.
+     * `grep -o '13707:[[:digit:]]\+' tfidf_vectors.txt | paste -s -d, -` # 13707:9,13707:16,13707:9,13707:9
+* reuters-matrix
   * docIndex
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/docIndex -q | head
+     * `mahout seqdumper -i $WORK_DIR/reuters-matrix/docIndex -q | head`
      * e.g. key: 1: value: /reut2-000.sgm-1.txt; key: 21577: value: /reut2-021.sgm-99.txt
   * matrix
-     * mahout seqdumper -i /tmp/mahout-work-hylee/reuters-out-matrix/matrix -q | tail
-     * e.g. key: 21577: value: /reut2-021.sgm-99.txt:{33834:9.623783111572266,  
-          34837:5.249424934387207,20362:1.9876184463500977,39389:11.363191604614258,4747:4.020981311798096,  
-          40723:7.030537128448486,25508:6.2267255783081055,29996:4.846031665802002,26109:4.315020561218262,  
-          3730:3.051023483276367,33426:3.2492547035217285,4397:2.9004313945770264,7711:4.540079116821289,  
-          834:8.676844596862793,12157:4.992977619171143,10344:4.8077287673950195,29802:4.378199577331543,  
-          23135:4.283630847930908,30839:3.5672693252563477,30234:4.959400177001953,30567:3.5451722145080566,  
-          1555:7.45306921005249,2689:3.1351888179779053,39538:4.789113998413086,36387:4.446075916290283,  
-          30377:3.8201377391815186,19031:4.827460765838623,39463:9.880817413330078}
-* reuters-lda-topic -- final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix
-  * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-topics-x2 -o document-model-inference.txt
+     * `mahout seqdumper -i $WORK_DIR/reuters-matrix/matrix -o matrix.txt`
+     * `grep -o '31707:[^,]\+' matrix.txt | paste -s -d, -` # see  
+       31707:12.5864839553833,31707:8.899988174438477,31707:8.899988174438477,31707:8.899988174438477,  
+       31707:15.415231704711914,31707:19.900978088378906,31707:15.415231704711914
+* reuters-lda-topic -- final document/topic inference from $WORK_DIR/reuters-matrix/matrix
+  * mahout vectordump -i $WORK_DIR/reuters-lda-topics-x2 -o document-model-inference.txt
   * e.g. {0:0.03604119661007879,1:0.0688613083091687,2:0.04104584185075027,3:0.04201322451285146,  
     4:0.07094607918051136,5:0.059726447187793144,6:0.027547023622972115,7:0.02936943642966859,  
     8:0.05693857435609574,9:0.0804624506346288,10:0.05340769167421293,11:0.015173259854307931,  
     12:0.04513986733501052,13:0.0516641119210567,14:0.0337996577135869,15:0.029916406161888273,  
     16:0.058812759531053076,17:0.04011268844849057,18:0.07464871072544656,19:0.08437326394042743}
-* reuters-lda-model -- final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model/model-20
-  * mahout vectordump -i /tmp/mahout-work-hylee/reuters-lda-model/model-20 -o topic-term-distributions.txt  
-    -p true -sort /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 -vs 20  
-    -d /tmp/mahout-work-hylee/reuters-out-seqdir-vectorized/dictionary.file-0 -dt sequencefile # 20 terms each topic.
+* reuters-lda-model -- final topic/term distributions from $WORK_DIR/reuters-lda-model/model-20
+  * mahout vectordump -i $WORK_DIR/reuters-lda-model/model-20 -o topic-term-distributions.txt  
+    -p true -sort $WORK_DIR/reuters-lda-model-x2/model-2 -vs 20  
+    -d $WORK_DIR/reuters-vector/dictionary.file-0 -dt sequencefile # 20 terms each topic.
   * e.g. topic0   {cts:3373.9386461065965,shr:2910.4272196658,net:2375.3787395189515,vs:2225.2862226817515,  
     mar:2000.3959744299038,bank:1544.2597492115585,company:1447.3947811352577,he:1441.3986830272913,  
     pct:1432.803268216384,two:1375.951945852348,sales:1266.572475574726,11:1234.2160846942008,  
@@ -162,9 +166,9 @@ $MAHOUT cvb \
 
 ```bash
 $MAHOUT cvb \
-  -i ${WORK_DIR}/reuters-out-matrix/matrix \
+  -i ${WORK_DIR}/reuters-matrix/matrix \
   -o ${WORK_DIR}/reuters-lda-x2 -ow -k 20 -x 2 \
-  -dict ${WORK_DIR}/reuters-out-seqdir-vectorized/dictionary.file-* \
+  -dict ${WORK_DIR}/reuters-vector/dictionary.file-* \
   -dt ${WORK_DIR}/reuters-lda-topics-x2 \
   -mt ${WORK_DIR}/reuters-lda-model-x2
 ```
@@ -172,9 +176,9 @@ $MAHOUT cvb \
 ```bash
 13/07/23 16:40:03 INFO cvb.CVB0Driver: Completed 2 iterations in 787 seconds
 13/07/23 16:40:03 INFO cvb.CVB0Driver: Perplexities: ()
-13/07/23 16:40:03 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/reuters-lda-model-x2/model-2 to /tmp/mahout-work-hylee/reuters-lda-x2
+13/07/23 16:40:03 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from $WORK_DIR/reuters-lda-model-x2/model-2 to $WORK_DIR/reuters-lda-x2
 13/07/23 16:40:04 INFO input.FileInputFormat: Total input paths to process : 10
-13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/reuters-out-matrix/matrix to /tmp/mahout-work-hylee/reuters-lda-topics-x2
+13/07/23 16:40:05 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from $WORK_DIR/reuters-matrix/matrix to $WORK_DIR/reuters-lda-topics-x2
 ```
 
 ##### Make a doc-topic inference for a new doc by [TopicModel#trainDocTopicModel](https://builds.apache.org/job/Mahout-Quality/javadoc/org/apache/mahout/clustering/lda/cvb/TopicModel.html#trainDocTopicModel(org.apache.mahout.math.Vector, org.apache.mahout.math.Vector, org.apache.mahout.math.Matrix\))?
@@ -376,4 +380,4 @@ org.apache.mahout:mahout-examples:jar:0.8:compile
 ![x](http://www.manning.com/ingersoll/ingersoll_cover150.jpg)
 ![x](http://www.manning.com/owen/owen_cover150.jpg)
 
-eod
+Good Bye!
