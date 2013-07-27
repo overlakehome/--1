@@ -8,6 +8,8 @@
 * Setup [passphraseless ssh](http://hadoop.apache.org/docs/stable/single_node_setup.html#Setup+passphraseless)
   * `ssh-keygen -t rsa`, and then `cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
 * Setup `libexec/conf/hadoop-env.sh` and [pseudo-distributed operation](http://hadoop.apache.org/docs/stable/single_node_setup.html#PseudoDistributed)
+* Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
+* Upload & Downloads local files to DFS by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then [`hadoop dfs -ls`](http://hadoop.apache.org/docs/stable/file_system_shell.html#ls)
 
 ```bash
 curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/hadoop-env.sh' \
@@ -17,8 +19,6 @@ curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' \
 rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER
 stop-all.sh && hadoop namenode -format
 ```
-* Bring up the [name node](http://localhost:50070/) and [job tracker](http://localhost:50030/)
-* Upload & Downloads local files to DFS by [`hadoop dfs -put`](http://hadoop.apache.org/docs/stable/file_system_shell.html#put), [`hadoop dfs -get`](http://hadoop.apache.org/docs/stable/file_system_shell.html#get), and then [`hadoop dfs -ls`](http://hadoop.apache.org/docs/stable/file_system_shell.html#ls)
 
 ```bash
 start-all.sh # starts up hadoop daemons: name, data, 2nd name nodes, and job & task tracker.
