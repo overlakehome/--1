@@ -46,7 +46,7 @@ public final class MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase {
   // extended set of stop words composed of common mail terms like "hi",
   // HTML tags, and Java keywords asmany of the messages in the archives
   // are subversion check-in notifications
-    
+
   private static final CharArraySet STOP_SET = new CharArraySet(LUCENE_VERSION, Arrays.asList(
     "3d","7bit","a0","about","above","abstract","across","additional","after",
     "afterwards","again","against","align","all","almost","alone","along",
@@ -114,7 +114,7 @@ public final class MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase {
     super(LUCENE_VERSION, stopSet);
 
   }
-  
+
   @Override
   protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
     Tokenizer tokenizer = new StandardTokenizer(LUCENE_VERSION, reader);
