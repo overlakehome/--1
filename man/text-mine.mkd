@@ -19,6 +19,6 @@
 * -md 1 (default: 1, also called --minDF)
 * -xs -1 (default: -1, also called --maxDFSigma) -- a good value to be 3.0.
 * -wt (default: tfidf, also called --weight) -- tf or tfidf.
-* -n (default: 
+* -n (default: -1, also called --norm)
 * -ml (1.0, also called --minLLR) - minimum log likelihood ratio.
 * -lnorm (default: false, also called --logNormalize)
