@@ -27,7 +27,7 @@ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 1
 stop-all.sh # stops hadoop daemons.
 ```
 
-##### Mahout 0.7 w/ [0.8 patches](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
+##### [Mahout 0.8](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
 * Source code as best documentation: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
