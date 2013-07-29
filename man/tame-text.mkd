@@ -1,3 +1,5 @@
+* http://jmlr.org/papers/volume5/lewis04a/a11-smart-stop-list/english.stop
+
 ##### Analyzer Basics
 
 Solr applies an analysis process to fields being indexed to stem words, remove stopwords, and otherwise alter the tokens to be indexed. The Lucene Analyzer class controls this process, and consists of an optional **CharFilter**, a required **Tokenizer**, and zero or more **TokenFilter**s.  
