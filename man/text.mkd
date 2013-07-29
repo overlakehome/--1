@@ -27,25 +27,16 @@ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 1
 stop-all.sh # stops hadoop daemons.
 ```
 
-##### Mahout 0.7 w/ [0.8 patches](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
+##### [Mahout 0.8](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
 * Source code as best documentation: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
 
 ```bah
 [ ! -d /workspace ] && sudo mkdir /workspace # make one unless there is.
-curl -o $HOME/Downloads/mahout-distribution-0.7.zip \
-  -kL http://www.globalish.com/am/mahout/0.7/mahout-distribution-0.7.zip
-unzip -o $HOME/Downloads/mahout-distribution-0.7.zip -d /workspace/
-ln -s /workspace/mahout-distribution-0.7 /workspace/mahout
-```
-
-```
-mv /workspace/mahout/mahout-examples-0.7-job.jar /workspace/mahout/mahout-examples-0.7-job.jar.bak
-mv /workspace/mahout/mahout-examples-0.7.jar /workspace/mahout/mahout-examples-0.7.jar.bak
-curl -o /workspace/mahout/mahout-examples-0.8-job.jar \
-  -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8-job.jar
-curl -o /workspace/mahout/mahout-examples-0.8.jar \
-  -kL http://search.maven.org/remotecontent?filepath=org/apache/mahout/mahout-examples/0.8/mahout-examples-0.8.jar
+curl -o $HOME/Downloads/mahout-distribution-0.8.zip \
+  -kL http://www.motorlogy.com/apache/mahout/0.8/mahout-distribution-0.8.zip
+unzip -o $HOME/Downloads/mahout-distribution-0.8.zip -d /workspace/
+ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ```
 
 ##### Mahout LDA CVB Demo 
@@ -225,13 +216,29 @@ public void testDocumentTopicInferenceForNewDocsOverReuters() {
     assertThat(model.getNumTerms(), equalTo(41807));
 
     val doc = takeOnlineDocument(conf);
-    Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0/model.getNumTopics());
+    Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0 / model.getNumTopics());
     Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
 
-    for (int i = 0; i < 25 /* maxItrs */; i++) {
+    for (int i = 0; i < 20 /* maxItrs */; i++) {
         model.trainDocTopicModel(doc, docTopics, docTopicModel);
-        System.out.println(docTopics.toString());
+        System.out.println(strip(docTopics, 0.1).toString());
     }
+
+    // tests against doc-topic inference from training
+    assertThat(Math.round(docTopics.get(0) - 31), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(3) - 22), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(7) - 22), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(10) - 13), lessThanOrEqualTo(1L));
+}
+
+private static Vector strip(Vector v, double min) {
+    Vector sv = new SequentialAccessSparseVector(v.size());
+    for (val e : v.all()) {
+        if (e.get() > min) {
+            sv.set(e.index(), e.get());
+        }
+    }
+    return sv;
 }
 
 private static Vector takeOnlineDocument(Configuration conf) {

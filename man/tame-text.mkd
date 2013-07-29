@@ -1,3 +1,5 @@
+* http://jmlr.org/papers/volume5/lewis04a/a11-smart-stop-list/english.stop
+
 ##### Analyzer Basics
 
 Solr applies an analysis process to fields being indexed to stem words, remove stopwords, and otherwise alter the tokens to be indexed. The Lucene Analyzer class controls this process, and consists of an optional **CharFilter**, a required **Tokenizer**, and zero or more **TokenFilter**s.  
@@ -42,14 +44,20 @@ if (nGramSize > 1) {
 ```
 
 #
-* [o.a.l.analysis.coreStopAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/StopAnalyzer.java?view=markup)
-* [o.a.l.analysis.core.WhitespaceAnalyzer extends Analyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
+* [o.a.l.analysis.coreStopAnalyzer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html)
+  -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/StopAnalyzer.java?view=markup)
+  * filters LetterTokenizer with LowerCaseFilter and StopFilter.
+* [o.a.l.analysis.core.WhitespaceAnalyzer extends Analyzer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/core/WhitespaceAnalyzer.html)
+  -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
+  * uses [o.a.l.analysis.core.WhitespaceTokenizer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html)
 * [o.a.l.analysis.en.EnglishAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/en/EnglishAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
+  * filters StandardTokenizer with StandardFilter, EnglishPossessiveFilter, PorterStemFilter w/ a stem exclusion list, LowerCaseFilter and StopFilter, using a list of English stop words.
+  * uses [o.a.l.analysis.en.EnglishPossessiveFilter for trailing `'s`](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/en/EnglishPossessiveFilter.html)
 * [o.a.l.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
   * filters StandardTokenizer with StandardFilter, LowerCaseFilter and StopFilter, using a list of English stop words.
-  * [o.a.l.analysis.standard.StandardTokenizer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html)
+  * uses [o.a.l.analysis.standard.StandardTokenizer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html)
      * A grammar-based tokenizer constructed with JFlex.
      * As of Lucene version 3.1, this class implements the Word Break rules from the Unicode Text Segmentation algorithm, as specified in Unicode Standard Annex #29.
      * Many applications have specific tokenizer needs. If this tokenizer does not suit your application, please consider copying this source code directory to your project and maintaining your own grammar-based tokenizer.
@@ -63,7 +71,7 @@ if (nGramSize > 1) {
 * [o.a.l.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
   * filters UAX29URLEmailTokenizer with StandardFilter, LowerCaseFilter and StopFilter, using a list of English stop words.
-  * [o.a.l.analysis.standard.UAX29URLEmailTokenizer extends Tokenizer](https://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html)
+  * uses [o.a.l.analysis.standard.UAX29URLEmailTokenizer extends Tokenizer](https://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html)
 * [o.a.m.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
   * [o.a.l.analysis.wikipedia.WikipediaTokenizer](http://lucene.apache.org/core/3_6_2/api/all/org/apache/lucene/analysis/wikipedia/WikipediaTokenizer.html)
      * Extension of StandardTokenizer that is aware of Wikipedia syntax. It is based off of the Wikipedia tutorial available at http://en.wikipedia.org/wiki/Wikipedia:Tutorial, but it may not be complete.
