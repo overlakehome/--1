@@ -7,3 +7,7 @@
 * [MailArchivesClusteringAnalyzer extends org.apache.lucene.analysis.util.StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
 * [WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
 * [AnalyzerTransformer](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/utils/regex/AnalyzerTransformer.java?view=markup)
+
+##### mahout seq2sparse --help
+
+* 
