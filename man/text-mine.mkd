@@ -6,7 +6,7 @@
 * [org.apache.lucene.analysis.standard.UAX29URLEmailAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
 * [org.apache.mahout.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
 * [org.apache.mahout.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
-* [org.apache.mahout.utils.regex.AnalyzerTransformer](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/utils/regex/AnalyzerTransformer.java?view=markup)
+* [org.apache.mahout.utils.regex.AnalyzerTransformer implements RegexTransformer](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/utils/regex/AnalyzerTransformer.java?view=markup)
 
 ##### mahout seq2sparse --help
 
