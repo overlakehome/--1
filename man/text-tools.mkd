@@ -1,9 +1,0 @@
-##### Analzyers
-
-* http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
-  * [AnalyzerUtils#createAnalzyer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/AnalyzerUtils.java?view=markup)
-* org.apache.lucene.analysis.standard.StandardAnalyzer # v 4.3?
-  * grep -r 'new StandardAnalyzer' .
-* [MailArchivesClusteringAnalyzer extends org.apache.lucene.analysis.util.StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
-* [WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
-* [AnalyzerTransformer](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/utils/regex/AnalyzerTransformer.java?view=markup)
