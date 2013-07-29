@@ -46,6 +46,7 @@ if (nGramSize > 1) {
 * [o.a.l.analysis.core.WhitespaceAnalyzer extends Analyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
 * [o.a.l.analysis.en.EnglishAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/en/EnglishAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
+  * filters StandardTokenizer with StandardFilter, EnglishPossessiveFilter, PorterStemFilter w/ a stem exclusion list, LowerCaseFilter and StopFilter, using a list of English stop words.
   * [o.a.l.analysis.en.EnglishPossessiveFilter for trailing `'s`](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/en/EnglishPossessiveFilter.html)
 * [o.a.l.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
