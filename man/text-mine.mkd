@@ -5,6 +5,7 @@
 * [org.apache.mahout.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
 * [org.apache.mahout.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
 * [org.dspace.search.DSAnalyzer](https://svn.duraspace.org/view/dspace/dspace/trunk/dspace-api/src/main/java/org/dspace/search/DSAnalyzer.java?view=markup)
+* [org.yooreeka.algos.search.lucene.analyzer.CustomAnalyzer](http://yooreeka.googlecode.com/svn-history/r87/trunk/src/org/yooreeka/algos/search/lucene/analyzer/CustomAnalyzer.java)
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
