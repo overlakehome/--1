@@ -24,8 +24,10 @@ Solr applies an analysis process to fields being indexed to stem words, remove s
 
 ##### Analyzers
 
-To reduce the number of unique terms, we developed a custom Lucene analyzer that’s more aggressive than the default StandardAnalyzer. Specifically, the MailArchivesClusteringAnalyzer uses a broader set of stopwords, excludes nonalphanumeric tokens, and applies porter stemming.
+* MailArchivesClusteringAnalyzer (more aggresive than the default StandardAnalyzer) uses a broader set of stopwords, excludes nonalphanumeric tokens, and applies porter stemming.
+* WhitespaceAnalyzer performs simpletokenization of the input data. The data will have stemming performed and stopwords removed using Lucene’s EnglishAnalyzer later as a part of the training and test process, so there’s no need to perform anything other than whitespace tokenization at this point. Other classifiers such as Mahout's Bayes classifier benefit from performing stemming and stopword removal as a part of the data preparation phase.
 
+#
 * [org.apache.lucene.analysis.core.WhitespaceAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
 * [org.apache.lucene.analysis.en.EnglishAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
 * [org.apache.lucene.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
