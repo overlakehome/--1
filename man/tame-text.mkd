@@ -17,9 +17,12 @@ Solr applies an analysis process to fields being indexed to stem words, remove s
 <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
 
 <!-- good for fuzzy string matching -->
+<!-- <tokenizer class="solr.KeywordTokenizerFactory"/> -->
 <!-- <tokenizer class="solr.PatternTokenizerFactory" pattern="." group="0" /> -->
 <!-- <filter class="solr.EdgeNGramFilterFactory" side="front" minGramSize="2" maxGramSize="3"/> -->
 ```
+
+To reduce the number of unique terms, we developed a custom Lucene analyzer that’s more aggressive than the default StandardAnalyzer. Specifically, the MailArchivesClusteringAnalyzer uses a broader set of stopwords, excludes nonalphanumeric tokens, and applies porter stemming.
 
 ##### Analyzers
 
