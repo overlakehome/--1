@@ -2,8 +2,12 @@
 
 * .
 
-Solr provides a means to stem words, remove stopwords, and otherwise alter the tokens to be indexed. The Lucene Analyzer class controls this process, and consists of an optional `CharFilter`, a required `Tokenizer`, and 0+ `TokenFilter`s. Note that in most cases, you won’t need a CharFilter. A Tokenizer produces Tokens,
-which in most cases correspond to words to be indexed. The TokenFilter then takes Tokens from the Tokenizer and optionally modifies or removes the Tokens before giving them back to Lucene for indexing. For instance, Solr's WhitespaceTokenizer breaks words on whitespace, and its StopFilter removes common words from search results.
+Solr provides a means to stem words, remove stopwords, and otherwise alter the tokens to be indexed.  
+The Lucene Analyzer class controls this process, and consists of an optional `CharFilter`, a required `Tokenizer`, and 0+ `TokenFilter`s.  
+A `CharFilter` can be used to remove content while maintaining correct offset information (such as stripping HTML tags) for things like highlighting.  
+Note that in most cases, you won’t need a `CharFilter`. A `Tokenizer` produces Tokens, which in most cases correspond to words to be indexed. 
+The `TokenFilter` then takes Tokens from the `Tokenizer` and optionally modifies or removes the Tokens before giving them back to Lucene for indexing.
+For instance, Solr's `WhitespaceTokenizer` breaks words on whitespace, and its `StopFilter` removes common words from search results.
 
 ##### Analyzers
 
