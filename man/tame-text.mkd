@@ -2,6 +2,8 @@
 
 * .
 
+Solr provides a means to stem words, remove stopwords, and otherwise alter the tokens to be indexed. The Lucene Analyzer class controls this process, and consists of an optional `CharFilter`, a required `Tokenizer`, and 0+ `TokenFilter`s.
+
 ##### Analyzers
 
 * [org.apache.lucene.analysis.core.WhitespaceAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
