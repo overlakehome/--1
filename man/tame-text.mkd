@@ -42,7 +42,9 @@ if (nGramSize > 1) {
 ```
 
 #
-* [o.a.l.analysis.coreStopAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/StopAnalyzer.java?view=markup)
+* [o.a.l.analysis.coreStopAnalyzer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html)
+  -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/StopAnalyzer.java?view=markup)
+  * filters LetterTokenizer with LowerCaseFilter and StopFilter.
 * [o.a.l.analysis.core.WhitespaceAnalyzer extends Analyzer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/core/WhitespaceAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
   * uses [o.a.l.analysis.core.WhitespaceTokenizer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html)
