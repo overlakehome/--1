@@ -216,13 +216,29 @@ public void testDocumentTopicInferenceForNewDocsOverReuters() {
     assertThat(model.getNumTerms(), equalTo(41807));
 
     val doc = takeOnlineDocument(conf);
-    Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0/model.getNumTopics());
+    Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0 / model.getNumTopics());
     Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
 
-    for (int i = 0; i < 25 /* maxItrs */; i++) {
+    for (int i = 0; i < 20 /* maxItrs */; i++) {
         model.trainDocTopicModel(doc, docTopics, docTopicModel);
-        System.out.println(docTopics.toString());
+        System.out.println(strip(docTopics, 0.1).toString());
     }
+
+    // tests against doc-topic inference from training
+    assertThat(Math.round(docTopics.get(0) - 31), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(3) - 22), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(7) - 22), lessThanOrEqualTo(1L));
+    assertThat(Math.round(docTopics.get(10) - 13), lessThanOrEqualTo(1L));
+}
+
+private static Vector strip(Vector v, double min) {
+    Vector sv = new SequentialAccessSparseVector(v.size());
+    for (val e : v.all()) {
+        if (e.get() > min) {
+            sv.set(e.index(), e.get());
+        }
+    }
+    return sv;
 }
 
 private static Vector takeOnlineDocument(Configuration conf) {
