@@ -59,7 +59,9 @@ if (nGramSize > 1) {
 * [o.a.l.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.html)
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
   * filters UAX29URLEmailTokenizer with StandardFilter, LowerCaseFilter and StopFilter, using a list of English stop words.
-* [o.a.l.analysis.standard](https://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html)
+  * [o.a.l.analysis.standard.UAX29URLEmailTokenizer](https://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html)
+
+#
 * [o.a.m.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
 * [org.dspace.search.DSAnalyzer](https://svn.duraspace.org/view/dspace/dspace/trunk/dspace-api/src/main/java/org/dspace/search/DSAnalyzer.java?view=markup)
 * [org.yooreeka.algos.search.lucene.analyzer.CustomAnalyzer](http://yooreeka.googlecode.com/svn-history/r87/trunk/src/org/yooreeka/algos/search/lucene/analyzer/CustomAnalyzer.java)
