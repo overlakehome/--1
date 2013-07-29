@@ -14,7 +14,7 @@
 * -x 70 (default 99, also called --maxDFPercent) -- excludes that occur in 70+% documents.
 * -ng 1 (default 1, also called --maxNGramSize) -- 2 for bigram, 3 for trigram, etc.
 
-######
+###### (maybe)
 
 * -md 1 (default: 1, also called --minDF)
 * -xs -1 (default: -1, also called --maxDFSigma) -- a good value to be 3.0.
