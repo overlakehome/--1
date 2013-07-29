@@ -27,6 +27,20 @@ Solr applies an analysis process to fields being indexed to stem words, remove s
 * MailArchivesClusteringAnalyzer (more aggresive than the default StandardAnalyzer) uses a broader set of stopwords, excludes nonalphanumeric tokens, and applies porter stemming.
 * WhitespaceAnalyzer performs simpletokenization of the input data. The data will have stemming performed and stopwords removed using Lucene’s EnglishAnalyzer later as a part of the training and test process, so there’s no need to perform anything other than whitespace tokenization at this point. Other classifiers such as Mahout's Bayes classifier benefit from performing stemming and stopword removal as a part of the data preparation phase.
 
+```java
+Directory directory = FSDirectory.open(new File(pathname));
+Analyzer analyzer = new EnglishAnalyzer(Version.LUCENE_36);
+if (nGramSize > 1) {
+    ShingleAnalyzerWrapper sw = new ShingleAnalyzerWrapper(analyzer,
+            nGramSize, // min shingle size
+            nGramSize, // max shingle size
+            "-", // token separator
+            true, // output unigrams
+            true); // output unigrams if no shingles
+    analyzer = sw;
+}
+```
+
 #
 * [org.apache.lucene.analysis.core.WhitespaceAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
 * [org.apache.lucene.analysis.en.EnglishAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
