@@ -42,12 +42,14 @@ if (nGramSize > 1) {
 ```
 
 #
-* [org.apache.lucene.analysis.core.WhitespaceAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
-* [org.apache.lucene.analysis.en.EnglishAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
-* [org.apache.lucene.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
-* [org.apache.lucene.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
-* [org.apache.mahout.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
-* [org.apache.mahout.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
+* [o.a.l.analysis.coreStopAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/StopAnalyzer.java?view=markup)
+* [o.a.l.analysis.core.WhitespaceAnalyzer extends Analyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
+* [o.a.l.analysis.en.EnglishAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
+* [o.a.l.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
+  * [StandardAnalyzer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html)
+* [o.a.l.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
+* [o.a.m.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
+* [o.a.m.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
 * [org.dspace.search.DSAnalyzer](https://svn.duraspace.org/view/dspace/dspace/trunk/dspace-api/src/main/java/org/dspace/search/DSAnalyzer.java?view=markup)
 * [org.yooreeka.algos.search.lucene.analyzer.CustomAnalyzer](http://yooreeka.googlecode.com/svn-history/r87/trunk/src/org/yooreeka/algos/search/lucene/analyzer/CustomAnalyzer.java)
 * [org.icatproject.core.manager.IcatAnalyzer](https://code.google.com/p/icatproject/source/browse/icat/trunk/core/src/main/java/org/icatproject/core/manager/IcatAnalyzer.java?r=2511)
