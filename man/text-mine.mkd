@@ -12,3 +12,10 @@
 
 * -s 500 (default 2, also called --minSupport) -- excludes that don't occur 500- times across all documents.
 * -x 70 (default 99, also called --maxDFPercent) -- excludes that occur in 70+% documents.
+
+######
+
+* -md 1 (default: 1, also called --minDF)
+* -xs -1 (default: -1, also called --maxDFSigma) -- a good value to be 3.0.
+* -wt (tf or tfidf)
+* -n (default: 
