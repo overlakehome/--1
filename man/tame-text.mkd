@@ -15,6 +15,9 @@ Solr applies an analysis process to fields being indexed to stem words, remove s
 <filter class="solr.LowerCaseFilterFactory"/>
 <filter class="solr.EnglishPorterFilterFactory" protected="protwords.txt"/>
 <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+
+<!-- to index a dictionary or other set of terms, treating each term as a document and each character as its own token in Solr. ->
+<!-- <tokenizer class="solr.PatternTokenizerFactory" pattern="." group="0" /> -->
 ```
 
 ##### Analyzers
