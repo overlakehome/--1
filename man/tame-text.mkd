@@ -1,4 +1,4 @@
-##### Analyzer
+##### Analyzer Basics
 
 Solr applies an analysis process to fields being indexed to stem words, remove stopwords, and otherwise alter the tokens to be indexed. The Lucene Analyzer class controls this process, and consists of an optional **CharFilter**, a required **Tokenizer**, and zero or more **TokenFilter**s.  
 * A `CharFilter` can be used to remove content while maintaining correct offset information (such as stripping HTML tags) for things like highlighting. In most cases, you won’t need a `CharFilter`.
@@ -22,9 +22,9 @@ Solr applies an analysis process to fields being indexed to stem words, remove s
 <!-- <filter class="solr.EdgeNGramFilterFactory" side="front" minGramSize="2" maxGramSize="3"/> -->
 ```
 
-To reduce the number of unique terms, we developed a custom Lucene analyzer that’s more aggressive than the default StandardAnalyzer. Specifically, the MailArchivesClusteringAnalyzer uses a broader set of stopwords, excludes nonalphanumeric tokens, and applies porter stemming.
-
 ##### Analyzers
+
+To reduce the number of unique terms, we developed a custom Lucene analyzer that’s more aggressive than the default StandardAnalyzer. Specifically, the MailArchivesClusteringAnalyzer uses a broader set of stopwords, excludes nonalphanumeric tokens, and applies porter stemming.
 
 * [org.apache.lucene.analysis.core.WhitespaceAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
 * [org.apache.lucene.analysis.en.EnglishAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
