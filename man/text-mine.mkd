@@ -13,6 +13,7 @@
 * -s 500 (default 2, also called --minSupport) -- excludes that don't occur 500- times across all documents.
 * -x 70 (default 99, also called --maxDFPercent) -- excludes that occur in 70+% documents.
 * -ng 1 (default 1, also called --maxNGramSize) -- 2 for bigram, 3 for trigram, etc.
+* -a org.apache.mahout.text.MailArchivesClusteringAnalyzer
 
 ###### (maybe)
 
