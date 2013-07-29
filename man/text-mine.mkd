@@ -10,4 +10,5 @@
 
 ##### mahout seq2sparse --help
 
-* 
+* -s 500 (default 2, also called --minSupport) -- excludes that don't occur 500- times across all documents.
+* -x 70 (default 99, also called --maxDFPercent) -- excludes that occur in 70+% documents.
