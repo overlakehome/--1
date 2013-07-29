@@ -3,5 +3,5 @@
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
   * [AnalyzerUtils#createAnalzyer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/AnalyzerUtils.java?view=markup)
 * StandardAnalyzer
-* MailArchivesClusteringAnalyzer
+* [MailArchivesClusteringAnalyzer extends org.apache.lucene.analysis.util.StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
 * 
