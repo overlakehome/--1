@@ -60,9 +60,11 @@ if (nGramSize > 1) {
   -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
   * filters UAX29URLEmailTokenizer with StandardFilter, LowerCaseFilter and StopFilter, using a list of English stop words.
   * [o.a.l.analysis.standard.UAX29URLEmailTokenizer extends Tokenizer](https://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html)
+* [o.a.m.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
+  * [o.a.l.analysis.wikipedia.WikipediaTokenizer](http://lucene.apache.org/core/3_6_2/api/all/org/apache/lucene/analysis/wikipedia/WikipediaTokenizer.html)
+     * Extension of StandardTokenizer that is aware of Wikipedia syntax. It is based off of the Wikipedia tutorial available at http://en.wikipedia.org/wiki/Wikipedia:Tutorial, but it may not be complete.
 
 #
-* [o.a.m.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
 * [org.dspace.search.DSAnalyzer](https://svn.duraspace.org/view/dspace/dspace/trunk/dspace-api/src/main/java/org/dspace/search/DSAnalyzer.java?view=markup)
 * [org.yooreeka.algos.search.lucene.analyzer.CustomAnalyzer](http://yooreeka.googlecode.com/svn-history/r87/trunk/src/org/yooreeka/algos/search/lucene/analyzer/CustomAnalyzer.java)
 * [org.icatproject.core.manager.IcatAnalyzer](https://code.google.com/p/icatproject/source/browse/icat/trunk/core/src/main/java/org/icatproject/core/manager/IcatAnalyzer.java?r=2511)
