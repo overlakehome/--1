@@ -44,12 +44,31 @@ if (nGramSize > 1) {
 #
 * [o.a.l.analysis.coreStopAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/StopAnalyzer.java?view=markup)
 * [o.a.l.analysis.core.WhitespaceAnalyzer extends Analyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/core/WhitespaceAnalyzer.java?view=markup)
-* [o.a.l.analysis.en.EnglishAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
-* [o.a.l.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
-  * [StandardAnalyzer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html)
-* [o.a.l.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
-* [o.a.m.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
+* [o.a.l.analysis.en.EnglishAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/en/EnglishAnalyzer.html)
+  -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/en/EnglishAnalyzer.java?view=markup)
+* [o.a.l.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardAnalyzer.html)
+  -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
+  * filters StandardTokenizer with StandardFilter, LowerCaseFilter and StopFilter, using a list of English stop words.
+  * [o.a.l.analysis.standard.StandardTokenizer](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html)
+     * A grammar-based tokenizer constructed with JFlex.
+     * As of Lucene version 3.1, this class implements the Word Break rules from the Unicode Text Segmentation algorithm, as specified in Unicode Standard Annex #29.
+     * Many applications have specific tokenizer needs. If this tokenizer does not suit your application, please consider copying this source code directory to your project and maintaining your own grammar-based tokenizer.
+  * standard tokenizer w/ 255 max token length, filters: lower-case, and stop.
+  * 33 stop-words: ["a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "if", "in", "into", "is", "it", "no", "not", "of", "on", "or", "such", "that", "the", "their", "then", "there", "these", "they", "this", "to", "was", "will", "with"]
+* [o.a.m.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://www.java2s.com/Open-Source/Java-Open-Source-Library/Data-Mnining/mahout/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java.java-doc.htm)
+  -- [svn](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
+  * custom Lucene Analyzer designed for aggressive feature reduction for clustering the ASF Mail Archives using an extended set of stop words, excluding non-alpha-numeric tokens, and porter stemming.
+  * standard tokenizer, filters: lower-case, ascii-folding, alpha-numeric (2 - 40 chars long), stop, and porter-stem.
+  * 471 stop-words w/o "a".
+* [o.a.l.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.html)
+  -- [svn](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
+  * filters UAX29URLEmailTokenizer with StandardFilter, LowerCaseFilter and StopFilter, using a list of English stop words.
+  * [o.a.l.analysis.standard.UAX29URLEmailTokenizer extends Tokenizer](https://lucene.apache.org/core/4_4_0/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html)
 * [o.a.m.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
+  * [o.a.l.analysis.wikipedia.WikipediaTokenizer](http://lucene.apache.org/core/3_6_2/api/all/org/apache/lucene/analysis/wikipedia/WikipediaTokenizer.html)
+     * Extension of StandardTokenizer that is aware of Wikipedia syntax. It is based off of the Wikipedia tutorial available at http://en.wikipedia.org/wiki/Wikipedia:Tutorial, but it may not be complete.
+
+#
 * [org.dspace.search.DSAnalyzer](https://svn.duraspace.org/view/dspace/dspace/trunk/dspace-api/src/main/java/org/dspace/search/DSAnalyzer.java?view=markup)
 * [org.yooreeka.algos.search.lucene.analyzer.CustomAnalyzer](http://yooreeka.googlecode.com/svn-history/r87/trunk/src/org/yooreeka/algos/search/lucene/analyzer/CustomAnalyzer.java)
 * [org.icatproject.core.manager.IcatAnalyzer](https://code.google.com/p/icatproject/source/browse/icat/trunk/core/src/main/java/org/icatproject/core/manager/IcatAnalyzer.java?r=2511)
