@@ -3,7 +3,7 @@
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
   * [AnalyzerUtils#createAnalzyer](http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/AnalyzerUtils.java?view=markup)
 * [org.apache.lucene.analysis.standard.StandardAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/StandardAnalyzer.java?view=markup)
-* [org.apache.lucene.analysis.standard.UAX29URLEmailAnalyzer](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
+* [org.apache.lucene.analysis.standard.UAX29URLEmailAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/lucene/dev/trunk/lucene/analysis/common/src/java/org/apache/lucene/analysis/standard/UAX29URLEmailAnalyzer.java?view=markup)
 * [org.apache.mahout.text.MailArchivesClusteringAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/MailArchivesClusteringAnalyzer.java?view=markup)
 * [org.apache.mahout.text.wikipedia.WikipediaAnalyzer extends StopwordAnalyzerBase](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/text/wikipedia/WikipediaAnalyzer.java?view=markup)
 * [org.apache.mahout.utils.regex.AnalyzerTransformer implements RegexTransformer](http://svn.apache.org/viewvc/mahout/trunk/integration/src/main/java/org/apache/mahout/utils/regex/AnalyzerTransformer.java?view=markup)
