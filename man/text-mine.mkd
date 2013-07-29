@@ -14,6 +14,7 @@
 * -x 70 (default 99, also called --maxDFPercent) -- excludes that occur in 70+% documents.
 * -ng 1 (default 1, also called --maxNGramSize) -- 2 for bigram, 3 for trigram, etc.
 * -a org.apache.mahout.text.MailArchivesClusteringAnalyzer
+* -a org.apache.lucene.analysis.WhitespaceAnalyzer
 
 ###### (maybe)
 
