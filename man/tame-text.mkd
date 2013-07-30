@@ -85,6 +85,8 @@ if (nGramSize > 1) {
 * org.geotoolkit.lucene.analysis.standard.ClassicAnalyzer
 * org.projectforge.lucene.StandardAnalyzer
 * org.elasticsearch.index.analysis.StandardHtmlStripAnalyzer
+* org.openedit.data.lucene.FullTextAnalyzer
+* nc.ird.cantharella.data.model.search.CantharellaAnalyzer
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
