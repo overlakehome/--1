@@ -88,6 +88,7 @@ if (nGramSize > 1) {
 * org.elasticsearch.index.analysis.StandardHtmlStripAnalyzer
 * org.openedit.data.lucene.FullTextAnalyzer
 * nc.ird.cantharella.data.model.search.CantharellaAnalyzer
+* eu.dicodeproject.analysis.lucene.TweetAnalyzer
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
