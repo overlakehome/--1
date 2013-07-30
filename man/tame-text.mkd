@@ -90,6 +90,7 @@ if (nGramSize > 1) {
 * nc.ird.cantharella.data.model.search.CantharellaAnalyzer
 * eu.dicodeproject.analysis.lucene.TweetAnalyzer
 * org.greenstone.LuceneWrapper3.GS2StandardAnalyzer
+* org.apache.lucene.analysis.ca.CatalanAnalyzer
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
