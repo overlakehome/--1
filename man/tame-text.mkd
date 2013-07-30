@@ -84,6 +84,7 @@ if (nGramSize > 1) {
 * org.apache.lucene.analysis.gosen.GosenAnalyzer
 * org.geotoolkit.lucene.analysis.standard.ClassicAnalyzer
 * org.projectforge.lucene.StandardAnalyzer
+* org.elasticsearch.index.analysis.StandardHtmlStripAnalyzer
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
