@@ -1,3 +1,4 @@
+* http://blog.swwomm.com/2013/07/tuning-lucene-to-get-most-relevant.html
 * http://jmlr.org/papers/volume5/lewis04a/a11-smart-stop-list/english.stop
 
 ##### Analyzer Basics
