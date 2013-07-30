@@ -82,6 +82,7 @@ if (nGramSize > 1) {
 * [org.icatproject.core.manager.IcatAnalyzer](https://code.google.com/p/icatproject/source/browse/icat/trunk/core/src/main/java/org/icatproject/core/manager/IcatAnalyzer.java?r=2511)
 * [org.icatproject.core.manager.ESNAnalyzer](https://code.google.com/p/icatproject/source/browse/icat/trunk/core/src/main/java/org/icatproject/core/manager/ESNAnalyzer.java?spec=svn2499&r=2499)
 * org.apache.lucene.analysis.gosen.GosenAnalyzer
+* org.geotoolkit.lucene.analysis.standard.ClassicAnalyzer
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
