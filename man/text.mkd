@@ -18,6 +18,7 @@ curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' \
   -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'
 rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER
 stop-all.sh && hadoop namenode -format
+hadoop dfsadmin -safemode leave
 ```
 
 ```bash
