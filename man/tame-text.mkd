@@ -89,6 +89,7 @@ if (nGramSize > 1) {
 * org.openedit.data.lucene.FullTextAnalyzer
 * nc.ird.cantharella.data.model.search.CantharellaAnalyzer
 * eu.dicodeproject.analysis.lucene.TweetAnalyzer
+* org.greenstone.LuceneWrapper3.GS2StandardAnalyzer
 
 #
 * http://svn.apache.org/viewvc/mahout/trunk/core/src/main/java/org/apache/mahout/common/lucene/
