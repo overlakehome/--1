@@ -56,20 +56,20 @@ export WORK_DIR=/tmp/mahout-work-${USER}
 ```bash
 if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     if [ ! -e ${WORK_DIR}/comm-text-sgm ]; then
-        if [ ! -f $HOME/Downloads/comm-text21578.tar.gz ]; then
+        if [ ! -f $HOME/Downloads/reuters21578.tar.gz ]; then
             echo "Downloading Reuters-21578"
-            curl http://kdd.ics.uci.edu/databases/comm-text21578/comm-text21578.tar.gz -o $HOME/Downloads/comm-text21578.tar.gz
+            curl http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.tar.gz -o $HOME/Downloads/reuters21578.tar.gz
         fi
         mkdir -p ${WORK_DIR}/comm-text-sgm
         echo "Extracting..."
-        tar xzf $HOME/Downloads/comm-text21578.tar.gz -C ${WORK_DIR}/comm-text-sgm
+        tar xzf $HOME/Downloads/reuters21578.tar.gz -C ${WORK_DIR}/reuters-sgm
     fi
 
     # Safe to ignore WARN: driver.MahoutDriver:
     #   [No org.apache.lucene.benchmark.utils.ExtractReuters.props found on classpath]
     #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
-    $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/comm-text-sgm ${WORK_DIR}/comm-text-ext
+    $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/comm-text-ext
 
     echo "Copying Reuters data to Hadoop"
     $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext || true
