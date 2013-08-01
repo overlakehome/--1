@@ -88,11 +88,13 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-vector -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
+  -o ${WORK_DIR}/comm-text-vector -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  -s 100 -x 50 -ng 1 --namedVector # excludes terms of 140- DF times & 70+ DF%; took 184,207 ms \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-vector/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-matrix # took 5,209 ms \
+  -o ${WORK_DIR}/comm-text-matrix # took 1,453 ms \
 && \
 rm -rf ${WORK_DIR}/comm-text-lda ${WORK_DIR}/comm-text-lda-topics ${WORK_DIR}/comm-text-lda-model \
 && \
