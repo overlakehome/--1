@@ -90,7 +90,7 @@ $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-vector -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  -s 100 -x 50 -ng 1 --namedVector # excludes terms of 140- DF times & 70+ DF%; took 184,207 ms \
+  -s 100 -x 80 -ng 1 --namedVector # excludes terms of 100- DF times & 80+ DF%; took 184,207 ms \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-vector/tfidf-vectors \
@@ -171,8 +171,7 @@ ruby -e '
 ```
 
 ```bash
-curl -o /usr/local/bin/dump-topic-term-matrix -kL https://raw.github.com/henry4j/-/master/bin/dump-topic-term-matrix
-chmod +x /usr/local/bin/dump-topic-term-matrix
+curl -o /usr/local/bin/dump-topic-term-matrix -kL http://tinyurl.com/lhgrnu2 && chmod +x /usr/local/bin/dump-topic-term-matrix
 dump-topic-term-matrix topic-term-dist10.txt
 
  0 (/1k): {"tonnes"=>5.7, "ec"=>3.6, "export"=>2.8, "european"=>2.7, "trade"=>2.5, "sugar"=>2.4, "community"=>2.4, "wheat"=>2.3, "agriculture"=>2.2, "u.s"=>2.1}
