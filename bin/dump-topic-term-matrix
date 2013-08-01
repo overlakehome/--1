@@ -5,5 +5,5 @@ open(ARGV[0]).each do |l|
   (t,l) = l.split
   h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
     reduce({}) { |h, (k,v)| h[k] = (v/1000).round(1); h }
-  puts "%2s (/1k): %s" % [t, h]
+  p "%2s (/1k): %s" % [t, h]
 end
