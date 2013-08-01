@@ -70,6 +70,7 @@ if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/comm-text-ext
+    # or, extract-csv-2-comm-text /tmp/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14794 documents
 
     echo "Copying Reuters data to Hadoop"
     $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext || true
@@ -77,7 +78,7 @@ if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     
     echo "Converting to Sequence Files"
     $MAHOUT seqdirectory -i ${WORK_DIR}/comm-text-ext -o ${WORK_DIR}/comm-text-seq -ow -c UTF-8 -chunk 5
-fi # or, extract-csv-2-comm-text /tmp/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14794 documents
+fi
 ```
 
 ###### Topic Modeling w/o repetitive tuning cycles
