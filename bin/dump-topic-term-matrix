@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-%w{open-uri}.each { |e| require e }
+%w{open-uri JSON}.each { |e| require e }
 
 open(ARGV[0]).each do |l|
   (t,l) = l.split
