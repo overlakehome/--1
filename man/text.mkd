@@ -88,7 +88,9 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-vector -ow --maxDFPercent 85 --namedVector # took 273,274 ms \
+  -o ${WORK_DIR}/comm-text-vector -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer2 \
+  -s 140 -x 85 -ng1 --namedVector # took 273,274 ms \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-vector/tfidf-vectors \
