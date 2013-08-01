@@ -90,7 +90,7 @@ $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-vector -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  -s 140 -x 70 -ng 1 --namedVector # excludes terms of 140- DF; 70+% in DF; took 184207 ms \
+  -s 140 -x 70 -ng 1 --namedVector # excludes terms of 140- DF times & 70+ DF%; took 184207 ms \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-vector/tfidf-vectors \
