@@ -146,8 +146,8 @@ $MAHOUT cvb \
 * comm-text-lda-topic -- final document/topic inference from $WORK_DIR/comm-text-matrix/matrix
   * `mahout vectordump -i $WORK_DIR/comm-text-lda-topics -o doc-topic-inference.txt`
 * comm-text-lda-model -- final topic/term distributions from $WORK_DIR/comm-text-lda-model/model-20
-  * `mahout vectordump -i $WORK_DIR/comm-text-lda-model/model-20 -o topic-term-dist10.txt \`  
-    `-p true -sort $WORK_DIR/comm-text-lda-model/model-20 -vs 10 \`  
+  * `mahout vectordump -i $WORK_DIR/comm-text-lda-model/model-20 -o topic-term-dist12.txt \`  
+    `-p true -sort $WORK_DIR/comm-text-lda-model/model-20 -vs 12 \`  
     `-d $WORK_DIR/comm-text-vector/dictionary.file-0 -dt sequencefile` # top 10 terms each topic.
 
 ```bash
@@ -171,16 +171,10 @@ ruby -e '
 ```
 
 ```bash
-ruby -e '
-  require "JSON"
-  t = l = nil
-  open("topic-term-dist10.txt").each { |l|
-    (t,l) = l.split
-    h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-      reduce({}) { |h, (k,v)| h[k] = (v/1000).round(1); h }
-    puts "%2s (/1k): %s" % [t, h]
-  }
-'
+curl -o /usr/local/bin/dump-topic-term-matrix -kL https://raw.github.com/henry4j/-/master/bin/dump-topic-term-matrix
+chmod +x /usr/local/bin/dump-topic-term-matrix
+dump-topic-term-matrix topic-term-dist10.txt
+
  0 (/1k): {"tonnes"=>5.7, "ec"=>3.6, "export"=>2.8, "european"=>2.7, "trade"=>2.5, "sugar"=>2.4, "community"=>2.4, "wheat"=>2.3, "agriculture"=>2.2, "u.s"=>2.1}
 10 (/1k): {"crop"=>1.6, "corn"=>1.3, "usda"=>1.1, "grain"=>1.1, "said"=>1.0, "chrysler"=>1.0, "land"=>0.9, "wheat"=>0.9, "weather"=>0.9, "crops"=>0.9}
  1 (/1k): {"record"=>5.0, "7"=>4.1, "dividend"=>4.1, "april"=>3.9, "apr"=>3.8, "cts"=>3.8, "div"=>3.3, "pay"=>3.3, "prior"=>3.2, "sets"=>3.0}
