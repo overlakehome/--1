@@ -101,10 +101,10 @@ rm -rf ${WORK_DIR}/comm-text-lda-bigram ${WORK_DIR}/comm-text-lda-topics-bigram 
 $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-matrix-bigram/matrix \
   -dict ${WORK_DIR}/comm-text-vector-bigram/dictionary.file-0 \
-  -o ${WORK_DIR}/comm-text-lda-bigram -ow -k 20 -x 200 \
+  -o ${WORK_DIR}/comm-text-lda-bigram -ow \
   -dt ${WORK_DIR}/comm-text-lda-bigram-topics \
   -mt ${WORK_DIR}/comm-text-lda-bigram-model \
-  -block 1 -tf 0.5
+  -k 20 -x 35 -cd 1e-4 -block 2 -tf 0.25 -seed 2014
 ```
 
 ```bash
