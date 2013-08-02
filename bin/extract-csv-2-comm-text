@@ -10,7 +10,6 @@ OptionParser.new do |opts|
   opts.on('-f', '--fields i,j,k', Array, 'Specifies required field indices to put into output files.') { |v| $options[:fields] = v }
   opts.on('-x', '--stop-phrases x,y,z', Array, 'Specifies optional file paths for stop-phrases.') { |v| $options[:stop_phrases] = v }
 end.parse!
-
 # fail '--id-fields cannot be nil or empty.' if ($options[:id_fields] || []).empty?
 # fail '--fields cannot be nil or empty.' if ($options[:fields] || []).empty?
 
