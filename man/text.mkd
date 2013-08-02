@@ -45,8 +45,14 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ```bash
 export MAHOUT_TO=/workspace/mahout
 export MAHOUT_FROM=https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk
+
+
+https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk/core/target/mahout-core-0.9-SNAPSHOT-job.jar
+https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk/core/target/mahout-core-0.9-SNAPSHOT.jar
 curl -o $MAHOUT_TO/mahout-examples-0.9-SNAPSHOT.jar     -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT.jar
 curl -o $MAHOUT_TO/mahout-examples-0.9-SNAPSHOT-job.jar -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT-job.jar
+https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk/integration/target/mahout-integration-0.9-SNAPSHOT.jar
+https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk/math/target/mahout-math-0.9-SNAPSHOT.jar
 ```
 
 ##### Mahout LDA CVB Demo 
