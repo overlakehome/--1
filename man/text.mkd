@@ -88,22 +88,23 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-vector -ow \
+  -o ${WORK_DIR}/comm-text-vector-bigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  -s 100 -x 80 -ng 1 --namedVector # excludes terms of 100- DF times & 80+ DF%; took 184,207 ms \
+  -s 70 -x 85 -ng 2 --namedVector # excludes terms of 100- DF times & 80+ DF%; took 184,207 ms \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-vector/tfidf-vectors \
+  -i ${WORK_DIR}/comm-text-vector-bigram/tfidf-vectors \
   -o ${WORK_DIR}/comm-text-matrix # took 1,453 ms \
 && \
 rm -rf ${WORK_DIR}/comm-text-lda ${WORK_DIR}/comm-text-lda-topics ${WORK_DIR}/comm-text-lda-model \
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-matrix/matrix \
-  -dict ${WORK_DIR}/comm-text-vector/dictionary.file-0 \
+  -dict ${WORK_DIR}/comm-text-vector-bigram/dictionary.file-0 \
   -o ${WORK_DIR}/comm-text-lda -ow -k 20 -x 20 \
   -dt ${WORK_DIR}/comm-text-lda-topics \
-  -mt ${WORK_DIR}/comm-text-lda-model
+  -mt ${WORK_DIR}/comm-text-lda-model \
+  -block 1
 ```
 
 ```bash
