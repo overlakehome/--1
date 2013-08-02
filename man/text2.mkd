@@ -1,6 +1,15 @@
 * http://blog.swwomm.com/2013/07/tuning-lucene-to-get-most-relevant.html
 * http://jmlr.org/papers/volume5/lewis04a/a11-smart-stop-list/english.stop
 
+##### CVB params
+
+* 8K documents, 
+* typically for English, reasonable topics b/w 20 and 200 (tending toward the lower-end unless there are very many documents).
+  * 20 topics'll yield very generic things, 100 is pretty nice, a lot of the time, but 200+ can lead to really niche things.
+* 20 - 30 iterations tend to be always be enough, but check for perplexity; doc-topic distribution's plateaued, as perplexity's.
+  * In practice, Jake M. never needed more than 30 iterations; less the larger the corpus is.
+* for smoothing doc-topic and topic-term distribution, do a grid search over (α, β) = {0.001, 0.01, 0.1} x {0.001, 0.01, 0.1}.
+
 ##### Analyzer Basics
 
 Solr applies an analysis process to fields being indexed to stem words, remove stopwords, and otherwise alter the tokens to be indexed. The Lucene Analyzer class controls this process, and consists of an optional **CharFilter**, a required **Tokenizer**, and zero or more **TokenFilter**s.  
