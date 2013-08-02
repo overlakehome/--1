@@ -13,8 +13,8 @@ end.parse!
 
 $options[:id_fields] ||= ['4']
 $options[:fields] ||= ['5','12']
-fail '--id-fields cannot be nil or empty.' if ($options[:id_fields] || []).empty?
-fail '--fields cannot be nil or empty.' if ($options[:fields] || []).empty?
+# fail '--id-fields cannot be nil or empty.' if ($options[:id_fields] || []).empty?
+# fail '--fields cannot be nil or empty.' if ($options[:fields] || []).empty?
 
 max_lines = $options[:max_lines]
 out_dir = $options[:out_dir] || '/tmp/'
