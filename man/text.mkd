@@ -70,7 +70,7 @@ if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/comm-text-ext
-    # or, extract-csv-2-comm-text /tmp/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14,794 documents/58MB
+    # or, extract-csv-2-comm-text $HOME/Downloads/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14,794 documents/58MB
 
     echo "Copying Reuters data to Hadoop"
     $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext || true
