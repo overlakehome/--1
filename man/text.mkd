@@ -43,15 +43,21 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ##### Mahout 
 
 ```bash
-export MAHOUT_HOME=/workspace/mahout
-export MAHOUT_FROM=https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk
-for i in $MAHOUT_HOME/*.jar; do mv -f $i $i.bak; done
-curl -o $MAHOUT_HOME/mahout-core-0.9-SNAPSHOT-job.jar     -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT-job.jar
-curl -o $MAHOUT_HOME/mahout-core-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT.jar
-curl -o $MAHOUT_HOME/mahout-examples-0.9-SNAPSHOT.jar     -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT.jar
-curl -o $MAHOUT_HOME/mahout-examples-0.9-SNAPSHOT-job.jar -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT-job.jar
-curl -o $MAHOUT_HOME/mahout-integration-0.9-SNAPSHOT.jar  -kL $MAHOUT_FROM/integration/target/mahout-integration-0.9-SNAPSHOT.jar
-curl -o $MAHOUT_HOME/mahout-math-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/math/target/mahout-math-0.9-SNAPSHOT.jar
+ruby -e '
+  mahout_home = %q(/workspace/mahout)
+  mahout_from = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
+  Dir.glob(%Q(#{mahout_home}/*.jar)).each { |e| File.rename(f, %Q(#{f}.bak)) }
+  %w(
+    core/target/mahout-core-0.9-SNAPSHOT-job.jar
+    core/target/mahout-core-0.9-SNAPSHOT.jar
+    examples/target/mahout-examples-0.9-SNAPSHOT-job.jar
+    examples/target/mahout-examples-0.9-SNAPSHOT.jar
+    integration/target/mahout-integration-0.9-SNAPSHOT.jar
+    math/target/mahout-math-0.9-SNAPSHOT.jar
+  ).each { |e|
+    system %Q(curl -o #{mahout_home}/#{File.basename(e)} -kL #{mahout_from}/#{e})
+  }
+'
 ```
 
 ##### Mahout LDA CVB Demo 
