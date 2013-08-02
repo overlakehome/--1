@@ -104,7 +104,7 @@ $MAHOUT cvb \
   -o ${WORK_DIR}/comm-text-lda-bigram -ow -k 20 -x 200 \
   -dt ${WORK_DIR}/comm-text-lda-topics-bigram \
   -mt ${WORK_DIR}/comm-text-lda-model-bigram \
-  -block 1
+  -block 1 -tf 0.5
 ```
 
 ```bash
