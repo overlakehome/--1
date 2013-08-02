@@ -3,7 +3,10 @@
 
 ##### CVB params
 
-*
+* 8K documents, 
+* 
+* doc-topic distribution smoothing: -a
+* topic-term distribution smoothing: -e
 
 ##### Analyzer Basics
 
