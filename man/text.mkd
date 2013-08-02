@@ -94,16 +94,16 @@ $MAHOUT seq2sparse \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-vector-bigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-matrix # took 1,453 ms \
+  -o ${WORK_DIR}/comm-text-matrix-bigram # took 1,453 ms \
 && \
-rm -rf ${WORK_DIR}/comm-text-lda ${WORK_DIR}/comm-text-lda-topics ${WORK_DIR}/comm-text-lda-model \
+rm -rf ${WORK_DIR}/comm-text-lda-bigram ${WORK_DIR}/comm-text-lda-topics-bigram ${WORK_DIR}/comm-text-lda-model-bigram \
 && \
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-matrix/matrix \
+  -i ${WORK_DIR}/comm-text-matrix/matrix-bigram \
   -dict ${WORK_DIR}/comm-text-vector-bigram/dictionary.file-0 \
-  -o ${WORK_DIR}/comm-text-lda -ow -k 20 -x 20 \
-  -dt ${WORK_DIR}/comm-text-lda-topics \
-  -mt ${WORK_DIR}/comm-text-lda-model \
+  -o ${WORK_DIR}/comm-text-lda-bigram -ow -k 20 -x 20 \
+  -dt ${WORK_DIR}/comm-text-lda-topics-bigram \
+  -mt ${WORK_DIR}/comm-text-lda-model-bigram \
   -block 1
 ```
 
