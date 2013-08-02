@@ -46,7 +46,7 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ruby -e '
   mahout_home = %q(/workspace/mahout)
   mahout_from = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
-  Dir.glob(%Q(#{mahout_home}/*.jar)).each { |e| File.rename(f, %Q(#{f}.bak)) }
+  Dir.glob(%Q(#{mahout_home}/*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
   %w(
     core/target/mahout-core-0.9-SNAPSHOT-job.jar
     core/target/mahout-core-0.9-SNAPSHOT.jar
