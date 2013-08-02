@@ -43,15 +43,15 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ##### Mahout 
 
 ```bash
-export MAHOUT_TO=/workspace/mahout
+export MAHOUT_HOME=/workspace/mahout
 export MAHOUT_FROM=https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk
-mkdir $MAHOUT_TO/bak && mv $MAHOUT_TO/*.jar $MAHOUT_TO/bak
-curl -o $MAHOUT_TO/mahout-core-0.9-SNAPSHOT-job.jar     -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT-job.jar
-curl -o $MAHOUT_TO/mahout-core-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT.jar
-curl -o $MAHOUT_TO/mahout-examples-0.9-SNAPSHOT.jar     -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT.jar
-curl -o $MAHOUT_TO/mahout-examples-0.9-SNAPSHOT-job.jar -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT-job.jar
-curl -o $MAHOUT_TO/mahout-integration-0.9-SNAPSHOT.jar  -kL $MAHOUT_FROM/integration/target/mahout-integration-0.9-SNAPSHOT.jar
-curl -o $MAHOUT_TO/mahout-math-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/math/target/mahout-math-0.9-SNAPSHOT.jar
+mkdir $MAHOUT_HOME/bak && mv $MAHOUT_HOME/*.jar $MAHOUT_HOME/bak
+curl -o $MAHOUT_HOME/mahout-core-0.9-SNAPSHOT-job.jar     -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT-job.jar
+curl -o $MAHOUT_HOME/mahout-core-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT.jar
+curl -o $MAHOUT_HOME/mahout-examples-0.9-SNAPSHOT.jar     -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT.jar
+curl -o $MAHOUT_HOME/mahout-examples-0.9-SNAPSHOT-job.jar -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT-job.jar
+curl -o $MAHOUT_HOME/mahout-integration-0.9-SNAPSHOT.jar  -kL $MAHOUT_FROM/integration/target/mahout-integration-0.9-SNAPSHOT.jar
+curl -o $MAHOUT_HOME/mahout-math-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/math/target/mahout-math-0.9-SNAPSHOT.jar
 ```
 
 ##### Mahout LDA CVB Demo 
