@@ -1,233 +1,233 @@
-13/08/01 22:02:27 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-1
-13/08/01 22:02:52 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2851747.2269188142 and model weight 481668.3674072027
-13/08/01 22:02:52 INFO cvb.CVB0Driver: Current perplexity = 5.920561572829933
-13/08/01 22:02:52 INFO cvb.CVB0Driver: (p_1 - p_0) / p_0 = 1.7976931348623157E308; target = 0.0
-13/08/01 22:03:29 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-2
-13/08/01 22:03:56 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2721569.71531349 and model weight 481668.3674072027
-13/08/01 22:03:56 INFO cvb.CVB0Driver: Current perplexity = 5.650297797141147
-13/08/01 22:03:56 INFO cvb.CVB0Driver: (p_2 - p_1) / p_0 = 0.0456483345987067; target = 0.0
-13/08/01 22:04:35 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-3
-13/08/01 22:05:02 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2623953.698551792 and model weight 481668.3674072027
-13/08/01 22:05:02 INFO cvb.CVB0Driver: Current perplexity = 5.4476355021534975
-13/08/01 22:05:02 INFO cvb.CVB0Driver: (p_3 - p_2) / p_0 = 0.03423024868412613; target = 0.0
-13/08/01 22:05:42 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-4
-13/08/01 22:06:10 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2564418.8256798554 and model weight 481668.3674072027
-13/08/01 22:06:10 INFO cvb.CVB0Driver: Current perplexity = 5.324034126392806
-13/08/01 22:06:10 INFO cvb.CVB0Driver: (p_4 - p_3) / p_0 = 0.020876630407478777; target = 0.0
-13/08/01 22:06:51 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-5
-13/08/01 22:07:19 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2528321.32009146 and model weight 481668.3674072027
-13/08/01 22:07:19 INFO cvb.CVB0Driver: Current perplexity = 5.249091472834909
-13/08/01 22:07:19 INFO cvb.CVB0Driver: (p_5 - p_4) / p_0 = 0.012658031275583098; target = 0.0
-13/08/01 22:07:54 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-6
-13/08/01 22:08:19 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2505717.6685590264 and model weight 481668.3674072027
-13/08/01 22:08:19 INFO cvb.CVB0Driver: Current perplexity = 5.202163642273588
-13/08/01 22:08:19 INFO cvb.CVB0Driver: (p_6 - p_5) / p_0 = 0.007926246519701419; target = 0.0
-13/08/01 22:08:58 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-7
-13/08/01 22:09:22 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2490923.2830173112 and model weight 481668.3674072027
-13/08/01 22:09:22 INFO cvb.CVB0Driver: Current perplexity = 5.171448763442427
-13/08/01 22:09:22 INFO cvb.CVB0Driver: (p_7 - p_6) / p_0 = 0.0051878320077126065; target = 0.0
-13/08/01 22:10:02 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-8
-13/08/01 22:10:27 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2480739.091103901 and model weight 481668.3674072027
-13/08/01 22:10:27 INFO cvb.CVB0Driver: Current perplexity = 5.15030518706802
-13/08/01 22:10:27 INFO cvb.CVB0Driver: (p_8 - p_7) / p_0 = 0.0035712112971575663; target = 0.0
-13/08/01 22:11:02 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-9
-13/08/01 22:11:27 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2473685.141642696 and model weight 481668.3674072027
-13/08/01 22:11:27 INFO cvb.CVB0Driver: Current perplexity = 5.13566036100403
-13/08/01 22:11:27 INFO cvb.CVB0Driver: (p_9 - p_8) / p_0 = 0.002473553544514564; target = 0.0
-13/08/01 22:12:04 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-10
-13/08/01 22:12:30 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2468583.499391838 and model weight 481668.3674072027
-13/08/01 22:12:30 INFO cvb.CVB0Driver: Current perplexity = 5.125068753590987
-13/08/01 22:12:30 INFO cvb.CVB0Driver: (p_10 - p_9) / p_0 = 0.001788953173234308; target = 0.0
-13/08/01 22:13:07 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-11
-13/08/01 22:13:34 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2464420.076323103 and model weight 481668.3674072027
-13/08/01 22:13:34 INFO cvb.CVB0Driver: Current perplexity = 5.116424999193856
-13/08/01 22:13:34 INFO cvb.CVB0Driver: (p_11 - p_10) / p_0 = 0.0014599551564158711; target = 0.0
-13/08/01 22:14:12 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-12
-13/08/01 22:14:37 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2461050.0185525725 and model weight 481668.3674072027
-13/08/01 22:14:37 INFO cvb.CVB0Driver: Current perplexity = 5.109428364167414
-13/08/01 22:14:37 INFO cvb.CVB0Driver: (p_12 - p_11) / p_0 = 0.0011817519234240176; target = 0.0
-13/08/01 22:15:16 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-13
-13/08/01 22:15:44 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2458436.492602965 and model weight 481668.3674072027
-13/08/01 22:15:44 INFO cvb.CVB0Driver: Current perplexity = 5.104002377894584
-13/08/01 22:15:44 INFO cvb.CVB0Driver: (p_13 - p_12) / p_0 = 9.164647991720632E-4; target = 0.0
-13/08/01 22:16:21 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-14
-13/08/01 22:16:47 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2456354.046409337 and model weight 481668.3674072027
-13/08/01 22:16:47 INFO cvb.CVB0Driver: Current perplexity = 5.099678975457264
-13/08/01 22:16:47 INFO cvb.CVB0Driver: (p_14 - p_13) / p_0 = 7.302351954518556E-4; target = 0.0
-13/08/01 22:17:26 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-15
-13/08/01 22:17:50 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2454749.6345313555 and model weight 481668.3674072027
-13/08/01 22:17:50 INFO cvb.CVB0Driver: Current perplexity = 5.096348028302446
-13/08/01 22:17:50 INFO cvb.CVB0Driver: (p_15 - p_14) / p_0 = 5.626066233488206E-4; target = 0.0
-13/08/01 22:18:29 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-16
-13/08/01 22:18:58 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2453524.0167245315 and model weight 481668.3674072027
-13/08/01 22:18:58 INFO cvb.CVB0Driver: Current perplexity = 5.093803502047957
-13/08/01 22:18:58 INFO cvb.CVB0Driver: (p_16 - p_15) / p_0 = 4.2977785522329567E-4; target = 0.0
-13/08/01 22:19:34 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-17
-13/08/01 22:20:01 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2452551.292969963 and model weight 481668.3674072027
-13/08/01 22:20:01 INFO cvb.CVB0Driver: Current perplexity = 5.091784013494444
-13/08/01 22:20:01 INFO cvb.CVB0Driver: (p_17 - p_16) / p_0 = 3.4109746662894485E-4; target = 0.0
-13/08/01 22:20:41 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-18
-13/08/01 22:21:08 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2451734.91980789 and model weight 481668.3674072027
-13/08/01 22:21:08 INFO cvb.CVB0Driver: Current perplexity = 5.090089127100995
-13/08/01 22:21:08 INFO cvb.CVB0Driver: (p_18 - p_17) / p_0 = 2.862712215048915E-4; target = 0.0
-13/08/01 22:21:46 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-19
-13/08/01 22:22:11 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2450953.6284104716 and model weight 481668.3674072027
-13/08/01 22:22:11 INFO cvb.CVB0Driver: Current perplexity = 5.088467074563844
-13/08/01 22:22:11 INFO cvb.CVB0Driver: (p_19 - p_18) / p_0 = 2.7396937219528614E-4; target = 0.0
-13/08/01 22:22:48 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-20
-13/08/01 22:23:14 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2450225.042738762 and model weight 481668.3674072027
-13/08/01 22:23:14 INFO cvb.CVB0Driver: Current perplexity = 5.086954445292315
-13/08/01 22:23:14 INFO cvb.CVB0Driver: (p_20 - p_19) / p_0 = 2.554874656603164E-4; target = 0.0
-13/08/01 22:23:51 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-21
-13/08/01 22:24:17 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2449685.2875855025 and model weight 481668.3674072027
-13/08/01 22:24:17 INFO cvb.CVB0Driver: Current perplexity = 5.085833850314977
-13/08/01 22:24:17 INFO cvb.CVB0Driver: (p_21 - p_20) / p_0 = 1.8927173774887607E-4; target = 0.0
-13/08/01 22:24:56 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-22
-13/08/01 22:25:21 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2449221.756926893 and model weight 481668.3674072027
-13/08/01 22:25:21 INFO cvb.CVB0Driver: Current perplexity = 5.0848715063248475
-13/08/01 22:25:21 INFO cvb.CVB0Driver: (p_22 - p_21) / p_0 = 1.625426875966417E-4; target = 0.0
-13/08/01 22:25:58 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-23
-13/08/01 22:26:22 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2448782.8953082524 and model weight 481668.3674072027
-13/08/01 22:26:22 INFO cvb.CVB0Driver: Current perplexity = 5.083960378153813
-13/08/01 22:26:22 INFO cvb.CVB0Driver: (p_23 - p_22) / p_0 = 1.5389218739238786E-4; target = 0.0
-13/08/01 22:27:01 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-24
-13/08/01 22:27:25 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2448383.470267286 and model weight 481668.3674072027
-13/08/01 22:27:25 INFO cvb.CVB0Driver: Current perplexity = 5.08313112494145
-13/08/01 22:27:25 INFO cvb.CVB0Driver: (p_24 - p_23) / p_0 = 1.4006326970215433E-4; target = 0.0
-13/08/01 22:28:01 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-25
-13/08/01 22:28:27 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2448058.7561946637 and model weight 481668.3674072027
-13/08/01 22:28:27 INFO cvb.CVB0Driver: Current perplexity = 5.082456980458244
-13/08/01 22:28:27 INFO cvb.CVB0Driver: (p_25 - p_24) / p_0 = 1.1386495603721542E-4; target = 0.0
-13/08/01 22:29:05 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-26
-13/08/01 22:29:32 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2447770.8367543267 and model weight 481668.3674072027
-13/08/01 22:29:32 INFO cvb.CVB0Driver: Current perplexity = 5.081859225945348
-13/08/01 22:29:32 INFO cvb.CVB0Driver: (p_26 - p_25) / p_0 = 1.0096246876965748E-4; target = 0.0
-13/08/01 22:30:09 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-27
-13/08/01 22:30:33 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2447470.019173015 and model weight 481668.3674072027
-13/08/01 22:30:33 INFO cvb.CVB0Driver: Current perplexity = 5.081234693379651
-13/08/01 22:30:33 INFO cvb.CVB0Driver: (p_27 - p_26) / p_0 = 1.0548535945703937E-4; target = 0.0
-13/08/01 22:31:12 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-28
-13/08/01 22:31:39 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2447166.6723548844 and model weight 481668.3674072027
-13/08/01 22:31:39 INFO cvb.CVB0Driver: Current perplexity = 5.080604909821799
-13/08/01 22:31:39 INFO cvb.CVB0Driver: (p_28 - p_27) / p_0 = 1.0637226724262505E-4; target = 0.0
-13/08/01 22:32:14 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-29
-13/08/01 22:32:44 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2446879.206300793 and model weight 481668.3674072027
-13/08/01 22:32:44 INFO cvb.CVB0Driver: Current perplexity = 5.080008096591903
-13/08/01 22:32:44 INFO cvb.CVB0Driver: (p_29 - p_28) / p_0 = 1.0080348334445385E-4; target = 0.0
-13/08/01 22:33:18 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-30
-13/08/01 22:33:45 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2446617.3881614264 and model weight 481668.3674072027
-13/08/01 22:33:45 INFO cvb.CVB0Driver: Current perplexity = 5.079464531439854
-13/08/01 22:33:45 INFO cvb.CVB0Driver: (p_30 - p_29) / p_0 = 9.180972874998812E-5; target = 0.0
-13/08/01 22:34:22 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-31
-13/08/01 22:34:46 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2446335.9318827316 and model weight 481668.3674072027
-13/08/01 22:34:46 INFO cvb.CVB0Driver: Current perplexity = 5.078880195208248
-13/08/01 22:34:46 INFO cvb.CVB0Driver: (p_31 - p_30) / p_0 = 9.86960821905155E-5; target = 0.0
-13/08/01 22:35:20 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-32
-13/08/01 22:35:48 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2446096.5605912646 and model weight 481668.3674072027
-13/08/01 22:35:48 INFO cvb.CVB0Driver: Current perplexity = 5.078383232344035
-13/08/01 22:35:48 INFO cvb.CVB0Driver: (p_32 - p_31) / p_0 = 8.393846733948808E-5; target = 0.0
-13/08/01 22:36:23 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-33
-13/08/01 22:36:48 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445940.189723165 and model weight 481668.3674072027
-13/08/01 22:36:48 INFO cvb.CVB0Driver: Current perplexity = 5.078058588089439
-13/08/01 22:36:48 INFO cvb.CVB0Driver: (p_33 - p_32) / p_0 = 5.4833355012496615E-5; target = 0.0
-13/08/01 22:37:25 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-34
-13/08/01 22:37:53 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445825.8793480946 and model weight 481668.3674072027
-13/08/01 22:37:53 INFO cvb.CVB0Driver: Current perplexity = 5.077821266349409
-13/08/01 22:37:53 INFO cvb.CVB0Driver: (p_34 - p_33) / p_0 = 4.0084329351229805E-5; target = 0.0
-13/08/01 22:38:30 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-35
-13/08/01 22:38:58 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445717.415019506 and model weight 481668.3674072027
-13/08/01 22:38:58 INFO cvb.CVB0Driver: Current perplexity = 5.077596081687248
-13/08/01 22:38:58 INFO cvb.CVB0Driver: (p_35 - p_34) / p_0 = 3.803434174131003E-5; target = 0.0
-13/08/01 22:39:35 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-36
-13/08/01 22:40:06 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445613.1963579375 and model weight 481668.3674072027
-13/08/01 22:40:06 INFO cvb.CVB0Driver: Current perplexity = 5.077379711527568
-13/08/01 22:40:06 INFO cvb.CVB0Driver: (p_36 - p_35) / p_0 = 3.65455467387985E-5; target = 0.0
-13/08/01 22:40:41 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-37
-13/08/01 22:41:11 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445523.302813542 and model weight 481668.3674072027
-13/08/01 22:41:11 INFO cvb.CVB0Driver: Current perplexity = 5.07719308199057
-13/08/01 22:41:11 INFO cvb.CVB0Driver: (p_37 - p_36) / p_0 = 3.15222694168652E-5; target = 0.0
-13/08/01 22:41:49 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-38
-13/08/01 22:42:16 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445440.231083902 and model weight 481668.3674072027
-13/08/01 22:42:16 INFO cvb.CVB0Driver: Current perplexity = 5.077020615340773
-13/08/01 22:42:16 INFO cvb.CVB0Driver: (p_38 - p_37) / p_0 = 2.9130116742397288E-5; target = 0.0
-13/08/01 22:42:54 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-39
-13/08/01 22:43:21 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445356.403421317 and model weight 481668.3674072027
-13/08/01 22:43:21 INFO cvb.CVB0Driver: Current perplexity = 5.07684657928556
-13/08/01 22:43:21 INFO cvb.CVB0Driver: (p_39 - p_38) / p_0 = 2.939519386337393E-5; target = 0.0
-13/08/01 22:43:59 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-40
-13/08/01 22:44:26 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445254.74632764 and model weight 481668.3674072027
-13/08/01 22:44:26 INFO cvb.CVB0Driver: Current perplexity = 5.076635527241132
-13/08/01 22:44:26 INFO cvb.CVB0Driver: (p_40 - p_39) / p_0 = 3.5647301667489985E-5; target = 0.0
-13/08/01 22:45:03 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-41
-13/08/01 22:45:31 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2445098.0194358076 and model weight 481668.3674072027
-13/08/01 22:45:31 INFO cvb.CVB0Driver: Current perplexity = 5.076310143839527
-13/08/01 22:45:31 INFO cvb.CVB0Driver: (p_41 - p_40) / p_0 = 5.4958199083349684E-5; target = 0.0
-13/08/01 22:46:06 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-42
-13/08/01 22:46:33 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2444874.405477525 and model weight 481668.3674072027
-13/08/01 22:46:33 INFO cvb.CVB0Driver: Current perplexity = 5.0758458950463465
-13/08/01 22:46:33 INFO cvb.CVB0Driver: (p_42 - p_41) / p_0 = 7.841296597796218E-5; target = 0.0
-13/08/01 22:47:09 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-43
-13/08/01 22:47:35 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2444669.134669596 and model weight 481668.3674072027
-13/08/01 22:47:35 INFO cvb.CVB0Driver: Current perplexity = 5.07541972878379
-13/08/01 22:47:35 INFO cvb.CVB0Driver: (p_43 - p_42) / p_0 = 7.19807162402245E-5; target = 0.0
-13/08/01 22:48:11 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-44
-13/08/01 22:48:38 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2444479.2631779793 and model weight 481668.3674072027
-13/08/01 22:48:38 INFO cvb.CVB0Driver: Current perplexity = 5.075025533307266
-13/08/01 22:48:38 INFO cvb.CVB0Driver: (p_44 - p_43) / p_0 = 6.658075786811603E-5; target = 0.0
-13/08/01 22:49:15 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-45
-13/08/01 22:49:43 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2444288.791978968 and model weight 481668.3674072027
-13/08/01 22:49:43 INFO cvb.CVB0Driver: Current perplexity = 5.074630092767883
-13/08/01 22:49:43 INFO cvb.CVB0Driver: (p_45 - p_44) / p_0 = 6.679105259163484E-5; target = 0.0
-13/08/01 22:50:20 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-46
-13/08/01 22:50:46 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2444123.782337754 and model weight 481668.3674072027
-13/08/01 22:50:46 INFO cvb.CVB0Driver: Current perplexity = 5.074287513407519
-13/08/01 22:50:46 INFO cvb.CVB0Driver: (p_46 - p_45) / p_0 = 5.786264633005463E-5; target = 0.0
-13/08/01 22:51:25 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-47
-13/08/01 22:51:51 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2444000.155356352 and model weight 481668.3674072027
-13/08/01 22:51:51 INFO cvb.CVB0Driver: Current perplexity = 5.074030849300496
-13/08/01 22:51:51 INFO cvb.CVB0Driver: (p_47 - p_46) / p_0 = 4.335131116629572E-5; target = 0.0
-13/08/01 22:52:28 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-48
-13/08/01 22:52:55 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443893.568171633 and model weight 481668.3674072027
-13/08/01 22:52:55 INFO cvb.CVB0Driver: Current perplexity = 5.073809561809077
-13/08/01 22:52:55 INFO cvb.CVB0Driver: (p_48 - p_47) / p_0 = 3.7376098313786836E-5; target = 0.0
-13/08/01 22:53:33 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-49
-13/08/01 22:54:00 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443784.3020174373 and model weight 481668.3674072027
-13/08/01 22:54:00 INFO cvb.CVB0Driver: Current perplexity = 5.073582712462952
-13/08/01 22:54:00 INFO cvb.CVB0Driver: (p_49 - p_48) / p_0 = 3.83155116849938E-5; target = 0.0
-13/08/01 22:54:37 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-50
-13/08/01 22:55:03 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443663.7552792067 and model weight 481668.3674072027
-13/08/01 22:55:03 INFO cvb.CVB0Driver: Current perplexity = 5.0733324433018705
-13/08/01 22:55:03 INFO cvb.CVB0Driver: (p_50 - p_49) / p_0 = 4.227118627222721E-5; target = 0.0
-13/08/01 22:55:41 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-51
-13/08/01 22:56:06 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443537.72819103 and model weight 481668.3674072027
-13/08/01 22:56:06 INFO cvb.CVB0Driver: Current perplexity = 5.073070796291802
-13/08/01 22:56:06 INFO cvb.CVB0Driver: (p_51 - p_50) / p_0 = 4.4192937924913184E-5; target = 0.0
-13/08/01 22:56:44 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-52
-13/08/01 22:57:11 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443419.386839379 and model weight 481668.3674072027
-13/08/01 22:57:11 INFO cvb.CVB0Driver: Current perplexity = 5.072825105771812
-13/08/01 22:57:11 INFO cvb.CVB0Driver: (p_52 - p_51) / p_0 = 4.14978405287813E-5; target = 0.0
-13/08/01 22:57:46 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-53
-13/08/01 22:58:14 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443304.674424805 and model weight 481668.3674072027
-13/08/01 22:58:14 INFO cvb.CVB0Driver: Current perplexity = 5.072586949350639
-13/08/01 22:58:14 INFO cvb.CVB0Driver: (p_53 - p_52) / p_0 = 4.022530941411774E-5; target = 0.0
-13/08/01 22:58:52 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-54
-13/08/01 22:59:18 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443189.992575082 and model weight 481668.3674072027
-13/08/01 22:59:18 INFO cvb.CVB0Driver: Current perplexity = 5.07234885638568
-13/08/01 22:59:18 INFO cvb.CVB0Driver: (p_54 - p_53) / p_0 = 4.021459147597146E-5; target = 0.0
-13/08/01 22:59:57 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-55
-13/08/01 23:00:21 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2443079.0158655294 and model weight 481668.3674072027
-13/08/01 23:00:21 INFO cvb.CVB0Driver: Current perplexity = 5.072118455726093
-13/08/01 23:00:21 INFO cvb.CVB0Driver: (p_55 - p_54) / p_0 = 3.891533881581502E-5; target = 0.0
-13/08/01 23:01:01 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-56
-13/08/01 23:01:28 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2442974.359066965 and model weight 481668.3674072027
-13/08/01 23:01:28 INFO cvb.CVB0Driver: Current perplexity = 5.071901175942644
-13/08/01 23:01:28 INFO cvb.CVB0Driver: (p_56 - p_55) / p_0 = 3.669918482836262E-5; target = 0.0
-13/08/01 23:02:06 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-57
-13/08/01 23:02:34 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2442878.403905535 and model weight 481668.3674072027
-13/08/01 23:02:34 INFO cvb.CVB0Driver: Current perplexity = 5.071701961778039
-13/08/01 23:02:34 INFO cvb.CVB0Driver: (p_57 - p_56) / p_0 = 3.3647849474221805E-5; target = 0.0
-13/08/01 23:03:13 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-58
-13/08/01 23:03:40 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 2442786.702141563 and model weight 481668.3674072027
-13/08/01 23:03:40 INFO cvb.CVB0Driver: Current perplexity = 5.07151157816521
-13/08/01 23:03:40 INFO cvb.CVB0Driver: (p_58 - p_57) / p_0 = 3.2156343699255886E-5; target = 0.0
-13/08/01 23:04:19 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-59
+22:02:27: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-1
+22:02:52: Read 1 entries with total perplexity 2851747.2269188142 and model weight 481668.3674072027
+22:02:52: Current perplexity = 5.920561572829933
+22:02:52: (p_1 - p_0) / p_0 = 1.7976931348623157E308; target = 0.0
+22:03:29: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-2
+22:03:56: Read 1 entries with total perplexity 2721569.71531349 and model weight 481668.3674072027
+22:03:56: Current perplexity = 5.650297797141147
+22:03:56: (p_2 - p_1) / p_0 = 0.0456483345987067; target = 0.0
+22:04:35: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-3
+22:05:02: Read 1 entries with total perplexity 2623953.698551792 and model weight 481668.3674072027
+22:05:02: Current perplexity = 5.4476355021534975
+22:05:02: (p_3 - p_2) / p_0 = 0.03423024868412613; target = 0.0
+22:05:42: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-4
+22:06:10: Read 1 entries with total perplexity 2564418.8256798554 and model weight 481668.3674072027
+22:06:10: Current perplexity = 5.324034126392806
+22:06:10: (p_4 - p_3) / p_0 = 0.020876630407478777; target = 0.0
+22:06:51: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-5
+22:07:19: Read 1 entries with total perplexity 2528321.32009146 and model weight 481668.3674072027
+22:07:19: Current perplexity = 5.249091472834909
+22:07:19: (p_5 - p_4) / p_0 = 0.012658031275583098; target = 0.0
+22:07:54: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-6
+22:08:19: Read 1 entries with total perplexity 2505717.6685590264 and model weight 481668.3674072027
+22:08:19: Current perplexity = 5.202163642273588
+22:08:19: (p_6 - p_5) / p_0 = 0.007926246519701419; target = 0.0
+22:08:58: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-7
+22:09:22: Read 1 entries with total perplexity 2490923.2830173112 and model weight 481668.3674072027
+22:09:22: Current perplexity = 5.171448763442427
+22:09:22: (p_7 - p_6) / p_0 = 0.0051878320077126065; target = 0.0
+22:10:02: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-8
+22:10:27: Read 1 entries with total perplexity 2480739.091103901 and model weight 481668.3674072027
+22:10:27: Current perplexity = 5.15030518706802
+22:10:27: (p_8 - p_7) / p_0 = 0.0035712112971575663; target = 0.0
+22:11:02: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-9
+22:11:27: Read 1 entries with total perplexity 2473685.141642696 and model weight 481668.3674072027
+22:11:27: Current perplexity = 5.13566036100403
+22:11:27: (p_9 - p_8) / p_0 = 0.002473553544514564; target = 0.0
+22:12:04: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-10
+22:12:30: Read 1 entries with total perplexity 2468583.499391838 and model weight 481668.3674072027
+22:12:30: Current perplexity = 5.125068753590987
+22:12:30: (p_10 - p_9) / p_0 = 0.001788953173234308; target = 0.0
+22:13:07: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-11
+22:13:34: Read 1 entries with total perplexity 2464420.076323103 and model weight 481668.3674072027
+22:13:34: Current perplexity = 5.116424999193856
+22:13:34: (p_11 - p_10) / p_0 = 0.0014599551564158711; target = 0.0
+22:14:12: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-12
+22:14:37: Read 1 entries with total perplexity 2461050.0185525725 and model weight 481668.3674072027
+22:14:37: Current perplexity = 5.109428364167414
+22:14:37: (p_12 - p_11) / p_0 = 0.0011817519234240176; target = 0.0
+22:15:16: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-13
+22:15:44: Read 1 entries with total perplexity 2458436.492602965 and model weight 481668.3674072027
+22:15:44: Current perplexity = 5.104002377894584
+22:15:44: (p_13 - p_12) / p_0 = 9.164647991720632E-4; target = 0.0
+22:16:21: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-14
+22:16:47: Read 1 entries with total perplexity 2456354.046409337 and model weight 481668.3674072027
+22:16:47: Current perplexity = 5.099678975457264
+22:16:47: (p_14 - p_13) / p_0 = 7.302351954518556E-4; target = 0.0
+22:17:26: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-15
+22:17:50: Read 1 entries with total perplexity 2454749.6345313555 and model weight 481668.3674072027
+22:17:50: Current perplexity = 5.096348028302446
+22:17:50: (p_15 - p_14) / p_0 = 5.626066233488206E-4; target = 0.0
+22:18:29: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-16
+22:18:58: Read 1 entries with total perplexity 2453524.0167245315 and model weight 481668.3674072027
+22:18:58: Current perplexity = 5.093803502047957
+22:18:58: (p_16 - p_15) / p_0 = 4.2977785522329567E-4; target = 0.0
+22:19:34: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-17
+22:20:01: Read 1 entries with total perplexity 2452551.292969963 and model weight 481668.3674072027
+22:20:01: Current perplexity = 5.091784013494444
+22:20:01: (p_17 - p_16) / p_0 = 3.4109746662894485E-4; target = 0.0
+22:20:41: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-18
+22:21:08: Read 1 entries with total perplexity 2451734.91980789 and model weight 481668.3674072027
+22:21:08: Current perplexity = 5.090089127100995
+22:21:08: (p_18 - p_17) / p_0 = 2.862712215048915E-4; target = 0.0
+22:21:46: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-19
+22:22:11: Read 1 entries with total perplexity 2450953.6284104716 and model weight 481668.3674072027
+22:22:11: Current perplexity = 5.088467074563844
+22:22:11: (p_19 - p_18) / p_0 = 2.7396937219528614E-4; target = 0.0
+22:22:48: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-20
+22:23:14: Read 1 entries with total perplexity 2450225.042738762 and model weight 481668.3674072027
+22:23:14: Current perplexity = 5.086954445292315
+22:23:14: (p_20 - p_19) / p_0 = 2.554874656603164E-4; target = 0.0
+22:23:51: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-21
+22:24:17: Read 1 entries with total perplexity 2449685.2875855025 and model weight 481668.3674072027
+22:24:17: Current perplexity = 5.085833850314977
+22:24:17: (p_21 - p_20) / p_0 = 1.8927173774887607E-4; target = 0.0
+22:24:56: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-22
+22:25:21: Read 1 entries with total perplexity 2449221.756926893 and model weight 481668.3674072027
+22:25:21: Current perplexity = 5.0848715063248475
+22:25:21: (p_22 - p_21) / p_0 = 1.625426875966417E-4; target = 0.0
+22:25:58: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-23
+22:26:22: Read 1 entries with total perplexity 2448782.8953082524 and model weight 481668.3674072027
+22:26:22: Current perplexity = 5.083960378153813
+22:26:22: (p_23 - p_22) / p_0 = 1.5389218739238786E-4; target = 0.0
+22:27:01: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-24
+22:27:25: Read 1 entries with total perplexity 2448383.470267286 and model weight 481668.3674072027
+22:27:25: Current perplexity = 5.08313112494145
+22:27:25: (p_24 - p_23) / p_0 = 1.4006326970215433E-4; target = 0.0
+22:28:01: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-25
+22:28:27: Read 1 entries with total perplexity 2448058.7561946637 and model weight 481668.3674072027
+22:28:27: Current perplexity = 5.082456980458244
+22:28:27: (p_25 - p_24) / p_0 = 1.1386495603721542E-4; target = 0.0
+22:29:05: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-26
+22:29:32: Read 1 entries with total perplexity 2447770.8367543267 and model weight 481668.3674072027
+22:29:32: Current perplexity = 5.081859225945348
+22:29:32: (p_26 - p_25) / p_0 = 1.0096246876965748E-4; target = 0.0
+22:30:09: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-27
+22:30:33: Read 1 entries with total perplexity 2447470.019173015 and model weight 481668.3674072027
+22:30:33: Current perplexity = 5.081234693379651
+22:30:33: (p_27 - p_26) / p_0 = 1.0548535945703937E-4; target = 0.0
+22:31:12: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-28
+22:31:39: Read 1 entries with total perplexity 2447166.6723548844 and model weight 481668.3674072027
+22:31:39: Current perplexity = 5.080604909821799
+22:31:39: (p_28 - p_27) / p_0 = 1.0637226724262505E-4; target = 0.0
+22:32:14: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-29
+22:32:44: Read 1 entries with total perplexity 2446879.206300793 and model weight 481668.3674072027
+22:32:44: Current perplexity = 5.080008096591903
+22:32:44: (p_29 - p_28) / p_0 = 1.0080348334445385E-4; target = 0.0
+22:33:18: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-30
+22:33:45: Read 1 entries with total perplexity 2446617.3881614264 and model weight 481668.3674072027
+22:33:45: Current perplexity = 5.079464531439854
+22:33:45: (p_30 - p_29) / p_0 = 9.180972874998812E-5; target = 0.0
+22:34:22: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-31
+22:34:46: Read 1 entries with total perplexity 2446335.9318827316 and model weight 481668.3674072027
+22:34:46: Current perplexity = 5.078880195208248
+22:34:46: (p_31 - p_30) / p_0 = 9.86960821905155E-5; target = 0.0
+22:35:20: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-32
+22:35:48: Read 1 entries with total perplexity 2446096.5605912646 and model weight 481668.3674072027
+22:35:48: Current perplexity = 5.078383232344035
+22:35:48: (p_32 - p_31) / p_0 = 8.393846733948808E-5; target = 0.0
+22:36:23: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-33
+22:36:48: Read 1 entries with total perplexity 2445940.189723165 and model weight 481668.3674072027
+22:36:48: Current perplexity = 5.078058588089439
+22:36:48: (p_33 - p_32) / p_0 = 5.4833355012496615E-5; target = 0.0
+22:37:25: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-34
+22:37:53: Read 1 entries with total perplexity 2445825.8793480946 and model weight 481668.3674072027
+22:37:53: Current perplexity = 5.077821266349409
+22:37:53: (p_34 - p_33) / p_0 = 4.0084329351229805E-5; target = 0.0
+22:38:30: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-35
+22:38:58: Read 1 entries with total perplexity 2445717.415019506 and model weight 481668.3674072027
+22:38:58: Current perplexity = 5.077596081687248
+22:38:58: (p_35 - p_34) / p_0 = 3.803434174131003E-5; target = 0.0
+22:39:35: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-36
+22:40:06: Read 1 entries with total perplexity 2445613.1963579375 and model weight 481668.3674072027
+22:40:06: Current perplexity = 5.077379711527568
+22:40:06: (p_36 - p_35) / p_0 = 3.65455467387985E-5; target = 0.0
+22:40:41: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-37
+22:41:11: Read 1 entries with total perplexity 2445523.302813542 and model weight 481668.3674072027
+22:41:11: Current perplexity = 5.07719308199057
+22:41:11: (p_37 - p_36) / p_0 = 3.15222694168652E-5; target = 0.0
+22:41:49: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-38
+22:42:16: Read 1 entries with total perplexity 2445440.231083902 and model weight 481668.3674072027
+22:42:16: Current perplexity = 5.077020615340773
+22:42:16: (p_38 - p_37) / p_0 = 2.9130116742397288E-5; target = 0.0
+22:42:54: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-39
+22:43:21: Read 1 entries with total perplexity 2445356.403421317 and model weight 481668.3674072027
+22:43:21: Current perplexity = 5.07684657928556
+22:43:21: (p_39 - p_38) / p_0 = 2.939519386337393E-5; target = 0.0
+22:43:59: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-40
+22:44:26: Read 1 entries with total perplexity 2445254.74632764 and model weight 481668.3674072027
+22:44:26: Current perplexity = 5.076635527241132
+22:44:26: (p_40 - p_39) / p_0 = 3.5647301667489985E-5; target = 0.0
+22:45:03: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-41
+22:45:31: Read 1 entries with total perplexity 2445098.0194358076 and model weight 481668.3674072027
+22:45:31: Current perplexity = 5.076310143839527
+22:45:31: (p_41 - p_40) / p_0 = 5.4958199083349684E-5; target = 0.0
+22:46:06: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-42
+22:46:33: Read 1 entries with total perplexity 2444874.405477525 and model weight 481668.3674072027
+22:46:33: Current perplexity = 5.0758458950463465
+22:46:33: (p_42 - p_41) / p_0 = 7.841296597796218E-5; target = 0.0
+22:47:09: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-43
+22:47:35: Read 1 entries with total perplexity 2444669.134669596 and model weight 481668.3674072027
+22:47:35: Current perplexity = 5.07541972878379
+22:47:35: (p_43 - p_42) / p_0 = 7.19807162402245E-5; target = 0.0
+22:48:11: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-44
+22:48:38: Read 1 entries with total perplexity 2444479.2631779793 and model weight 481668.3674072027
+22:48:38: Current perplexity = 5.075025533307266
+22:48:38: (p_44 - p_43) / p_0 = 6.658075786811603E-5; target = 0.0
+22:49:15: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-45
+22:49:43: Read 1 entries with total perplexity 2444288.791978968 and model weight 481668.3674072027
+22:49:43: Current perplexity = 5.074630092767883
+22:49:43: (p_45 - p_44) / p_0 = 6.679105259163484E-5; target = 0.0
+22:50:20: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-46
+22:50:46: Read 1 entries with total perplexity 2444123.782337754 and model weight 481668.3674072027
+22:50:46: Current perplexity = 5.074287513407519
+22:50:46: (p_46 - p_45) / p_0 = 5.786264633005463E-5; target = 0.0
+22:51:25: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-47
+22:51:51: Read 1 entries with total perplexity 2444000.155356352 and model weight 481668.3674072027
+22:51:51: Current perplexity = 5.074030849300496
+22:51:51: (p_47 - p_46) / p_0 = 4.335131116629572E-5; target = 0.0
+22:52:28: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-48
+22:52:55: Read 1 entries with total perplexity 2443893.568171633 and model weight 481668.3674072027
+22:52:55: Current perplexity = 5.073809561809077
+22:52:55: (p_48 - p_47) / p_0 = 3.7376098313786836E-5; target = 0.0
+22:53:33: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-49
+22:54:00: Read 1 entries with total perplexity 2443784.3020174373 and model weight 481668.3674072027
+22:54:00: Current perplexity = 5.073582712462952
+22:54:00: (p_49 - p_48) / p_0 = 3.83155116849938E-5; target = 0.0
+22:54:37: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-50
+22:55:03: Read 1 entries with total perplexity 2443663.7552792067 and model weight 481668.3674072027
+22:55:03: Current perplexity = 5.0733324433018705
+22:55:03: (p_50 - p_49) / p_0 = 4.227118627222721E-5; target = 0.0
+22:55:41: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-51
+22:56:06: Read 1 entries with total perplexity 2443537.72819103 and model weight 481668.3674072027
+22:56:06: Current perplexity = 5.073070796291802
+22:56:06: (p_51 - p_50) / p_0 = 4.4192937924913184E-5; target = 0.0
+22:56:44: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-52
+22:57:11: Read 1 entries with total perplexity 2443419.386839379 and model weight 481668.3674072027
+22:57:11: Current perplexity = 5.072825105771812
+22:57:11: (p_52 - p_51) / p_0 = 4.14978405287813E-5; target = 0.0
+22:57:46: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-53
+22:58:14: Read 1 entries with total perplexity 2443304.674424805 and model weight 481668.3674072027
+22:58:14: Current perplexity = 5.072586949350639
+22:58:14: (p_53 - p_52) / p_0 = 4.022530941411774E-5; target = 0.0
+22:58:52: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-54
+22:59:18: Read 1 entries with total perplexity 2443189.992575082 and model weight 481668.3674072027
+22:59:18: Current perplexity = 5.07234885638568
+22:59:18: (p_54 - p_53) / p_0 = 4.021459147597146E-5; target = 0.0
+22:59:57: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-55
+23:00:21: Read 1 entries with total perplexity 2443079.0158655294 and model weight 481668.3674072027
+23:00:21: Current perplexity = 5.072118455726093
+23:00:21: (p_55 - p_54) / p_0 = 3.891533881581502E-5; target = 0.0
+23:01:01: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-56
+23:01:28: Read 1 entries with total perplexity 2442974.359066965 and model weight 481668.3674072027
+23:01:28: Current perplexity = 5.071901175942644
+23:01:28: (p_56 - p_55) / p_0 = 3.669918482836262E-5; target = 0.0
+23:02:06: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-57
+23:02:34: Read 1 entries with total perplexity 2442878.403905535 and model weight 481668.3674072027
+23:02:34: Current perplexity = 5.071701961778039
+23:02:34: (p_57 - p_56) / p_0 = 3.3647849474221805E-5; target = 0.0
+23:03:13: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-58
+23:03:40: Read 1 entries with total perplexity 2442786.702141563 and model weight 481668.3674072027
+23:03:40: Current perplexity = 5.07151157816521
+23:03:40: (p_58 - p_57) / p_0 = 3.2156343699255886E-5; target = 0.0
+23:04:19: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-lda-bigram-model/model-59
