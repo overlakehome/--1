@@ -45,7 +45,7 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ```bash
 export MAHOUT_TO=/workspace/mahout
 export MAHOUT_FROM=https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk
-
+mkdir $MAHOUT_TO/bak && mv $MAHOUT_TO/*.jar $MAHOUT_TO/bak
 
 https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk/core/target/mahout-core-0.9-SNAPSHOT-job.jar
 https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk/core/target/mahout-core-0.9-SNAPSHOT.jar
