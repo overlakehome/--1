@@ -45,7 +45,7 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ```bash
 export MAHOUT_HOME=/workspace/mahout
 export MAHOUT_FROM=https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk
-for i in $MAHOUT_HOME/*.jar; do mv -f "$i" "$i".bak; done
+for i in $MAHOUT_HOME/*.jar; do mv -f $i $i.bak; done
 curl -o $MAHOUT_HOME/mahout-core-0.9-SNAPSHOT-job.jar     -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT-job.jar
 curl -o $MAHOUT_HOME/mahout-core-0.9-SNAPSHOT.jar         -kL $MAHOUT_FROM/core/target/mahout-core-0.9-SNAPSHOT.jar
 curl -o $MAHOUT_HOME/mahout-examples-0.9-SNAPSHOT.jar     -kL $MAHOUT_FROM/examples/target/mahout-examples-0.9-SNAPSHOT.jar
