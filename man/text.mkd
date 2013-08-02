@@ -103,7 +103,8 @@ $MAHOUT cvb \
   -dict ${WORK_DIR}/comm-text-vector/dictionary.file-0 \
   -o ${WORK_DIR}/comm-text-lda -ow -k 20 -x 20 \
   -dt ${WORK_DIR}/comm-text-lda-topics \
-  -mt ${WORK_DIR}/comm-text-lda-model
+  -mt ${WORK_DIR}/comm-text-lda-model \
+  -block 1
 ```
 
 ```bash
