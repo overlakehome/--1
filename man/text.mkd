@@ -102,8 +102,8 @@ $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-matrix-bigram/matrix \
   -dict ${WORK_DIR}/comm-text-vector-bigram/dictionary.file-0 \
   -o ${WORK_DIR}/comm-text-lda-bigram -ow -k 20 -x 200 \
-  -dt ${WORK_DIR}/comm-text-lda-topics-bigram \
-  -mt ${WORK_DIR}/comm-text-lda-model-bigram \
+  -dt ${WORK_DIR}/comm-text-lda-bigram-topics \
+  -mt ${WORK_DIR}/comm-text-lda-bigram-model \
   -block 1 -tf 0.5
 ```
 
