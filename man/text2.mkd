@@ -4,13 +4,11 @@
 ##### CVB params
 
 * 8K documents, 
-* typically for English, reasonable topics ranging between 20 and 200 (tending toward the lower-end unless there are very many documents).
-  * 20 topics'll yield very generic things, 100 is pretty nice, a lot of the time, but 200 or more can lead to really niche things.
-* 20 - 30 iterations tend to be always be enough, but check perplexity; doc-topic distribution's plateaued, as the perplexity's plateaued.
+* typically for English, reasonable topics b/w 20 and 200 (tending toward the lower-end unless there are very many documents).
+  * 20 topics'll yield very generic things, 100 is pretty nice, a lot of the time, but 200+ can lead to really niche things.
+* 20 - 30 iterations tend to be always be enough, but check for perplexity; doc-topic distribution's plateaued, as perplexity's.
   * In practice, Jake M. never needed more than 30 iterations; less the larger the corpus is.
-
-* doc-topic distribution smoothing: -a
-* topic-term distribution smoothing: -e
+* for smoothing doc-topic and topic-term distribution, a grid search over (α, β) = {0.001, 0.01, 0.1} x {0.001, 0.01, 0.1}.
 
 ##### Analyzer Basics
 
