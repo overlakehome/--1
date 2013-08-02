@@ -40,7 +40,7 @@ unzip -o $HOME/Downloads/mahout-distribution-0.8.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ```
 
-##### Mahout 
+##### Mahout (optionally, the last stable build)
 
 ```bash
 ruby -e '
