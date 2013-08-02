@@ -30,7 +30,7 @@ ARGV.each do |e|
       next if (headlines -= 1) >= 0
       break unless max_lines.nil? || (max_lines -= 1) >= 0
       FileUtils.mkdir_p out_dir unless Dir.exists?(out_dir)
-      path = File.join(out_dir, id_fields.map { |f| l[f] }.join('-') + ".ext")
+      path = File.join(out_dir, id_fields.map { |f| l[f] }.join('-') + ".txt")
       puts "WARN: will over-write '#{path}'!!!" if File.exists?(path)
       open(path, 'w') do |w| 
         fields.each do |f| 
