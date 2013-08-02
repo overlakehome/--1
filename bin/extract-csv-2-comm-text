@@ -11,15 +11,13 @@ OptionParser.new do |opts|
   opts.on('-x', '--stop-phrases x,y,z', Array, 'Specifies optional file paths for stop-phrases.') { |v| $options[:stop_phrases] = v }
 end.parse!
 
-$options[:id_fields] ||= ['4']
-$options[:fields] ||= ['5','12']
 # fail '--id-fields cannot be nil or empty.' if ($options[:id_fields] || []).empty?
 # fail '--fields cannot be nil or empty.' if ($options[:fields] || []).empty?
 
 max_lines = $options[:max_lines]
 out_dir = $options[:out_dir] || '/tmp/'
-id_fields = $options[:id_fields].map { |e| e.to_i - 1 }  
-fields = $options[:fields].map { |e| e.to_i - 1}
+id_fields = ($options[:id_fields] || ['4']).map { |e| e.to_i - 1 }
+fields = ($options[:fields] || ['5', '12']).map { |e| e.to_i - 1 }
 stop_phrases = $options[:stop_phrases] || [File.expand_path('../stop-phrase-4-comm-text', File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__)]
 stop_phrases = stop_phrases.reduce({}) do |h, e|
   h.tap { open(e) { |f| f.each_line { |l| l = l.chomp; h[l] = [/#{l}/, 0] unless '#'.eql?(l[0..1]) } } if File.exists?(e) }
