@@ -14,6 +14,6 @@ cut_off = $options[:cut_off] || 0.1;
 open(ARGV[0]).each do |l|
   next if (headlines -= 1) >= 0
   break unless max_lines.nil? || (max_lines -= 1) >= 0
-  p JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
+  p JSON[l.chomp.gsub(%r(([^,{]+)\s*:), %q("\1":))].
     reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f%) % (v*100) if v > cut_off; h }
 end
