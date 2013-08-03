@@ -3,13 +3,19 @@
 
 $options = {}
 OptionParser.new do |opts|
-  opts.on('-e', '--exponent FLOAT', Float, 'Divides numbers by 10 to the power of the specified # (default: -3).') { |v| $options[:exponent] = v }
+  opts.on('-s', '--headlines INTEGER', Integer, 'Skips processing the specified # of headlines (default: 1).') { |v| $options[:headlines] = v }
+  opts.on('-m', '--max-lines INTEGER', Integer, 'Processes as many as the specified # of lines.') { |v| $options[:max_lines] = v }
+  opts.on('-c', '--cut-off FLOAT', Float, 'Cuts off numbers smaller than the specified # (default: -0.1).') { |v| $options[:cut_off] = v }
 end.parse!
-exponent = $options[:exponent] || -3.0;
+headlines = $options[:headlines] || 0
+max_lines = $options[:max_lines]
+cut_off = $options[:cut_off] || 0.1;
 
 open(ARGV[0]).each do |l|
-  t, l = l.split
+  next if (headlines -= 1) >= 0
+  break unless max_lines.nil? || (max_lines -= 1) >= 0
+  t, l = l.chomp.split(%Q(\t))
   h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-    reduce({}) { |h, (k,v)| h[k] = (v / (10 ** exponent)).round(1); h }
-  p "%2s (/1k): %s" % [t, h]
+    reduce({}) { |h, (k,v)| h[k] = %q(%.1f%) % (v*100) if v > cut_off; h }
+  p "%2s: %s" % [t, h]
 end
