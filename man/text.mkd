@@ -126,15 +126,14 @@ $MAHOUT seq2sparse \
   -o ${WORK_DIR}/comm-text-unigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
   --namedVector -s 70 -x 85 # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
-&& \
+hadoop dfs -rmr comm-text-unigram-*-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-unigram-tfidf-matrix \
-&& \
+  -o ${WORK_DIR}/comm-text-unigram-tfidf-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441 \
-&& \
+  -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441
+
 rm -rf ${WORK_DIR}/comm-text-unigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
