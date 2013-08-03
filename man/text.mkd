@@ -143,7 +143,7 @@ $MAHOUT cvb \
   -ow -o ${WORK_DIR}/comm-text-unigram-lda \
   -dt ${WORK_DIR}/comm-text-unigram-topics \
   -mt ${WORK_DIR}/comm-text-unigram-model \
-  -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 777
+  -k 20 -x 35 -cd 5e-4 -block 2 -tf 0.25 -seed 777
 ```
 
 ```bash
