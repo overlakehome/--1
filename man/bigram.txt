@@ -1,9 +1,9 @@
 00:49:13:gits/henry4j> $MAHOUT cvb \
->   -i ${WORK_DIR}/comm-text-bigram/tf-matrix/matrix \
 >   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
->   -ow -o ${WORK_DIR}/comm-text-bigram-lda \
+>   -i  ${WORK_DIR}/comm-text-bigram/tfidf-matrix/matrix \
+>   -o  ${WORK_DIR}/comm-text-bigram-model -ow \
+>   -mt ${WORK_DIR}/comm-text-bigram-modeling \
 >   -dt ${WORK_DIR}/comm-text-bigram-topics \
->   -mt ${WORK_DIR}/comm-text-bigram-model \
 >   -k 20 -x 35 -cd 2e-4 -block 2 -tf 0.25 -seed 777
 Running on hadoop, using /usr/local/bin/hadoop and HADOOP_CONF_DIR=
 MAHOUT-JOB: /workspace/mahout/mahout-examples-0.8-job.jar
