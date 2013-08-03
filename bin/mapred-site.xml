@@ -8,7 +8,6 @@
     <name>mapred.job.tracker</name>
     <value>localhost:9001</value>
   </property>
-  <!--
   <property>
     <name>mapred.tasktracker.map.tasks.maximum</name>
     <value>12</value>
@@ -17,5 +16,4 @@
     <name>mapred.tasktracker.reduce.tasks.maximum</name>
     <value>6</value>
   </property>
-  -->
 </configuration>
