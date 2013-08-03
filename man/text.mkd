@@ -213,7 +213,7 @@ pp-z,d bigram-z,d | less -N
      * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `amazon`: value: 13707
   * wordcount
-     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/wordcount -o wordcount.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/wordcount/ngrams -o bigrams.txt`
      * key: `amazon`: value: 6 # grep -w amazon token_vectors.txt | grep -o amazon | wc -l
   * frequency.file-0 -- frequencies keyed by term ID.
      * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/frequency.file-0 -o frequency.txt`
