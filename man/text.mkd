@@ -120,7 +120,7 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
-hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram ${WORK_DIR}/comm-text-unigram-*-matrix
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-unigram -ow \
@@ -147,7 +147,7 @@ $MAHOUT cvb \
 ```
 
 ```bash
-hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model ${WORK_DIR}/comm-text-bigram
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram ${WORK_DIR}/comm-text-bigram-*-matrix
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-bigram -ow \
