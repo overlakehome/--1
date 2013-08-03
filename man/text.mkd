@@ -138,7 +138,7 @@ $MAHOUT rowid \
 rm -rf ${WORK_DIR}/comm-text-unigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-unigram-tf-matrix \
+  -i ${WORK_DIR}/comm-text-unigram-tf-matrix/matrix \
   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
   -ow -o ${WORK_DIR}/comm-text-unigram-lda \
   -dt ${WORK_DIR}/comm-text-unigram-topics \
