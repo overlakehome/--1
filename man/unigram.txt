@@ -1,0 +1,1447 @@
+00:15:08:Users/~> $MAHOUT cvb \
+>   -i ${WORK_DIR}/comm-text-unigram-tf-matrix/matrix \
+>   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
+>   -ow -o ${WORK_DIR}/comm-text-unigram-lda \
+>   -dt ${WORK_DIR}/comm-text-unigram-topics \
+>   -mt ${WORK_DIR}/comm-text-unigram-model \
+>   -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 777
+Running on hadoop, using /usr/local/bin/hadoop and HADOOP_CONF_DIR=
+MAHOUT-JOB: /workspace/mahout/mahout-examples-0.8-job.jar
+13/08/03 00:15:13 WARN driver.MahoutDriver: No cvb.props found on classpath, will use command-line arguments only
+13/08/03 00:15:13 INFO common.AbstractJob: Command line arguments: {--convergenceDelta=[1e-3], --dictionary=[/tmp/mahout-work-hylee/comm-text-unigram/dictionary.file-0], --doc_topic_output=[/tmp/mahout-work-hylee/comm-text-unigram-topics], --doc_topic_smoothing=[1.0E-4], --endPhase=[2147483647], --input=[/tmp/mahout-work-hylee/comm-text-unigram-tf-matrix/matrix], --iteration_block_size=[2], --maxIter=[35], --max_doc_topic_iters=[10], --num_reduce_tasks=[10], --num_topics=[20], --num_train_threads=[4], --num_update_threads=[1], --output=[/tmp/mahout-work-hylee/comm-text-unigram-lda], --overwrite=null, --random_seed=[777], --startPhase=[0], --tempDir=[temp], --term_topic_smoothing=[1.0E-4], --test_set_fraction=[0.25], --topic_model_temp_dir=[/tmp/mahout-work-hylee/comm-text-unigram-model]}
+13/08/03 00:15:14 INFO cvb.CVB0Driver: Will run Collapsed Variational Bayes (0th-derivative approximation) learning for LDA on /tmp/mahout-work-hylee/comm-text-unigram-tf-matrix/matrix (numTerms: 441), finding 20-topics, with document/topic prior 1.0E-4, topic/term prior 1.0E-4.  Maximum iterations to run will be 35, unless the change in perplexity is less than 0.0010.  Topic model output (p(term|topic) for each topic) will be stored /tmp/mahout-work-hylee/comm-text-unigram-lda.  Random initialization seed is 777, holding out 0.25 of the data for perplexity check
+
+13/08/03 00:15:14 INFO cvb.CVB0Driver: Dictionary to be used located /tmp/mahout-work-hylee/comm-text-unigram/dictionary.file-0
+p(topic|docId) will be stored /tmp/mahout-work-hylee/comm-text-unigram-topics
+
+00:15:14 INFO cvb.CVB0Driver: Current iteration number: 0
+00:15:14 INFO cvb.CVB0Driver: About to run iteration 1 of 35
+00:15:14 INFO cvb.CVB0Driver: About to run: Iteration 1 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-0
+00:15:14 INFO input.FileInputFormat: Total input paths to process : 1
+00:15:14 INFO mapred.JobClient: Running job: job_201308030014_0001
+00:15:15 INFO mapred.JobClient:  map 0% reduce 0%
+00:15:32 INFO mapred.JobClient:  map 100% reduce 0%
+00:15:42 INFO mapred.JobClient:  map 100% reduce 20%
+00:15:43 INFO mapred.JobClient:  map 100% reduce 43%
+00:15:45 INFO mapred.JobClient:  map 100% reduce 60%
+00:15:51 INFO mapred.JobClient:  map 100% reduce 63%
+00:15:52 INFO mapred.JobClient:  map 100% reduce 76%
+00:15:53 INFO mapred.JobClient:  map 100% reduce 100%
+00:15:54 INFO mapred.JobClient: Job complete: job_201308030014_0001
+00:15:54 INFO mapred.JobClient: Counters: 26
+00:15:54 INFO mapred.JobClient:   Job Counters 
+00:15:54 INFO mapred.JobClient:     Launched reduce tasks=10
+00:15:54 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=10877
+00:15:54 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:15:54 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:15:54 INFO mapred.JobClient:     Launched map tasks=1
+00:15:54 INFO mapred.JobClient:     Data-local map tasks=1
+00:15:54 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93706
+00:15:54 INFO mapred.JobClient:   File Output Format Counters 
+00:15:54 INFO mapred.JobClient:     Bytes Written=72030
+00:15:54 INFO mapred.JobClient:   FileSystemCounters
+00:15:54 INFO mapred.JobClient:     FILE_BYTES_READ=67970
+00:15:54 INFO mapred.JobClient:     HDFS_BYTES_READ=1185242
+00:15:54 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=762933
+00:15:54 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:15:54 INFO mapred.JobClient:   File Input Format Counters 
+00:15:54 INFO mapred.JobClient:     Bytes Read=1185099
+00:15:54 INFO mapred.JobClient:   Map-Reduce Framework
+00:15:54 INFO mapred.JobClient:     Map output materialized bytes=67890
+00:15:54 INFO mapred.JobClient:     Map input records=14774
+00:15:54 INFO mapred.JobClient:     Reduce shuffle bytes=67890
+00:15:54 INFO mapred.JobClient:     Spilled Records=40
+00:15:54 INFO mapred.JobClient:     Map output bytes=70700
+00:15:54 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047220224
+00:15:54 INFO mapred.JobClient:     Combine input records=20
+00:15:54 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:15:54 INFO mapred.JobClient:     Reduce input records=20
+00:15:54 INFO mapred.JobClient:     Reduce input groups=20
+00:15:54 INFO mapred.JobClient:     Combine output records=20
+00:15:54 INFO mapred.JobClient:     Reduce output records=20
+00:15:54 INFO mapred.JobClient:     Map output records=20
+00:15:54 INFO cvb.CVB0Driver: About to run iteration 2 of 35
+00:15:54 INFO cvb.CVB0Driver: About to run: Iteration 2 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-1
+00:15:54 INFO input.FileInputFormat: Total input paths to process : 1
+00:15:54 INFO mapred.JobClient: Running job: job_201308030014_0002
+00:15:55 INFO mapred.JobClient:  map 0% reduce 0%
+00:16:12 INFO mapred.JobClient:  map 100% reduce 0%
+00:16:19 INFO mapred.JobClient:  map 100% reduce 3%
+00:16:21 INFO mapred.JobClient:  map 100% reduce 16%
+00:16:22 INFO mapred.JobClient:  map 100% reduce 43%
+00:16:23 INFO mapred.JobClient:  map 100% reduce 60%
+00:16:29 INFO mapred.JobClient:  map 100% reduce 66%
+00:16:30 INFO mapred.JobClient:  map 100% reduce 76%
+00:16:31 INFO mapred.JobClient:  map 100% reduce 100%
+00:16:32 INFO mapred.JobClient: Job complete: job_201308030014_0002
+00:16:32 INFO mapred.JobClient: Counters: 26
+00:16:32 INFO mapred.JobClient:   Job Counters 
+00:16:32 INFO mapred.JobClient:     Launched reduce tasks=10
+00:16:32 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8051
+00:16:32 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:16:32 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:16:32 INFO mapred.JobClient:     Launched map tasks=1
+00:16:32 INFO mapred.JobClient:     Data-local map tasks=1
+00:16:32 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93639
+00:16:32 INFO mapred.JobClient:   File Output Format Counters 
+00:16:32 INFO mapred.JobClient:     Bytes Written=72030
+00:16:32 INFO mapred.JobClient:   FileSystemCounters
+00:16:32 INFO mapred.JobClient:     FILE_BYTES_READ=68193
+00:16:32 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:16:32 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775336
+00:16:32 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:16:32 INFO mapred.JobClient:   File Input Format Counters 
+00:16:32 INFO mapred.JobClient:     Bytes Read=1185099
+00:16:32 INFO mapred.JobClient:   Map-Reduce Framework
+00:16:32 INFO mapred.JobClient:     Map output materialized bytes=68113
+00:16:32 INFO mapred.JobClient:     Map input records=14774
+00:16:32 INFO mapred.JobClient:     Reduce shuffle bytes=68113
+00:16:32 INFO mapred.JobClient:     Spilled Records=40
+00:16:32 INFO mapred.JobClient:     Map output bytes=70700
+00:16:32 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:16:32 INFO mapred.JobClient:     Combine input records=20
+00:16:32 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:16:32 INFO mapred.JobClient:     Reduce input records=20
+00:16:32 INFO mapred.JobClient:     Reduce input groups=20
+00:16:32 INFO mapred.JobClient:     Combine output records=20
+00:16:32 INFO mapred.JobClient:     Reduce output records=20
+00:16:32 INFO mapred.JobClient:     Map output records=20
+00:16:32 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-2
+00:16:32 INFO input.FileInputFormat: Total input paths to process : 1
+00:16:32 INFO mapred.JobClient: Running job: job_201308030014_0003
+00:16:33 INFO mapred.JobClient:  map 0% reduce 0%
+00:16:50 INFO mapred.JobClient:  map 100% reduce 0%
+00:16:59 INFO mapred.JobClient:  map 100% reduce 100%
+00:16:59 INFO mapred.JobClient: Job complete: job_201308030014_0003
+00:16:59 INFO mapred.JobClient: Counters: 27
+00:16:59 INFO mapred.JobClient:   Job Counters 
+00:16:59 INFO mapred.JobClient:     Launched reduce tasks=1
+00:16:59 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6642
+00:16:59 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:16:59 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:16:59 INFO mapred.JobClient:     Launched map tasks=1
+00:16:59 INFO mapred.JobClient:     Data-local map tasks=1
+00:16:59 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8538
+00:16:59 INFO mapred.JobClient:   File Output Format Counters 
+00:16:59 INFO mapred.JobClient:     Bytes Written=122
+00:16:59 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:16:59 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:16:59 INFO mapred.JobClient:   FileSystemCounters
+00:16:59 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:16:59 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:16:59 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116407
+00:16:59 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:16:59 INFO mapred.JobClient:   File Input Format Counters 
+00:16:59 INFO mapred.JobClient:     Bytes Read=1185099
+00:16:59 INFO mapred.JobClient:   Map-Reduce Framework
+00:16:59 INFO mapred.JobClient:     Map output materialized bytes=30
+00:16:59 INFO mapred.JobClient:     Map input records=14774
+00:16:59 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:16:59 INFO mapred.JobClient:     Spilled Records=2
+00:16:59 INFO mapred.JobClient:     Map output bytes=58032
+00:16:59 INFO mapred.JobClient:     Total committed heap usage (bytes)=282095616
+00:16:59 INFO mapred.JobClient:     Combine input records=3627
+00:16:59 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:16:59 INFO mapred.JobClient:     Reduce input records=1
+00:16:59 INFO mapred.JobClient:     Reduce input groups=1
+00:16:59 INFO mapred.JobClient:     Combine output records=1
+00:16:59 INFO mapred.JobClient:     Reduce output records=1
+00:16:59 INFO mapred.JobClient:     Map output records=3627
+00:16:59 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 246922.9632650465 and model weight 4435.0
+00:16:59 INFO cvb.CVB0Driver: Current perplexity = 55.67597818828557
+00:16:59 INFO cvb.CVB0Driver: (p_2 - p_0) / p_0 = 1.7976931348623157E308; target = 0.0010
+00:16:59 INFO cvb.CVB0Driver: About to run iteration 3 of 35
+00:16:59 INFO cvb.CVB0Driver: About to run: Iteration 3 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-2
+00:16:59 INFO input.FileInputFormat: Total input paths to process : 1
+00:16:59 INFO mapred.JobClient: Running job: job_201308030014_0004
+00:17:00 INFO mapred.JobClient:  map 0% reduce 0%
+00:17:15 INFO mapred.JobClient:  map 100% reduce 0%
+00:17:24 INFO mapred.JobClient:  map 100% reduce 3%
+00:17:25 INFO mapred.JobClient:  map 100% reduce 26%
+00:17:26 INFO mapred.JobClient:  map 100% reduce 50%
+00:17:27 INFO mapred.JobClient:  map 100% reduce 60%
+00:17:32 INFO mapred.JobClient:  map 100% reduce 63%
+00:17:33 INFO mapred.JobClient:  map 100% reduce 73%
+00:17:34 INFO mapred.JobClient:  map 100% reduce 83%
+00:17:35 INFO mapred.JobClient:  map 100% reduce 100%
+00:17:36 INFO mapred.JobClient: Job complete: job_201308030014_0004
+00:17:36 INFO mapred.JobClient: Counters: 26
+00:17:36 INFO mapred.JobClient:   Job Counters 
+00:17:36 INFO mapred.JobClient:     Launched reduce tasks=10
+00:17:36 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7903
+00:17:36 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:17:36 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:17:36 INFO mapred.JobClient:     Launched map tasks=1
+00:17:36 INFO mapred.JobClient:     Data-local map tasks=1
+00:17:36 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93604
+00:17:36 INFO mapred.JobClient:   File Output Format Counters 
+00:17:36 INFO mapred.JobClient:     Bytes Written=72030
+00:17:36 INFO mapred.JobClient:   FileSystemCounters
+00:17:36 INFO mapred.JobClient:     FILE_BYTES_READ=68246
+00:17:36 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:17:36 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775442
+00:17:36 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:17:36 INFO mapred.JobClient:   File Input Format Counters 
+00:17:36 INFO mapred.JobClient:     Bytes Read=1185099
+00:17:36 INFO mapred.JobClient:   Map-Reduce Framework
+00:17:36 INFO mapred.JobClient:     Map output materialized bytes=68166
+00:17:36 INFO mapred.JobClient:     Map input records=14774
+00:17:36 INFO mapred.JobClient:     Reduce shuffle bytes=68166
+00:17:36 INFO mapred.JobClient:     Spilled Records=40
+00:17:36 INFO mapred.JobClient:     Map output bytes=70700
+00:17:36 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047400448
+00:17:36 INFO mapred.JobClient:     Combine input records=20
+00:17:36 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:17:36 INFO mapred.JobClient:     Reduce input records=20
+00:17:36 INFO mapred.JobClient:     Reduce input groups=20
+00:17:36 INFO mapred.JobClient:     Combine output records=20
+00:17:36 INFO mapred.JobClient:     Reduce output records=20
+00:17:36 INFO mapred.JobClient:     Map output records=20
+00:17:36 INFO cvb.CVB0Driver: About to run iteration 4 of 35
+00:17:36 INFO cvb.CVB0Driver: About to run: Iteration 4 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-3
+00:17:37 INFO input.FileInputFormat: Total input paths to process : 1
+00:17:37 INFO mapred.JobClient: Running job: job_201308030014_0005
+00:17:38 INFO mapred.JobClient:  map 0% reduce 0%
+00:17:55 INFO mapred.JobClient:  map 100% reduce 0%
+00:18:04 INFO mapred.JobClient:  map 100% reduce 16%
+00:18:05 INFO mapred.JobClient:  map 100% reduce 36%
+00:18:06 INFO mapred.JobClient:  map 100% reduce 60%
+00:18:12 INFO mapred.JobClient:  map 100% reduce 63%
+00:18:13 INFO mapred.JobClient:  map 100% reduce 80%
+00:18:14 INFO mapred.JobClient:  map 100% reduce 93%
+00:18:15 INFO mapred.JobClient:  map 100% reduce 100%
+00:18:15 INFO mapred.JobClient: Job complete: job_201308030014_0005
+00:18:15 INFO mapred.JobClient: Counters: 26
+00:18:15 INFO mapred.JobClient:   Job Counters 
+00:18:15 INFO mapred.JobClient:     Launched reduce tasks=10
+00:18:15 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7953
+00:18:15 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:18:15 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:18:15 INFO mapred.JobClient:     Launched map tasks=1
+00:18:15 INFO mapred.JobClient:     Data-local map tasks=1
+00:18:15 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93560
+00:18:15 INFO mapred.JobClient:   File Output Format Counters 
+00:18:15 INFO mapred.JobClient:     Bytes Written=72030
+00:18:15 INFO mapred.JobClient:   FileSystemCounters
+00:18:15 INFO mapred.JobClient:     FILE_BYTES_READ=68312
+00:18:15 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:18:15 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775574
+00:18:15 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:18:15 INFO mapred.JobClient:   File Input Format Counters 
+00:18:15 INFO mapred.JobClient:     Bytes Read=1185099
+00:18:15 INFO mapred.JobClient:   Map-Reduce Framework
+00:18:15 INFO mapred.JobClient:     Map output materialized bytes=68232
+00:18:15 INFO mapred.JobClient:     Map input records=14774
+00:18:15 INFO mapred.JobClient:     Reduce shuffle bytes=68232
+00:18:15 INFO mapred.JobClient:     Spilled Records=40
+00:18:15 INFO mapred.JobClient:     Map output bytes=70700
+00:18:15 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:18:15 INFO mapred.JobClient:     Combine input records=20
+00:18:15 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:18:15 INFO mapred.JobClient:     Reduce input records=20
+00:18:15 INFO mapred.JobClient:     Reduce input groups=20
+00:18:15 INFO mapred.JobClient:     Combine output records=20
+00:18:15 INFO mapred.JobClient:     Reduce output records=20
+00:18:15 INFO mapred.JobClient:     Map output records=20
+00:18:15 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-4
+00:18:16 INFO input.FileInputFormat: Total input paths to process : 1
+00:18:17 INFO mapred.JobClient: Running job: job_201308030014_0006
+00:18:18 INFO mapred.JobClient:  map 0% reduce 0%
+00:18:32 INFO mapred.JobClient:  map 100% reduce 0%
+00:18:40 INFO mapred.JobClient:  map 100% reduce 100%
+00:18:41 INFO mapred.JobClient: Job complete: job_201308030014_0006
+00:18:41 INFO mapred.JobClient: Counters: 27
+00:18:41 INFO mapred.JobClient:   Job Counters 
+00:18:41 INFO mapred.JobClient:     Launched reduce tasks=1
+00:18:41 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6581
+00:18:41 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:18:41 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:18:41 INFO mapred.JobClient:     Launched map tasks=1
+00:18:41 INFO mapred.JobClient:     Data-local map tasks=1
+00:18:41 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8520
+00:18:41 INFO mapred.JobClient:   File Output Format Counters 
+00:18:41 INFO mapred.JobClient:     Bytes Written=122
+00:18:41 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:18:41 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:18:41 INFO mapred.JobClient:   FileSystemCounters
+00:18:41 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:18:41 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:18:41 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116407
+00:18:41 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:18:41 INFO mapred.JobClient:   File Input Format Counters 
+00:18:41 INFO mapred.JobClient:     Bytes Read=1185099
+00:18:41 INFO mapred.JobClient:   Map-Reduce Framework
+00:18:41 INFO mapred.JobClient:     Map output materialized bytes=30
+00:18:41 INFO mapred.JobClient:     Map input records=14774
+00:18:41 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:18:41 INFO mapred.JobClient:     Spilled Records=2
+00:18:41 INFO mapred.JobClient:     Map output bytes=58032
+00:18:41 INFO mapred.JobClient:     Total committed heap usage (bytes)=282075136
+00:18:41 INFO mapred.JobClient:     Combine input records=3627
+00:18:41 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:18:41 INFO mapred.JobClient:     Reduce input records=1
+00:18:41 INFO mapred.JobClient:     Reduce input groups=1
+00:18:41 INFO mapred.JobClient:     Combine output records=1
+00:18:41 INFO mapred.JobClient:     Reduce output records=1
+00:18:41 INFO mapred.JobClient:     Map output records=3627
+00:18:41 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 234330.2319600538 and model weight 4435.0
+00:18:41 INFO cvb.CVB0Driver: Current perplexity = 52.83657992334922
+00:18:41 INFO cvb.CVB0Driver: (p_4 - p_2) / p_0 = 0.05099862377512335; target = 0.0010
+00:18:41 INFO cvb.CVB0Driver: About to run iteration 5 of 35
+00:18:41 INFO cvb.CVB0Driver: About to run: Iteration 5 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-4
+00:18:41 INFO input.FileInputFormat: Total input paths to process : 1
+00:18:43 INFO mapred.JobClient: Running job: job_201308030014_0007
+00:18:44 INFO mapred.JobClient:  map 0% reduce 0%
+00:18:59 INFO mapred.JobClient:  map 100% reduce 0%
+00:19:08 INFO mapred.JobClient:  map 100% reduce 13%
+00:19:09 INFO mapred.JobClient:  map 100% reduce 33%
+00:19:10 INFO mapred.JobClient:  map 100% reduce 60%
+00:19:16 INFO mapred.JobClient:  map 100% reduce 63%
+00:19:17 INFO mapred.JobClient:  map 100% reduce 73%
+00:19:18 INFO mapred.JobClient:  map 100% reduce 90%
+00:19:19 INFO mapred.JobClient:  map 100% reduce 100%
+00:19:19 INFO mapred.JobClient: Job complete: job_201308030014_0007
+00:19:19 INFO mapred.JobClient: Counters: 26
+00:19:19 INFO mapred.JobClient:   Job Counters 
+00:19:19 INFO mapred.JobClient:     Launched reduce tasks=10
+00:19:19 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7942
+00:19:19 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:19:19 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:19:19 INFO mapred.JobClient:     Launched map tasks=1
+00:19:19 INFO mapred.JobClient:     Data-local map tasks=1
+00:19:19 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93973
+00:19:19 INFO mapred.JobClient:   File Output Format Counters 
+00:19:19 INFO mapred.JobClient:     Bytes Written=72030
+00:19:19 INFO mapred.JobClient:   FileSystemCounters
+00:19:19 INFO mapred.JobClient:     FILE_BYTES_READ=68348
+00:19:19 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:19:19 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775646
+00:19:19 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:19:19 INFO mapred.JobClient:   File Input Format Counters 
+00:19:19 INFO mapred.JobClient:     Bytes Read=1185099
+00:19:19 INFO mapred.JobClient:   Map-Reduce Framework
+00:19:19 INFO mapred.JobClient:     Map output materialized bytes=68268
+00:19:19 INFO mapred.JobClient:     Map input records=14774
+00:19:19 INFO mapred.JobClient:     Reduce shuffle bytes=68268
+00:19:19 INFO mapred.JobClient:     Spilled Records=40
+00:19:19 INFO mapred.JobClient:     Map output bytes=70700
+00:19:19 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:19:19 INFO mapred.JobClient:     Combine input records=20
+00:19:19 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:19:19 INFO mapred.JobClient:     Reduce input records=20
+00:19:19 INFO mapred.JobClient:     Reduce input groups=20
+00:19:19 INFO mapred.JobClient:     Combine output records=20
+00:19:19 INFO mapred.JobClient:     Reduce output records=20
+00:19:19 INFO mapred.JobClient:     Map output records=20
+00:19:19 INFO cvb.CVB0Driver: About to run iteration 6 of 35
+00:19:19 INFO cvb.CVB0Driver: About to run: Iteration 6 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-5
+00:19:21 INFO input.FileInputFormat: Total input paths to process : 1
+00:19:21 INFO mapred.JobClient: Running job: job_201308030014_0008
+00:19:22 INFO mapred.JobClient:  map 0% reduce 0%
+00:19:37 INFO mapred.JobClient:  map 100% reduce 0%
+00:19:47 INFO mapred.JobClient:  map 100% reduce 30%
+00:19:48 INFO mapred.JobClient:  map 100% reduce 43%
+00:19:49 INFO mapred.JobClient:  map 100% reduce 60%
+00:19:56 INFO mapred.JobClient:  map 100% reduce 76%
+00:19:57 INFO mapred.JobClient:  map 100% reduce 100%
+00:19:58 INFO mapred.JobClient: Job complete: job_201308030014_0008
+00:19:58 INFO mapred.JobClient: Counters: 26
+00:19:58 INFO mapred.JobClient:   Job Counters 
+00:19:58 INFO mapred.JobClient:     Launched reduce tasks=10
+00:19:58 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7894
+00:19:58 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:19:58 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:19:58 INFO mapred.JobClient:     Launched map tasks=1
+00:19:58 INFO mapred.JobClient:     Data-local map tasks=1
+00:19:58 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93920
+00:19:58 INFO mapred.JobClient:   File Output Format Counters 
+00:19:58 INFO mapred.JobClient:     Bytes Written=72030
+00:19:58 INFO mapred.JobClient:   FileSystemCounters
+00:19:58 INFO mapred.JobClient:     FILE_BYTES_READ=68408
+00:19:58 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:19:58 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775766
+00:19:58 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:19:58 INFO mapred.JobClient:   File Input Format Counters 
+00:19:58 INFO mapred.JobClient:     Bytes Read=1185099
+00:19:58 INFO mapred.JobClient:   Map-Reduce Framework
+00:19:58 INFO mapred.JobClient:     Map output materialized bytes=68328
+00:19:58 INFO mapred.JobClient:     Map input records=14774
+00:19:58 INFO mapred.JobClient:     Reduce shuffle bytes=68328
+00:19:58 INFO mapred.JobClient:     Spilled Records=40
+00:19:58 INFO mapred.JobClient:     Map output bytes=70700
+00:19:58 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047236608
+00:19:58 INFO mapred.JobClient:     Combine input records=20
+00:19:58 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:19:58 INFO mapred.JobClient:     Reduce input records=20
+00:19:58 INFO mapred.JobClient:     Reduce input groups=20
+00:19:58 INFO mapred.JobClient:     Combine output records=20
+00:19:58 INFO mapred.JobClient:     Reduce output records=20
+00:19:58 INFO mapred.JobClient:     Map output records=20
+00:19:58 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-6
+00:19:58 INFO input.FileInputFormat: Total input paths to process : 1
+00:19:58 INFO mapred.JobClient: Running job: job_201308030014_0009
+00:19:59 INFO mapred.JobClient:  map 0% reduce 0%
+00:20:14 INFO mapred.JobClient:  map 100% reduce 0%
+00:20:23 INFO mapred.JobClient:  map 100% reduce 100%
+00:20:24 INFO mapred.JobClient: Job complete: job_201308030014_0009
+00:20:24 INFO mapred.JobClient: Counters: 27
+00:20:24 INFO mapred.JobClient:   Job Counters 
+00:20:24 INFO mapred.JobClient:     Launched reduce tasks=1
+00:20:24 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6687
+00:20:24 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:20:24 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:20:24 INFO mapred.JobClient:     Launched map tasks=1
+00:20:24 INFO mapred.JobClient:     Data-local map tasks=1
+00:20:24 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8554
+00:20:24 INFO mapred.JobClient:   File Output Format Counters 
+00:20:24 INFO mapred.JobClient:     Bytes Written=122
+00:20:24 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:20:24 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:20:24 INFO mapred.JobClient:   FileSystemCounters
+00:20:24 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:20:24 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:20:24 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116407
+00:20:24 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:20:24 INFO mapred.JobClient:   File Input Format Counters 
+00:20:24 INFO mapred.JobClient:     Bytes Read=1185099
+00:20:24 INFO mapred.JobClient:   Map-Reduce Framework
+00:20:24 INFO mapred.JobClient:     Map output materialized bytes=30
+00:20:24 INFO mapred.JobClient:     Map input records=14774
+00:20:24 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:20:24 INFO mapred.JobClient:     Spilled Records=2
+00:20:24 INFO mapred.JobClient:     Map output bytes=58032
+00:20:24 INFO mapred.JobClient:     Total committed heap usage (bytes)=282075136
+00:20:24 INFO mapred.JobClient:     Combine input records=3627
+00:20:24 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:20:24 INFO mapred.JobClient:     Reduce input records=1
+00:20:24 INFO mapred.JobClient:     Reduce input groups=1
+00:20:24 INFO mapred.JobClient:     Combine output records=1
+00:20:24 INFO mapred.JobClient:     Reduce output records=1
+00:20:24 INFO mapred.JobClient:     Map output records=3627
+00:20:24 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 228663.73940802793 and model weight 4435.0
+00:20:24 INFO cvb.CVB0Driver: Current perplexity = 51.5589040378868
+00:20:24 INFO cvb.CVB0Driver: (p_6 - p_4) / p_0 = 0.02294842276756351; target = 0.0010
+00:20:24 INFO cvb.CVB0Driver: About to run iteration 7 of 35
+00:20:24 INFO cvb.CVB0Driver: About to run: Iteration 7 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-6
+00:20:24 INFO input.FileInputFormat: Total input paths to process : 1
+00:20:24 INFO mapred.JobClient: Running job: job_201308030014_0010
+00:20:25 INFO mapred.JobClient:  map 0% reduce 0%
+00:20:42 INFO mapred.JobClient:  map 100% reduce 0%
+00:20:51 INFO mapred.JobClient:  map 100% reduce 13%
+00:20:52 INFO mapred.JobClient:  map 100% reduce 46%
+00:20:53 INFO mapred.JobClient:  map 100% reduce 60%
+00:21:00 INFO mapred.JobClient:  map 100% reduce 73%
+00:21:01 INFO mapred.JobClient:  map 100% reduce 83%
+00:21:02 INFO mapred.JobClient:  map 100% reduce 100%
+00:21:02 INFO mapred.JobClient: Job complete: job_201308030014_0010
+00:21:02 INFO mapred.JobClient: Counters: 26
+00:21:02 INFO mapred.JobClient:   Job Counters 
+00:21:02 INFO mapred.JobClient:     Launched reduce tasks=10
+00:21:02 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8084
+00:21:02 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:21:02 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:21:02 INFO mapred.JobClient:     Launched map tasks=1
+00:21:02 INFO mapred.JobClient:     Data-local map tasks=1
+00:21:02 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94357
+00:21:02 INFO mapred.JobClient:   File Output Format Counters 
+00:21:02 INFO mapred.JobClient:     Bytes Written=72030
+00:21:02 INFO mapred.JobClient:   FileSystemCounters
+00:21:02 INFO mapred.JobClient:     FILE_BYTES_READ=68445
+00:21:02 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:21:02 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775840
+00:21:02 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:21:02 INFO mapred.JobClient:   File Input Format Counters 
+00:21:02 INFO mapred.JobClient:     Bytes Read=1185099
+00:21:02 INFO mapred.JobClient:   Map-Reduce Framework
+00:21:02 INFO mapred.JobClient:     Map output materialized bytes=68365
+00:21:02 INFO mapred.JobClient:     Map input records=14774
+00:21:02 INFO mapred.JobClient:     Reduce shuffle bytes=68365
+00:21:02 INFO mapred.JobClient:     Spilled Records=40
+00:21:02 INFO mapred.JobClient:     Map output bytes=70700
+00:21:02 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:21:02 INFO mapred.JobClient:     Combine input records=20
+00:21:02 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:21:02 INFO mapred.JobClient:     Reduce input records=20
+00:21:02 INFO mapred.JobClient:     Reduce input groups=20
+00:21:02 INFO mapred.JobClient:     Combine output records=20
+00:21:02 INFO mapred.JobClient:     Reduce output records=20
+00:21:02 INFO mapred.JobClient:     Map output records=20
+00:21:02 INFO cvb.CVB0Driver: About to run iteration 8 of 35
+00:21:02 INFO cvb.CVB0Driver: About to run: Iteration 8 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-7
+00:21:03 INFO input.FileInputFormat: Total input paths to process : 1
+00:21:03 INFO mapred.JobClient: Running job: job_201308030014_0011
+00:21:04 INFO mapred.JobClient:  map 0% reduce 0%
+00:21:19 INFO mapred.JobClient:  map 100% reduce 0%
+00:21:27 INFO mapred.JobClient:  map 100% reduce 3%
+00:21:28 INFO mapred.JobClient:  map 100% reduce 16%
+00:21:29 INFO mapred.JobClient:  map 100% reduce 40%
+00:21:30 INFO mapred.JobClient:  map 100% reduce 60%
+00:21:36 INFO mapred.JobClient:  map 100% reduce 63%
+00:21:37 INFO mapred.JobClient:  map 100% reduce 73%
+00:21:38 INFO mapred.JobClient:  map 100% reduce 86%
+00:21:39 INFO mapred.JobClient:  map 100% reduce 100%
+00:21:39 INFO mapred.JobClient: Job complete: job_201308030014_0011
+00:21:39 INFO mapred.JobClient: Counters: 26
+00:21:39 INFO mapred.JobClient:   Job Counters 
+00:21:39 INFO mapred.JobClient:     Launched reduce tasks=10
+00:21:39 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8128
+00:21:39 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:21:39 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:21:39 INFO mapred.JobClient:     Launched map tasks=1
+00:21:39 INFO mapred.JobClient:     Data-local map tasks=1
+00:21:39 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=95045
+00:21:39 INFO mapred.JobClient:   File Output Format Counters 
+00:21:39 INFO mapred.JobClient:     Bytes Written=72030
+00:21:39 INFO mapred.JobClient:   FileSystemCounters
+00:21:39 INFO mapred.JobClient:     FILE_BYTES_READ=68484
+00:21:39 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:21:39 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775918
+00:21:39 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:21:39 INFO mapred.JobClient:   File Input Format Counters 
+00:21:39 INFO mapred.JobClient:     Bytes Read=1185099
+00:21:39 INFO mapred.JobClient:   Map-Reduce Framework
+00:21:39 INFO mapred.JobClient:     Map output materialized bytes=68404
+00:21:39 INFO mapred.JobClient:     Map input records=14774
+00:21:39 INFO mapred.JobClient:     Reduce shuffle bytes=68404
+00:21:39 INFO mapred.JobClient:     Spilled Records=40
+00:21:39 INFO mapred.JobClient:     Map output bytes=70700
+00:21:39 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:21:39 INFO mapred.JobClient:     Combine input records=20
+00:21:39 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:21:39 INFO mapred.JobClient:     Reduce input records=20
+00:21:39 INFO mapred.JobClient:     Reduce input groups=20
+00:21:39 INFO mapred.JobClient:     Combine output records=20
+00:21:39 INFO mapred.JobClient:     Reduce output records=20
+00:21:39 INFO mapred.JobClient:     Map output records=20
+00:21:39 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-8
+00:21:39 INFO input.FileInputFormat: Total input paths to process : 1
+00:21:42 INFO mapred.JobClient: Running job: job_201308030014_0012
+00:21:43 INFO mapred.JobClient:  map 0% reduce 0%
+00:21:57 INFO mapred.JobClient:  map 100% reduce 0%
+00:22:06 INFO mapred.JobClient:  map 100% reduce 100%
+00:22:06 INFO mapred.JobClient: Job complete: job_201308030014_0012
+00:22:06 INFO mapred.JobClient: Counters: 27
+00:22:06 INFO mapred.JobClient:   Job Counters 
+00:22:06 INFO mapred.JobClient:     Launched reduce tasks=1
+00:22:06 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6758
+00:22:06 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:22:06 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:22:06 INFO mapred.JobClient:     Launched map tasks=1
+00:22:06 INFO mapred.JobClient:     Data-local map tasks=1
+00:22:06 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8558
+00:22:06 INFO mapred.JobClient:   File Output Format Counters 
+00:22:06 INFO mapred.JobClient:     Bytes Written=122
+00:22:06 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:22:06 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:22:06 INFO mapred.JobClient:   FileSystemCounters
+00:22:06 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:22:06 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:22:06 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116407
+00:22:06 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:22:06 INFO mapred.JobClient:   File Input Format Counters 
+00:22:06 INFO mapred.JobClient:     Bytes Read=1185099
+00:22:06 INFO mapred.JobClient:   Map-Reduce Framework
+00:22:06 INFO mapred.JobClient:     Map output materialized bytes=30
+00:22:06 INFO mapred.JobClient:     Map input records=14774
+00:22:06 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:22:06 INFO mapred.JobClient:     Spilled Records=2
+00:22:06 INFO mapred.JobClient:     Map output bytes=58032
+00:22:06 INFO mapred.JobClient:     Total committed heap usage (bytes)=282075136
+00:22:06 INFO mapred.JobClient:     Combine input records=3627
+00:22:06 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:22:06 INFO mapred.JobClient:     Reduce input records=1
+00:22:06 INFO mapred.JobClient:     Reduce input groups=1
+00:22:06 INFO mapred.JobClient:     Combine output records=1
+00:22:06 INFO mapred.JobClient:     Reduce output records=1
+00:22:06 INFO mapred.JobClient:     Map output records=3627
+00:22:06 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 225780.2574795975 and model weight 4435.0
+00:22:06 INFO cvb.CVB0Driver: Current perplexity = 50.90873900329143
+00:22:06 INFO cvb.CVB0Driver: (p_8 - p_6) / p_0 = 0.011677658044850749; target = 0.0010
+00:22:06 INFO cvb.CVB0Driver: About to run iteration 9 of 35
+00:22:06 INFO cvb.CVB0Driver: About to run: Iteration 9 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-8
+00:22:06 INFO input.FileInputFormat: Total input paths to process : 1
+00:22:06 INFO mapred.JobClient: Running job: job_201308030014_0013
+00:22:07 INFO mapred.JobClient:  map 0% reduce 0%
+00:22:25 INFO mapred.JobClient:  map 100% reduce 0%
+00:22:33 INFO mapred.JobClient:  map 100% reduce 3%
+00:22:34 INFO mapred.JobClient:  map 100% reduce 10%
+00:22:35 INFO mapred.JobClient:  map 100% reduce 30%
+00:22:36 INFO mapred.JobClient:  map 100% reduce 60%
+
+
+
+00:22:43 INFO mapred.JobClient:  map 100% reduce 63%
+00:22:44 INFO mapred.JobClient:  map 100% reduce 83%
+00:22:45 INFO mapred.JobClient:  map 100% reduce 100%
+00:22:46 INFO mapred.JobClient: Job complete: job_201308030014_0013
+00:22:46 INFO mapred.JobClient: Counters: 26
+00:22:46 INFO mapred.JobClient:   Job Counters 
+00:22:46 INFO mapred.JobClient:     Launched reduce tasks=10
+00:22:46 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7964
+00:22:46 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:22:46 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:22:46 INFO mapred.JobClient:     Launched map tasks=1
+00:22:46 INFO mapred.JobClient:     Data-local map tasks=1
+00:22:46 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=95199
+00:22:46 INFO mapred.JobClient:   File Output Format Counters 
+00:22:46 INFO mapred.JobClient:     Bytes Written=72030
+00:22:46 INFO mapred.JobClient:   FileSystemCounters
+00:22:46 INFO mapred.JobClient:     FILE_BYTES_READ=68475
+00:22:46 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:22:46 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775900
+00:22:46 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:22:46 INFO mapred.JobClient:   File Input Format Counters 
+00:22:46 INFO mapred.JobClient:     Bytes Read=1185099
+00:22:46 INFO mapred.JobClient:   Map-Reduce Framework
+00:22:46 INFO mapred.JobClient:     Map output materialized bytes=68395
+00:22:46 INFO mapred.JobClient:     Map input records=14774
+00:22:46 INFO mapred.JobClient:     Reduce shuffle bytes=68395
+00:22:46 INFO mapred.JobClient:     Spilled Records=40
+00:22:46 INFO mapred.JobClient:     Map output bytes=70700
+00:22:46 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047236608
+00:22:46 INFO mapred.JobClient:     Combine input records=20
+00:22:46 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:22:46 INFO mapred.JobClient:     Reduce input records=20
+00:22:46 INFO mapred.JobClient:     Reduce input groups=20
+00:22:46 INFO mapred.JobClient:     Combine output records=20
+00:22:46 INFO mapred.JobClient:     Reduce output records=20
+00:22:46 INFO mapred.JobClient:     Map output records=20
+00:22:46 INFO cvb.CVB0Driver: About to run iteration 10 of 35
+00:22:46 INFO cvb.CVB0Driver: About to run: Iteration 10 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-9
+00:22:46 INFO input.FileInputFormat: Total input paths to process : 1
+00:22:47 INFO mapred.JobClient: Running job: job_201308030014_0014
+00:22:48 INFO mapred.JobClient:  map 0% reduce 0%
+00:23:03 INFO mapred.JobClient:  map 100% reduce 0%
+00:23:13 INFO mapred.JobClient:  map 100% reduce 26%
+00:23:14 INFO mapred.JobClient:  map 100% reduce 53%
+00:23:15 INFO mapred.JobClient:  map 100% reduce 60%
+00:23:20 INFO mapred.JobClient:  map 100% reduce 63%
+00:23:21 INFO mapred.JobClient:  map 100% reduce 73%
+00:23:22 INFO mapred.JobClient:  map 100% reduce 83%
+00:23:23 INFO mapred.JobClient:  map 100% reduce 100%
+00:23:24 INFO mapred.JobClient: Job complete: job_201308030014_0014
+00:23:24 INFO mapred.JobClient: Counters: 26
+00:23:24 INFO mapred.JobClient:   Job Counters 
+00:23:24 INFO mapred.JobClient:     Launched reduce tasks=10
+00:23:24 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7954
+00:23:24 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:23:24 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:23:24 INFO mapred.JobClient:     Launched map tasks=1
+00:23:24 INFO mapred.JobClient:     Data-local map tasks=1
+00:23:24 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94096
+00:23:24 INFO mapred.JobClient:   File Output Format Counters 
+00:23:24 INFO mapred.JobClient:     Bytes Written=72030
+00:23:24 INFO mapred.JobClient:   FileSystemCounters
+00:23:24 INFO mapred.JobClient:     FILE_BYTES_READ=68500
+00:23:24 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:23:24 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775972
+00:23:24 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:23:24 INFO mapred.JobClient:   File Input Format Counters 
+00:23:24 INFO mapred.JobClient:     Bytes Read=1185099
+00:23:24 INFO mapred.JobClient:   Map-Reduce Framework
+00:23:24 INFO mapred.JobClient:     Map output materialized bytes=68420
+00:23:24 INFO mapred.JobClient:     Map input records=14774
+00:23:24 INFO mapred.JobClient:     Reduce shuffle bytes=68420
+00:23:24 INFO mapred.JobClient:     Spilled Records=40
+00:23:24 INFO mapred.JobClient:     Map output bytes=70700
+00:23:24 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:23:24 INFO mapred.JobClient:     Combine input records=20
+00:23:24 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:23:24 INFO mapred.JobClient:     Reduce input records=20
+00:23:24 INFO mapred.JobClient:     Reduce input groups=20
+00:23:24 INFO mapred.JobClient:     Combine output records=20
+00:23:24 INFO mapred.JobClient:     Reduce output records=20
+00:23:24 INFO mapred.JobClient:     Map output records=20
+00:23:24 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-10
+00:23:24 INFO input.FileInputFormat: Total input paths to process : 1
+00:23:25 INFO mapred.JobClient: Running job: job_201308030014_0015
+00:23:26 INFO mapred.JobClient:  map 0% reduce 0%
+00:23:41 INFO mapred.JobClient:  map 100% reduce 0%
+00:23:49 INFO mapred.JobClient:  map 100% reduce 100%
+00:23:50 INFO mapred.JobClient: Job complete: job_201308030014_0015
+00:23:50 INFO mapred.JobClient: Counters: 27
+00:23:50 INFO mapred.JobClient:   Job Counters 
+00:23:50 INFO mapred.JobClient:     Launched reduce tasks=1
+00:23:50 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6666
+00:23:50 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:23:50 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:23:50 INFO mapred.JobClient:     Launched map tasks=1
+00:23:50 INFO mapred.JobClient:     Data-local map tasks=1
+00:23:50 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8561
+00:23:50 INFO mapred.JobClient:   File Output Format Counters 
+00:23:50 INFO mapred.JobClient:     Bytes Written=122
+00:23:50 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:23:50 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:23:50 INFO mapred.JobClient:   FileSystemCounters
+00:23:50 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:23:50 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:23:50 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116431
+00:23:50 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:23:50 INFO mapred.JobClient:   File Input Format Counters 
+00:23:50 INFO mapred.JobClient:     Bytes Read=1185099
+00:23:50 INFO mapred.JobClient:   Map-Reduce Framework
+00:23:50 INFO mapred.JobClient:     Map output materialized bytes=30
+00:23:50 INFO mapred.JobClient:     Map input records=14774
+00:23:50 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:23:50 INFO mapred.JobClient:     Spilled Records=2
+00:23:50 INFO mapred.JobClient:     Map output bytes=58032
+00:23:50 INFO mapred.JobClient:     Total committed heap usage (bytes)=282095616
+00:23:50 INFO mapred.JobClient:     Combine input records=3627
+00:23:50 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:23:50 INFO mapred.JobClient:     Reduce input records=1
+00:23:50 INFO mapred.JobClient:     Reduce input groups=1
+00:23:50 INFO mapred.JobClient:     Combine output records=1
+00:23:50 INFO mapred.JobClient:     Reduce output records=1
+00:23:50 INFO mapred.JobClient:     Map output records=3627
+00:23:50 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 224276.3423569528 and model weight 4435.0
+00:23:50 INFO cvb.CVB0Driver: Current perplexity = 50.569637510023185
+00:23:50 INFO cvb.CVB0Driver: (p_10 - p_8) / p_0 = 0.006090624795517171; target = 0.0010
+00:23:50 INFO cvb.CVB0Driver: About to run iteration 11 of 35
+00:23:50 INFO cvb.CVB0Driver: About to run: Iteration 11 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-10
+00:23:50 INFO input.FileInputFormat: Total input paths to process : 1
+00:23:50 INFO mapred.JobClient: Running job: job_201308030014_0016
+00:23:51 INFO mapred.JobClient:  map 0% reduce 0%
+00:24:07 INFO mapred.JobClient:  map 100% reduce 0%
+00:24:14 INFO mapred.JobClient:  map 100% reduce 3%
+00:24:15 INFO mapred.JobClient:  map 100% reduce 6%
+00:24:16 INFO mapred.JobClient:  map 100% reduce 16%
+00:24:17 INFO mapred.JobClient:  map 100% reduce 36%
+00:24:18 INFO mapred.JobClient:  map 100% reduce 60%
+00:24:24 INFO mapred.JobClient:  map 100% reduce 66%
+00:24:25 INFO mapred.JobClient:  map 100% reduce 76%
+00:24:26 INFO mapred.JobClient:  map 100% reduce 90%
+00:24:27 INFO mapred.JobClient:  map 100% reduce 100%
+00:24:27 INFO mapred.JobClient: Job complete: job_201308030014_0016
+00:24:27 INFO mapred.JobClient: Counters: 26
+00:24:27 INFO mapred.JobClient:   Job Counters 
+00:24:27 INFO mapred.JobClient:     Launched reduce tasks=10
+00:24:27 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7986
+00:24:27 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:24:27 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:24:27 INFO mapred.JobClient:     Launched map tasks=1
+00:24:27 INFO mapred.JobClient:     Data-local map tasks=1
+00:24:27 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93937
+00:24:27 INFO mapred.JobClient:   File Output Format Counters 
+00:24:27 INFO mapred.JobClient:     Bytes Written=72030
+00:24:27 INFO mapred.JobClient:   FileSystemCounters
+00:24:27 INFO mapred.JobClient:     FILE_BYTES_READ=68501
+00:24:27 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:24:27 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=776095
+00:24:27 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:24:27 INFO mapred.JobClient:   File Input Format Counters 
+00:24:27 INFO mapred.JobClient:     Bytes Read=1185099
+00:24:27 INFO mapred.JobClient:   Map-Reduce Framework
+00:24:27 INFO mapred.JobClient:     Map output materialized bytes=68421
+00:24:27 INFO mapred.JobClient:     Map input records=14774
+00:24:27 INFO mapred.JobClient:     Reduce shuffle bytes=68421
+00:24:27 INFO mapred.JobClient:     Spilled Records=40
+00:24:27 INFO mapred.JobClient:     Map output bytes=70700
+00:24:27 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:24:27 INFO mapred.JobClient:     Combine input records=20
+00:24:27 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:24:27 INFO mapred.JobClient:     Reduce input records=20
+00:24:27 INFO mapred.JobClient:     Reduce input groups=20
+00:24:27 INFO mapred.JobClient:     Combine output records=20
+00:24:27 INFO mapred.JobClient:     Reduce output records=20
+00:24:27 INFO mapred.JobClient:     Map output records=20
+00:24:27 INFO cvb.CVB0Driver: About to run iteration 12 of 35
+00:24:27 INFO cvb.CVB0Driver: About to run: Iteration 12 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-11
+00:24:28 INFO input.FileInputFormat: Total input paths to process : 1
+00:24:30 INFO mapred.JobClient: Running job: job_201308030014_0017
+00:24:31 INFO mapred.JobClient:  map 0% reduce 0%
+00:24:50 INFO mapred.JobClient:  map 100% reduce 0%
+00:24:59 INFO mapred.JobClient:  map 100% reduce 6%
+00:25:00 INFO mapred.JobClient:  map 100% reduce 30%
+00:25:01 INFO mapred.JobClient:  map 100% reduce 53%
+00:25:02 INFO mapred.JobClient:  map 100% reduce 60%
+00:25:08 INFO mapred.JobClient:  map 100% reduce 63%
+00:25:09 INFO mapred.JobClient:  map 100% reduce 80%
+00:25:10 INFO mapred.JobClient:  map 100% reduce 100%
+00:25:11 INFO mapred.JobClient: Job complete: job_201308030014_0017
+00:25:11 INFO mapred.JobClient: Counters: 26
+00:25:11 INFO mapred.JobClient:   Job Counters 
+00:25:11 INFO mapred.JobClient:     Launched reduce tasks=10
+00:25:11 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8054
+00:25:11 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:25:11 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:25:11 INFO mapred.JobClient:     Launched map tasks=1
+00:25:11 INFO mapred.JobClient:     Data-local map tasks=1
+00:25:11 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94117
+00:25:11 INFO mapred.JobClient:   File Output Format Counters 
+00:25:11 INFO mapred.JobClient:     Bytes Written=72030
+00:25:11 INFO mapred.JobClient:   FileSystemCounters
+00:25:11 INFO mapred.JobClient:     FILE_BYTES_READ=68488
+00:25:11 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:25:11 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=776069
+00:25:11 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:25:11 INFO mapred.JobClient:   File Input Format Counters 
+00:25:11 INFO mapred.JobClient:     Bytes Read=1185099
+00:25:11 INFO mapred.JobClient:   Map-Reduce Framework
+00:25:11 INFO mapred.JobClient:     Map output materialized bytes=68408
+00:25:11 INFO mapred.JobClient:     Map input records=14774
+00:25:11 INFO mapred.JobClient:     Reduce shuffle bytes=68408
+00:25:11 INFO mapred.JobClient:     Spilled Records=40
+00:25:11 INFO mapred.JobClient:     Map output bytes=70700
+00:25:11 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:25:11 INFO mapred.JobClient:     Combine input records=20
+00:25:11 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:25:11 INFO mapred.JobClient:     Reduce input records=20
+00:25:11 INFO mapred.JobClient:     Reduce input groups=20
+00:25:11 INFO mapred.JobClient:     Combine output records=20
+00:25:11 INFO mapred.JobClient:     Reduce output records=20
+00:25:11 INFO mapred.JobClient:     Map output records=20
+00:25:11 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-12
+00:25:12 INFO input.FileInputFormat: Total input paths to process : 1
+00:25:12 INFO mapred.JobClient: Running job: job_201308030014_0018
+00:25:13 INFO mapred.JobClient:  map 0% reduce 0%
+00:25:27 INFO mapred.JobClient:  map 100% reduce 0%
+00:25:36 INFO mapred.JobClient:  map 100% reduce 100%
+00:25:36 INFO mapred.JobClient: Job complete: job_201308030014_0018
+00:25:36 INFO mapred.JobClient: Counters: 27
+00:25:36 INFO mapred.JobClient:   Job Counters 
+00:25:36 INFO mapred.JobClient:     Launched reduce tasks=1
+00:25:36 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6688
+00:25:36 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:25:36 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:25:36 INFO mapred.JobClient:     Launched map tasks=1
+00:25:36 INFO mapred.JobClient:     Data-local map tasks=1
+00:25:36 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8557
+00:25:36 INFO mapred.JobClient:   File Output Format Counters 
+00:25:36 INFO mapred.JobClient:     Bytes Written=122
+00:25:36 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:25:36 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:25:36 INFO mapred.JobClient:   FileSystemCounters
+00:25:36 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:25:36 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:25:36 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116431
+00:25:36 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:25:36 INFO mapred.JobClient:   File Input Format Counters 
+00:25:36 INFO mapred.JobClient:     Bytes Read=1185099
+00:25:36 INFO mapred.JobClient:   Map-Reduce Framework
+00:25:36 INFO mapred.JobClient:     Map output materialized bytes=30
+00:25:36 INFO mapred.JobClient:     Map input records=14774
+00:25:36 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:25:36 INFO mapred.JobClient:     Spilled Records=2
+00:25:36 INFO mapred.JobClient:     Map output bytes=58032
+00:25:36 INFO mapred.JobClient:     Total committed heap usage (bytes)=282095616
+00:25:36 INFO mapred.JobClient:     Combine input records=3627
+00:25:36 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:25:36 INFO mapred.JobClient:     Reduce input records=1
+00:25:36 INFO mapred.JobClient:     Reduce input groups=1
+00:25:36 INFO mapred.JobClient:     Combine output records=1
+00:25:36 INFO mapred.JobClient:     Reduce output records=1
+00:25:36 INFO mapred.JobClient:     Map output records=3627
+00:25:36 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 223441.93493303677 and model weight 4435.0
+00:25:36 INFO cvb.CVB0Driver: Current perplexity = 50.381496039016184
+00:25:36 INFO cvb.CVB0Driver: (p_12 - p_10) / p_0 = 0.0033792216523029325; target = 0.0010
+00:25:36 INFO cvb.CVB0Driver: About to run iteration 13 of 35
+00:25:36 INFO cvb.CVB0Driver: About to run: Iteration 13 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-12
+00:25:36 INFO input.FileInputFormat: Total input paths to process : 1
+00:25:36 INFO mapred.JobClient: Running job: job_201308030014_0019
+00:25:37 INFO mapred.JobClient:  map 0% reduce 0%
+00:25:53 INFO mapred.JobClient:  map 100% reduce 0%
+00:26:03 INFO mapred.JobClient:  map 100% reduce 26%
+00:26:04 INFO mapred.JobClient:  map 100% reduce 60%
+00:26:10 INFO mapred.JobClient:  map 100% reduce 63%
+00:26:11 INFO mapred.JobClient:  map 100% reduce 73%
+00:26:12 INFO mapred.JobClient:  map 100% reduce 80%
+00:26:13 INFO mapred.JobClient:  map 100% reduce 100%
+00:26:14 INFO mapred.JobClient: Job complete: job_201308030014_0019
+00:26:14 INFO mapred.JobClient: Counters: 26
+00:26:14 INFO mapred.JobClient:   Job Counters 
+00:26:14 INFO mapred.JobClient:     Launched reduce tasks=10
+00:26:14 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8018
+00:26:14 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:26:14 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:26:14 INFO mapred.JobClient:     Launched map tasks=1
+00:26:14 INFO mapred.JobClient:     Data-local map tasks=1
+00:26:14 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93925
+00:26:14 INFO mapred.JobClient:   File Output Format Counters 
+00:26:14 INFO mapred.JobClient:     Bytes Written=72030
+00:26:14 INFO mapred.JobClient:   FileSystemCounters
+00:26:14 INFO mapred.JobClient:     FILE_BYTES_READ=68471
+00:26:14 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:26:14 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=776035
+00:26:14 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:26:14 INFO mapred.JobClient:   File Input Format Counters 
+00:26:14 INFO mapred.JobClient:     Bytes Read=1185099
+00:26:14 INFO mapred.JobClient:   Map-Reduce Framework
+00:26:14 INFO mapred.JobClient:     Map output materialized bytes=68391
+00:26:14 INFO mapred.JobClient:     Map input records=14774
+00:26:14 INFO mapred.JobClient:     Reduce shuffle bytes=68391
+00:26:14 INFO mapred.JobClient:     Spilled Records=40
+00:26:14 INFO mapred.JobClient:     Map output bytes=70700
+00:26:14 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047216128
+00:26:14 INFO mapred.JobClient:     Combine input records=20
+00:26:14 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:26:14 INFO mapred.JobClient:     Reduce input records=20
+00:26:14 INFO mapred.JobClient:     Reduce input groups=20
+00:26:14 INFO mapred.JobClient:     Combine output records=20
+00:26:14 INFO mapred.JobClient:     Reduce output records=20
+00:26:14 INFO mapred.JobClient:     Map output records=20
+00:26:14 INFO cvb.CVB0Driver: About to run iteration 14 of 35
+00:26:14 INFO cvb.CVB0Driver: About to run: Iteration 14 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-13
+00:26:15 INFO input.FileInputFormat: Total input paths to process : 1
+00:26:16 INFO mapred.JobClient: Running job: job_201308030014_0020
+00:26:17 INFO mapred.JobClient:  map 0% reduce 0%
+00:26:33 INFO mapred.JobClient:  map 100% reduce 0%
+00:26:41 INFO mapred.JobClient:  map 100% reduce 3%
+00:26:42 INFO mapred.JobClient:  map 100% reduce 16%
+00:26:43 INFO mapred.JobClient:  map 100% reduce 36%
+00:26:44 INFO mapred.JobClient:  map 100% reduce 60%
+00:26:50 INFO mapred.JobClient:  map 100% reduce 66%
+00:26:51 INFO mapred.JobClient:  map 100% reduce 73%
+00:26:52 INFO mapred.JobClient:  map 100% reduce 90%
+00:26:53 INFO mapred.JobClient:  map 100% reduce 100%
+00:26:53 INFO mapred.JobClient: Job complete: job_201308030014_0020
+00:26:53 INFO mapred.JobClient: Counters: 26
+00:26:53 INFO mapred.JobClient:   Job Counters 
+00:26:53 INFO mapred.JobClient:     Launched reduce tasks=10
+00:26:53 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8046
+00:26:53 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:26:53 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:26:53 INFO mapred.JobClient:     Launched map tasks=1
+00:26:53 INFO mapred.JobClient:     Data-local map tasks=1
+00:26:53 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94122
+00:26:53 INFO mapred.JobClient:   File Output Format Counters 
+00:26:53 INFO mapred.JobClient:     Bytes Written=72030
+00:26:53 INFO mapred.JobClient:   FileSystemCounters
+00:26:53 INFO mapred.JobClient:     FILE_BYTES_READ=68480
+00:26:53 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:26:53 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=776053
+00:26:53 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:26:53 INFO mapred.JobClient:   File Input Format Counters 
+00:26:53 INFO mapred.JobClient:     Bytes Read=1185099
+00:26:53 INFO mapred.JobClient:   Map-Reduce Framework
+00:26:53 INFO mapred.JobClient:     Map output materialized bytes=68400
+00:26:53 INFO mapred.JobClient:     Map input records=14774
+00:26:53 INFO mapred.JobClient:     Reduce shuffle bytes=68400
+00:26:53 INFO mapred.JobClient:     Spilled Records=40
+00:26:53 INFO mapred.JobClient:     Map output bytes=70700
+00:26:53 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:26:53 INFO mapred.JobClient:     Combine input records=20
+00:26:53 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:26:53 INFO mapred.JobClient:     Reduce input records=20
+00:26:53 INFO mapred.JobClient:     Reduce input groups=20
+00:26:53 INFO mapred.JobClient:     Combine output records=20
+00:26:53 INFO mapred.JobClient:     Reduce output records=20
+00:26:53 INFO mapred.JobClient:     Map output records=20
+00:26:53 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-14
+00:26:53 INFO input.FileInputFormat: Total input paths to process : 1
+00:26:53 INFO mapred.JobClient: Running job: job_201308030014_0021
+00:26:54 INFO mapred.JobClient:  map 0% reduce 0%
+00:27:08 INFO mapred.JobClient:  map 100% reduce 0%
+00:27:17 INFO mapred.JobClient:  map 100% reduce 100%
+00:27:18 INFO mapred.JobClient: Job complete: job_201308030014_0021
+00:27:18 INFO mapred.JobClient: Counters: 27
+00:27:18 INFO mapred.JobClient:   Job Counters 
+00:27:18 INFO mapred.JobClient:     Launched reduce tasks=1
+00:27:18 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6760
+00:27:18 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:27:18 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:27:18 INFO mapred.JobClient:     Launched map tasks=1
+00:27:18 INFO mapred.JobClient:     Data-local map tasks=1
+00:27:18 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8558
+00:27:18 INFO mapred.JobClient:   File Output Format Counters 
+00:27:18 INFO mapred.JobClient:     Bytes Written=122
+00:27:18 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:27:18 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:27:18 INFO mapred.JobClient:   FileSystemCounters
+00:27:18 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:27:18 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:27:18 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116431
+00:27:18 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:27:18 INFO mapred.JobClient:   File Input Format Counters 
+00:27:18 INFO mapred.JobClient:     Bytes Read=1185099
+00:27:18 INFO mapred.JobClient:   Map-Reduce Framework
+00:27:18 INFO mapred.JobClient:     Map output materialized bytes=30
+00:27:18 INFO mapred.JobClient:     Map input records=14774
+00:27:18 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:27:18 INFO mapred.JobClient:     Spilled Records=2
+00:27:18 INFO mapred.JobClient:     Map output bytes=58032
+00:27:18 INFO mapred.JobClient:     Total committed heap usage (bytes)=282095616
+00:27:18 INFO mapred.JobClient:     Combine input records=3627
+00:27:18 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:27:18 INFO mapred.JobClient:     Reduce input records=1
+00:27:18 INFO mapred.JobClient:     Reduce input groups=1
+00:27:18 INFO mapred.JobClient:     Combine output records=1
+00:27:18 INFO mapred.JobClient:     Reduce output records=1
+00:27:18 INFO mapred.JobClient:     Map output records=3627
+00:27:18 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 222936.2158862084 and model weight 4435.0
+00:27:18 INFO cvb.CVB0Driver: Current perplexity = 50.26746694164789
+00:27:18 INFO cvb.CVB0Driver: (p_14 - p_12) / p_0 = 0.0020480843099454924; target = 0.0010
+00:27:18 INFO cvb.CVB0Driver: About to run iteration 15 of 35
+00:27:18 INFO cvb.CVB0Driver: About to run: Iteration 15 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-14
+00:27:18 INFO input.FileInputFormat: Total input paths to process : 1
+00:27:18 INFO mapred.JobClient: Running job: job_201308030014_0022
+00:27:19 INFO mapred.JobClient:  map 0% reduce 0%
+00:27:37 INFO mapred.JobClient:  map 100% reduce 0%
+00:27:45 INFO mapred.JobClient:  map 100% reduce 6%
+00:27:46 INFO mapred.JobClient:  map 100% reduce 13%
+00:27:47 INFO mapred.JobClient:  map 100% reduce 33%
+00:27:48 INFO mapred.JobClient:  map 100% reduce 60%
+00:27:54 INFO mapred.JobClient:  map 100% reduce 63%
+00:27:55 INFO mapred.JobClient:  map 100% reduce 76%
+00:27:56 INFO mapred.JobClient:  map 100% reduce 93%
+00:27:57 INFO mapred.JobClient:  map 100% reduce 100%
+00:27:57 INFO mapred.JobClient: Job complete: job_201308030014_0022
+00:27:57 INFO mapred.JobClient: Counters: 26
+00:27:57 INFO mapred.JobClient:   Job Counters 
+00:27:57 INFO mapred.JobClient:     Launched reduce tasks=10
+00:27:57 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8110
+00:27:57 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:27:57 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:27:57 INFO mapred.JobClient:     Launched map tasks=1
+00:27:57 INFO mapred.JobClient:     Data-local map tasks=1
+00:27:57 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94720
+00:27:57 INFO mapred.JobClient:   File Output Format Counters 
+00:27:57 INFO mapred.JobClient:     Bytes Written=72030
+00:27:57 INFO mapred.JobClient:   FileSystemCounters
+00:27:57 INFO mapred.JobClient:     FILE_BYTES_READ=68477
+00:27:57 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:27:57 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=776047
+00:27:57 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:27:57 INFO mapred.JobClient:   File Input Format Counters 
+00:27:57 INFO mapred.JobClient:     Bytes Read=1185099
+00:27:57 INFO mapred.JobClient:   Map-Reduce Framework
+00:27:57 INFO mapred.JobClient:     Map output materialized bytes=68397
+00:27:57 INFO mapred.JobClient:     Map input records=14774
+00:27:57 INFO mapred.JobClient:     Reduce shuffle bytes=68397
+00:27:57 INFO mapred.JobClient:     Spilled Records=40
+00:27:57 INFO mapred.JobClient:     Map output bytes=70700
+00:27:57 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047212032
+00:27:57 INFO mapred.JobClient:     Combine input records=20
+00:27:57 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:27:57 INFO mapred.JobClient:     Reduce input records=20
+00:27:57 INFO mapred.JobClient:     Reduce input groups=20
+00:27:57 INFO mapred.JobClient:     Combine output records=20
+00:27:57 INFO mapred.JobClient:     Reduce output records=20
+00:27:57 INFO mapred.JobClient:     Map output records=20
+00:27:57 INFO cvb.CVB0Driver: About to run iteration 16 of 35
+00:27:57 INFO cvb.CVB0Driver: About to run: Iteration 16 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-15
+00:27:57 INFO input.FileInputFormat: Total input paths to process : 1
+00:27:57 INFO mapred.JobClient: Running job: job_201308030014_0023
+00:27:58 INFO mapred.JobClient:  map 0% reduce 0%
+00:28:13 INFO mapred.JobClient:  map 100% reduce 0%
+00:28:22 INFO mapred.JobClient:  map 100% reduce 3%
+00:28:23 INFO mapred.JobClient:  map 100% reduce 23%
+00:28:24 INFO mapred.JobClient:  map 100% reduce 53%
+00:28:25 INFO mapred.JobClient:  map 100% reduce 60%
+00:28:31 INFO mapred.JobClient:  map 100% reduce 66%
+00:28:32 INFO mapred.JobClient:  map 100% reduce 76%
+00:28:33 INFO mapred.JobClient:  map 100% reduce 100%
+00:28:34 INFO mapred.JobClient: Job complete: job_201308030014_0023
+00:28:34 INFO mapred.JobClient: Counters: 26
+00:28:34 INFO mapred.JobClient:   Job Counters 
+00:28:34 INFO mapred.JobClient:     Launched reduce tasks=10
+00:28:34 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8114
+00:28:34 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:28:34 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:28:34 INFO mapred.JobClient:     Launched map tasks=1
+00:28:34 INFO mapred.JobClient:     Data-local map tasks=1
+00:28:34 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=95056
+00:28:34 INFO mapred.JobClient:   File Output Format Counters 
+00:28:34 INFO mapred.JobClient:     Bytes Written=72030
+00:28:34 INFO mapred.JobClient:   FileSystemCounters
+00:28:34 INFO mapred.JobClient:     FILE_BYTES_READ=68409
+00:28:34 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:28:34 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775911
+00:28:34 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:28:34 INFO mapred.JobClient:   File Input Format Counters 
+00:28:34 INFO mapred.JobClient:     Bytes Read=1185099
+00:28:34 INFO mapred.JobClient:   Map-Reduce Framework
+00:28:34 INFO mapred.JobClient:     Map output materialized bytes=68329
+00:28:34 INFO mapred.JobClient:     Map input records=14774
+00:28:34 INFO mapred.JobClient:     Reduce shuffle bytes=68329
+00:28:34 INFO mapred.JobClient:     Spilled Records=40
+00:28:34 INFO mapred.JobClient:     Map output bytes=70700
+00:28:34 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047220224
+00:28:34 INFO mapred.JobClient:     Combine input records=20
+00:28:34 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:28:34 INFO mapred.JobClient:     Reduce input records=20
+00:28:34 INFO mapred.JobClient:     Reduce input groups=20
+00:28:34 INFO mapred.JobClient:     Combine output records=20
+00:28:34 INFO mapred.JobClient:     Reduce output records=20
+00:28:34 INFO mapred.JobClient:     Map output records=20
+00:28:34 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-16
+00:28:36 INFO input.FileInputFormat: Total input paths to process : 1
+00:28:37 INFO mapred.JobClient: Running job: job_201308030014_0024
+00:28:38 INFO mapred.JobClient:  map 0% reduce 0%
+00:28:51 INFO mapred.JobClient:  map 100% reduce 0%
+00:29:00 INFO mapred.JobClient:  map 100% reduce 100%
+00:29:01 INFO mapred.JobClient: Job complete: job_201308030014_0024
+00:29:01 INFO mapred.JobClient: Counters: 27
+00:29:01 INFO mapred.JobClient:   Job Counters 
+00:29:01 INFO mapred.JobClient:     Launched reduce tasks=1
+00:29:01 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6654
+00:29:01 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:29:01 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:29:01 INFO mapred.JobClient:     Launched map tasks=1
+00:29:01 INFO mapred.JobClient:     Data-local map tasks=1
+00:29:01 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8538
+00:29:01 INFO mapred.JobClient:   File Output Format Counters 
+00:29:01 INFO mapred.JobClient:     Bytes Written=122
+00:29:01 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:29:01 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:29:01 INFO mapred.JobClient:   FileSystemCounters
+00:29:01 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:29:01 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:29:01 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116431
+00:29:01 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:29:01 INFO mapred.JobClient:   File Input Format Counters 
+00:29:01 INFO mapred.JobClient:     Bytes Read=1185099
+00:29:01 INFO mapred.JobClient:   Map-Reduce Framework
+00:29:01 INFO mapred.JobClient:     Map output materialized bytes=30
+00:29:01 INFO mapred.JobClient:     Map input records=14774
+00:29:01 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:29:01 INFO mapred.JobClient:     Spilled Records=2
+00:29:01 INFO mapred.JobClient:     Map output bytes=58032
+00:29:01 INFO mapred.JobClient:     Total committed heap usage (bytes)=282079232
+00:29:01 INFO mapred.JobClient:     Combine input records=3627
+00:29:01 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:29:01 INFO mapred.JobClient:     Reduce input records=1
+00:29:01 INFO mapred.JobClient:     Reduce input groups=1
+00:29:01 INFO mapred.JobClient:     Combine output records=1
+00:29:01 INFO mapred.JobClient:     Reduce output records=1
+00:29:01 INFO mapred.JobClient:     Map output records=3627
+00:29:01 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 222591.58341074362 and model weight 4435.0
+00:29:01 INFO cvb.CVB0Driver: Current perplexity = 50.18975950636835
+00:29:01 INFO cvb.CVB0Driver: (p_16 - p_14) / p_0 = 0.001395708487002251; target = 0.0010
+00:29:01 INFO cvb.CVB0Driver: About to run iteration 17 of 35
+00:29:01 INFO cvb.CVB0Driver: About to run: Iteration 17 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-16
+00:29:01 INFO input.FileInputFormat: Total input paths to process : 1
+00:29:01 INFO mapred.JobClient: Running job: job_201308030014_0025
+00:29:02 INFO mapred.JobClient:  map 0% reduce 0%
+00:29:18 INFO mapred.JobClient:  map 100% reduce 0%
+00:29:27 INFO mapred.JobClient:  map 100% reduce 3%
+00:29:28 INFO mapred.JobClient:  map 100% reduce 36%
+00:29:29 INFO mapred.JobClient:  map 100% reduce 60%
+00:29:35 INFO mapred.JobClient:  map 100% reduce 63%
+00:29:36 INFO mapred.JobClient:  map 100% reduce 73%
+00:29:37 INFO mapred.JobClient:  map 100% reduce 80%
+00:29:38 INFO mapred.JobClient:  map 100% reduce 100%
+00:29:38 INFO mapred.JobClient: Job complete: job_201308030014_0025
+00:29:38 INFO mapred.JobClient: Counters: 26
+00:29:38 INFO mapred.JobClient:   Job Counters 
+00:29:38 INFO mapred.JobClient:     Launched reduce tasks=10
+00:29:38 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7940
+00:29:38 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:29:38 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:29:38 INFO mapred.JobClient:     Launched map tasks=1
+00:29:38 INFO mapred.JobClient:     Data-local map tasks=1
+00:29:38 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=93831
+00:29:38 INFO mapred.JobClient:   File Output Format Counters 
+00:29:38 INFO mapred.JobClient:     Bytes Written=72030
+00:29:38 INFO mapred.JobClient:   FileSystemCounters
+00:29:38 INFO mapred.JobClient:     FILE_BYTES_READ=68433
+00:29:38 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:29:38 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775959
+00:29:38 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:29:38 INFO mapred.JobClient:   File Input Format Counters 
+00:29:38 INFO mapred.JobClient:     Bytes Read=1185099
+00:29:38 INFO mapred.JobClient:   Map-Reduce Framework
+00:29:38 INFO mapred.JobClient:     Map output materialized bytes=68353
+00:29:38 INFO mapred.JobClient:     Map input records=14774
+00:29:38 INFO mapred.JobClient:     Reduce shuffle bytes=68353
+00:29:38 INFO mapred.JobClient:     Spilled Records=40
+00:29:38 INFO mapred.JobClient:     Map output bytes=70700
+00:29:38 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047240704
+00:29:38 INFO mapred.JobClient:     Combine input records=20
+00:29:38 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:29:38 INFO mapred.JobClient:     Reduce input records=20
+00:29:38 INFO mapred.JobClient:     Reduce input groups=20
+00:29:38 INFO mapred.JobClient:     Combine output records=20
+00:29:38 INFO mapred.JobClient:     Reduce output records=20
+00:29:38 INFO mapred.JobClient:     Map output records=20
+00:29:38 INFO cvb.CVB0Driver: About to run iteration 18 of 35
+00:29:38 INFO cvb.CVB0Driver: About to run: Iteration 18 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-17
+00:29:38 INFO input.FileInputFormat: Total input paths to process : 1
+00:29:40 INFO mapred.JobClient: Running job: job_201308030014_0026
+00:29:41 INFO mapred.JobClient:  map 0% reduce 0%
+00:29:56 INFO mapred.JobClient:  map 100% reduce 0%
+00:30:04 INFO mapred.JobClient:  map 100% reduce 3%
+00:30:05 INFO mapred.JobClient:  map 100% reduce 6%
+00:30:06 INFO mapred.JobClient:  map 100% reduce 26%
+00:30:07 INFO mapred.JobClient:  map 100% reduce 43%
+00:30:08 INFO mapred.JobClient:  map 100% reduce 60%
+00:30:14 INFO mapred.JobClient:  map 100% reduce 66%
+00:30:15 INFO mapred.JobClient:  map 100% reduce 83%
+00:30:16 INFO mapred.JobClient:  map 100% reduce 100%
+00:30:17 INFO mapred.JobClient: Job complete: job_201308030014_0026
+00:30:17 INFO mapred.JobClient: Counters: 26
+00:30:17 INFO mapred.JobClient:   Job Counters 
+00:30:17 INFO mapred.JobClient:     Launched reduce tasks=10
+00:30:17 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=8030
+00:30:17 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:30:17 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:30:17 INFO mapred.JobClient:     Launched map tasks=1
+00:30:17 INFO mapred.JobClient:     Data-local map tasks=1
+00:30:17 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94427
+00:30:17 INFO mapred.JobClient:   File Output Format Counters 
+00:30:17 INFO mapred.JobClient:     Bytes Written=72030
+00:30:17 INFO mapred.JobClient:   FileSystemCounters
+00:30:17 INFO mapred.JobClient:     FILE_BYTES_READ=68456
+00:30:17 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:30:17 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=776005
+00:30:17 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+00:30:17 INFO mapred.JobClient:   File Input Format Counters 
+00:30:17 INFO mapred.JobClient:     Bytes Read=1185099
+00:30:17 INFO mapred.JobClient:   Map-Reduce Framework
+00:30:17 INFO mapred.JobClient:     Map output materialized bytes=68376
+00:30:17 INFO mapred.JobClient:     Map input records=14774
+00:30:17 INFO mapred.JobClient:     Reduce shuffle bytes=68376
+00:30:17 INFO mapred.JobClient:     Spilled Records=40
+00:30:17 INFO mapred.JobClient:     Map output bytes=70700
+00:30:17 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+00:30:17 INFO mapred.JobClient:     Combine input records=20
+00:30:17 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:30:17 INFO mapred.JobClient:     Reduce input records=20
+00:30:17 INFO mapred.JobClient:     Reduce input groups=20
+00:30:17 INFO mapred.JobClient:     Combine output records=20
+00:30:17 INFO mapred.JobClient:     Reduce output records=20
+00:30:17 INFO mapred.JobClient:     Map output records=20
+00:30:17 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-18
+00:30:18 INFO input.FileInputFormat: Total input paths to process : 1
+00:30:20 INFO mapred.JobClient: Running job: job_201308030014_0027
+00:30:21 INFO mapred.JobClient:  map 0% reduce 0%
+00:30:34 INFO mapred.JobClient:  map 100% reduce 0%
+00:30:42 INFO mapred.JobClient:  map 100% reduce 33%
+00:30:43 INFO mapred.JobClient:  map 100% reduce 100%
+00:30:44 INFO mapred.JobClient: Job complete: job_201308030014_0027
+00:30:44 INFO mapred.JobClient: Counters: 27
+00:30:44 INFO mapred.JobClient:   Job Counters 
+00:30:44 INFO mapred.JobClient:     Launched reduce tasks=1
+00:30:44 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6751
+00:30:44 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+00:30:44 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+00:30:44 INFO mapred.JobClient:     Launched map tasks=1
+00:30:44 INFO mapred.JobClient:     Data-local map tasks=1
+00:30:44 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8594
+00:30:44 INFO mapred.JobClient:   File Output Format Counters 
+00:30:44 INFO mapred.JobClient:     Bytes Written=122
+00:30:44 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+00:30:44 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:30:44 INFO mapred.JobClient:   FileSystemCounters
+00:30:44 INFO mapred.JobClient:     FILE_BYTES_READ=38
+00:30:44 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+00:30:44 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116431
+00:30:44 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+00:30:44 INFO mapred.JobClient:   File Input Format Counters 
+00:30:44 INFO mapred.JobClient:     Bytes Read=1185099
+00:30:44 INFO mapred.JobClient:   Map-Reduce Framework
+00:30:44 INFO mapred.JobClient:     Map output materialized bytes=30
+00:30:44 INFO mapred.JobClient:     Map input records=14774
+00:30:44 INFO mapred.JobClient:     Reduce shuffle bytes=30
+00:30:44 INFO mapred.JobClient:     Spilled Records=2
+00:30:44 INFO mapred.JobClient:     Map output bytes=58032
+00:30:44 INFO mapred.JobClient:     Total committed heap usage (bytes)=282083328
+00:30:44 INFO mapred.JobClient:     Combine input records=3627
+00:30:44 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+00:30:44 INFO mapred.JobClient:     Reduce input records=1
+00:30:44 INFO mapred.JobClient:     Reduce input groups=1
+00:30:44 INFO mapred.JobClient:     Combine output records=1
+00:30:44 INFO mapred.JobClient:     Reduce output records=1
+00:30:44 INFO mapred.JobClient:     Map output records=3627
+00:30:44 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 222314.06671589118 and model weight 4435.0
+00:30:44 INFO cvb.CVB0Driver: Current perplexity = 50.12718527979508
+00:30:44 INFO cvb.CVB0Driver: (p_18 - p_16) / p_0 = 0.0011238999045810052; target = 0.0010
+00:30:44 INFO cvb.CVB0Driver: About to run iteration 19 of 35
+00:30:44 INFO cvb.CVB0Driver: About to run: Iteration 19 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-18
+00:30:46 INFO input.FileInputFormat: Total input paths to process : 1
+00:30:46 INFO mapred.JobClient: Running job: job_201308030014_0028
+00:30:47 INFO mapred.JobClient:  map 0% reduce 0%
+00:31:00 INFO mapred.JobClient:  map 100% reduce 0%
+ 00:31:09 INFO mapred.JobClient:  map 100% reduce 3%
+ 00:31:10 INFO mapred.JobClient:  map 100% reduce 23%
+ 00:31:11 INFO mapred.JobClient:  map 100% reduce 60%
+ 00:31:18 INFO mapred.JobClient:  map 100% reduce 63%
+ 00:31:19 INFO mapred.JobClient:  map 100% reduce 83%
+ 00:31:20 INFO mapred.JobClient:  map 100% reduce 100%
+ 00:31:21 INFO mapred.JobClient: Job complete: job_201308030014_0028
+ 00:31:21 INFO mapred.JobClient: Counters: 26
+ 00:31:21 INFO mapred.JobClient:   Job Counters 
+ 00:31:21 INFO mapred.JobClient:     Launched reduce tasks=10
+ 00:31:21 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7957
+ 00:31:21 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+ 00:31:21 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+ 00:31:21 INFO mapred.JobClient:     Launched map tasks=1
+ 00:31:21 INFO mapred.JobClient:     Data-local map tasks=1
+ 00:31:21 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94154
+ 00:31:21 INFO mapred.JobClient:   File Output Format Counters 
+ 00:31:21 INFO mapred.JobClient:     Bytes Written=72030
+ 00:31:21 INFO mapred.JobClient:   FileSystemCounters
+ 00:31:21 INFO mapred.JobClient:     FILE_BYTES_READ=68408
+ 00:31:21 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+ 00:31:21 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775909
+ 00:31:21 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+ 00:31:21 INFO mapred.JobClient:   File Input Format Counters 
+ 00:31:21 INFO mapred.JobClient:     Bytes Read=1185099
+ 00:31:21 INFO mapred.JobClient:   Map-Reduce Framework
+ 00:31:21 INFO mapred.JobClient:     Map output materialized bytes=68328
+ 00:31:21 INFO mapred.JobClient:     Map input records=14774
+ 00:31:21 INFO mapred.JobClient:     Reduce shuffle bytes=68328
+ 00:31:21 INFO mapred.JobClient:     Spilled Records=40
+ 00:31:21 INFO mapred.JobClient:     Map output bytes=70700
+ 00:31:21 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+ 00:31:21 INFO mapred.JobClient:     Combine input records=20
+ 00:31:21 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+ 00:31:21 INFO mapred.JobClient:     Reduce input records=20
+ 00:31:21 INFO mapred.JobClient:     Reduce input groups=20
+ 00:31:21 INFO mapred.JobClient:     Combine output records=20
+ 00:31:21 INFO mapred.JobClient:     Reduce output records=20
+ 00:31:21 INFO mapred.JobClient:     Map output records=20
+ 00:31:21 INFO cvb.CVB0Driver: About to run iteration 20 of 35
+ 00:31:21 INFO cvb.CVB0Driver: About to run: Iteration 20 of 35, input path: /tmp/mahout-work-hylee/comm-text-unigram-model/model-19
+ 00:31:22 INFO input.FileInputFormat: Total input paths to process : 1
+ 00:31:22 INFO mapred.JobClient: Running job: job_201308030014_0029
+ 00:31:23 INFO mapred.JobClient:  map 0% reduce 0%
+ 00:31:39 INFO mapred.JobClient:  map 100% reduce 0%
+ 00:31:48 INFO mapred.JobClient:  map 100% reduce 3%
+ 00:31:49 INFO mapred.JobClient:  map 100% reduce 30%
+ 00:31:50 INFO mapred.JobClient:  map 100% reduce 53%
+ 00:31:51 INFO mapred.JobClient:  map 100% reduce 60%
+ 00:31:56 INFO mapred.JobClient:  map 100% reduce 63%
+ 00:31:57 INFO mapred.JobClient:  map 100% reduce 66%
+ 00:31:58 INFO mapred.JobClient:  map 100% reduce 76%
+ 00:31:59 INFO mapred.JobClient:  map 100% reduce 100%
+ 00:32:00 INFO mapred.JobClient: Job complete: job_201308030014_0029
+ 00:32:00 INFO mapred.JobClient: Counters: 26
+ 00:32:00 INFO mapred.JobClient:   Job Counters 
+ 00:32:00 INFO mapred.JobClient:     Launched reduce tasks=10
+ 00:32:00 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=7998
+ 00:32:00 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+ 00:32:00 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+ 00:32:00 INFO mapred.JobClient:     Launched map tasks=1
+ 00:32:00 INFO mapred.JobClient:     Data-local map tasks=1
+ 00:32:00 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=94196
+ 00:32:00 INFO mapred.JobClient:   File Output Format Counters 
+ 00:32:00 INFO mapred.JobClient:     Bytes Written=72030
+ 00:32:00 INFO mapred.JobClient:   FileSystemCounters
+ 00:32:00 INFO mapred.JobClient:     FILE_BYTES_READ=68378
+ 00:32:00 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+ 00:32:00 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=775849
+ 00:32:00 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+ 00:32:00 INFO mapred.JobClient:   File Input Format Counters 
+ 00:32:00 INFO mapred.JobClient:     Bytes Read=1185099
+ 00:32:00 INFO mapred.JobClient:   Map-Reduce Framework
+ 00:32:00 INFO mapred.JobClient:     Map output materialized bytes=68298
+ 00:32:00 INFO mapred.JobClient:     Map input records=14774
+ 00:32:00 INFO mapred.JobClient:     Reduce shuffle bytes=68298
+ 00:32:00 INFO mapred.JobClient:     Spilled Records=40
+ 00:32:00 INFO mapred.JobClient:     Map output bytes=70700
+ 00:32:00 INFO mapred.JobClient:     Total committed heap usage (bytes)=1047203840
+ 00:32:00 INFO mapred.JobClient:     Combine input records=20
+ 00:32:00 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+ 00:32:00 INFO mapred.JobClient:     Reduce input records=20
+ 00:32:00 INFO mapred.JobClient:     Reduce input groups=20
+ 00:32:00 INFO mapred.JobClient:     Combine output records=20
+ 00:32:00 INFO mapred.JobClient:     Reduce output records=20
+ 00:32:00 INFO mapred.JobClient:     Map output records=20
+ 00:32:00 INFO cvb.CVB0Driver: About to run: Calculating perplexity for /tmp/mahout-work-hylee/comm-text-unigram-model/model-20
+ 00:32:00 INFO input.FileInputFormat: Total input paths to process : 1
+ 00:32:01 INFO mapred.JobClient: Running job: job_201308030014_0030
+ 00:32:02 INFO mapred.JobClient:  map 0% reduce 0%
+ 00:32:21 INFO mapred.JobClient:  map 100% reduce 0%
+ 00:32:29 INFO mapred.JobClient:  map 100% reduce 33%
+ 00:32:30 INFO mapred.JobClient:  map 100% reduce 100%
+ 00:32:30 INFO mapred.JobClient: Job complete: job_201308030014_0030
+ 00:32:30 INFO mapred.JobClient: Counters: 27
+ 00:32:30 INFO mapred.JobClient:   Job Counters 
+ 00:32:30 INFO mapred.JobClient:     Launched reduce tasks=1
+ 00:32:30 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=6689
+ 00:32:30 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+ 00:32:30 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+ 00:32:30 INFO mapred.JobClient:     Launched map tasks=1
+ 00:32:30 INFO mapred.JobClient:     Data-local map tasks=1
+ 00:32:30 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=8576
+ 00:32:30 INFO mapred.JobClient:   File Output Format Counters 
+ 00:32:30 INFO mapred.JobClient:     Bytes Written=122
+ 00:32:30 INFO mapred.JobClient:   org.apache.mahout.clustering.lda.cvb.CachingCVB0PerplexityMapper$Counters
+ 00:32:30 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+ 00:32:30 INFO mapred.JobClient:   FileSystemCounters
+ 00:32:30 INFO mapred.JobClient:     FILE_BYTES_READ=38
+ 00:32:30 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+ 00:32:30 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=116431
+ 00:32:30 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=122
+ 00:32:30 INFO mapred.JobClient:   File Input Format Counters 
+ 00:32:30 INFO mapred.JobClient:     Bytes Read=1185099
+ 00:32:30 INFO mapred.JobClient:   Map-Reduce Framework
+ 00:32:30 INFO mapred.JobClient:     Map output materialized bytes=30
+ 00:32:30 INFO mapred.JobClient:     Map input records=14774
+ 00:32:30 INFO mapred.JobClient:     Reduce shuffle bytes=30
+ 00:32:30 INFO mapred.JobClient:     Spilled Records=2
+ 00:32:30 INFO mapred.JobClient:     Map output bytes=58032
+ 00:32:30 INFO mapred.JobClient:     Total committed heap usage (bytes)=282075136
+ 00:32:30 INFO mapred.JobClient:     Combine input records=3627
+ 00:32:30 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+ 00:32:30 INFO mapred.JobClient:     Reduce input records=1
+ 00:32:30 INFO mapred.JobClient:     Reduce input groups=1
+ 00:32:30 INFO mapred.JobClient:     Combine output records=1
+ 00:32:30 INFO mapred.JobClient:     Reduce output records=1
+ 00:32:30 INFO mapred.JobClient:     Map output records=3627
+ 00:32:30 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 222089.50606594858 and model weight 4435.0
+ 00:32:30 INFO cvb.CVB0Driver: Current perplexity = 50.07655153685425
+ 00:32:30 INFO cvb.CVB0Driver: (p_20 - p_18) / p_0 = 9.094360725840901E-4; target = 0.0010
+ 00:32:30 INFO cvb.CVB0Driver: Convergence achieved at iteration 20 with perplexity 50.07655153685425 and delta 9.094360725840901E-4
+ 00:32:30 INFO cvb.CVB0Driver: Completed 20 iterations in 1035 seconds
+ 00:32:30 INFO cvb.CVB0Driver: Perplexities: (55.67597818828557, 52.83657992334922, 51.5589040378868, 50.90873900329143, 50.569637510023185, 50.381496039016184, 50.26746694164789, 50.18975950636835, 50.12718527979508, 50.07655153685425)
+ 00:32:30 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/comm-text-unigram-model/model-20 to /tmp/mahout-work-hylee/comm-text-unigram-lda
+ 00:32:30 INFO input.FileInputFormat: Total input paths to process : 10
+ 00:32:30 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/comm-text-unigram-tf-matrix/matrix to /tmp/mahout-work-hylee/comm-text-unigram-topics
+ 00:32:31 INFO input.FileInputFormat: Total input paths to process : 1
+ 00:32:32 INFO mapred.JobClient: Running job: job_201308030014_0031
+ 00:32:33 INFO mapred.JobClient:  map 0% reduce 0%
+ 00:32:55 INFO mapred.JobClient:  map 40% reduce 0%
+ 00:32:56 INFO mapred.JobClient:  map 90% reduce 0%
+ 00:32:57 INFO mapred.JobClient:  map 100% reduce 0%
+ 00:32:57 INFO mapred.JobClient: Job complete: job_201308030014_0031
+ 00:32:57 INFO mapred.JobClient: Counters: 16
+ 00:32:57 INFO mapred.JobClient:   Job Counters 
+ 00:32:57 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=78088
+ 00:32:57 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+ 00:32:57 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+ 00:32:57 INFO mapred.JobClient:     Launched map tasks=10
+ 00:32:57 INFO mapred.JobClient:     Data-local map tasks=10
+ 00:32:57 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=0
+ 00:32:57 INFO mapred.JobClient:   File Output Format Counters 
+ 00:32:57 INFO mapred.JobClient:     Bytes Written=72030
+ 00:32:57 INFO mapred.JobClient:   FileSystemCounters
+ 00:32:57 INFO mapred.JobClient:     HDFS_BYTES_READ=73570
+ 00:32:57 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=564590
+ 00:32:57 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=72030
+ 00:32:57 INFO mapred.JobClient:   File Input Format Counters 
+ 00:32:57 INFO mapred.JobClient:     Bytes Read=72030
+ 00:32:57 INFO mapred.JobClient:   Map-Reduce Framework
+ 00:32:57 INFO mapred.JobClient:     Map input records=20
+ 00:32:57 INFO mapred.JobClient:     Spilled Records=0
+ 00:32:57 INFO mapred.JobClient:     Total committed heap usage (bytes)=850001920
+ 00:32:57 INFO mapred.JobClient:     Map output records=20
+ 00:32:57 INFO mapred.JobClient:     SPLIT_RAW_BYTES=1540
+ 00:32:57 INFO mapred.JobClient: Running job: job_201308030014_0032
+ 00:32:58 INFO mapred.JobClient:  map 0% reduce 0%
+ 00:33:01 INFO mapred.JobClient:  map 79% reduce 0%
+ 00:33:04 INFO mapred.JobClient:  map 100% reduce 0%
+ 00:33:06 INFO mapred.JobClient: Job complete: job_201308030014_0032
+ 00:33:06 INFO mapred.JobClient: Counters: 16
+ 00:33:06 INFO mapred.JobClient:   Job Counters 
+ 00:33:06 INFO mapred.JobClient:     SLOTS_MILLIS_MAPS=20089
+ 00:33:06 INFO mapred.JobClient:     Total time spent by all reduces waiting after reserving slots (ms)=0
+ 00:33:06 INFO mapred.JobClient:     Total time spent by all maps waiting after reserving slots (ms)=0
+ 00:33:06 INFO mapred.JobClient:     Launched map tasks=1
+ 00:33:06 INFO mapred.JobClient:     Data-local map tasks=1
+ 00:33:06 INFO mapred.JobClient:     SLOTS_MILLIS_REDUCES=0
+ 00:33:06 INFO mapred.JobClient:   File Output Format Counters 
+ 00:33:06 INFO mapred.JobClient:     Bytes Written=2595393
+ 00:33:06 INFO mapred.JobClient:   FileSystemCounters
+ 00:33:06 INFO mapred.JobClient:     HDFS_BYTES_READ=1257272
+ 00:33:06 INFO mapred.JobClient:     FILE_BYTES_WRITTEN=57551
+ 00:33:06 INFO mapred.JobClient:     HDFS_BYTES_WRITTEN=2595393
+ 00:33:06 INFO mapred.JobClient:   File Input Format Counters 
+ 00:33:06 INFO mapred.JobClient:     Bytes Read=1185099
+ 00:33:06 INFO mapred.JobClient:   Map-Reduce Framework
+ 00:33:06 INFO mapred.JobClient:     Map input records=14774
+ 00:33:06 INFO mapred.JobClient:     Spilled Records=0
+ 00:33:06 INFO mapred.JobClient:     Total committed heap usage (bytes)=85000192
+ 00:33:06 INFO mapred.JobClient:     Map output records=14774
+ 00:33:06 INFO mapred.JobClient:     SPLIT_RAW_BYTES=143
+ 00:33:06 INFO driver.MahoutDriver: Program took 1072427 ms (Minutes: 17.873783333333332)
