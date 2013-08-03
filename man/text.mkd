@@ -198,6 +198,10 @@ pp-w,z bigram-w,z
 pp-z,d bigram-z,d | less -N
 ```
 
+###### Noises
+
+* amazon.com, help, problem(s), question(s), issue(s)
+
 ###### Deep Dive into Output
 
 * `comm-text-vector` by `seq2sparse`
