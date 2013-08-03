@@ -222,7 +222,7 @@ $MAHOUT cvb \
 ```bash
 curl -o '/usr/local/bin/pp-w,z' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-w,z'
 curl -o '/usr/local/bin/pp-z,d' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-z,d'
-chmod +x '/usr/local/bin/pp-*'
+chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
@@ -246,9 +246,7 @@ ruby -e '
 ```
 
 ```bash
-curl -o /usr/local/bin/pull-topic-term-matrix -kL http://tinyurl.com/lhgrnu2 && \
-chmod +x /usr/local/bin/pull-topic-term-matrix
-dump-topic-term-matrix topic-term-dist10.txt
+pp-z,d topic-term-dist10.txt
 
  0 (/1k): {"tonnes"=>5.7, "ec"=>3.6, "export"=>2.8, "european"=>2.7, "trade"=>2.5, "sugar"=>2.4, "community"=>2.4, "wheat"=>2.3, "agriculture"=>2.2, "u.s"=>2.1}
 10 (/1k): {"crop"=>1.6, "corn"=>1.3, "usda"=>1.1, "grain"=>1.1, "said"=>1.0, "chrysler"=>1.0, "land"=>0.9, "wheat"=>0.9, "weather"=>0.9, "crops"=>0.9}
