@@ -170,16 +170,35 @@ $MAHOUT cvb \
   -dt ${WORK_DIR}/comm-text-bigram-topics \
   -mt ${WORK_DIR}/comm-text-bigram-model \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
-
-# p(term|topic) goes to ${WORK_DIR}/comm-text-bigram-lda; p(topic|docId) goes to ${WORK_DIR}/comm-text-bigram-topics
 ```
 
 ```bash
-13/07/26 12:17:51 INFO cvb.CVB0Driver: Completed 20 iterations in 2134 seconds
-13/07/26 12:17:51 INFO cvb.CVB0Driver: Perplexities: ()
-13/07/26 12:17:51 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/comm-text-lda-model/model-20 to /tmp/mahout-work-hylee/comm-text-lda
-13/07/26 12:17:53 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/comm-text-matrix/matrix to /tmp/mahout-work-hylee/comm-text-lda-topics
+curl -o '/usr/local/bin/pp-w,z' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-w,z'
+curl -o '/usr/local/bin/pp-z,d' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-z,d'
+chmod +x /usr/local/bin/pp-*
 ```
+
+```bash
+mahout vectordump -i $WORK_DIR/comm-text-unigram-lda -o unigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-unigram-lda -vs 15 \
+  -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
+
+mahout vectordump -i $WORK_DIR/comm-text-unigram-topics -o unigram-z,d.txt
+
+mahout vectordump -i $WORK_DIR/comm-text-bigram-lda -o bigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-bigram-lda -vs 15 \
+  -d $WORK_DIR/comm-text-bigram/dictionary.file-0 -dt sequencefile
+
+mahout vectordump -i $WORK_DIR/comm-text-bigram-topics -o bigram-z,d.txt
+
+pp-w,z unigram-w,z.txt
+pp-z,d unigram-z,d | less -N
+
+pp-w,z bigram-w,z
+pp-z,d bigram-z,d | less -N
+```
+
+###### Deep Dive into Output
 
 * `comm-text-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
@@ -217,13 +236,6 @@ $MAHOUT cvb \
   * `mahout vectordump -i $WORK_DIR/comm-text-lda-model/model-20 -o term-topic-distribution.txt \`  
     `-p true -sort $WORK_DIR/comm-text-lda-model/model-20 -vs 12 \`  
     `-d $WORK_DIR/comm-text-vector/dictionary.file-0 -dt sequencefile` # top 10 terms each topic.
-
-
-```bash
-curl -o '/usr/local/bin/pp-w,z' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-w,z'
-curl -o '/usr/local/bin/pp-z,d' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-z,d'
-chmod +x /usr/local/bin/pp-*
-```
 
 ```bash
 pp-z,d doc-topic-inference.txt
