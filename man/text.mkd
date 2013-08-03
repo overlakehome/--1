@@ -115,7 +115,7 @@ $MAHOUT rowid \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram/tf-matrix \
+  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699 \
 && \
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
@@ -129,7 +129,7 @@ $MAHOUT rowid \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-unigram/tf-matrix \
+  -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441 \
 && \
 rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
 && \
