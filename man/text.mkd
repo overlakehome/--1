@@ -138,11 +138,11 @@ $MAHOUT rowid \
 rm -rf ${WORK_DIR}/comm-text-unigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-unigram/tf-matrix/matrix \
   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
-  -ow -o ${WORK_DIR}/comm-text-unigram-lda \
+  -i  ${WORK_DIR}/comm-text-unigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-unigram-model -ow \
+  -mt ${WORK_DIR}/comm-text-unigram-modeling \
   -dt ${WORK_DIR}/comm-text-unigram-topics \
-  -mt ${WORK_DIR}/comm-text-unigram-model \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
@@ -164,11 +164,11 @@ $MAHOUT rowid \
 rm -rf ${WORK_DIR}/comm-text-bigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-bigram/tf-matrix/matrix \
   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
-  -ow -o ${WORK_DIR}/comm-text-bigram-lda \
+  -i  ${WORK_DIR}/comm-text-bigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-bigram-model -ow \
+  -mt ${WORK_DIR}/comm-text-bigram-modeling \
   -dt ${WORK_DIR}/comm-text-bigram-topics \
-  -mt ${WORK_DIR}/comm-text-bigram-model \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
@@ -179,16 +179,16 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
-mahout vectordump -i $WORK_DIR/comm-text-unigram-lda -o unigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-unigram-lda -vs 15 \
+mahout vectordump \
+  -i $WORK_DIR/comm-text-unigram-model -o unigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-unigram-model -vs 25 \
   -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
-
 mahout vectordump -i $WORK_DIR/comm-text-unigram-topics -o unigram-z,d.txt
 
-mahout vectordump -i $WORK_DIR/comm-text-bigram-lda -o bigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-bigram-lda -vs 15 \
+mahout vectordump \
+  -i $WORK_DIR/comm-text-bigram-model -o bigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-bigram-model -vs 25 \
   -d $WORK_DIR/comm-text-bigram/dictionary.file-0 -dt sequencefile
-
 mahout vectordump -i $WORK_DIR/comm-text-bigram-topics -o bigram-z,d.txt
 
 pp-w,z unigram-w,z.txt
