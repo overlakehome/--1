@@ -120,7 +120,7 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
-hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model ${WORK_DIR}/comm-text-unigram
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-unigram -ow \
@@ -136,7 +136,7 @@ $MAHOUT rowid \
   -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441 \
 && \
 rm -rf ${WORK_DIR}/comm-text-unigram-* \
-&& \
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-unigram/tf-matrix \
   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
