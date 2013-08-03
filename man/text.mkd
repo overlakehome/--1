@@ -125,24 +125,24 @@ $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-unigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  --namedVector -s 70 -x 85 # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms
+  --namedVector -s 80 -x 70 # excludes terms of 80- DF times & 70+ DF%; took 184,207 ms
 
-hadoop dfs -rmr comm-text-unigram-*-matrix
+hadoop dfs -rmr comm-text-unigram/*-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tfidf-vectors \
   -o ${WORK_DIR}/comm-text-unigram/tfidf-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441
+  -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441; 14774 x 398
 
 rm -rf ${WORK_DIR}/comm-text-unigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-unigram/tf-matrix/matrix \
   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
-  -ow -o ${WORK_DIR}/comm-text-unigram-lda \
+  -i  ${WORK_DIR}/comm-text-unigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-unigram-model -ow \
+  -mt ${WORK_DIR}/comm-text-unigram-modeling \
   -dt ${WORK_DIR}/comm-text-unigram-topics \
-  -mt ${WORK_DIR}/comm-text-unigram-model \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
@@ -152,23 +152,24 @@ $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-bigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  --namedVector -s 70 -x 85 -ng 2 # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms
+  --namedVector -s 80 -x 70 -ng 2 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
 
+hadoop dfs -rmr comm-text-bigram/*-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tfidf-vectors \
   -o ${WORK_DIR}/comm-text-bigram/tfidf-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699
+  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699; 14774 x 610
 
 rm -rf ${WORK_DIR}/comm-text-bigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-bigram/tf-matrix/matrix \
   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
-  -ow -o ${WORK_DIR}/comm-text-bigram-lda \
+  -i  ${WORK_DIR}/comm-text-bigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-bigram-model -ow \
+  -mt ${WORK_DIR}/comm-text-bigram-modeling \
   -dt ${WORK_DIR}/comm-text-bigram-topics \
-  -mt ${WORK_DIR}/comm-text-bigram-model \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
@@ -179,16 +180,16 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
-mahout vectordump -i $WORK_DIR/comm-text-unigram-lda -o unigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-unigram-lda -vs 15 \
+mahout vectordump \
+  -i $WORK_DIR/comm-text-unigram-model -o unigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-unigram-model -vs 25 \
   -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
-
 mahout vectordump -i $WORK_DIR/comm-text-unigram-topics -o unigram-z,d.txt
 
-mahout vectordump -i $WORK_DIR/comm-text-bigram-lda -o bigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-bigram-lda -vs 15 \
+mahout vectordump \
+  -i $WORK_DIR/comm-text-bigram-model -o bigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-bigram-model -vs 25 \
   -d $WORK_DIR/comm-text-bigram/dictionary.file-0 -dt sequencefile
-
 mahout vectordump -i $WORK_DIR/comm-text-bigram-topics -o bigram-z,d.txt
 
 pp-w,z unigram-w,z.txt
@@ -206,24 +207,24 @@ pp-z,d bigram-z,d | less -N
 
 * `comm-text-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/tokenized-documents -o token_vectors.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents -o token_vectors.txt`
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * dictionary.file-0 -- integer IDs keyed by term.
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `amazon`: value: 13707
   * wordcount
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/wordcount -o wordcount.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/wordcount/ngrams -o bigrams.txt`
      * key: `amazon`: value: 6 # grep -w amazon token_vectors.txt | grep -o amazon | wc -l
   * frequency.file-0 -- frequencies keyed by term ID.
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/frequency.file-0 -o frequency.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/frequency.file-0 -o frequency.txt`
      * e.g. key: 0: value: 43; key: 13707: value: 4 -- term `0` occurs 43 times; term `amazon` occurs in 4 documents.
   * df-count
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/frequency.file-0 -q | grep 13707` # shows `amazon` occurs in 4 documents.
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/frequency.file-0 -q | grep 13707` # shows `amazon` occurs in 4 documents.
   * tf-vectors
-     * `mahout vectordump -i $WORK_DIR/comm-text-vector/tf-vectors/part-r-00000 -o tf-vectors.txt` # returns 21,578 docs.
+     * `mahout vectordump -i $WORK_DIR/comm-text-bigram/tf-vectors/part-r-00000 -o tf-vectors.txt` # returns 21,578 docs.
      * `grep -o '13707:[[:digit:]]\+' tf-vectors.txt | paste -s -d, -` # 13707:1,13707:3,13707:1,13707:1
   * tfidf-vectors
-     * `mahout vectordump -i $WORK_DIR/comm-text-vector/tfidf-vectors -o tfidf_vectors.txt` # returns 21,578 docs.
+     * `mahout vectordump -i $WORK_DIR/comm-text-bigram/tfidf-vectors -o tfidf_vectors.txt` # returns 21,578 docs.
      * `grep -o '13707:[[:digit:]]\+' tfidf_vectors.txt | paste -s -d, -` # 13707:9,13707:16,13707:9,13707:9
 * comm-text-matrix
   * docIndex
@@ -234,12 +235,6 @@ pp-z,d bigram-z,d | less -N
      * `grep -o '31707:[^,]\+' matrix.txt | paste -s -d, -` # see  
        31707:12.5864839553833,31707:8.899988174438477,31707:8.899988174438477,31707:8.899988174438477,  
        31707:15.415231704711914,31707:19.900978088378906,31707:15.415231704711914
-* comm-text-lda-topic -- final document/topic inference from $WORK_DIR/comm-text-matrix/matrix
-  * `mahout vectordump -i $WORK_DIR/comm-text-lda-topics -o doc-topic-inference.txt`
-* comm-text-lda-model -- final topic/term distributions from $WORK_DIR/comm-text-lda-model/model-20
-  * `mahout vectordump -i $WORK_DIR/comm-text-lda-model/model-20 -o term-topic-distribution.txt \`  
-    `-p true -sort $WORK_DIR/comm-text-lda-model/model-20 -vs 12 \`  
-    `-d $WORK_DIR/comm-text-vector/dictionary.file-0 -dt sequencefile` # top 10 terms each topic.
 
 ```bash
 pp-z,d doc-topic-inference.txt
