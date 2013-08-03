@@ -60,8 +60,8 @@ ruby -e '
 ```bash
 ruby -e '
   output = %q(/workspace/mahout)
-  Dir.glob(%Q(#{output}/*0.9*.jar.bak)).each { |e| File.delete(e) }
-  Dir.glob(%Q(#{output}/*0.8*.jar.bak)).each { |e| File.rename(e, %Q(#{e}[0..-5])) }
+  Dir.glob(%Q(#{output}/*0.9*.jar)).each { |e| File.delete(e) }
+  Dir.glob(%Q(#{output}/*0.8*.jar.bak)).each { |e| File.rename(e, %Q(#{e[0..-5]})) }
 '
 ```
 
