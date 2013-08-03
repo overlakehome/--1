@@ -22,10 +22,19 @@ stop-all.sh && hadoop namenode -format
 
 ```bash
 start-all.sh # starts up hadoop daemons: name, data, 2nd name nodes, and job & task tracker.
-hadoop dfsadmin -safemode leave
 ps aux | grep hadoop | grep -o 'org.apache.[^ ]\+$' # sees 5 lines for hadoop daemons.
 hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 10 100 # same as ruby -e 'p Math::PI'
 stop-all.sh # stops hadoop daemons.
+```
+
+```bash
+cat <<EOF >> /usr/local/bin/restart-all
+#!/bin/bash
+stop-all.sh
+start-all.sh
+hadoop dfsadmin -safemode leave
+EOF
+chmod +x /usr/local/bin/restart-all
 ```
 
 ##### [Mahout 0.8](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
@@ -46,7 +55,7 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ruby -e '
   output = %q(/workspace/mahout)
   source = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
-  Dir.glob(%Q(#{output}/*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
+  Dir.glob(%Q(#{output}/*0.8*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
   %w(
     core/target/mahout-core-0.9-SNAPSHOT-job.jar core/target/mahout-core-0.9-SNAPSHOT.jar
     examples/target/mahout-examples-0.9-SNAPSHOT-job.jar examples/target/mahout-examples-0.9-SNAPSHOT.jar
@@ -54,6 +63,14 @@ ruby -e '
   ).each { |e|
     system %Q(curl -o #{output}/#{File.basename(e)} -kL #{source}/#{e})
   }
+'
+```
+
+```bash
+ruby -e '
+  output = %q(/workspace/mahout)
+  Dir.glob(%Q(#{output}/*0.9*.jar)).each { |e| File.delete(e) }
+  Dir.glob(%Q(#{output}/*0.8*.jar.bak)).each { |e| File.rename(e, %Q(#{e[0..-5]})) }
 '
 ```
 
@@ -103,29 +120,59 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram*
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-vector-bigram -ow \
+  -o ${WORK_DIR}/comm-text-unigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  -s 70 -x 85 -ng 2 --namedVector # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
+  --namedVector -s 70 -x 85 # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-vector-bigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-matrix-bigram \
+  -i ${WORK_DIR}/comm-text-unigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-unigram-tfidf-matrix \
 && \
 $MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-vector-bigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-matrix-bigram-tf \
+  -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
+  -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441 \
 && \
-rm -rf ${WORK_DIR}/comm-text-lda-bigram ${WORK_DIR}/comm-text-lda-topics-bigram ${WORK_DIR}/comm-text-lda-model-bigram \
-&& \
+rm -rf ${WORK_DIR}/comm-text-unigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-matrix-bigram-tf/matrix \
-  -dict ${WORK_DIR}/comm-text-vector-bigram/dictionary.file-0 \
-  -o ${WORK_DIR}/comm-text-lda-bigram -ow \
-  -dt ${WORK_DIR}/comm-text-lda-bigram-topics \
-  -mt ${WORK_DIR}/comm-text-lda-bigram-model \
-  -k 20 -x 35 -cd 1e-4 -block 2 -tf 0.25 -seed 2014
+  -i ${WORK_DIR}/comm-text-unigram-tf-matrix \
+  -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
+  -ow -o ${WORK_DIR}/comm-text-unigram-lda \
+  -dt ${WORK_DIR}/comm-text-unigram-topics \
+  -mt ${WORK_DIR}/comm-text-unigram-model \
+  -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 777
+```
+
+```bash
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram ${WORK_DIR}/comm-text-bigram-*-matrix
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-bigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  --namedVector -s 70 -x 85 -ng 2 # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
+&& \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-bigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-bigram-tfidf-matrix \
+&& \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
+  -o ${WORK_DIR}/comm-text-bigram-tf-matrix # 14774 x 699 \
+&& \
+rm -rf ${WORK_DIR}/comm-text-bigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model
+$MAHOUT cvb \
+  -i ${WORK_DIR}/comm-text-bigram-tf-matrix \
+  -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
+  -ow -o ${WORK_DIR}/comm-text-bigram-lda \
+  -dt ${WORK_DIR}/comm-text-bigram-topics \
+  -mt ${WORK_DIR}/comm-text-bigram-model \
+  -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 2014 \
+
+# p(term|topic) goes to ${WORK_DIR}/comm-text-bigram-lda; p(topic|docId) goes to ${WORK_DIR}/comm-text-bigram-topics
 ```
 
 ```bash
