@@ -125,7 +125,7 @@ $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
   -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441 \
 && \
-rm -rf ${WORK_DIR}/comm-text-unigram-lda ${WORK_DIR}/comm-text-unigram-topics ${WORK_DIR}/comm-text-unigram-model \
+rm -rf ${WORK_DIR}/comm-text-unigram-* \
 && \
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model \
 && \
@@ -153,7 +153,7 @@ $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
   -o ${WORK_DIR}/comm-text-bigram-tf-matrix # 14774 x 699 \
 && \
-rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
+rm -rf ${WORK_DIR}/comm-text-bigram-* \
 && \
 hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model \
 && \
