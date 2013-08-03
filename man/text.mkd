@@ -226,13 +226,8 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
-ruby -e '
-  require "JSON"
-  puts %x(head -n 10 doc-topic-inference.txt).split.map { |l|
-    JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-      reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f%) % (v*100) if v > 0.1; h }
-  }
-'
+pp-z,d doc-topic-inference.txt
+
 {0=>"30.8%", 3=>"22.1%", 7=>"22.1%", 10=>"13.4%"}
 {4=>"31.0%", 13=>"20.2%", 16=>"13.0%", 17=>"21.3%"}
 {2=>"88.3%"}
