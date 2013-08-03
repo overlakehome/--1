@@ -46,7 +46,7 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 ruby -e '
   output = %q(/workspace/mahout)
   source = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
-  Dir.glob(%Q(#{output}/*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
+  Dir.glob(%Q(#{output}/*0.8*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
   %w(
     core/target/mahout-core-0.9-SNAPSHOT-job.jar core/target/mahout-core-0.9-SNAPSHOT.jar
     examples/target/mahout-examples-0.9-SNAPSHOT-job.jar examples/target/mahout-examples-0.9-SNAPSHOT.jar
@@ -54,6 +54,14 @@ ruby -e '
   ).each { |e|
     system %Q(curl -o #{output}/#{File.basename(e)} -kL #{source}/#{e})
   }
+'
+```
+
+```bash
+ruby -e '
+  output = %q(/workspace/mahout)
+  Dir.glob(%Q(#{output}/*0.9*.jar.bak)).each { |e| File.delete(e) }
+  Dir.glob(%Q(#{output}/*0.8*.jar.bak)).each { |e| File.rename(e, %Q(#{e}[0..-5])) }
 '
 ```
 
