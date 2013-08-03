@@ -239,7 +239,8 @@ ruby -e '
 ```
 
 ```bash
-curl -o /usr/local/bin/dump-topic-term-matrix -kL http://tinyurl.com/lhgrnu2 && chmod +x /usr/local/bin/dump-topic-term-matrix
+curl -o /usr/local/bin/pull-topic-term-matrix -kL http://tinyurl.com/lhgrnu2 && \
+chmod +x /usr/local/bin/pull-topic-term-matrix
 dump-topic-term-matrix topic-term-dist10.txt
 
  0 (/1k): {"tonnes"=>5.7, "ec"=>3.6, "export"=>2.8, "european"=>2.7, "trade"=>2.5, "sugar"=>2.4, "community"=>2.4, "wheat"=>2.3, "agriculture"=>2.2, "u.s"=>2.1}
