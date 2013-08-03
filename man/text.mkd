@@ -140,7 +140,8 @@ $MAHOUT rowid \
   -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441 \
 && \
 rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
-hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model
+&& \
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model \
 && \
 $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-bigram-tf-matrix \
