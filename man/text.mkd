@@ -218,6 +218,13 @@ $MAHOUT cvb \
     `-p true -sort $WORK_DIR/comm-text-lda-model/model-20 -vs 12 \`  
     `-d $WORK_DIR/comm-text-vector/dictionary.file-0 -dt sequencefile` # top 10 terms each topic.
 
+
+```bash
+curl -o '/usr/local/bin/pp-w,z' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-w,z'
+curl -o '/usr/local/bin/pp-z,d' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-z,d'
+chmod +x '/usr/local/bin/pp-*'
+```
+
 ```bash
 ruby -e '
   require "JSON"
