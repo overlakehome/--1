@@ -135,7 +135,7 @@ $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
   -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441 \
 && \
-rm -rf ${WORK_DIR}/comm-text-unigram-* \
+rm -rf ${WORK_DIR}/comm-text-unigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-unigram/tf-matrix \
@@ -162,8 +162,8 @@ $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
   -o ${WORK_DIR}/comm-text-bigram-tf-matrix # 14774 x 699 \
 && \
-rm -rf ${WORK_DIR}/comm-text-bigram-* \
-&& \
+rm -rf ${WORK_DIR}/comm-text-bigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model
 $MAHOUT cvb \
   -i ${WORK_DIR}/comm-text-bigram-tf-matrix \
   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
