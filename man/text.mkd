@@ -119,11 +119,11 @@ $MAHOUT seq2sparse \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram/tfidf-matrix \
+  -o ${WORK_DIR}/comm-text-bigram-tfidf-matrix \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699 \
+  -o ${WORK_DIR}/comm-text-bigram-tf-matrix # 14774 x 699 \
 && \
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
@@ -133,16 +133,17 @@ $MAHOUT seq2sparse \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-unigram/tfidf-matrix \
+  -o ${WORK_DIR}/comm-text-unigram-tfidf-matrix \
 && \
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441 \
+  -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441 \
 && \
 rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model
 && \
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-bigram/tf-matrix \
+  -i ${WORK_DIR}/comm-text-bigram-tf-matrix \
   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
   -ow -o ${WORK_DIR}/comm-text-bigram-lda \
   -dt ${WORK_DIR}/comm-text-bigram-topics \
