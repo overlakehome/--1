@@ -68,4 +68,8 @@ p(topic|docId) will be stored /tmp/mahout-work-hylee/comm-text-unigram-topics
 00:32:30 INFO cvb.CVB0Driver: Convergence achieved at iteration 20 with perplexity 50.07655153685425 and delta 9.094360725840901E-4
 00:32:30 INFO cvb.CVB0Driver: Completed 20 iterations in 1035 seconds
 00:32:30 INFO cvb.CVB0Driver: Perplexities: (55.67597818828557, 52.83657992334922, 51.5589040378868, 50.90873900329143, 50.569637510023185, 50.381496039016184, 50.26746694164789, 50.18975950636835, 50.12718527979508, 50.07655153685425)
+00:32:30 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/comm-text-unigram-model/model-20 to /tmp/mahout-work-hylee/comm-text-unigram-lda
+00:32:30 INFO input.FileInputFormat: Total input paths to process : 10
+00:32:30 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/comm-text-unigram-tf-matrix/matrix to /tmp/mahout-work-hylee/comm-text-unigram-topics
+00:32:31 INFO input.FileInputFormat: Total input paths to process : 1
 00:33:06 INFO driver.MahoutDriver: Program took 1072427 ms (Minutes: 17.873783333333332)
