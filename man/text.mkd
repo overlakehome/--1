@@ -117,6 +117,20 @@ $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
   -o ${WORK_DIR}/comm-text-bigram/tf-matrix \
 && \
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-unigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  -s 70 -x 85 -ng 1 --namedVector # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
+&& \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-unigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-unigram/tfidf-matrix \
+&& \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
+  -o ${WORK_DIR}/comm-text-unigram/tf-matrix \
+&& \
 rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
 && \
 $MAHOUT cvb \
