@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-%w{open-uri JSON}.each { |e| require e }
+%w{optparse open-uri JSON}.each { |e| require e }
 
 $options = {}
 OptionParser.new do |opts|
