@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+%w{open-uri JSON}.each { |e| require e }
+
+$options = {}
+OptionParser.new do |opts|
+  opts.on('-c', '--cut-off FLOAT', Float, 'Cuts off numbers smaller than the specified # (default: -0.1).') { |v| $options[:cut_off] = v }
+end.parse!
+cut_off = $options[:cut_off] || 0.1;
+
+open(ARGV[0]).each do |l|
+  p JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
+    reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f%) % (v*100) if v > cut_off; h }
+end
