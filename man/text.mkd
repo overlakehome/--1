@@ -139,7 +139,7 @@ $MAHOUT cvb \
   -ow -o ${WORK_DIR}/comm-text-bigram-lda \
   -dt ${WORK_DIR}/comm-text-bigram-topics \
   -mt ${WORK_DIR}/comm-text-bigram-model \
-  -k 20 -x 35 -cd 1e-4 -block 2 -tf 0.25 -seed 2014
+  -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 2014
 
 # p(term|topic) goes to ${WORK_DIR}/comm-text-bigram-lda; p(topic|docId) goes to ${WORK_DIR}/comm-text-bigram-topics
 ```
