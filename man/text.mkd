@@ -30,8 +30,6 @@ stop-all.sh # stops hadoop daemons.
 
 ##### [Mahout 0.8](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
-* Source code as best documentation: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
-
 ```bah
 [ ! -d /workspace ] && sudo mkdir /workspace # make one unless there is.
 curl -o $HOME/Downloads/mahout-distribution-0.8.zip \
@@ -42,17 +40,19 @@ ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
 
 ##### Mahout (optionally, the last stable build)
 
+* Source: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
+
 ```bash
 ruby -e '
-  mahout_home = %q(/workspace/mahout)
-  mahout_from = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
-  Dir.glob(%Q(#{mahout_home}/*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
+  output = %q(/workspace/mahout)
+  source = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
+  Dir.glob(%Q(#{output}/*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
   %w(
     core/target/mahout-core-0.9-SNAPSHOT-job.jar core/target/mahout-core-0.9-SNAPSHOT.jar
     examples/target/mahout-examples-0.9-SNAPSHOT-job.jar examples/target/mahout-examples-0.9-SNAPSHOT.jar
     integration/target/mahout-integration-0.9-SNAPSHOT.jar math/target/mahout-math-0.9-SNAPSHOT.jar
   ).each { |e|
-    system %Q(curl -o #{mahout_home}/#{File.basename(e)} -kL #{mahout_from}/#{e})
+    system %Q(curl -o #{output}/#{File.basename(e)} -kL #{source}/#{e})
   }
 '
 ```
