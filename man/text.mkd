@@ -113,20 +113,6 @@ fi
 ```bash
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-bigram -ow \
-  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  -s 70 -x 85 -ng 2 --namedVector # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
-&& \
-$MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-bigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram-tfidf-matrix \
-&& \
-$MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram-tf-matrix # 14774 x 699 \
-&& \
-$MAHOUT seq2sparse \
-  -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-unigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
   -s 70 -x 85 -ng 1 --namedVector # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
@@ -139,18 +125,6 @@ $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
   -o ${WORK_DIR}/comm-text-unigram-tf-matrix # 14774 x 441 \
 && \
-rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
-&& \
-hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model \
-&& \
-$MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-bigram-tf-matrix \
-  -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
-  -ow -o ${WORK_DIR}/comm-text-bigram-lda \
-  -dt ${WORK_DIR}/comm-text-bigram-topics \
-  -mt ${WORK_DIR}/comm-text-bigram-model \
-  -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 2014 \
-&& \
 rm -rf ${WORK_DIR}/comm-text-unigram-lda ${WORK_DIR}/comm-text-unigram-topics ${WORK_DIR}/comm-text-unigram-model \
 && \
 hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model \
@@ -162,6 +136,34 @@ $MAHOUT cvb \
   -dt ${WORK_DIR}/comm-text-unigram-topics \
   -mt ${WORK_DIR}/comm-text-unigram-model \
   -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 2014
+```
+
+```bash
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-bigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  -s 70 -x 85 -ng 2 --namedVector # excludes terms of 70- DF times & 85+ DF%; took 184,207 ms \
+&& \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-bigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-bigram-tfidf-matrix \
+&& \
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
+  -o ${WORK_DIR}/comm-text-bigram-tf-matrix # 14774 x 699 \
+&& \
+rm -rf ${WORK_DIR}/comm-text-bigram-lda ${WORK_DIR}/comm-text-bigram-topics ${WORK_DIR}/comm-text-bigram-model \
+&& \
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram-model \
+&& \
+$MAHOUT cvb \
+  -i ${WORK_DIR}/comm-text-bigram-tf-matrix \
+  -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
+  -ow -o ${WORK_DIR}/comm-text-bigram-lda \
+  -dt ${WORK_DIR}/comm-text-bigram-topics \
+  -mt ${WORK_DIR}/comm-text-bigram-model \
+  -k 20 -x 35 -cd 1e-3 -block 2 -tf 0.25 -seed 2014 \
 
 # p(term|topic) goes to ${WORK_DIR}/comm-text-bigram-lda; p(topic|docId) goes to ${WORK_DIR}/comm-text-bigram-topics
 ```
