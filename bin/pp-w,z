@@ -12,8 +12,8 @@ max_lines = $options[:max_lines]
 cut_off = $options[:cut_off] || 0.1;
 
 open(ARGV[0]).each do |l|
-  next if (headlines -= 1) >= 0
-  break unless max_lines.nil? || (max_lines -= 1) >= 0
+  next if 0 <= headlines -= 1
+  break if max_lines && 0 > max_lines -= 1
   t, l = l.chomp.split(%Q(\t))
   h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
     reduce({}) { |h, (k,v)| h[k] = v.round(3) if v > cut_off; h }
