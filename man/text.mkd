@@ -180,6 +180,9 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
+mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o unigram-token-d.txt
+mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents  -o bigram-token-d.txt
+
 mahout vectordump \
   -i $WORK_DIR/comm-text-unigram-model -o unigram-w,z.txt \
   -p true -sort $WORK_DIR/comm-text-unigram-model -vs 25 \
