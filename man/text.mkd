@@ -107,7 +107,7 @@ if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     # or, prep-comm-text $HOME/Downloads/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14,794 documents/58MB
 
     echo "Copying Reuters data to Hadoop"
-    $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext || true
+    $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext ${WORK_DIR}/comm-text-seq || true
     $HADOOP dfs -put ${WORK_DIR}/comm-text-ext ${WORK_DIR}/comm-text-ext
     
     echo "Converting to Sequence Files"
