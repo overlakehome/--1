@@ -16,6 +16,6 @@ open(ARGV[0]).each do |l|
   break unless max_lines.nil? || (max_lines -= 1) >= 0
   t, l = l.chomp.split(%Q(\t))
   h = JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-    reduce({}) { |h, (k,v)| h[k] = %q(%.1f%) % (v*100) if v > cut_off; h }
-  p "%2s: %s" % [t, h]
+    reduce({}) { |h, (k,v)| h[k] = v.round(3) if v > cut_off; h }
+  j [t, h]
 end
