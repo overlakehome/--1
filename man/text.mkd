@@ -195,8 +195,8 @@ mahout vectordump -i $WORK_DIR/comm-text-bigram-topics -o bigram-z,d.txt
 pp-w,z unigram-w,z.txt
 pp-z,d unigram-z,d.txt -n 10
 
-pp-w,z bigram-w,z
-pp-z,d bigram-z,d.text -n 10
+pp-w,z bigram-w,z.txt
+pp-z,d bigram-z,d.txt -n 10
 ```
 
 ###### Noises
