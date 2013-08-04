@@ -209,7 +209,7 @@ mahout vectordump \
   -i $WORK_DIR/comm-text-unigram/model -o trigram-w,z.txt \
   -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
   -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
-mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o unigram-z,d.txt
+mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o trigram-z,d.txt
 
 mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents  -o bigram-token-d.txt
 mahout vectordump \
