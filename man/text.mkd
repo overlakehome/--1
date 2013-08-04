@@ -206,7 +206,7 @@ chmod +x /usr/local/bin/pp-*
 ```bash
 mahout seqdumper -i $WORK_DIR/comm-text-trigram/tokenized-documents -o trigram-token-d.txt
 mahout vectordump \
-  -i $WORK_DIR/comm-text-unigram/model -o trigram-w,z.txt \
+  -i $WORK_DIR/comm-text-trigram/model -o trigram-w,z.txt \
   -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
   -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
 mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o trigram-z,d.txt
