@@ -120,6 +120,30 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram*
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-trigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  --namedVector -s 60 -x 70 -ng 3 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
+
+hadoop dfs -rmr comm-text-trigram/*-matrix
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-trigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-trigram/tfidf-matrix
+
+rm -rf ${WORK_DIR}/comm-text-trigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram/model
+$MAHOUT cvb \
+  -dict ${WORK_DIR}/comm-text-trigram/dictionary.file-0 \
+  -i  ${WORK_DIR}/comm-text-trigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-trigram/model -ow \
+  -mt ${WORK_DIR}/comm-text-trigram-modeling \
+  -dt ${WORK_DIR}/comm-text-trigram/topics \
+  -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
+```
+
+```bash
 hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram*
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
@@ -180,28 +204,38 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
-mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o unigram-token-d.txt
+mahout seqdumper -i $WORK_DIR/comm-text-trigram/tokenized-documents -o trigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-trigram/model -o trigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o trigram-z,d.txt
+
 mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents  -o bigram-token-d.txt
-
 mahout vectordump \
-  -i $WORK_DIR/comm-text-unigram-model -o unigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-unigram-model -vs 25 \
-  -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
-mahout vectordump -i $WORK_DIR/comm-text-unigram-topics -o unigram-z,d.txt
-
-mahout vectordump \
-  -i $WORK_DIR/comm-text-bigram-model -o bigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-bigram-model -vs 25 \
+  -i $WORK_DIR/comm-text-bigram/model -o bigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-bigram/model -vs 25 \
   -d $WORK_DIR/comm-text-bigram/dictionary.file-0 -dt sequencefile
-mahout vectordump -i $WORK_DIR/comm-text-bigram-topics -o bigram-z,d.txt
+mahout vectordump -i $WORK_DIR/comm-text-bigram/topics -o bigram-z,d.txt
 
-pp-w,z unigram-w,z.txt
-pp-z,d unigram-z,d.txt -n 10
-head -11 unigram-token-d.txt
+mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o unigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-unigram/model -o unigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-unigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-unigram/topics -o unigram-z,d.txt
+
+pp-w,z trigram-w,z.txt
+pp-z,d trigram-z,d.txt -n 10
+head -12 trigram-token-d.txt
 
 pp-w,z bigram-w,z.txt
 pp-z,d bigram-z,d.txt -n 10
-head -11 bigram-token-d.txt
+head -12 bigram-token-d.txt
+
+pp-w,z unigram-w,z.txt
+pp-z,d unigram-z,d.txt -n 10
+head -12 unigram-token-d.txt
 ```
 
 ###### Noises
