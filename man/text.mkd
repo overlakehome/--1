@@ -140,9 +140,9 @@ hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram-model
 $MAHOUT cvb \
   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
   -i  ${WORK_DIR}/comm-text-unigram/tfidf-matrix/matrix \
-  -o  ${WORK_DIR}/comm-text-unigram-model -ow \
-  -mt ${WORK_DIR}/comm-text-unigram-modeling \
-  -dt ${WORK_DIR}/comm-text-unigram-topics \
+  -o  ${WORK_DIR}/comm-text-unigram/model -ow \
+  -mt ${WORK_DIR}/comm-text-unigram/modeling \
+  -dt ${WORK_DIR}/comm-text-unigram/topics \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
