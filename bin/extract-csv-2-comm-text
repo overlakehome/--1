@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+%w{optparse fileutils open-uri csv}.each { |e| require e }
+
+$options = {}
+OptionParser.new do |opts|
+  opts.on('-s', '--headlines INTEGER', Integer, 'Skips processing the specified # of headlines (default: 1).') { |v| $options[:headlines] = v }
+  opts.on('-m', '--max-lines INTEGER', Integer, 'Processes as many as the specified # of lines.') { |v| $options[:max_lines] = v }
+  opts.on('-d', '--out-dir PATH', String, 'Specifies an optional output directory path (default: /tmp/).') { |v| $options[:out_dir] = v }
+  opts.on('-i', '--id-fields i,j,k', Array, 'Specifies required field indices to compose output file names.') { |v| $options[:id_fields] = v }
+  opts.on('-f', '--fields i,j,k', Array, 'Specifies required field indices to put into output files.') { |v| $options[:fields] = v }
+  opts.on('-x', '--stop-phrases x,y,z', Array, 'Specifies optional file paths for stop-phrases.') { |v| $options[:stop_phrases] = v }
+end.parse!
+# fail '--id-fields cannot be nil or empty.' if ($options[:id_fields] || []).empty?
+# fail '--fields cannot be nil or empty.' if ($options[:fields] || []).empty?
+
+max_lines = $options[:max_lines]
+out_dir = $options[:out_dir] || '/tmp/'
+id_fields = ($options[:id_fields] || ['4']).map { |e| e.to_i - 1 }
+fields = ($options[:fields] || ['5', '12']).map { |e| e.to_i - 1 }
+stop_phrases = $options[:stop_phrases] || [File.expand_path('../stop-phrase-4-comm-text', File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__)]
+stop_phrases = stop_phrases.reduce({}) do |h, e|
+  open(e) { |f| f.each_line { |l| l = l.chomp; h[l] = [/#{l}/, 0] unless '#'.eql?(l[0..1]) } } if File.exists?(e); h
+end
+puts "INFO: `stop_phrases` contains #{stop_phrases.size} elements."
+
+ARGV.each do |e|
+  open(e, 'r:windows-1250') do |f|
+    headlines = $options[:headlines] || 1
+    CSV.new(f).each do |l|
+      next if (headlines -= 1) >= 0
+      break unless max_lines.nil? || (max_lines -= 1) >= 0
+      FileUtils.mkdir_p out_dir unless Dir.exists?(out_dir)
+      path = File.join(out_dir, id_fields.map { |f| l[f] }.join('-') + ".txt")
+      puts "WARN: will over-write '#{path}'!!!" if File.exists?(path)
+      open(path, 'w') do |w| 
+        fields.each do |f| 
+          begin
+            w.puts stop_phrases.each.reduce(l[f]) { |s, (k, v)| s.gsub(v[0]) { |_| v[1] += 1; "; " } } if l[f]
+          rescue
+            raise 'Failed to process a line: %s.' % [l]
+          end
+        end
+      end
+      puts "INFO: done writing to '#{path}'."
+    end
+  end
+end
+
+stop_phrases = stop_phrases.reject { |k, v| v[1] > 0 }
+puts "DEBUG: #{stop_phrases.size} stop_phrases not in use:\n#{stop_phrases.values.map { |e| e[0] }.join("\n")}"
