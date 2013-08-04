@@ -32,7 +32,7 @@ ARGV.each do |e|
       FileUtils.mkdir_p out_dir unless Dir.exists?(out_dir)
       path = File.join(out_dir, id_fields.map { |f| l[f] }.join('-') + ".txt")
       puts "WARN: will over-write '#{path}'!!!" if File.exists?(path)
-      open(path, 'w') do |w| 
+      open(path, 'w:UTF-8') do |w| 
         fields.each do |f| 
           begin
             w.puts stop_phrases.each.reduce(l[f]) { |s, (k, v)| s.gsub(v[0]) { |_| v[1] += 1; "; " } } if l[f]
