@@ -2,8 +2,11 @@
 (URL to product details on manufacturer's website or attached scan of product manual or photo)
 (You MUST verify security if account/order information is involved)
 (please allow 3 business days to process your shipment)
-ASIN/ISBN:?|ISBN:
-ASIN:|UPC or ASIN:|ISBN. UPC. or ASIN:
+ASIN/ISBN:?
+ISBN:
+ASIN:
+UPC or ASIN:
+ISBN. UPC. or ASIN:
 Account ID
 Actual Account Type
 Additional Information:
@@ -16,14 +19,19 @@ Contact phone number for account
 Customer ID/Account #:
 Customer's e-?mail address \(required\)
 Date of communication:
-Date of sale:|Date\(s\) of sale\(s\):
-Date order placed:|Last digital order placed:|Last physical order placed:
+Date of sale:
+Date\(s\) of sale\(s\):
+Date order placed:
+Last digital order placed:
+Last physical order placed:
 Date you last updated your bank account information:
 Describe all sales channels you use. including other web storefronts:
 Detailed explanation of caller's inquiry \(required\): 
 Detailed explanation of customer's inquiry \(required\): 
-Disbursement date:|Expected disbursement date:
-FNSKU:|SKU:
+Disbursement date:
+Expected disbursement date:
+FNSKU:
+SKU:
 Feed ID:
 Field(s) that currently contain wrong information
 Follow up Actions
@@ -59,11 +67,31 @@ Tracking information on delivered orders:
 Transaction ID or Order Number
 URL of Tools Used
 What is wrong with the information\?
-Your Order ID:|Order ID:|Order #:
+Your Order ID:
+Order ID:
+Order #:
 Your e-?mail address \(required\)
 Your name
 Your suggested change?
 \(Feel free to send attachments if lists are lengthy.\)
 help
-problems?|Date of Problem:
-[Aa]mazon|AMAZON|[Aa]mazon\.(ca|CA)|[Aa]mazon\.co\.uk|[Aa]mazon\.(com|COM)|[Aa]mazon\.es|[Aa]mazon\.de|[Aa]mazon\.fr|issues?|questions?|Initial Question:|Cut and paste of email:  (\(You can also use the attachment feature below to send a copy of the email to Amazon.\))?|Date of delivery at Amazon Fulfillment Center:|Explain how the issues identified by Amazon will be resolved by your company:|Please describe the issue or question:|Please describe the issue:|Please include the following information. so we can understand the issue:|What's the issue\?:Which product\(s\) do you have a question about\?:
+problems?
+Date of Problem:
+[Aa]mazon
+AMAZON
+[Aa]mazon\.(ca|CA)
+[Aa]mazon\.co\.uk
+[Aa]mazon\.(com|COM)
+[Aa]mazon\.es
+[Aa]mazon\.de
+[Aa]mazon\.fr
+issues?
+questions?
+Initial Question:
+Cut and paste of email:  (\(You can also use the attachment feature below to send a copy of the email to Amazon.\))?
+Date of delivery at Amazon Fulfillment Center:
+Explain how the issues identified by Amazon will be resolved by your company:
+Please describe the issue or question:
+Please describe the issue:
+Please include the following information. so we can understand the issue:
+What's the issue\?:Which product\(s\) do you have a question about\?:
