@@ -204,12 +204,12 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
-mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o unigram-token-d.txt
+mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o trigram-token-d.txt
 mahout vectordump \
-  -i $WORK_DIR/comm-text-unigram/model -o unigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-unigram/model -vs 25 \
-  -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
-mahout vectordump -i $WORK_DIR/comm-text-unigram/topics -o unigram-z,d.txt
+  -i $WORK_DIR/comm-text-unigram/model -o trigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o unigram-z,d.txt
 
 mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents  -o bigram-token-d.txt
 mahout vectordump \
@@ -218,13 +218,24 @@ mahout vectordump \
   -d $WORK_DIR/comm-text-bigram/dictionary.file-0 -dt sequencefile
 mahout vectordump -i $WORK_DIR/comm-text-bigram/topics -o bigram-z,d.txt
 
-pp-w,z unigram-w,z.txt
-pp-z,d unigram-z,d.txt -n 10
-head -12 unigram-token-d.txt
+mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o unigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-unigram/model -o unigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-unigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-unigram/topics -o unigram-z,d.txt
+
+pp-w,z trigram-w,z.txt
+pp-z,d trigram-z,d.txt -n 10
+head -12 trigram-token-d.txt
 
 pp-w,z bigram-w,z.txt
 pp-z,d bigram-z,d.txt -n 10
 head -12 bigram-token-d.txt
+
+pp-w,z unigram-w,z.txt
+pp-z,d unigram-z,d.txt -n 10
+head -12 unigram-token-d.txt
 ```
 
 ###### Noises
