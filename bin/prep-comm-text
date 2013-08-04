@@ -19,9 +19,9 @@ id_fields = ($options[:id_fields] || ['4']).map { |e| e.to_i - 1 }
 fields = ($options[:fields] || ['5', '12']).map { |e| e.to_i - 1 }
 stop_phrases = $options[:stop_phrases] || [File.expand_path('../stop-comm-text', File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__)]
 stop_phrases = stop_phrases.reduce({}) do |h, e|
-  open(e) { |f| f.each_line { |l| l = l.chomp; h[l] = [/#{l}/, 0] unless '#'.eql?(l[0..1]) } } if File.exists?(e); h
-end
-puts "INFO: `stop_phrases` contains #{stop_phrases.size} elements."
+  open(e) { |f| f.each_line { |l| h[l.chomp] = nil unless '#'.eql?(l[0..1]) } } if File.exists?(e); h
+end.keys.join('|')
+stop_phrases = /#{stop_phrases}/
 
 ARGV.each do |e|
   open(e, 'r:windows-1250') do |f|
@@ -35,7 +35,7 @@ ARGV.each do |e|
       open(path, 'w:UTF-8') do |w| 
         fields.each do |f| 
           begin
-            w.puts stop_phrases.each.reduce(l[f]) { |s, (k, v)| s.gsub(v[0]) { |_| v[1] += 1; "; " } } if l[f]
+            w.puts l[f].gsub(stop_phrases, ';') if l[f]
           rescue
             raise 'Failed to process a line: %s.' % [l]
           end
@@ -45,6 +45,3 @@ ARGV.each do |e|
     end
   end
 end
-
-stop_phrases = stop_phrases.reject { |k, v| v[1] > 0 }
-puts "DEBUG: #{stop_phrases.size} stop_phrases not in use:\n#{stop_phrases.values.map { |e| e[0] }.join("\n")}"
