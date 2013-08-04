@@ -13,9 +13,12 @@ max_entries = $options[:max_entries]
 max_fields = $options[:max_fields] || 12
 min_value = $options[:min_value] || 2.0
 
-open(ARGV[0]).each do |l|
-  next if 0 <= skip_count -= 1
-  break if max_entries && 0 > max_entries -= 1
-  j JSON[l.chomp.gsub(%r(([^,{]+)\s*:), %q("\1":))].sort_by { |e| -e[1] }.
-    reduce({}) { |h, e| e[1] *= 100; h[e[0].to_i] = e[1].round(1) unless e[1] < min_value || h.size >= max_fields; h }
+open(ARGV[0]) do |f|
+  f.each do |l|
+    next if 0 <= skip_count -= 1
+    break if max_entries && 0 > max_entries -= 1
+    h = JSON[l.chomp.gsub(%r(([^,{]+)\s*:), %q("\1":))].sort_by { |e| -e[1] }.
+      reduce({}) { |h, e| e[1] *= 100; h[e[0].to_i] = e[1].round(1) unless e[1] < min_value || h.size >= max_fields; h }
+    j [f.lineno, h]
+  end
 end
