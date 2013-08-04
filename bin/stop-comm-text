@@ -83,9 +83,8 @@ Your Order ID:
 Your e-?mail address \(required\)
 Your name
 Your suggested change?
-[Aa]mazon
+[Aa]mazon(\.(com|COM))?
 [Aa]mazon\.(ca|CA)
-[Aa]mazon\.(com|COM)
 [Aa]mazon\.co\.uk
 [Aa]mazon\.de
 [Aa]mazon\.es
