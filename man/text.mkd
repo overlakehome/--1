@@ -107,7 +107,7 @@ if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     # or, prep-comm-text $HOME/Downloads/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14,794 documents/58MB
 
     echo "Copying Reuters data to Hadoop"
-    $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext || true
+    $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext ${WORK_DIR}/comm-text-seq || true
     $HADOOP dfs -put ${WORK_DIR}/comm-text-ext ${WORK_DIR}/comm-text-ext
     
     echo "Converting to Sequence Files"
@@ -141,7 +141,7 @@ $MAHOUT cvb \
   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
   -i  ${WORK_DIR}/comm-text-bigram/tfidf-matrix/matrix \
   -o  ${WORK_DIR}/comm-text-bigram/model -ow \
-  -mt ${WORK_DIR}/comm-text-bigram/modeling \
+  -mt ${WORK_DIR}/comm-text-bigram-modeling \
   -dt ${WORK_DIR}/comm-text-bigram/topics \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
@@ -168,7 +168,7 @@ $MAHOUT cvb \
   -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
   -i  ${WORK_DIR}/comm-text-unigram/tfidf-matrix/matrix \
   -o  ${WORK_DIR}/comm-text-unigram/model -ow \
-  -mt ${WORK_DIR}/comm-text-unigram/modeling \
+  -mt ${WORK_DIR}/comm-text-unigram-modeling \
   -dt ${WORK_DIR}/comm-text-unigram/topics \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
