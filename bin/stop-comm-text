@@ -42,7 +42,7 @@ In the Feedback Box. customer entered the following comments:
 Initial Question:
 Is this contact Pre or Post sale?
 January|February|March|April|May|June|July|August|September|October|November|December
-Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec
+Jan\W|Feb\W|Mar\W|Apr\W|Jun\W|Jul\W|Aug\W|Sep\W|Oct\W|Nov\W|Dec\W
 Java Script is Enabled
 Last digital order placed:
 Last physical order placed:
