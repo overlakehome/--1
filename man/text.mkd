@@ -120,12 +120,12 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
-hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram*
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
   -o ${WORK_DIR}/comm-text-trigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  --namedVector -s 80 -x 70 -ng 3 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
+  --namedVector -s 60 -x 70 -ng 3 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
 
 hadoop dfs -rmr comm-text-trigram/*-matrix
 $MAHOUT rowid \
