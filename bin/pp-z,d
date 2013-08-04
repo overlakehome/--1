@@ -9,11 +9,11 @@ OptionParser.new do |opts|
 end.parse!
 headlines = $options[:headlines] || 0
 max_lines = $options[:max_lines]
-cut_off = $options[:cut_off] || 0.25
+cut_off = $options[:cut_off] || 0.025
 
 open(ARGV[0]).each do |l|
   next if 0 <= headlines -= 1
   break if max_lines && 0 > max_lines -= 1
   j JSON[l.chomp.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-    reduce({}) { |h, (k,v)| h[k.to_i] = (v*100).round(1) if v > cut_off; h }
+    reduce({}) { |h, (k,v)| h[k.to_i] = (100 * v).round(1) if v > cut_off; h }
 end
