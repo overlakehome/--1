@@ -18,7 +18,6 @@ curl -o '/usr/local/Cellar/hadoop/1.1.2/libexec/conf/#1-site.xml' \
   -kL 'https://raw.github.com/henry4j/-/master/bin/{core,hdfs,mapred}-site.xml'
 rm -rf /usr/local/tmp/hadoop-$USER && mkdir -p /usr/local/tmp/hadoop-$USER
 stop-all.sh && hadoop namenode -format
-hadoop dfsadmin -safemode leave
 ```
 
 ```bash
@@ -28,9 +27,17 @@ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/hadoop-examples-1.1.2.jar pi 1
 stop-all.sh # stops hadoop daemons.
 ```
 
-##### [Mahout 0.8](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
+```bash
+cat <<EOF >> /usr/local/bin/restart-all
+#!/bin/bash
+stop-all.sh
+start-all.sh
+hadoop dfsadmin -safemode leave
+EOF
+chmod +x /usr/local/bin/restart-all
+```
 
-* Source code as best documentation: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
+##### [Mahout 0.8](http://search.maven.org/#search%7Cga%7C1%7Cmahout)
 
 ```bah
 [ ! -d /workspace ] && sudo mkdir /workspace # make one unless there is.
@@ -38,6 +45,33 @@ curl -o $HOME/Downloads/mahout-distribution-0.8.zip \
   -kL http://www.motorlogy.com/apache/mahout/0.8/mahout-distribution-0.8.zip
 unzip -o $HOME/Downloads/mahout-distribution-0.8.zip -d /workspace/
 ln -s /workspace/mahout-distribution-0.8 /workspace/mahout
+```
+
+##### Mahout (optionally, the last stable build)
+
+* Source: `svn checkout http://svn.apache.org/repos/asf/mahout/trunk /workspace/mahout-trunk`
+
+```bash
+ruby -e '
+  output = %q(/workspace/mahout)
+  source = %q(https://builds.apache.org/job/Mahout-Quality/lastStableBuild/artifact/trunk)
+  Dir.glob(%Q(#{output}/*0.8*.jar)).each { |e| File.rename(e, %Q(#{e}.bak)) }
+  %w(
+    core/target/mahout-core-0.9-SNAPSHOT-job.jar core/target/mahout-core-0.9-SNAPSHOT.jar
+    examples/target/mahout-examples-0.9-SNAPSHOT-job.jar examples/target/mahout-examples-0.9-SNAPSHOT.jar
+    integration/target/mahout-integration-0.9-SNAPSHOT.jar math/target/mahout-math-0.9-SNAPSHOT.jar
+  ).each { |e|
+    system %Q(curl -o #{output}/#{File.basename(e)} -kL #{source}/#{e})
+  }
+'
+```
+
+```bash
+ruby -e '
+  output = %q(/workspace/mahout)
+  Dir.glob(%Q(#{output}/*0.9*.jar)).each { |e| File.delete(e) }
+  Dir.glob(%Q(#{output}/*0.8*.jar.bak)).each { |e| File.rename(e, %Q(#{e[0..-5]})) }
+'
 ```
 
 ##### Mahout LDA CVB Demo 
@@ -70,10 +104,10 @@ if [ ! -e ${WORK_DIR}/comm-text-ext ]; then
     #   (http://lucene.apache.org/core/4_4_0/benchmark/org/apache/lucene/benchmark/utils/ExtractReuters.html)
     echo "Extracting Reuters"
     $MAHOUT org.apache.lucene.benchmark.utils.ExtractReuters ${WORK_DIR}/reuters-sgm ${WORK_DIR}/comm-text-ext
-    # or, extract-csv-2-comm-text $HOME/Downloads/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14,794 documents/58MB
+    # or, prep-comm-text $HOME/Downloads/comm-text.csv -d ${WORK_DIR}/comm-text-ext # 14,794 documents/58MB
 
     echo "Copying Reuters data to Hadoop"
-    $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext || true
+    $HADOOP dfs -rmr ${WORK_DIR}/comm-text-ext ${WORK_DIR}/comm-text-seq || true
     $HADOOP dfs -put ${WORK_DIR}/comm-text-ext ${WORK_DIR}/comm-text-ext
     
     echo "Converting to Sequence Files"
@@ -86,54 +120,150 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram*
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-vector-bigram -ow \
+  -o ${WORK_DIR}/comm-text-trigram -ow \
   -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  -s 70 -x 85 -ng 2 --namedVector # excludes terms of 100- DF times & 80+ DF%; took 184,207 ms \
-&& \
+  --namedVector -s 60 -x 70 -ng 3 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
+
+hadoop dfs -rmr comm-text-trigram/*-matrix
 $MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-vector-bigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-matrix-bigram # took 1,453 ms \
-&& \
-rm -rf ${WORK_DIR}/comm-text-lda-bigram ${WORK_DIR}/comm-text-lda-topics-bigram ${WORK_DIR}/comm-text-lda-model-bigram \
-&& \
+  -i ${WORK_DIR}/comm-text-trigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-trigram/tfidf-matrix
+
+rm -rf ${WORK_DIR}/comm-text-trigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram/model
 $MAHOUT cvb \
-  -i ${WORK_DIR}/comm-text-matrix-bigram/matrix \
-  -dict ${WORK_DIR}/comm-text-vector-bigram/dictionary.file-0 \
-  -o ${WORK_DIR}/comm-text-lda-bigram -ow \
-  -dt ${WORK_DIR}/comm-text-lda-bigram-topics \
-  -mt ${WORK_DIR}/comm-text-lda-bigram-model \
-  -k 20 -x 35 -cd 1e-4 -block 2 -tf 0.25 -seed 2014
+  -dict ${WORK_DIR}/comm-text-trigram/dictionary.file-0 \
+  -i  ${WORK_DIR}/comm-text-trigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-trigram/model -ow \
+  -mt ${WORK_DIR}/comm-text-trigram-modeling \
+  -dt ${WORK_DIR}/comm-text-trigram/topics \
+  -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
 ```bash
-13/07/26 12:17:51 INFO cvb.CVB0Driver: Completed 20 iterations in 2134 seconds
-13/07/26 12:17:51 INFO cvb.CVB0Driver: Perplexities: ()
-13/07/26 12:17:51 INFO cvb.CVB0Driver: About to run: Writing final topic/term distributions from /tmp/mahout-work-hylee/comm-text-lda-model/model-20 to /tmp/mahout-work-hylee/comm-text-lda
-13/07/26 12:17:53 INFO cvb.CVB0Driver: About to run: Writing final document/topic inference from /tmp/mahout-work-hylee/comm-text-matrix/matrix to /tmp/mahout-work-hylee/comm-text-lda-topics
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram*
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-bigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  --namedVector -s 80 -x 70 -ng 2 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
+
+hadoop dfs -rmr comm-text-bigram/*-matrix
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-bigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-bigram/tfidf-matrix
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
+  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699; 14774 x 610
+
+rm -rf ${WORK_DIR}/comm-text-bigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram/model
+$MAHOUT cvb \
+  -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
+  -i  ${WORK_DIR}/comm-text-bigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-bigram/model -ow \
+  -mt ${WORK_DIR}/comm-text-bigram-modeling \
+  -dt ${WORK_DIR}/comm-text-bigram/topics \
+  -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
+
+```bash
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram*
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-unigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  --namedVector -s 80 -x 70 # excludes terms of 80- DF times & 70+ DF%; took 184,207 ms
+
+hadoop dfs -rmr comm-text-unigram/*-matrix
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-unigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-unigram/tfidf-matrix
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-unigram/tf-vectors \
+  -o ${WORK_DIR}/comm-text-unigram/tf-matrix # 14774 x 441; 14774 x 398
+
+rm -rf ${WORK_DIR}/comm-text-unigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-unigram/model
+$MAHOUT cvb \
+  -dict ${WORK_DIR}/comm-text-unigram/dictionary.file-0 \
+  -i  ${WORK_DIR}/comm-text-unigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-unigram/model -ow \
+  -mt ${WORK_DIR}/comm-text-unigram-modeling \
+  -dt ${WORK_DIR}/comm-text-unigram/topics \
+  -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
+```
+
+```bash
+curl -o '/usr/local/bin/pp-w,z' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-w,z'
+curl -o '/usr/local/bin/pp-z,d' -kL 'https://raw.github.com/henry4j/-/master/bin/pp-z,d'
+chmod +x /usr/local/bin/pp-*
+```
+
+```bash
+mahout seqdumper -i $WORK_DIR/comm-text-trigram/tokenized-documents -o trigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-trigram/model -o trigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o trigram-z,d.txt
+
+mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents  -o bigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-bigram/model -o bigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-bigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-bigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-bigram/topics -o bigram-z,d.txt
+
+mahout seqdumper -i $WORK_DIR/comm-text-unigram/tokenized-documents -o unigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-unigram/model -o unigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-unigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-unigram/topics -o unigram-z,d.txt
+
+pp-w,z trigram-w,z.txt
+pp-z,d trigram-z,d.txt -n 10
+head -12 trigram-token-d.txt
+
+pp-w,z bigram-w,z.txt
+pp-z,d bigram-z,d.txt -n 10
+head -12 bigram-token-d.txt
+
+pp-w,z unigram-w,z.txt
+pp-z,d unigram-z,d.txt -n 10
+head -12 unigram-token-d.txt
+```
+
+###### Noises
+
+* amazon.com, help, problem(s), question(s), issue(s)
+
+###### Deep Dive into Output
 
 * `comm-text-vector` by `seq2sparse`
   * tokenized-documents -- tokens (string tuples) keyed by docs.
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/tokenized-documents -o token_vectors.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents -o token_vectors.txt`
      * e.g. key: /reut2-010.sgm-92.txt: value: [26, mar, 1987, 14, 39, 20.76, dexter, dex, units, sets, license, toyota, unit, dexter, corp's, hysol, aerospace, industrial, products, division, said, agreed, license, its, engineering, adhesives, toyota, motor, co's, toyoda, gosei, unit, two, units, jointly, develop, line, structural, adhesive, application, techniques, automotive, certain, other, industries, reuter, 3]
   * dictionary.file-0 -- integer IDs keyed by term.
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/dictionary.file-0 -o dictionary.txt` # returns 41807 terms.
      * e.g. key: `0`: value: 0, key: `amazon`: value: 13707
   * wordcount
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/wordcount -o wordcount.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/wordcount/ngrams -o bigrams.txt`
      * key: `amazon`: value: 6 # grep -w amazon token_vectors.txt | grep -o amazon | wc -l
   * frequency.file-0 -- frequencies keyed by term ID.
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/frequency.file-0 -o frequency.txt`
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/frequency.file-0 -o frequency.txt`
      * e.g. key: 0: value: 43; key: 13707: value: 4 -- term `0` occurs 43 times; term `amazon` occurs in 4 documents.
   * df-count
-     * `mahout seqdumper -i $WORK_DIR/comm-text-vector/frequency.file-0 -q | grep 13707` # shows `amazon` occurs in 4 documents.
+     * `mahout seqdumper -i $WORK_DIR/comm-text-bigram/frequency.file-0 -q | grep 13707` # shows `amazon` occurs in 4 documents.
   * tf-vectors
-     * `mahout vectordump -i $WORK_DIR/comm-text-vector/tf-vectors/part-r-00000 -o tf-vectors.txt` # returns 21,578 docs.
+     * `mahout vectordump -i $WORK_DIR/comm-text-bigram/tf-vectors/part-r-00000 -o tf-vectors.txt` # returns 21,578 docs.
      * `grep -o '13707:[[:digit:]]\+' tf-vectors.txt | paste -s -d, -` # 13707:1,13707:3,13707:1,13707:1
   * tfidf-vectors
-     * `mahout vectordump -i $WORK_DIR/comm-text-vector/tfidf-vectors -o tfidf_vectors.txt` # returns 21,578 docs.
+     * `mahout vectordump -i $WORK_DIR/comm-text-bigram/tfidf-vectors -o tfidf_vectors.txt` # returns 21,578 docs.
      * `grep -o '13707:[[:digit:]]\+' tfidf_vectors.txt | paste -s -d, -` # 13707:9,13707:16,13707:9,13707:9
 * comm-text-matrix
   * docIndex
@@ -144,21 +274,10 @@ $MAHOUT cvb \
      * `grep -o '31707:[^,]\+' matrix.txt | paste -s -d, -` # see  
        31707:12.5864839553833,31707:8.899988174438477,31707:8.899988174438477,31707:8.899988174438477,  
        31707:15.415231704711914,31707:19.900978088378906,31707:15.415231704711914
-* comm-text-lda-topic -- final document/topic inference from $WORK_DIR/comm-text-matrix/matrix
-  * `mahout vectordump -i $WORK_DIR/comm-text-lda-topics -o doc-topic-inference.txt`
-* comm-text-lda-model -- final topic/term distributions from $WORK_DIR/comm-text-lda-model/model-20
-  * `mahout vectordump -i $WORK_DIR/comm-text-lda-model/model-20 -o topic-term-dist12.txt \`  
-    `-p true -sort $WORK_DIR/comm-text-lda-model/model-20 -vs 12 \`  
-    `-d $WORK_DIR/comm-text-vector/dictionary.file-0 -dt sequencefile` # top 10 terms each topic.
 
 ```bash
-ruby -e '
-  require "JSON"
-  puts %x(head -n 10 doc-topic-inference.txt).split.map { |l|
-    JSON[l.gsub(%r(([^,{]+)\s*:), %q("\1":))].
-      reduce({}) { |h, (k,v)| h[k.to_i] = %q(%.1f%) % (v*100) if v > 0.1; h }
-  }
-'
+pp-z,d doc-topic-inference.txt
+
 {0=>"30.8%", 3=>"22.1%", 7=>"22.1%", 10=>"13.4%"}
 {4=>"31.0%", 13=>"20.2%", 16=>"13.0%", 17=>"21.3%"}
 {2=>"88.3%"}
@@ -172,8 +291,7 @@ ruby -e '
 ```
 
 ```bash
-curl -o /usr/local/bin/dump-topic-term-matrix -kL http://tinyurl.com/lhgrnu2 && chmod +x /usr/local/bin/dump-topic-term-matrix
-dump-topic-term-matrix topic-term-dist10.txt
+pp-w,z term-topic-distribution.txt
 
  0 (/1k): {"tonnes"=>5.7, "ec"=>3.6, "export"=>2.8, "european"=>2.7, "trade"=>2.5, "sugar"=>2.4, "community"=>2.4, "wheat"=>2.3, "agriculture"=>2.2, "u.s"=>2.1}
 10 (/1k): {"crop"=>1.6, "corn"=>1.3, "usda"=>1.1, "grain"=>1.1, "said"=>1.0, "chrysler"=>1.0, "land"=>0.9, "wheat"=>0.9, "weather"=>0.9, "crops"=>0.9}

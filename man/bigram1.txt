@@ -1,0 +1,85 @@
+$MAHOUT cvb \
+>   -dict ${WORK_DIR}/comm-text-bigram/dictionary.file-0 \
+>   -i  ${WORK_DIR}/comm-text-bigram/tfidf-matrix/matrix \
+>   -o  ${WORK_DIR}/comm-text-bigram-model -ow \
+>   -mt ${WORK_DIR}/comm-text-bigram-modeling \
+>   -dt ${WORK_DIR}/comm-text-bigram-topics \
+>   -k 20 -x 35 -cd 2e-4 -block 2 -tf 0.25 -seed 777
+Running on hadoop, using /usr/local/bin/hadoop and HADOOP_CONF_DIR=
+MAHOUT-JOB: /workspace/mahout/mahout-examples-0.8-job.jar
+13/08/03 00:49:19 WARN driver.MahoutDriver: No cvb.props found on classpath, will use command-line arguments only
+13/08/03 00:49:19 INFO common.AbstractJob: Command line arguments: {--convergenceDelta=[2e-4], --dictionary=[/tmp/mahout-work-hylee/comm-text-bigram/dictionary.file-0], --doc_topic_output=[/tmp/mahout-work-hylee/comm-text-bigram-topics], --doc_topic_smoothing=[1.0E-4], --endPhase=[2147483647], --input=[/tmp/mahout-work-hylee/comm-text-bigram/tf-matrix/matrix], --iteration_block_size=[2], --maxIter=[35], --max_doc_topic_iters=[10], --num_reduce_tasks=[10], --num_topics=[20], --num_train_threads=[4], --num_update_threads=[1], --output=[/tmp/mahout-work-hylee/comm-text-bigram-lda], --overwrite=null, --random_seed=[777], --startPhase=[0], --tempDir=[temp], --term_topic_smoothing=[1.0E-4], --test_set_fraction=[0.25], --topic_model_temp_dir=[/tmp/mahout-work-hylee/comm-text-bigram-model]}
+13/08/03 00:49:19 INFO cvb.CVB0Driver: Will run Collapsed Variational Bayes (0th-derivative approximation) learning for LDA on /tmp/mahout-work-hylee/comm-text-bigram/tf-matrix/matrix (numTerms: 699), finding 20-topics, with document/topic prior 1.0E-4, topic/term prior 1.0E-4.  Maximum iterations to run will be 35, unless the change in perplexity is less than 2.0E-4.  Topic model output (p(term|topic) for each topic) will be stored /tmp/mahout-work-hylee/comm-text-bigram-lda.  Random initialization seed is 777, holding out 0.25 of the data for perplexity check
+
+13/08/03 00:49:19 INFO cvb.CVB0Driver: Dictionary to be used located /tmp/mahout-work-hylee/comm-text-bigram/dictionary.file-0
+p(topic|docId) will be stored /tmp/mahout-work-hylee/comm-text-bigram-topics
+
+00:49:19 INFO cvb.CVB0Driver: Current iteration number: 0
+00:51:06 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:51:06 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 347258.31055023026 and model weight 6265.0
+00:51:06 INFO cvb.CVB0Driver: Current perplexity = 55.42830176380372
+00:51:06 INFO cvb.CVB0Driver: (p_2 - p_0) / p_0 = 1.7976931348623157E308; target = 2.0E-4
+00:52:46 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:52:46 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 325584.1277668767 and model weight 6265.0
+00:52:46 INFO cvb.CVB0Driver: Current perplexity = 51.96873547755414
+00:52:46 INFO cvb.CVB0Driver: (p_4 - p_2) / p_0 = 0.06241515933487922; target = 2.0E-4
+00:54:26 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:54:26 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 317636.9470655305 and model weight 6265.0
+00:54:26 INFO cvb.CVB0Driver: Current perplexity = 50.700230976142144
+00:54:26 INFO cvb.CVB0Driver: (p_6 - p_4) / p_0 = 0.022885501829326593; target = 2.0E-4
+00:56:07 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:56:07 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 314313.2733857755 and model weight 6265.0
+00:56:07 INFO cvb.CVB0Driver: Current perplexity = 50.169716422310536
+00:56:07 INFO cvb.CVB0Driver: (p_8 - p_6) / p_0 = 0.009571185422427096; target = 2.0E-4
+00:57:50 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:57:50 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 312582.63170994114 and model weight 6265.0
+00:57:50 INFO cvb.CVB0Driver: Current perplexity = 49.893476729439925
+00:57:50 INFO cvb.CVB0Driver: (p_10 - p_8) / p_0 = 0.004983730045487403; target = 2.0E-4
+00:59:32 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+00:59:32 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 311488.2551527851 and model weight 6265.0
+00:59:32 INFO cvb.CVB0Driver: Current perplexity = 49.71879571473026
+00:59:32 INFO cvb.CVB0Driver: (p_12 - p_10) / p_0 = 0.0031514769377930718; target = 2.0E-4
+01:01:13 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:01:13 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 310668.45811904705 and model weight 6265.0
+01:01:13 INFO cvb.CVB0Driver: Current perplexity = 49.587942237677105
+01:01:13 INFO cvb.CVB0Driver: (p_14 - p_12) / p_0 = 0.002360770091978699; target = 2.0E-4
+01:02:52 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:02:52 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 310117.3632457498 and model weight 6265.0
+01:02:52 INFO cvb.CVB0Driver: Current perplexity = 49.499978171707866
+01:02:52 INFO cvb.CVB0Driver: (p_16 - p_14) / p_0 = 0.00158698829244452; target = 2.0E-4
+01:04:31 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:04:31 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 309656.1878677711 and model weight 6265.0
+01:04:31 INFO cvb.CVB0Driver: Current perplexity = 49.426366778574796
+01:04:31 INFO cvb.CVB0Driver: (p_18 - p_16) / p_0 = 0.0013280470588247573; target = 2.0E-4
+01:06:12 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:06:13 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 309389.2349337688 and model weight 6265.0
+01:06:13 INFO cvb.CVB0Driver: Current perplexity = 49.38375657362631
+01:06:13 INFO cvb.CVB0Driver: (p_20 - p_18) / p_0 = 7.68744550934698E-4; target = 2.0E-4
+01:07:57 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:07:57 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 309181.7878101527 and model weight 6265.0
+01:07:57 INFO cvb.CVB0Driver: Current perplexity = 49.350644502817666
+01:07:57 INFO cvb.CVB0Driver: (p_22 - p_20) / p_0 = 5.97385627106923E-4; target = 2.0E-4
+01:09:36 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:09:36 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 308971.3153630826 and model weight 6265.0
+01:09:36 INFO cvb.CVB0Driver: Current perplexity = 49.31704953919914
+01:09:36 INFO cvb.CVB0Driver: (p_24 - p_22) / p_0 = 6.060976531751635E-4; target = 2.0E-4
+01:11:21 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:11:21 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 308838.7856713203 and model weight 6265.0
+01:11:21 INFO cvb.CVB0Driver: Current perplexity = 49.29589555807187
+01:11:21 INFO cvb.CVB0Driver: (p_26 - p_24) / p_0 = 3.8164584614938055E-4; target = 2.0E-4
+01:13:00 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:13:00 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 308721.9313360775 and model weight 6265.0
+01:13:00 INFO cvb.CVB0Driver: Current perplexity = 49.27724362906265
+01:13:00 INFO cvb.CVB0Driver: (p_28 - p_26) / p_0 = 3.365055110058715E-4; target = 2.0E-4
+01:14:40 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:14:40 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 308636.3595643306 and model weight 6265.0
+01:14:40 INFO cvb.CVB0Driver: Current perplexity = 49.26358492646937
+01:14:40 INFO cvb.CVB0Driver: (p_30 - p_28) / p_0 = 2.46421091006655E-4; target = 2.0E-4
+01:16:22 INFO mapred.JobClient:     SAMPLED_DOCUMENTS=3627
+01:16:22 INFO cvb.CVB0Driver: Read 1 entries with total perplexity 308574.440003071 and model weight 6265.0
+01:16:22 INFO cvb.CVB0Driver: Current perplexity = 49.25370151685092
+01:16:22 INFO cvb.CVB0Driver: (p_32 - p_30) / p_0 = 1.7830980390792697E-4; target = 2.0E-4
+01:16:22 INFO cvb.CVB0Driver: Convergence achieved at iteration 32 with perplexity 49.25370151685092 and delta 1.7830980390792697E-4
+01:16:22 INFO cvb.CVB0Driver: Completed 32 iterations in 1622 seconds
+01:16:22 INFO cvb.CVB0Driver: Perplexities: (55.42830176380372, 51.96873547755414, 50.700230976142144, 50.169716422310536, 49.893476729439925, 49.71879571473026, 49.587942237677105, 49.499978171707866, 49.426366778574796, 49.38375657362631, 49.350644502817666, 49.31704953919914, 49.29589555807187, 49.27724362906265, 49.26358492646937, 49.25370151685092)
+01:16:56 INFO driver.MahoutDriver: Program took 1657110 ms (Minutes: 27.6185)
