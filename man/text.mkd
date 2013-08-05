@@ -201,10 +201,6 @@ mahout vectordump \
   -d $WORK_DIR/comm-text-unigram/dictionary.file-0 -dt sequencefile
 mahout vectordump -i $WORK_DIR/comm-text-unigram/topics -o unigram-z,d.txt
 
-pp-w,z trigram-w,z.txt
-pp-z,d trigram-z,d.txt -n 10
-head -12 trigram-token-d.txt
-
 pp-w,z bigram-w,z.txt
 pp-z,d bigram-z,d.txt -n 10
 head -12 bigram-token-d.txt
@@ -238,6 +234,10 @@ $MAHOUT cvb \
   -mt ${WORK_DIR}/comm-text-trigram-modeling \
   -dt ${WORK_DIR}/comm-text-trigram/topics \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
+
+pp-w,z trigram-w,z.txt
+pp-z,d trigram-z,d.txt -n 10
+head -12 trigram-token-d.txt
 ```
 
 ###### Noises
