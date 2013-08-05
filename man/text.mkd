@@ -120,30 +120,6 @@ fi
 * Let's do away with tuning required by seq2sparse and cvb for the better results.
 
 ```bash
-hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram*
-$MAHOUT seq2sparse \
-  -i ${WORK_DIR}/comm-text-seq/ \
-  -o ${WORK_DIR}/comm-text-trigram -ow \
-  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
-  --namedVector -s 60 -x 70 -ng 3 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
-
-hadoop dfs -rmr comm-text-trigram/*-matrix
-$MAHOUT rowid \
-  -i ${WORK_DIR}/comm-text-trigram/tfidf-vectors \
-  -o ${WORK_DIR}/comm-text-trigram/tfidf-matrix
-
-rm -rf ${WORK_DIR}/comm-text-trigram-*
-hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram/model
-$MAHOUT cvb \
-  -dict ${WORK_DIR}/comm-text-trigram/dictionary.file-0 \
-  -i  ${WORK_DIR}/comm-text-trigram/tfidf-matrix/matrix \
-  -o  ${WORK_DIR}/comm-text-trigram/model -ow \
-  -mt ${WORK_DIR}/comm-text-trigram-modeling \
-  -dt ${WORK_DIR}/comm-text-trigram/topics \
-  -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
-```
-
-```bash
 hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram*
 $MAHOUT seq2sparse \
   -i ${WORK_DIR}/comm-text-seq/ \
@@ -236,6 +212,32 @@ head -12 bigram-token-d.txt
 pp-w,z unigram-w,z.txt
 pp-z,d unigram-z,d.txt -n 10
 head -12 unigram-token-d.txt
+```
+
+###### Trigram?
+
+```bash
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram*
+$MAHOUT seq2sparse \
+  -i ${WORK_DIR}/comm-text-seq/ \
+  -o ${WORK_DIR}/comm-text-trigram -ow \
+  -a org.apache.mahout.text.MailArchivesClusteringAnalyzer \
+  --namedVector -s 60 -x 70 -ng 3 # excludes terms of 80- DF times & 85+ DF%; took 184,207 ms
+
+hadoop dfs -rmr comm-text-trigram/*-matrix
+$MAHOUT rowid \
+  -i ${WORK_DIR}/comm-text-trigram/tfidf-vectors \
+  -o ${WORK_DIR}/comm-text-trigram/tfidf-matrix
+
+rm -rf ${WORK_DIR}/comm-text-trigram-*
+hadoop dfs -rmr ${WORK_DIR}/comm-text-trigram/model
+$MAHOUT cvb \
+  -dict ${WORK_DIR}/comm-text-trigram/dictionary.file-0 \
+  -i  ${WORK_DIR}/comm-text-trigram/tfidf-matrix/matrix \
+  -o  ${WORK_DIR}/comm-text-trigram/model -ow \
+  -mt ${WORK_DIR}/comm-text-trigram-modeling \
+  -dt ${WORK_DIR}/comm-text-trigram/topics \
+  -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
 ```
 
 ###### Noises
