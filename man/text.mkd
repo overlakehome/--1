@@ -133,7 +133,7 @@ $MAHOUT rowid \
   -o ${WORK_DIR}/comm-text-bigram/tfidf-matrix
 $MAHOUT rowid \
   -i ${WORK_DIR}/comm-text-bigram/tf-vectors \
-  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699; 14774 x 610
+  -o ${WORK_DIR}/comm-text-bigram/tf-matrix # 14774 x 699; 14774 x 610; 14772 x 595
 
 rm -rf ${WORK_DIR}/comm-text-bigram-*
 hadoop dfs -rmr ${WORK_DIR}/comm-text-bigram/model
