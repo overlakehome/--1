@@ -180,13 +180,6 @@ chmod +x /usr/local/bin/pp-*
 ```
 
 ```bash
-mahout seqdumper -i $WORK_DIR/comm-text-trigram/tokenized-documents -o trigram-token-d.txt
-mahout vectordump \
-  -i $WORK_DIR/comm-text-trigram/model -o trigram-w,z.txt \
-  -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
-  -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
-mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o trigram-z,d.txt
-
 mahout seqdumper -i $WORK_DIR/comm-text-bigram/tokenized-documents  -o bigram-token-d.txt
 mahout vectordump \
   -i $WORK_DIR/comm-text-bigram/model -o bigram-w,z.txt \
@@ -234,6 +227,13 @@ $MAHOUT cvb \
   -mt ${WORK_DIR}/comm-text-trigram-modeling \
   -dt ${WORK_DIR}/comm-text-trigram/topics \
   -k 20 -x 35 -cd 6e-4 -block 2 -tf 0.25 -seed 777
+
+mahout seqdumper -i $WORK_DIR/comm-text-trigram/tokenized-documents -o trigram-token-d.txt
+mahout vectordump \
+  -i $WORK_DIR/comm-text-trigram/model -o trigram-w,z.txt \
+  -p true -sort $WORK_DIR/comm-text-trigram/model -vs 25 \
+  -d $WORK_DIR/comm-text-trigram/dictionary.file-0 -dt sequencefile
+mahout vectordump -i $WORK_DIR/comm-text-trigram/topics -o trigram-z,d.txt
 
 pp-w,z trigram-w,z.txt
 pp-z,d trigram-z,d.txt -n 10
