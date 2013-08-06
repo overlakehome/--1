@@ -25,6 +25,10 @@ DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath, // "./tokenized-d
         chunkSize,
         sequentialAccessOutput,
         namedVectors);
+        
+public static void createTermFrequencyVectors(...) {
+    startWordCounting(input, dictionaryJobPath, baseConf, minSupport);
+}
 ```
 
 
