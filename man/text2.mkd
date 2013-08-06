@@ -31,6 +31,9 @@ public static void createTermFrequencyVectors(...) {
 }
 ```
 
+* TermCountMapper
+* TermCountCombiner
+* TermCountReducer
 
 ##### CVB params
 
