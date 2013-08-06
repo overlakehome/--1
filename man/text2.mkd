@@ -41,6 +41,18 @@ public static void createTermFrequencyVectors(...) {
 * TermDocumentCountReducer
 * vector.setQuick(e.index(), tfidf.calculate((int) e.get(), (int) df, (int) featureCount, (int) vectorCount));
 
+```java
+public class TFIDF implements Weight {
+  private final DefaultSimilarity sim = new DefaultSimilarity();
+
+  @Override
+  public double calculate(int tf, int df, int length, int numDocs) {
+    // ignore length    
+    return sim.tf(tf) * sim.idf(df, numDocs); // tf, df, featureCount, vectorCount.
+  }
+}
+```
+
 ##### CVB params
 
 * 8K documents, 
