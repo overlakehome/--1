@@ -32,8 +32,8 @@ public static void createTermFrequencyVectors(...) {
 ```
 
 * TermCountMapper: `context.write(new Text(term), new LongWritable(count));`
-* TermCountCombiner: `context.write(termAsKey, new LongWritable(sumOfCounts))'`
-* TermCountReducer
+* TermCountCombiner: `context.write(termAsKey, new LongWritable(sumOfCounts));`
+* TermCountReducer: `if (sum >= minSupport) context.write(termAsKey, new LongWritable(sumOfCount));`
 
 ##### CVB params
 
