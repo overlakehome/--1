@@ -15,7 +15,7 @@ mahout seq2sparse --weight TF, or TFIDF
 DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath, // "./tokenized-documents"
         outputDir, // ${WORK_DIR}/comm-text-bigram.
         tfDirName, // "./tf-vectors" + "-topprune".
-        conf, //
+        conf, // getConf() for a hadoop conf.
         minSupport,
         maxNGramSize,
         minLLRValue,
