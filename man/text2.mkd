@@ -13,9 +13,9 @@ mahout seq2sparse --weight TF, or TFIDF
 
 ```java
 DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath,
-        outputDir,
-        tfDirName,
-        conf,
+        outputDir, // ${WORK_DIR}/comm-text-bigram.
+        tfDirName, // TOKENIZED_DOCUMENT_OUTPUT_FOLDER("tokenized-documents) + "-topprune".
+        conf, //
         minSupport,
         maxNGramSize,
         minLLRValue,
