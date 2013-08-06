@@ -39,6 +39,7 @@ public static void createTermFrequencyVectors(...) {
 * createDictionaryChunks appends lines of (termAsKey, i++) to dictionary.file-#.
 * TermDocumentCountMapper
 * TermDocumentCountReducer
+* vector.setQuick(e.index(), tfidf.calculate((int) e.get(), (int) df, (int) featureCount, (int) vectorCount));
 
 ##### CVB params
 
