@@ -35,7 +35,7 @@ ARGV.each do |e|
       open(path, 'w:UTF-8') do |w| 
         fields.each do |f| 
           begin
-            w.puts l[f].gsub(stop_phrases, ';') if l[f]
+            w.puts l[f].gsub(stop_phrases, '.') if l[f]
           rescue
             raise 'Failed to process a line: %s.' % [l]
           end
