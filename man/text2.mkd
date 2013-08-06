@@ -19,7 +19,7 @@ DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath, // "./tokenized-d
         minSupport,
         maxNGramSize,
         minLLRValue,
-        -1.0f,
+        -1.0f /* NO_NORMALIZING for normPower */,
         false,
         reduceTasks,
         chunkSize,
