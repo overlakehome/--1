@@ -12,9 +12,9 @@ mahout seq2sparse --weight TF, or TFIDF
 * SparseVectorsFromSequenceFiles.java -- processIdf = true by default.
 
 ```java
-DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath,
+DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath, // "./tokenized-documents"
         outputDir, // ${WORK_DIR}/comm-text-bigram.
-        tfDirName, // TOKENIZED_DOCUMENT_OUTPUT_FOLDER("tokenized-documents) + "-topprune".
+        tfDirName, // "./tf-vectors" + "-topprune".
         conf, //
         minSupport,
         maxNGramSize,
