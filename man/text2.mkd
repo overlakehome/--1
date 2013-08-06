@@ -37,7 +37,8 @@ public static void createTermFrequencyVectors(...) {
 * TermCountCombiner: `context.write(termAsKey, new LongWritable(sumOfCounts));`
 * TermCountReducer: `if (sum >= minSupport) context.write(termAsKey, new LongWritable(sumOfCount));`
 * createDictionaryChunks appends lines of (termAsKey, i++) to dictionary.file-#.
-* 
+* TermDocumentCountMapper
+* TermDocumentCountReducer
 
 ##### CVB params
 
