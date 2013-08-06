@@ -9,7 +9,23 @@
 mahout seq2sparse --weight TF, or TFIDF
 ```
 
-* SparseVectorsFromSequenceFiles.java
+* SparseVectorsFromSequenceFiles.java -- processIdf = true by default.
+
+```java
+DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath,
+        outputDir,
+        tfDirName,
+        conf,
+        minSupport,
+        maxNGramSize,
+        minLLRValue,
+        -1.0f,
+        false,
+        reduceTasks,
+        chunkSize,
+        sequentialAccessOutput,
+        namedVectors);
+```
 
 
 ##### CVB params
