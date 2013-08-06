@@ -29,7 +29,7 @@ DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath, // "./tokenized-d
 public static void createTermFrequencyVectors(...) {
     startWordCounting(input, dictionaryJobPath /* ./wordcount */, baseConf, minSupport); // writes to wordcount.
     dictionaryCunks = createDictionaryChunks(dictionaryJobPath /* ./wordcount */); // writes to dictionary.file-#
-    makePartialVectors(input, baseConf, maxNGramSize, dictionaryChunk, "partial-vectors-" + i++, maxTermDimension[0], ...);
+    makePartialVectors(input, baseConf, maxNGramSize, dictionaryChunk, "partial-vectors-" + i++, maxTermDimension /* 600 or so */, ...);
 }
 ```
 
