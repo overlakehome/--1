@@ -31,7 +31,7 @@ public static void createTermFrequencyVectors(...) {
 }
 ```
 
-* TermCountMapper: 
+* TermCountMapper: `context.write(new Text(term), new LongWritable(count));`
 * TermCountCombiner
 * TermCountReducer
 
