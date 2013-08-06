@@ -76,7 +76,6 @@ ruby -e '
 
 ##### Mahout LDA CVB Demo 
 
-
 ```bash
 # Set up alias and work dir.
 export MAHOUT="/workspace/mahout/bin/mahout" # same as mahout
