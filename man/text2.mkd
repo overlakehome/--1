@@ -29,6 +29,7 @@ DictionaryVectorizer.createTermFrequencyVectors(tokenizedPath, // "./tokenized-d
 public static void createTermFrequencyVectors(...) {
     startWordCounting(input, dictionaryJobPath /* ./wordcount */, baseConf, minSupport); // writes to wordcount.
     dictionaryCunks = createDictionaryChunks(dictionaryJobPath /* ./wordcount */); // writes to dictionary.file-#
+    makePartialVectors(input, baseConf, maxNGramSize, dictionaryChunk, "partial-vectors-" + i++, maxTermDimension[0], ...);
 }
 ```
 
@@ -36,6 +37,7 @@ public static void createTermFrequencyVectors(...) {
 * TermCountCombiner: `context.write(termAsKey, new LongWritable(sumOfCounts));`
 * TermCountReducer: `if (sum >= minSupport) context.write(termAsKey, new LongWritable(sumOfCount));`
 * createDictionaryChunks appends lines of (termAsKey, i++) to dictionary.file-#.
+* 
 
 ##### CVB params
 
