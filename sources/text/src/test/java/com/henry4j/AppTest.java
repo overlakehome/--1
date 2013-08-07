@@ -8,6 +8,8 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.SneakyThrows;
 import lombok.val;
@@ -25,6 +27,7 @@ import org.apache.mahout.common.Pair;
 import org.apache.mahout.common.iterator.sequencefile.PathFilters;
 import org.apache.mahout.math.DenseVector;
 import org.apache.mahout.math.Matrix;
+import org.apache.mahout.math.RandomAccessSparseVector;
 import org.apache.mahout.math.SequentialAccessSparseVector;
 import org.apache.mahout.math.SparseRowMatrix;
 import org.apache.mahout.math.Vector;
@@ -66,6 +69,11 @@ curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/maho
         val dictionary = readDictionary(new Path("/tmp/dictionary.file-0"), conf);
         assertThat(dictionary.length, equalTo(394));
 
+        Map<String, Integer> idsByTerm = new HashMap<String, Integer>();
+        for (int i = 0; i < dictionary.length; i++) {
+            idsByTerm.put(dictionary[i], i);
+        }
+
         val idf = readIdfs(new Path("/tmp/df-count"), conf);
         assertThat(idf.length, equalTo(394));
 
@@ -75,11 +83,19 @@ curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/maho
         assertThat(model.getNumTerms(), equalTo(394));
 
         val doc = takeOnlineDocument(conf);
-        // [
-        //     non, order, kitti, singletari, cancel, seller, 
-        //     inventori, husband, suffer, massiv, stroke,
-        //     caregiv, time, maintain, list, invento
-        // ]
+        val strings = new String[] {
+                "non", "order", "kitti", "singletari", "cancel", "seller",
+                "inventori", "husband", "suffer", "massiv", "stroke",
+                "caregiv", "time", "maintain", "list", "invento" };
+        val doc2 = new RandomAccessSparseVector(model.getNumTerms());
+        for (val s : strings) {
+            val id = idsByTerm.get(s);
+            if (null != id) {
+                doc2.setQuick(id, (doc2.get(id) + 1) * idf[id]);
+            }
+        }
+        assertThat(doc.equals(doc2), equalTo(true));
+
         Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0 / model.getNumTopics());
         Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
 
