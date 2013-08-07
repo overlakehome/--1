@@ -57,8 +57,6 @@ curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/maho
         val conf = new Configuration();
         val idf = readIdfs(new Path("/tmp/df-count"), conf);
         assertThat(idf.length, equalTo(394));
-
-        
         similarity.tf(10);
     }
 
@@ -68,12 +66,16 @@ curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/maho
         val dictionary = readDictionary(new Path("/tmp/dictionary.file-0"), conf);
         assertThat(dictionary.length, equalTo(394));
 
+        val idf = readIdfs(new Path("/tmp/df-count"), conf);
+        assertThat(idf.length, equalTo(394));
+
         // reads 'model' dense matrix (20 x 41K), and in 'topicSum' dense vector.
         TopicModel model = readModel(dictionary, new Path("/tmp/model-splits"), conf);
         assertThat(model.getNumTopics(), equalTo(20));
         assertThat(model.getNumTerms(), equalTo(394));
 
         val doc = takeOnlineDocument(conf);
+        // [non, order, kitti, singletari, cancel, seller, inventori, husband, suffer, massiv, stroke, caregiv, time, maintain, list, invento]
         Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0 / model.getNumTopics());
         Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
 
