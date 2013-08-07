@@ -75,7 +75,9 @@ curl -o /tmp/tfidf-vectors -kL https://dl.dropboxusercontent.com/u/47820156/maho
         assertThat(model.getNumTerms(), equalTo(394));
 
         val doc = takeOnlineDocument(conf);
-        // [non, order, kitti, singletari, cancel, seller, inventori, husband, suffer, massiv, stroke, caregiv, time, maintain, list, invento]
+        // [non, order, kitti, singletari, cancel, seller, 
+        // inventori, husband, suffer, massiv, stroke,
+        // caregiv, time, maintain, list, invento]
         Vector docTopics = new DenseVector(new double[model.getNumTopics()]).assign(1.0 / model.getNumTopics());
         Matrix docTopicModel = new SparseRowMatrix(model.getNumTopics(), doc.size());
 
